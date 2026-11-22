@@ -1147,6 +1147,149 @@ relations and new series, for instance (checked numerically)
 but only for irrational multiples of pi or for zero, and by the lemma none of them
 can shorten a formula for pi.
 
+## Part V. Base 3 (begun 22 November 2026)
+
+The same programme for base 3. One theorem is proved and machine-checked (the criterion for
+logarithms); the statements about pi are computed and not yet proved. Each paragraph says
+which.
+
+### Setting
+
+The class F3 is the set of series
+
+    S(rho) = sum over k >= 1 of rho(k) 3^(-floor(k/2)) / k,      rho rational and periodic.
+
+In Bailey's notation these are the series P(1, 3^B, n, A) with n = B or n = 2B. Put
+t = sqrt(-3) = i sqrt(3). Then t^2 = -3, so rho(k) 3^(-floor(k/2)) = c(k) t^(-k) with
+c(k) = rho(k) t^(k mod 2) (-1)^floor(k/2), of period lcm(N, 4), and as in Part III
+
+    S(rho) = sum over r^N = 1 of d_r Log(1 - r/t).
+
+The role of Z[i] and 1 + i (with (1+i)^2 = 2i) is played by the Eisenstein integers Z[w],
+w = (-1 + t)/2 a cube root of unity, and t, of norm 3. The units are the six roots +-1,
++-w, +-w^2.
+
+### Theorem K3: which logarithms have a base-3 formula (machine-checked)
+
+**Theorem K3.** Let y be a positive rational number. The following are equivalent.
+
+(a) log y is the value of a series of F3.
+
+(b) log y is a rational combination of log 3 and the numbers log |t^n - c|, n >= 1, c a cube
+    root of unity.
+
+(c) Some power y^k, k >= 1, is a product of integer powers of 3, of the numbers 3^m - 1
+    (m >= 1), and of the numbers 3^n - 3^((n+1)/2) + 1 and 3^n + 3^((n+1)/2) + 1 (n odd).
+
+The last two are the Aurifeuillian factors: 3^(3n) + 1 = (3^n + 1) L_n M_n for odd n.
+
+*Proof.* The proof of Theorem K, with w in place of i. (b) => (a): the roots of X^n = c have
+product of (t - r) equal to t^n - c, the power sums of these roots are n c^(k/n) or 0, and
+Re(w^e) and Re(w^e / t) are the rational numbers 1, -1/2, -1/2 and 0, 1/2, -1/2; so
+log |t^n - c| - n log |t| is a series of F3 of period 12n. Also t - w = -w^2 is a unit, which
+gives log 3. (a) => (b): Baker's theorem gives a relation prod (1 - r/t)^(e_r) = xi y^m with
+m non-zero; cleared, it is an integer polynomial identity at zeta = exp(2 pi i/N), N = 3K,
+with w = zeta^K and t = w - w^2; it holds at zeta^a for a prime to N, and a = 1 modulo 3 fixes
+t; adding logarithms of absolute values over these a and applying Moebius inversion leaves
+the numbers log |t^M - c| with c^3 = 1. (b) <=> (c): |t^n - c|^2 is (3^m -+ 1)^2 or
+9^m +- 3^m + 1 for n = 2m, and 3^n + 1 or L_n or M_n for n odd; and
+9^m + 3^m + 1 = (27^m - 1)/(3^m - 1), 9^m - 3^m + 1 = (27^m + 1)/(3^m + 1).
+
+*Machine-checked* (lean/Pilean/Base3, standard axioms only, no hypothesis with the formal
+proof of Baker's theorem): `PiFormula.Base3.isF3Value_log_rat_iff_pow` is (a) <=> (c);
+`isF3Value_log_rat_iff` is (a) <=> (b); `logSpan3_le_f3Values` and `isF3Value_log_of_pow`
+are the half that needs no Baker; `PiFormula.Base3.Unconditional.*` have no hypothesis.
+Also in Lean, with no Baker: log 2, log 3, log 5, log 7, log 11, log 13, log 19, log 37 and
+pi sqrt(3) are values of F3 (`isF3Value_log_19`, `isF3Value_pi_sqrt3`, and so on).
+
+### The test for a prime, and the list (computed; python/base3_criterion.py)
+
+For a prime p other than 3, let n = ord_p(3) and let g be the primitive part that contains
+p: g = Phi_n(3) if n is not 6 modulo 12; if n = 6m with m odd, g is the one of
+gcd(Phi_n(3), L_m), gcd(Phi_n(3), M_m) that p divides (they are coprime and their product is
+Phi_n(3)). Write g = p^x R. Then log p is a value of F3 if and only if R = 1, or R is a prime
+q dividing n and log q is a value of F3. This follows from (c) by the argument given for
+base 2; it is not machine-checked for base 3.
+
+Below 10^6 the test accepts 31 primes:
+
+    2, 3, 5, 7, 11, 13, 19, 31, 37, 41, 43, 61, 73, 271, 547, 757, 1093, 1181, 2269, 4561,
+    6481, 19441, 19927, 25411, 176419, 368089, 387631, 398581, 530713, 755551, 797161.
+
+Of these, 17 come from a full Phi_n(3) and 13 from an Aurifeuillian half (19 and 37 are the
+two halves of Phi_18(3) = 703; 31 and 271 those of Phi_30(3)). Below 100 the primes that
+fail are 17, 23, 29, 47, 53, 59, 67, 71, 79, 83, 89, 97; for example Phi_16(3) = 2 * 17 * 193.
+
+*Numerical check, with no theory* (python/base3_probe.py, lattice reduction on the values of
+the series of a given period): at period 32, log 17 + log 193 is a value and neither is
+alone; at period 44, log 67 + log 661 and log 23 + log 3851 are values and no single one is;
+at period 84, log 43 and log 2269 are values. All as the test predicts.
+
+*In print* (research/2026-11-22-base3/01_ternary_formulas_inventory.md): only log 2, 3, 5,
+7, 11, 13 appear as base-3 formulas (Bailey's compendium, formulas 67 to 75; OEIS A165132).
+The general families of the compendium, at b = 3^m, contain formulas for 19, 37 and others,
+but no source lists them as ternary, and none states a criterion. No list of the unique
+primes of base 3 was found in the OEIS
+(research/2026-11-22-base3/02_base3_unique_primes_data.md).
+
+### pi in base 3 (computed; the proof is the next step)
+
+Six roots of unity are exceptional: 1, -1, i, -i, w, -w^2. Indeed
+
+    t - 1 = 2w,   t + 1 = -2w^2,   t - w = -w^2,   t + w^2 = w,
+    (t - i)(t + i) = -2,           (t + i)/(t - i) = 2 + sqrt(3).
+
+So among the six numbers 1 - r/t for these r there are three independent multiplicative
+relations up to roots of unity (they lie in the group generated by 2, t and 2 + sqrt(3)).
+Every other orbit of roots of unity should have a private prime, as in Lemma 3: this needs
+a primitive prime in Phi_n(3) and in each Aurifeuillian half for n = 6 modulo 12, n >= 18.
+That lemma is not proved yet.
+
+Computed (lattice reduction, every period 12, 24, ..., 144, 180):
+
+- there are exactly two independent zero relations, both of period 12:
+
+      (1, 0, -10, -3, 4, 12, -1, 12, 10, 15, -4, 0),   (0, 1, -2, 0, 1, 4, 0, 3, 2, 4, -1, 0);
+
+- the patterns whose series is a rational multiple of pi sqrt(3) form a space of dimension
+  3, all of period 12;
+- pi itself is not found as a value at any of these periods.
+
+**Statement C3 (not proved).** Every series of F3 whose value is an algebraic multiple of pi
+has period 12; these series form a space of dimension 3; and the value is a rational
+multiple of pi sqrt(3). In particular pi is not the value of any series of F3.
+
+This would answer, for base 3 and this class, the research problem 10 of Borwein, Borwein
+and Galway (2004, p. 924), who proved only that pi is not a rational combination of the
+numbers arctan(3^(-m)). Given the lemma on private primes, the proof is the one of Theorem
+C: by Baker's theorem the coefficients d_r lie in the span of the relations, which are
+supported on the six exceptional roots, all of order dividing 12.
+
+**The cheapest formula (computed).** Among the formulas for pi sqrt(3) of period 12, the
+fewest non-zero terms is 6 per period, one term per base-3 digit, and exactly two formulas
+attain it:
+
+    pi sqrt(3) = S(6, 0, -6, 0)                      (the Gregory series at 1/sqrt(3)),
+    pi sqrt(3) = S(0, 18, 18, 18, 0, 0, 0, -18, -18, -18, 0, 0).
+
+The formulas in print found by the research (Adegoke's 2.14 and 2.15, the compendium's 92 at
+b = 3, all forms of the Gregory series; and the compendium's 69, with 7 terms per 6 digits)
+do not include the second one. So in base 3 nothing beats the Gregory series, in contrast
+with base 2, where there are many zero relations and the optimum 2/3 is below every
+classical formula.
+
+Other values (each checked to 50 digits): log 2 = S(0, 4, 0, 0); log 3 = S(0, 6, 0, 2);
+sqrt(3) log(2 + sqrt(3)) = S(2, 0); arctan(1/3) = S(0, 2, 0, 0, 0, -2, 0, 0).
+
+### What is and is not established in base 3
+
+- Proved and machine-checked: Theorem K3, and the values named above.
+- Proved on paper only: the test for a prime (by the argument for base 2).
+- Computed only: the list of 31 primes; the two zero relations and that there are no others;
+  that pi is not a value; the cheapest formula.
+- Next: the lemma on private primes in Z[w] (the analogue of Lemma 2 and Lemma 3), then
+  statement C3; then the test for a prime in Lean.
+
 ## Why this matters for digit extraction
 
 In the prime form of the window algorithm, the per-prime state a window must read is
