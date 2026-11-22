@@ -184,6 +184,37 @@ theorem not_isFValue_log_38737 : ¬ IsFValue (Real.log 38737) :=
 theorem not_isFValue_log_433 : ¬ IsFValue (Real.log 433) :=
   _root_.PiFormula.not_isFValue_log_433 bakerTheorem
 
+/-- **Theorem K, the converse.** If `log (a/b)` is a value of the class F, then it is a
+rational combination of `log 2` and the numbers `log N((1+i)^n - c)`. -/
+theorem mem_logSpan_of_isFValue_log {a b : ℕ} (ha : 0 < a) (hb : 0 < b)
+    (h : IsFValue (Real.log ((a : ℝ) / b))) : Real.log ((a : ℝ) / b) ∈ logSpan :=
+  _root_.PiFormula.mem_logSpan_of_isFValue_log bakerTheorem ha hb h
+
+/-- **Theorem K.** `log (a/b)` is a value of the class F if and only if it is a rational
+combination of `log 2` and the numbers `log N((1+i)^n - c)`. -/
+theorem isFValue_log_iff {a b : ℕ} (ha : 0 < a) (hb : 0 < b) :
+    IsFValue (Real.log ((a : ℝ) / b)) ↔ Real.log ((a : ℝ) / b) ∈ logSpan :=
+  _root_.PiFormula.isFValue_log_iff bakerTheorem ha hb
+
+/-- **Theorem K** for a positive integer. -/
+theorem isFValue_log_nat_iff {n : ℕ} (hn : 0 < n) :
+    IsFValue (Real.log (n : ℝ)) ↔ Real.log (n : ℝ) ∈ logSpan :=
+  _root_.PiFormula.isFValue_log_nat_iff bakerTheorem hn
+
+/-- **Theorem K** for a positive rational number. -/
+theorem isFValue_log_rat_iff {y : ℚ} (hy : 0 < y) :
+    IsFValue (Real.log (y : ℝ)) ↔ Real.log (y : ℝ) ∈ logSpan :=
+  _root_.PiFormula.isFValue_log_rat_iff bakerTheorem hy
+
+/-- **Theorem K in elementary terms.** For a positive rational `y`, `log y` is a value of
+the class F if and only if some power `y^k`, `k ≥ 1`, is a product of integer powers of
+the numbers `2`, `2^m - 1`, `2^(2j+1) - 2^(j+1) + 1` and `2^(2j+1) + 2^(j+1) + 1`. -/
+theorem isFValue_log_rat_iff_pow {y : ℚ} (hy : 0 < y) :
+    IsFValue (Real.log (y : ℝ)) ↔
+      ∃ k : ℕ, 0 < k ∧ ∃ (n : ℕ) (g : Fin n → ℤ) (e : Fin n → ℤ),
+        (∀ i, g i ∈ baseNumbers) ∧ y ^ k = ∏ i, (g i : ℚ) ^ e i :=
+  _root_.PiFormula.isFValue_log_rat_iff_pow bakerTheorem hy
+
 end Unconditional
 
 end PiFormula

@@ -711,11 +711,47 @@ occur in no other part of the relation, so they all equal p; this part is the g 
 test, and its other prime, if any, divides the index. Dividing out leaves a relation for q
 among parts of smaller index.
 
-*What is machine-checked.* (b) => (a) in general (`PiFormula.logSpan_le_fValues`), with the
-families `PiFormula.isFValue_log_two_pow_sub_one` (log(2^m - 1), every m),
-`PiFormula.isFValue_log_L` and `PiFormula.isFValue_log_M` (the two factors of 4^n + 1, every
-odd n). The implication (a) => (c) is proved above and is not in Lean in general; it is in
-Lean for twelve primes: the ten of Theorem H, and 433 and 38737 below.
+*What is machine-checked.* The equivalence of (a), (b) and (c), in full, for every positive
+rational y (22 November 2026).
+
+- (b) => (a), without Baker: `PiFormula.logSpan_le_fValues`, with the families
+  `PiFormula.isFValue_log_two_pow_sub_one` (log(2^m - 1), every m),
+  `PiFormula.isFValue_log_L` and `PiFormula.isFValue_log_M` (the two factors of 4^n + 1,
+  every odd n).
+- (a) => (b), from Baker's theorem: `PiFormula.mem_logSpan_of_isFValue_log`, and the
+  equivalence `PiFormula.isFValue_log_rat_iff` (`isFValue_log_iff` for a quotient a/b of
+  positive integers, `isFValue_log_nat_iff` for a positive integer).
+- (b) <=> (c): `PiFormula.logSpan_eq_baseSpan` and `PiFormula.log_mem_span_iff_pow`.
+- (a) <=> (c), the criterion in elementary terms: `PiFormula.isFValue_log_rat_iff_pow`.
+  Its statement uses only the definition of a series of F and the set
+  `PiFormula.baseNumbers` = {2} ∪ {2^m - 1} ∪ {2^(2j+1) - 2^(j+1) + 1} ∪
+  {2^(2j+1) + 2^(j+1) + 1}: log y is a value of F if and only if there are k >= 1, base
+  numbers g_1, ..., g_n and integers e_1, ..., e_n with y^k = g_1^(e_1) ... g_n^(e_n), an
+  identity between rational numbers. The half (c) => (a) alone needs no Baker:
+  `PiFormula.isFValue_log_of_pow`.
+- With the formal proof of Baker's theorem in the library these hold with no hypothesis:
+  `PiFormula.Unconditional.isFValue_log_rat_iff_pow` and the others. They depend on the
+  three standard axioms only.
+
+*The formal proof of (a) => (b)* takes a route that avoids the norm. From Baker's theorem
+(`baker_no_extra`) a formula for log(a/b) gives a relation
+prod (1 - r/t)^(e_r) = xi (a/b)^m with m non-zero; cleared of denominators it is an identity
+between two products of numbers t - r, powers of t and positive integers, up to xi. With
+zeta = exp(2 pi i/N), N = 4K a common multiple of the orders, and i = zeta^K, the identity
+is the value at zeta of a polynomial identity with integer coefficients. So it holds at
+zeta^a for every a prime to N (same minimal polynomial; `aeval_pow_of_coprime`), and for
+a = 1 modulo 4 this fixes i and t and replaces every r by r^a (`cleared_conj`). Taking
+logarithms of absolute values and adding over these a, m log(a/b) becomes an integer
+combination of log 2 and of the sums of log|t - r^a| over a. By Möbius inversion over the
+condition "a prime to N" each such sum is an integer combination of sums over all a = 1
+modulo 4 that are multiples of an odd divisor d of N (`sum_filter_coprime`), and such a sum
+runs over a full set {u^j x} of roots of X^M = x^M, each the same number of times, with x^M
+a fourth root of unity; so it is a multiple of log|t^M - c| (`sum_log_coset_mem`,
+`sum_log_mod_four_mem`, `sum_log_coprime_mem`). This replaces the induction on the order in
+the proof above by one explicit formula.
+
+Not machine-checked: the test for a prime, and (d). The test is in Lean prime by prime for
+twelve primes: the ten of Theorem H, and 433 and 38737 below.
 
 *The list.* The test decides every prime. Below 10^7 exactly 51 primes have a formula:
 
@@ -742,9 +778,11 @@ squared length at most 7,539, non-relations about 2^69). So the entry 38737 of A
 appears to be an error, unless it rests on a formula of a kind that (d) does not cover; we
 know of none.
 
-*Limits.* The implication (a) => (c) and the statement (d) are proved here on paper, from
-Baker's theorem, and are not machine-checked in general. The list above is the output of the
-test, in exact arithmetic.
+*Limits.* The equivalence of (a), (b), (c) is machine-checked. The test for a prime (the
+step from (c) to the statement about primitive parts) and the statement (d) are proved here
+on paper and are not machine-checked. The list above is the output of the test, in exact
+arithmetic; so the list of 51 primes rests on the paper proof of the test, except below 100,
+where Theorem H is formal.
 
 ### Arctangents: arctan(2/7) has no binary BBP-type formula (arctan_probe.py)
 
@@ -1283,13 +1321,16 @@ there is at present neither a candidate nor a proof of impossibility.
     formulas cost exactly 60. The search tree (8,083 + 180 nodes, 17,953 derived facts) is
     a certificate checked inside Lean by a verified checker and the kernel.
 
-  - **Theorem K, the criterion, in part** (`PiFormula.logSpan_le_fValues`,
-    `PiFormula.isFValue_log_two_pow_sub_one`, `PiFormula.isFValue_log_L`,
-    `PiFormula.isFValue_log_M`, unconditional; `PiFormula.not_isFValue_log_38737`,
-    `PiFormula.not_isFValue_log_433`, from Baker's theorem;
-    `PiFormula.isFValue_log_433_add_log_38737`, unconditional). The half "these logarithms
-    are values" in general, and the pair 433, 38737. The half "no other logarithm of a
-    rational is a value" is proved in the note and is not in Lean in general.
+  - **Theorem K, the criterion** (`PiFormula.isFValue_log_rat_iff_pow`,
+    `PiFormula.isFValue_log_rat_iff`, `PiFormula.mem_logSpan_of_isFValue_log`, from Baker's
+    theorem; `PiFormula.logSpan_le_fValues`, `PiFormula.isFValue_log_of_pow`,
+    `PiFormula.logSpan_eq_baseSpan`, `PiFormula.isFValue_log_two_pow_sub_one`,
+    `PiFormula.isFValue_log_L`, `PiFormula.isFValue_log_M`, unconditional). For a positive
+    rational y, log y is a value of F if and only if a power of y is a product of integer
+    powers of 2, the numbers 2^m - 1 and the two factors of 4^n + 1, n odd. Both halves, for
+    every y. Also the pair 433, 38737 (`PiFormula.not_isFValue_log_38737`,
+    `PiFormula.not_isFValue_log_433`, `PiFormula.isFValue_log_433_add_log_38737`). Not in
+    Lean: the finite test for a prime, and the statement (d) on the other binary families.
 
   - **Baker's theorem, and the theorems above without a hypothesis.** Since 22 November
     2026 the library contains a formal proof of Baker's theorem by Michail Karatarakis

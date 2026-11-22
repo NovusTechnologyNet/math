@@ -423,16 +423,22 @@ whenever `x² + y² = ℓ` already has its `good_ℓ` (53, 89, 97 so far). The p
 arctangent-type orbit sum up to multiples of `2π` without computing the branch. Open: the
 arctangents of the other excluded Gaussian primes (norm 157, 178481, ...), and a criterion.
 
-**Theorem K (22 November 2026): the criterion for logarithms. Half done.** The note proves:
-`log y` is a value of F iff a power of `y` is a product of powers of 2, the `2^m - 1` and
-the two factors of `4^n + 1`. In `LogCriterion.lean`: the "is a value" half in general
-(`logSpan_le_fValues` and the three families), and the pair 433, 38737. Open, and the next
-step for Lean: the converse in general. Plan: (1) from `baker_no_log`, a value `log ℓ`
-gives a relation `IsRelUpTo ℓ S e m` with `m ≠ 0`; (2) apply the norm to `ℚ(i)`: a
-polynomial over `ℚ(i)` that vanishes at a root of unity vanishes at its conjugates, which
-`galOrbit` and `natDegree_minpoly_of_galOrbit` already describe; (3) the atoms as quotients
-of the `t^n - c` by induction on the order. Also open: the finite test for a prime (the
-structure of primitive parts) as a Lean theorem.
+**Theorem K (22 November 2026): the criterion for logarithms. DONE** for every positive
+rational `y`: `log y` is a value of F iff a power of `y` is a product of powers of 2, the
+`2^m - 1` and the two factors of `4^n + 1` (`isFValue_log_rat_iff_pow` in
+`LogExplicit.lean`). In `LogCriterion.lean`: the "is a value" half (`logSpan_le_fValues` and
+the three families), and the pair 433, 38737. In `LogConverse.lean`: the converse
+(`mem_logSpan_of_isFValue_log`). The route that worked, simpler than the norm to `ℚ(i)`
+first planned: (1) `baker_no_extra` gives a relation `IsRelUpToQ a b S e m` with `m ≠ 0`,
+cleared by `cleared_upToQ`; (2) the cleared identity is an integer polynomial identity at
+`ζ_N` (with `i = ζ_N^(N/4)`), so it holds at `ζ_N^a` for `a` prime to `N`
+(`aeval_pow_of_coprime`, `cleared_conj`); (3) logarithms of absolute values, added over the
+`a ≡ 1 (mod 4)` prime to `N`; (4) Möbius inversion over "prime to `N`" reduces each sum to
+sums over full root sets of `X^M = c`, `c^4 = 1` (`sum_log_coprime_mem`). In
+`LogExplicit.lean`: the norms `N((1+i)^n - c)` computed (`norm_even_cases`,
+`norm_odd_cases`), `logSpan_eq_baseSpan`, and `log_mem_span_iff_pow`. Open: the finite test
+for a prime (the structure of primitive parts) as a Lean theorem, and statement (d) of the
+note (other binary families).
 
 **Theorem J (22 November 2026): the cheapest checked computation. DONE** in
 `CheckedPair.lean`: `pairCost_ge` (at least 60 for any two formulas of the same value) and

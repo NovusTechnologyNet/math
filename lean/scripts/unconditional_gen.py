@@ -74,6 +74,18 @@ ITEMS = [
      "`log 38737` is not a value of the class F, although 38737 is on the list A104885 of the\n"
      "OEIS; `log 433 + log 38737` is a value (`isFValue_log_433_add_log_38737`)."),
     ("LogCriterion", "not_isFValue_log_433", "`log 433` is not a value of the class F."),
+    ("LogConverse", "mem_logSpan_of_isFValue_log",
+     "**Theorem K, the converse.** If `log (a/b)` is a value of the class F, then it is a\n"
+     "rational combination of `log 2` and the numbers `log N((1+i)^n - c)`."),
+    ("LogConverse", "isFValue_log_iff",
+     "**Theorem K.** `log (a/b)` is a value of the class F if and only if it is a rational\n"
+     "combination of `log 2` and the numbers `log N((1+i)^n - c)`."),
+    ("LogConverse", "isFValue_log_nat_iff", "**Theorem K** for a positive integer."),
+    ("LogConverse", "isFValue_log_rat_iff", "**Theorem K** for a positive rational number."),
+    ("LogExplicit", "isFValue_log_rat_iff_pow",
+     "**Theorem K in elementary terms.** For a positive rational `y`, `log y` is a value of\n"
+     "the class F if and only if some power `y^k`, `k ≥ 1`, is a product of integer powers of\n"
+     "the numbers `2`, `2^m - 1`, `2^(2j+1) - 2^(j+1) + 1` and `2^(2j+1) + 2^(j+1) + 1`."),
 ]
 
 OPEN = {"(": ")", "{": "}", "[": "]", "⟨": "⟩"}

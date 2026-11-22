@@ -58,7 +58,9 @@ spanned by `γ(O) + γ(O*) = 0`, `γ(O_1) = π/4`, `γ(O_6) = 0` and `γ(O_10) -
 | `Pilean/PiFormula/Arctan.lean` | Theorem I: relations up to a power of `a / b` (`IsRelUpToQ`, `coeff_eq_zero_upToQ`, `exponent_eq_zero_upToQ`, `support_upToQ`, `no_rel_gaussian`); Baker's theorem with one more logarithm (`baker_no_extra`); `exp_two_arctan`; `no_arctan_of_goodPrimes`, `not_isFValue_arctan`; `no_arctan_two_sevenths`, `not_isFValue_arctan_two_sevenths`, `..._five_eighths`, `..._four_ninths`, the Bailey forms; the positive half `exp_gamma`, `isFValue_arctan_inv_129`, `isFValue_arctan_two_sevenths_add` | proved (the exclusions from `BakerTheorem`; the positive half unconditionally) |
 | `Pilean/PiFormula/CheckedPair.lean` | Theorem J: `pairCost`, `zCost`, `pairCost_eq_zCost`; the certificate checker `checkPair` and `checkPair_sound`; the certificate `pairCert` (about 31,000 generated lines) and `pairCert_ok`; `pairCost_ge`; Takahashi's formulas in Bailey's notation (`takahashi1_formula`, `takahashi2_formula`), `pairCost_takahashi`, `pairCost_huvent`, `checkedPair` | proved (the bound from `BakerTheorem`; the kernel check takes about four minutes) |
 | `Pilean/PiFormula/LogCriterion.lean` | Theorem K, in part: `fValues` (the values of F as a rational vector space), `logSpan_le_fValues`; `isFValue_log_two_pow_sub_one`, `isFValue_log_L`, `isFValue_log_M`; the pair 433, 38737: `atom_R40`, `good_433`, `good_38737`, `not_isFValue_log_433`, `not_isFValue_log_38737`, `isFValue_log_433_add_log_38737` | proved (the two exclusions from `BakerTheorem`) |
-| `Pilean/PiFormula/Unconditional.lean` | `bakerTheorem`; Theorems C, D, E, G, H, the value formula and Bailey's counts with no hypothesis (`PiFormula.Unconditional.*`) | proved |
+| `Pilean/PiFormula/LogConverse.lean` | Theorem K, the converse: `aeval_pow_of_coprime`, `cleared_conj` (conjugating a cleared relation); `sum_log_coset_mem`, `sum_log_mod_four_mem`, `sum_filter_coprime`, `sum_log_coprime_mem` (sums of `log \|t - r^a\|` in `logSpan`); `log_sub_mem_logSpan_of_cleared`; `mem_logSpan_of_isFValue_log`, `isFValue_log_iff`, `isFValue_log_nat_iff`, `isFValue_log_rat_iff` | proved (from `BakerTheorem`) |
+| `Pilean/PiFormula/LogExplicit.lean` | Theorem K in elementary terms: `baseNumbers`, `baseSpan`; `gaussian_unit_cases`, `tG_pow_even`, `norm_even_cases`, `norm_odd_cases`; `logSpan_eq_baseSpan`; `log_mem_span_iff_pow`; `isFValue_log_of_pow` (no Baker), `isFValue_log_rat_iff_pow` (from `BakerTheorem`) | proved |
+| `Pilean/PiFormula/Unconditional.lean` | `bakerTheorem`; Theorems C, D, E, G, H, I, J, K, the value formula and Bailey's counts with no hypothesis (`PiFormula.Unconditional.*`, 30 theorems) | proved |
 | `TauCeti/` | 25 modules of Tau Ceti (Apache-2.0), see `TauCeti/VENDORED.md` | builds unchanged |
 
 There is no `sorry` anywhere. `theoremA`, `theoremB`, `theoremBgamma`, `lemma2`, `size_bound` and every other theorem
@@ -453,7 +455,8 @@ theory-free numerical search that agrees.
   factor is used (89 for 23, 178481 for 47, 157 for 53, and so on).
 - `isFValue_log_23_add_log_89`: `log 23 + log 89` is a value, although neither summand is.
 
-Not proved: a criterion for all primes at once.
+A criterion for all positive rationals at once is Theorem K below (`LogConverse.lean`,
+`LogExplicit.lean`). Not proved in Lean: the finite test that decides it for a prime.
 
 **Theorem I: `arctan (2/7)` has no binary BBP-type formula** (`Arctan.lean`). Bailey's
 compendium says it is not known whether `arctan (2/7)` possesses a binary BBP formula.
@@ -495,15 +498,44 @@ computes `π` with one formula and checks it with a second one that shares most 
 Not proved: that Takahashi's pair is the only one at 60, and the bound 63 when no series
 may be computed twice (both computed, `python/verify_pair_optimum.py`).
 
-**Theorem K: which logarithms are values, in part** (`LogCriterion.lean`). The note proves
-a criterion: `log y` (`y` rational) is a value of the class F exactly when it is a rational
-combination of `log 2` and the numbers `log N((1+i)^n - c)`.
+**Theorem K: which logarithms are values** (`LogCriterion.lean`, `LogConverse.lean`,
+`LogExplicit.lean`). For a positive rational `y`, `log y` is a value of the class F exactly
+when it is a rational combination of `log 2` and the numbers `log N((1+i)^n - c)`, and
+exactly when a power of `y` is a product of integer powers of `2`, the numbers `2^m - 1`
+and the two factors `2^n ∓ 2^((n+1)/2) + 1` of `4^n + 1`, `n` odd. Both halves are formal.
 
 - `logSpan_le_fValues` (no Baker): every such combination is a value. `fValues` is the
   space of values. `isFValue_log_two_pow_sub_one`: `log (2^m - 1)`, every `m ≥ 1`;
   `isFValue_log_L`, `isFValue_log_M`: `log (2^n ∓ 2^((n+1)/2) + 1)`, every odd `n`.
-- The converse is not formal in general. It needs the norm from `ℚ(i, ζ_N)` to `ℚ(i)` of a
-  multiplicative relation, which is not set up here.
+- The converse, `mem_logSpan_of_isFValue_log` (from `BakerTheorem`), in `LogConverse.lean`.
+  The steps:
+  - `baker_no_extra` (from `Arctan.lean`) turns a formula for `log (a/b)` into a relation
+    `IsRelUpToQ a b S e m` with `m ≠ 0`, and `cleared_upToQ` clears its denominators.
+  - `aeval_pow_of_coprime`: an integer polynomial that vanishes at a primitive `N`-th root
+    of unity `ζ` vanishes at `ζ^a` for `a` prime to `N`
+    (`IsPrimitiveRoot.minpoly_eq_pow_coprime`). `cleared_conj`: so the cleared identity
+    holds with every root of unity `r` replaced by `r^a`, for `a ≡ 1 (mod 4)`; this uses
+    `i = ζ^(N/4)` (`zetaN_pow_quarter`). No field extension or norm map is needed.
+  - `sum_log_coset_mem`: `∑_{c < L} log |t - u^c x|` is in `logSpan` when the `u^c x` are
+    the roots of `X^M = x^M` with `(x^M)^4 = 1` (`IsPrimitiveRoot.nthRoots_eq`,
+    `zO_nthRoots`). `sum_log_mod_four_mem`: the exponents in one class modulo 4.
+    `sum_filter_coprime`: Möbius inversion over "prime to `N`" (`sum_moebius_dvd`).
+    `sum_log_coprime_mem`: the sum of `log |t - r^a|` over the `a` prime to `N` with
+    `a ≡ 1 (mod 4)` is in `logSpan`.
+  - `log_sub_mem_logSpan_of_cleared`, the key lemma: from a cleared identity,
+    `log c₁ - log c₂ ∈ logSpan`.
+- `isFValue_log_iff`, `isFValue_log_nat_iff`, `isFValue_log_rat_iff`: the criterion with
+  `logSpan`.
+- `LogExplicit.lean` removes the Gaussian integers from the statement. `baseNumbers` is the
+  set `{2} ∪ {2^m - 1} ∪ {2^(2j+1) ∓ 2^(j+1) + 1}`. `gaussian_unit_cases`, `tG_pow_even`,
+  `norm_even_cases`, `norm_odd_cases` compute `N((1+i)^n - c)`; `logSpan_eq_baseSpan`;
+  `log_mem_span_iff_pow` (a rational combination of logarithms of positive integers is a
+  multiplicative identity for a power); and the criterion in elementary terms,
+  `isFValue_log_rat_iff_pow`: `IsFValue (log y)` iff
+  `∃ k > 0, ∃ n g e, (∀ i, g i ∈ baseNumbers) ∧ y ^ k = ∏ i, (g i : ℚ) ^ e i`.
+  `isFValue_log_of_pow` is the "if" half, with no Baker.
+- Not formal: the finite test for a prime (the structure of the primitive parts), and the
+  statement (d) of the note about the other binary families.
 - `not_isFValue_log_38737`, `not_isFValue_log_433` (from `BakerTheorem`),
   `isFValue_log_433_add_log_38737` (no Baker): `Φ_72(2) = 433 · 38737` is the atom
   `R 4 0 = Φ_9(4i) = -4095 - 64i` (`atom_R40`), the only atom of index 72

@@ -17,9 +17,10 @@ This file proves the half that needs no Baker, in general:
 * `isFValue_log_L`, `isFValue_log_M`: `log (2^n - 2^((n+1)/2) + 1)` and
   `log (2^n + 2^((n+1)/2) + 1)` are values, for every odd `n`.
 
-The other half (no other logarithm of a rational is a value) is proved in the note from
-Baker's theorem and is formal only prime by prime: `LogPrimes.lean` for the ten primes below
-100, and here for the pair 433, 38737.
+The other half (no other logarithm of a rational is a value) is proved from Baker's theorem
+in `LogConverse.lean`, and `LogExplicit.lean` states the criterion in elementary terms. The
+finite test for a prime is not formal in general; it is formal prime by prime:
+`LogPrimes.lean` for the ten primes below 100, and here for the pair 433, 38737.
 
 **38737.** The list A104885 of the OEIS ("primes whose logarithms are known to possess binary
 BBP formulas", from Borwein and Bailey's book of 2004) contains 38737. Here
