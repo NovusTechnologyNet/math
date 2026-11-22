@@ -25,19 +25,21 @@ formulas and every `P(1, 2^B, n, A)` of Bailey's compendium with `n = B` or `n =
 |---|---|---|
 | Theorem A | Every rational relation between pi and the angles arctan(1/2^m), arctan(1/(2^m - 1)) comes from three classical ones | Lean, unconditional |
 | Theorem B | The same for the wider cyclotomic family | Lean, unconditional |
-| Theorem C | The formulas for pi in F form a space of dimension exactly 8 (13 for algebraic multiples of pi); every zero relation is known | Lean, from Baker's theorem |
-| Theorem D | No formula for pi in F avoids the slowly converging terms | Lean, from Baker's theorem |
-| Bailey's table | The number of independent zero relations of `P(1, 2^B, 2B, .)` and `P(1, 2^B, B, .)`, for every B | Lean, from Baker's theorem |
-| Theorem E | A formula for pi in F needs at least 2/3 of a term per bit; Huvent's formulas attain it. For a second cost measure the least value is 7/24, attained by a new formula | Lean, from Baker's theorem; the uniqueness statements are not formal |
-| Theorem G | log 23 is not the value of any series of F | Lean, from Baker's theorem |
-| Theorem H | For a prime p below 100, log p is a value of F exactly for 2, 3, 5, 7, 11, 13, 17, 19, 29, 31, 37, 41, 43, 61, 73 | Lean; the fifteen formulas unconditional, the ten exclusions from Baker's theorem |
+| Theorem C | The formulas for pi in F form a space of dimension exactly 8 (13 for algebraic multiples of pi); every zero relation is known | Lean |
+| Theorem D | No formula for pi in F avoids the slowly converging terms | Lean |
+| Bailey's table | The number of independent zero relations of `P(1, 2^B, 2B, .)` and `P(1, 2^B, B, .)`, for every B | Lean |
+| Theorem E | A formula for pi in F needs at least 2/3 of a term per bit; Huvent's formulas attain it. For a second cost measure the least value is 7/24, attained by a new formula | Lean; the uniqueness statements are not formal |
+| Theorem G | log 23 is not the value of any series of F | Lean |
+| Theorem H | For a prime p below 100, log p is a value of F exactly for 2, 3, 5, 7, 11, 13, 17, 19, 29, 31, 37, 41, 43, 61, 73 | Lean |
 | Checked pair | The least cost of computing pi with a check by a second formula is 60 terms per 60 bits, attained only by Takahashi's pair | Computed exactly (`python/verify_pair_optimum.py`); not in Lean |
 | Theorem F | The other binary families (Part IV of the note) | Written; not formal |
 
-"From Baker's theorem" means that the Lean statement takes Baker's theorem on linear forms
-in logarithms (1966) as an explicit hypothesis, `BakerTheorem`. It is a proved theorem, not
-a conjecture; it is a hypothesis here because it is not in Mathlib. `lean/README.md` says
-what is imported and what is assumed.
+Theorems C to H rest on Baker's theorem on linear forms in logarithms (1966). The library
+has each of them in two forms. Our own files prove them from Baker's theorem as an explicit
+hypothesis, `BakerTheorem`, because Baker's theorem is not in Mathlib. `lean/Baker/` holds a
+formal proof of Baker's theorem by Michail Karatarakis, and
+`lean/Pilean/PiFormula/Unconditional.lean` uses it to restate the theorems with no
+hypothesis (`PiFormula.Unconditional.*`). Those depend only on Lean's three standard axioms.
 
 ## Building and running
 
@@ -51,6 +53,8 @@ what is imported and what is assumed.
 
 - `lean/TauCeti/`: 25 modules of the Tau Ceti library (Bang's theorem), Apache License 2.0.
   See `lean/TauCeti/VENDORED.md`.
+- `lean/Baker/`: Baker's theorem, 19 files by Michail Karatarakis, Apache License 2.0.
+  See `lean/Baker/README.md`.
 
 ## Status
 

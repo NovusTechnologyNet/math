@@ -46,7 +46,7 @@ theorem that uses it will show `BakerTheorem →` in its statement, so nothing i
 ## Layer 1: unconditional (no Baker)
 
 **M1. The new formula is correct: DONE (21 November 2026).** `PiFormula.new_formula_series`
-in `Pilean/Pilean/PiFormula/NewFormula.lean`, standard axioms only. Before it, `PiFormula.new_formula`
+in `Pilean/PiFormula/NewFormula.lean`, standard axioms only. Before it, `PiFormula.new_formula`
 checked only the *value* `2 arctan(1/3) + arctan(1/7) + Z = π/4`. M1 proves the *series*,
 which is the thing the engine actually sums:
 
@@ -414,15 +414,14 @@ fifteen primes 2, 3, 5, 7, 11, 13, 17, 19, 29, 31, 37, 41, 43, 61, 73. The fifte
 are unconditional (`isFValue_log_of_mem`); the ten exclusions use Baker. Open: a criterion
 for all primes at once.
 
-**Baker's theorem (lead, 22 November 2026).** A public branch `baker` of the GitHub fork
-`mkaratarakis/mathlib4` has 19 Lean files (`Mathlib/NumberTheory/Transcendental/Baker/`)
-with `Transcendental.baker`, stated exactly like `BakerTheorem` (algebraic coefficients,
-`LinearIndependent ℚ l`). Its `Basic.lean` has an Apache 2.0 header and no `sorry`. It has
-not been built or audited here, it is unmerged and unannounced as far as the searches
-show, and it targets an earlier toolchain. If it builds against our Mathlib and
-`#print axioms` is clean, `BakerTheorem` becomes a theorem and every result of Part III
-becomes unconditional in Lean. The lean-eval problem "Baker-Wüstholz" is a different
-statement (integer coefficients, explicit lower bound) and would not give `BakerTheorem`.
+**Baker's theorem (22 November 2026): imported. DONE.** `Baker/` holds Michail
+Karatarakis's formal proof (`Transcendental.baker`, 19 files, Apache-2.0, from the branch
+`baker` of the GitHub fork `mkaratarakis/mathlib4`, commit `1d51891b`). It compiles with
+our Lean 4.36.0 and Mathlib v4.36.0 after three one-line adjustments, and depends only on
+the three standard axioms. `Unconditional.lean` derives `bakerTheorem : BakerTheorem` and
+restates Theorems C, D, E, G, H and Bailey's counts with no hypothesis. The lean-eval
+problem "Baker-Wüstholz" is a different statement (integer coefficients, explicit lower
+bound) and would not have given `BakerTheorem`.
 
 Open for Theorem E: the uniqueness statements (two formulas at `2/3`; two 2-dimensional
 flats at `7/24`) and the list of non-dominated pairs. The same checker extends to them:
@@ -430,7 +429,7 @@ the leaves must then also identify the flat.
 
 ## Out of scope
 
-* Baker's theorem itself.
+* A proof of Baker's theorem of our own. An existing formal proof is imported (`Baker/README.md`).
 * Part IV (Theorem F) until Layer 2 exists. It uses the same Baker framework plus the
   sub-series lemma.
 * The claim that the prime measure is the cost of the window algorithm. That is a fact

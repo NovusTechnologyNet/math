@@ -1095,10 +1095,18 @@ there is at present neither a candidate nor a proof of impossibility.
     is a value of F exactly for the fifteen primes 2, 3, 5, 7, 11, 13, 17, 19, 29, 31, 37,
     41, 43, 61, 73.
 
+  - **Baker's theorem, and the theorems above without a hypothesis.** Since 22 November
+    2026 the library contains a formal proof of Baker's theorem by Michail Karatarakis
+    (lean/Baker, Apache License 2.0; lean/Baker/README.md gives the source, the checks and
+    the three one-line adjustments made). `PiFormula.bakerTheorem` derives the hypothesis
+    from it, and `PiFormula.Unconditional.theoremC`, `theoremD_sharp`, `theoremE`,
+    `no_log23`, `log_primes_below_100`, `bailey_table` and the others restate the theorems
+    with no hypothesis. They depend only on the three standard axioms. That proof is not
+    ours and has not been through Mathlib's review; Lean's kernel has checked it.
+
   Not in Lean yet:
-  - Baker's theorem itself (a hypothesis throughout);
   - of Theorem E: that the optima are attained only by the stated formulas, and the list
     of non-dominated pairs.
 
-  The plan, with Baker's theorem as an explicit hypothesis, is lean/PART3_PLAN.md.
+  The plan is lean/PART3_PLAN.md.
   Nothing of Part IV is in Lean.

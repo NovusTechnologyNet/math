@@ -1,7 +1,7 @@
 # Certificate generators for Part III
 
-These scripts produced the generated parts of `Pilean/Pilean/PiFormula/Relations.lean` and
-`Pilean/Pilean/PiFormula/VSeries.lean`. Run them with the system Python, with sympy and mpmath
+These scripts produced the generated parts of `Pilean/PiFormula/Relations.lean` and
+`Pilean/PiFormula/VSeries.lean`. Run them with the system Python, with sympy and mpmath
 installed.
 
 | Script | Produces |
@@ -17,6 +17,7 @@ installed.
 | `fivegen.py` | M7 part 3. `python fivegen.py series`: section 3 of `FiveSeries.lean` (the five tables, the power sums and one certificate per residue, modulo `Φ_24` or `Φ_20`); the file is `five_head.lean`, this output and `five_tail.lean`. `python fivegen.py indep`: section 2 of `TheoremC3.lean` (values of the thirteen patterns, the inverse matrix, `coords13_D`); the file is `c3_head.lean`, this output and `c3_tail.lean` |
 | `egen.py` | Theorem E. `python egen.py classes`: the tables of `Classes.lean` (with `classes_head.lean`, `classes_tail.lean`). `python egen.py prime`: section 2 of `PrimeMeasure.lean`, the values on the four chains and 17 linear facts (with `prime_head.lean`, `prime_tail.lean`). `python egen.py terms`: the certificate of `FewestTerms.lean`, a branch-and-bound tree with an integer identity for every derived fact (with `terms_head.lean`, `terms_tail.lean`) |
 | `assemble.py` | glues `vseries_head.lean`, `vseries_tail.lean` and the generated parts into `VSeries.lean` |
+| `unconditional_gen.py` | `Unconditional.lean`: each main theorem of Part III with `(hB : BakerTheorem)` removed, proved by applying the original to `bakerTheorem` |
 
-The scripts write their output to a scratch folder. Edit the paths at the top of each
-script before running it. Lean checks the certificates; the scripts only find them.
+`relgen.py`, `twgen.py` and `named.py` write intermediate files to `scripts/generated/`
+(not in git), which `assemble.py` reads. Lean checks the certificates; the scripts only find them.

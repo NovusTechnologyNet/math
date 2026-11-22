@@ -1,7 +1,7 @@
 name = "pilean"
 version = "0.1.0"
 keywords = ["math"]
-defaultTargets = ["Pilean"]
+defaultTargets = ["Pilean", "Baker"]
 
 [leanOptions]
 pp.unicode.fun = true # pretty-prints `fun a ↦ b`
@@ -19,3 +19,6 @@ name = "Pilean"
 
 [[lean_lib]]
 name = "TauCeti"
+
+[[lean_lib]]
+name = "Baker"
