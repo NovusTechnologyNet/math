@@ -55,6 +55,7 @@ spanned by `γ(O) + γ(O*) = 0`, `γ(O_1) = π/4`, `γ(O_6) = 0` and `γ(O_10) -
 | `Pilean/PiFormula/LogYes.lean` | The values of F are a rational vector space (`IsFValue.add`, `IsFValue.const_mul`); the roots of `X^n = c` (`psum_nthRoots`, `zO_nthRoots`, `isFValue_gen`, `isFValue_log_of_gen`); the fifteen primes (`isFValue_log_2` ... `isFValue_log_73`, `isFValue_log_of_mem`); `isFValue_log_23_add_log_89`; `log_primes_below_100` | proved (the classification from `BakerTheorem`; the fifteen formulas unconditionally) |
 | `Pilean/PiFormula/BakerBridge.lean` | `bakerTheorem_of_linearIndependent`: a library-style statement of Baker's theorem gives `BakerTheorem` | proved |
 | `Baker/` | Baker's theorem (`Transcendental.baker`), 19 files by Michail Karatarakis (Apache-2.0), see `Baker/README.md` | builds with three one-line adjustments; standard axioms only |
+| `Pilean/PiFormula/Arctan.lean` | Theorem I: relations up to a power of `a / b` (`IsRelUpToQ`, `coeff_eq_zero_upToQ`, `exponent_eq_zero_upToQ`, `support_upToQ`, `no_rel_gaussian`); Baker's theorem with one more logarithm (`baker_no_extra`); `exp_two_arctan`; `no_arctan_of_goodPrimes`, `not_isFValue_arctan`; `no_arctan_two_sevenths`, `not_isFValue_arctan_two_sevenths`, `..._five_eighths`, `..._four_ninths`, the Bailey forms; the positive half `exp_gamma`, `isFValue_arctan_inv_129`, `isFValue_arctan_two_sevenths_add` | proved (the exclusions from `BakerTheorem`; the positive half unconditionally) |
 | `Pilean/PiFormula/Unconditional.lean` | `bakerTheorem`; Theorems C, D, E, G, H, the value formula and Bailey's counts with no hypothesis (`PiFormula.Unconditional.*`) | proved |
 | `TauCeti/` | 25 modules of Tau Ceti (Apache-2.0), see `TauCeti/VENDORED.md` | builds unchanged |
 
@@ -451,6 +452,26 @@ theory-free numerical search that agrees.
 - `isFValue_log_23_add_log_89`: `log 23 + log 89` is a value, although neither summand is.
 
 Not proved: a criterion for all primes at once.
+
+**Theorem I: `arctan (2/7)` has no binary BBP-type formula** (`Arctan.lean`). Bailey's
+compendium says it is not known whether `arctan (2/7)` possesses a binary BBP formula.
+
+- `no_rel_gaussian` (no Baker): let `a`, `b` be algebraic integers with `a b = ℓ`, an odd
+  prime to which `no_rel_of_goodPrimes` applies, and `a + b` an integer prime to `ℓ`. If
+  `∏ (1 - r/t)^(e_r) = ξ (a/b)^m` with `r`, `ξ` roots of unity, then `m = 0`. This is
+  `Log23.lean` redone for a quotient (`IsRelUpToQ`): a good prime of characteristic other
+  than `ℓ` contains neither `a` nor `b`, and a prime above `ℓ` contains exactly one of them.
+- `baker_no_extra` (from `BakerTheorem`): Baker's descent with one more logarithm `Λ`,
+  `exp Λ = a / b`. `exp_two_arctan`: `exp (2i arctan (y/x)) = (x + yi)/(x - yi)`.
+- `not_isFValue_arctan`, `no_arctan_of_goodPrimes`: `arctan (y/x)` is not a value of the
+  class F when `x² + y² = ℓ` is such a prime. With `good_53`, `good_89`, `good_97`:
+  `arctan (2/7)`, `arctan (5/8)`, `arctan (4/9)`, and the Bailey forms for `arctan (2/7)`.
+- The positive half, no Baker: `exp_gamma` (`exp (i γ(O))` is a positive multiple of
+  `z_O / t^|O|`), `isFValue_arctan_inv_129` (the thirteenth roots of unity give
+  `arctan (1/129)`), `isFValue_arctan_two_sevenths_add`:
+  `arctan (2/7) + arctan (6/11) = π/4 - arctan (1/129)` is a value.
+
+`python/arctan_probe.py` is a theory-free numerical search that agrees.
 
 **Baker's theorem is proved here too** (`Baker/`, `BakerBridge.lean`, `Unconditional.lean`).
 

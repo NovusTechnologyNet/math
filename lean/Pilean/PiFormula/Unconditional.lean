@@ -124,6 +124,40 @@ theorem log_primes_below_100 {p : ℕ} (hp : p.Prime) (h100 : p < 100) :
     IsFValue (Real.log p) ↔ p ∈ logPrimes :=
   _root_.PiFormula.log_primes_below_100 bakerTheorem hp h100
 
+/-- **Theorem I.** No series of the class F is a non-zero algebraic multiple of
+`arctan (2/7)`. -/
+theorem no_arctan_two_sevenths {N : ℕ} (hN : 0 < N) {ρ : ℕ → ℚ}
+    (hρ : ∀ k, ρ (k + N) = ρ k) {q : ℝ} (hq : IsAlgebraic ℚ q)
+    (h : HasSum (seriesTerm ρ) (q * Real.arctan (2 / 7))) : q = 0 :=
+  _root_.PiFormula.no_arctan_two_sevenths bakerTheorem hN hρ hq h
+
+/-- **Theorem I.** `arctan (2/7)` is not a value of the class F. -/
+theorem not_isFValue_arctan_two_sevenths :
+    ¬ IsFValue (Real.arctan (2 / 7)) :=
+  _root_.PiFormula.not_isFValue_arctan_two_sevenths bakerTheorem
+
+/-- `arctan (5/8)` is not a value of the class F. -/
+theorem not_isFValue_arctan_five_eighths :
+    ¬ IsFValue (Real.arctan (5 / 8)) :=
+  _root_.PiFormula.not_isFValue_arctan_five_eighths bakerTheorem
+
+/-- `arctan (4/9)` is not a value of the class F. -/
+theorem not_isFValue_arctan_four_ninths :
+    ¬ IsFValue (Real.arctan (4 / 9)) :=
+  _root_.PiFormula.not_isFValue_arctan_four_ninths bakerTheorem
+
+/-- **Theorem I** for `P(1, 2^B, 2B, A)`, every `B ≥ 1`. -/
+theorem bailey_no_arctan_two_sevenths_F2 {B : ℕ} (hB0 : 0 < B)
+    (a : Fin (2 * B) → ℚ) {q : ℝ} (hq : IsAlgebraic ℚ q)
+    (h : HasSum (baileyBlock B (2 * B) a) (q * Real.arctan (2 / 7))) : q = 0 :=
+  _root_.PiFormula.bailey_no_arctan_two_sevenths_F2 bakerTheorem hB0 a hq h
+
+/-- **Theorem I** for `P(1, 2^B, B, A)`, every `B ≥ 1`. -/
+theorem bailey_no_arctan_two_sevenths_F1 {B : ℕ} (hB0 : 0 < B)
+    (a : Fin B → ℚ) {q : ℝ} (hq : IsAlgebraic ℚ q)
+    (h : HasSum (baileyBlock B B a) (q * Real.arctan (2 / 7))) : q = 0 :=
+  _root_.PiFormula.bailey_no_arctan_two_sevenths_F1 bakerTheorem hB0 a hq h
+
 end Unconditional
 
 end PiFormula

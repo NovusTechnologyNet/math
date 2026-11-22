@@ -414,6 +414,15 @@ fifteen primes 2, 3, 5, 7, 11, 13, 17, 19, 29, 31, 37, 41, 43, 61, 73. The fifte
 are unconditional (`isFValue_log_of_mem`); the ten exclusions use Baker. Open: a criterion
 for all primes at once.
 
+**Theorem I (22 November 2026): `arctan (2/7)` has no binary BBP-type formula. DONE** in
+`Arctan.lean` (about 780 lines). `no_rel_gaussian` (unconditional) is `no_rel_of_goodPrimes`
+for a quotient `a / b` of algebraic integers with `a b = ℓ`; `baker_no_extra` is
+`baker_no_log` for any logarithm `Λ` with `exp Λ = a / b`. So `arctan (y/x)` is excluded
+whenever `x² + y² = ℓ` already has its `good_ℓ` (53, 89, 97 so far). The positive half
+(`isFValue_arctan_two_sevenths_add`) uses `exp_gamma`, which gives the value of any
+arctangent-type orbit sum up to multiples of `2π` without computing the branch. Open: the
+arctangents of the other excluded Gaussian primes (norm 157, 178481, ...), and a criterion.
+
 **Baker's theorem (22 November 2026): imported. DONE.** `Baker/` holds Michail
 Karatarakis's formal proof (`Transcendental.baker`, 19 files, Apache-2.0, from the branch
 `baker` of the GitHub fork `mkaratarakis/mathlib4`, commit `1d51891b`). It compiles with

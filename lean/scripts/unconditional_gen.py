@@ -1,7 +1,10 @@
 # Generates lean/Pilean/PiFormula/Unconditional.lean: the main theorems of Part III with the
 # hypothesis `BakerTheorem` discharged by the formal proof of Baker's theorem in lean/Baker.
 #
-#   python lean/scripts/unconditional_gen.py > lean/Pilean/PiFormula/Unconditional.lean
+#   python lean/scripts/unconditional_gen.py
+#
+# It writes lean/Pilean/PiFormula/Unconditional.lean itself, and only after every statement
+# has been found, so a failure cannot leave an empty file behind.
 #
 # Each statement is copied from its source file with `(hB : BakerTheorem)` removed, so the
 # file can be read on its own; each proof is the original theorem applied to `bakerTheorem`.
@@ -49,6 +52,19 @@ ITEMS = [
     ("LogYes", "log_primes_below_100",
      "**Theorem H.** For a prime `p < 100`, `log p` is a value of the class F if and only if\n"
      "`p` is one of `2, 3, 5, 7, 11, 13, 17, 19, 29, 31, 37, 41, 43, 61, 73`."),
+    ("Arctan", "no_arctan_two_sevenths",
+     "**Theorem I.** No series of the class F is a non-zero algebraic multiple of\n"
+     "`arctan (2/7)`."),
+    ("Arctan", "not_isFValue_arctan_two_sevenths",
+     "**Theorem I.** `arctan (2/7)` is not a value of the class F."),
+    ("Arctan", "not_isFValue_arctan_five_eighths",
+     "`arctan (5/8)` is not a value of the class F."),
+    ("Arctan", "not_isFValue_arctan_four_ninths",
+     "`arctan (4/9)` is not a value of the class F."),
+    ("Arctan", "bailey_no_arctan_two_sevenths_F2",
+     "**Theorem I** for `P(1, 2^B, 2B, A)`, every `B ≥ 1`."),
+    ("Arctan", "bailey_no_arctan_two_sevenths_F1",
+     "**Theorem I** for `P(1, 2^B, B, A)`, every `B ≥ 1`."),
 ]
 
 OPEN = {"(": ")", "{": "}", "[": "]", "⟨": "⟩"}
@@ -130,4 +146,8 @@ for fname, name, doc in ITEMS:
     w("theorem %s%s :%s :=\n" % (name, binders, stmt))
     w("  _root_.PiFormula.%s bakerTheorem%s\n" % (name, args))
 w("\nend Unconditional\n\nend PiFormula\n")
-sys.stdout.buffer.write(out.getvalue().encode("utf-8"))
+text = out.getvalue()
+assert sum(1 for line in text.splitlines() if line.startswith("theorem ")) == len(ITEMS) + 1
+with io.open(os.path.join(SRC, "Unconditional.lean"), "w", encoding="utf-8", newline="\n") as fh:
+    fh.write(text)
+print("wrote Unconditional.lean: %d theorems" % (len(ITEMS) + 1))

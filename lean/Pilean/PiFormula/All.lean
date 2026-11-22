@@ -37,3 +37,4 @@ import Pilean.PiFormula.Log23
 import Pilean.PiFormula.LogPrimes
 import Pilean.PiFormula.LogYes
 import Pilean.PiFormula.BakerBridge
+import Pilean.PiFormula.Arctan

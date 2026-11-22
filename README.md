@@ -31,10 +31,11 @@ formulas and every `P(1, 2^B, n, A)` of Bailey's compendium with `n = B` or `n =
 | Theorem E | A formula for pi in F needs at least 2/3 of a term per bit; Huvent's formulas attain it. For a second cost measure the least value is 7/24, attained by a new formula | Lean; the uniqueness statements are not formal |
 | Theorem G | log 23 is not the value of any series of F | Lean |
 | Theorem H | For a prime p below 100, log p is a value of F exactly for 2, 3, 5, 7, 11, 13, 17, 19, 29, 31, 37, 41, 43, 61, 73 | Lean |
+| Theorem I | arctan(2/7) is not the value of any series of F (a question left open in Bailey's compendium), nor are arctan(5/8) and arctan(4/9); arctan(2/7) + arctan(6/11) is a value | Lean |
 | Checked pair | The least cost of computing pi with a check by a second formula is 60 terms per 60 bits, attained only by Takahashi's pair | Computed exactly (`python/verify_pair_optimum.py`); not in Lean |
 | Theorem F | The other binary families (Part IV of the note) | Written; not formal |
 
-Theorems C to H rest on Baker's theorem on linear forms in logarithms (1966). The library
+Theorems C to I rest on Baker's theorem on linear forms in logarithms (1966). The library
 has each of them in two forms. Our own files prove them from Baker's theorem as an explicit
 hypothesis, `BakerTheorem`, because Baker's theorem is not in Mathlib. `lean/Baker/` holds a
 formal proof of Baker's theorem by Michail Karatarakis, and

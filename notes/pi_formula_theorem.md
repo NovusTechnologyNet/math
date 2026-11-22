@@ -642,6 +642,59 @@ Machine-checked: `PiFormula.log_primes_below_100` (from Baker's theorem),
 `PiFormula.not_isFValue_log_of_mem` (the ten primes, from Baker's theorem),
 `PiFormula.isFValue_log_23_add_log_89`.
 
+### Arctangents: arctan(2/7) has no binary BBP-type formula (arctan_probe.py)
+
+Bailey's compendium says that it is not known whether arctan(2/7) possesses a binary BBP
+formula, and Borwein, Borwein and Galway (2004, section 2.5) name it as the first
+arctangent for which they could find none.
+
+**Theorem I (arctan(2/7)).** No series of F has a non-zero algebraic multiple of
+arctan(2/7) as its value. In Bailey's notation: for every B >= 1 and rational A, neither
+P(1, 2^B, 2B, A) nor P(1, 2^B, B, A) is a non-zero algebraic multiple of arctan(2/7). The
+same holds for arctan(5/8) and arctan(4/9). On the other hand
+
+    arctan(2/7) + arctan(6/11)  =  pi/4 - arctan(1/129)
+
+is a value of F.
+
+*Proof.* The number 7 + 2i has norm 53. Put a = 7 + 2i and b = 7 - 2i, so that a b = 53 and
+exp(2i arctan(2/7)) = a/b. (i) *Multiplicative part, without Baker.* If
+prod (1 - r/t)^(e_r) = xi (a/b)^m with the r and xi roots of unity, then m = 0. The proof of
+Theorem G applies with a/b in place of 23. Every root of unity outside R0 has a good prime
+of residue characteristic other than 53 (the table of Theorem H: the only atom that
+contains 53 is Phi_13(1+i), of norm 53 * 157, and 157 is used). Such a prime contains
+neither a nor b, so the relation is supported on R0. A prime P above 53 contains exactly
+one of a and b (both would give a + b = 14 in P), and no t - r with r in R0, because
+t^120 - r^120 = 2^60 - 1 is prime to 53. Comparing the two sides at P gives m = 0.
+(ii) *Baker's theorem*, as in Theorem G, with the logarithm 2i arctan(2/7) in place of
+log 23.
+
+The same proof gives arctan(y/x) whenever x^2 + y^2 is one of the ten primes of Theorem H
+that is 1 modulo 4: 53 = 7^2 + 2^2, 89 = 8^2 + 5^2 and 97 = 9^2 + 4^2.
+
+*The positive half (no Baker).* The arctangent-type sum over the thirteenth roots of unity
+is a series of F of period 104. Its value is arg((t^13 - 1)/t^13) = arg(129 - i)
+= -arctan(1/129), up to a multiple of 2 pi. So arctan(1/129) is a value of F. Since
+(7 + 2i)(11 + 6i) = 65 + 64i and (65 + 64i)(129 + i) = 8321 (1 + i), the sum
+arctan(2/7) + arctan(6/11) equals pi/4 - arctan(1/129). This is the same picture as for
+log 23 and log 89: Phi_13(1+i) = -64 + 65i = i (7 + 2i)(11 + 6i), so 7 + 2i only ever
+comes with its partner 11 + 6i, of norm 157.
+
+*Numerical check, free of theory (python/arctan_probe.py).* Lattice reduction on pi,
+arctan(1/2), arctan(2/7), arctan(6/11) and the 104 residue-class sums of period 104 finds
+that pi, arctan(1/2) and arctan(2/7) + arctan(6/11) are values of period-104 series, and
+that arctan(2/7) alone is not (relations have squared length at most 2,177; non-relations
+about 2^68).
+
+*Limits.* As for Theorem G, the theorem is for the class F (n = B or n = 2B). Whether it
+was already known has been checked only by a literature search
+(research/2026-11-22-deep/16_last_gaps.md): the question is stated as open in the two
+sources above, and no proof of exclusion was found. Machine-checked, with no hypothesis:
+`PiFormula.Unconditional.not_isFValue_arctan_two_sevenths`,
+`PiFormula.Unconditional.no_arctan_two_sevenths` and the two Bailey forms;
+`PiFormula.isFValue_arctan_two_sevenths_add` and `PiFormula.isFValue_arctan_inv_129`
+(these two do not use Baker's theorem at all).
+
 ### Two cost measures, and the optimum in each
 
 *Standard measure (published).* Terms per bit: the number of non-zero entries per
@@ -1094,6 +1147,13 @@ there is at present neither a candidate nor a proof of impossibility.
     `PiFormula.not_isFValue_log_of_mem`, from Baker's theorem). For a prime p < 100, log p
     is a value of F exactly for the fifteen primes 2, 3, 5, 7, 11, 13, 17, 19, 29, 31, 37,
     41, 43, 61, 73.
+
+  - **Theorem I, arctan(2/7)** (`PiFormula.no_arctan_two_sevenths`,
+    `PiFormula.not_isFValue_arctan_two_sevenths`, `not_isFValue_arctan_five_eighths`,
+    `not_isFValue_arctan_four_ninths`, the Bailey forms, from Baker's theorem;
+    `PiFormula.no_rel_gaussian`, `PiFormula.isFValue_arctan_two_sevenths_add`,
+    `PiFormula.isFValue_arctan_inv_129`, unconditional). arctan(2/7), arctan(5/8) and
+    arctan(4/9) are not values of F; arctan(2/7) + arctan(6/11) is.
 
   - **Baker's theorem, and the theorems above without a hypothesis.** Since 22 November
     2026 the library contains a formal proof of Baker's theorem by Michail Karatarakis
