@@ -65,6 +65,11 @@ ITEMS = [
      "**Theorem I** for `P(1, 2^B, 2B, A)`, every `B ≥ 1`."),
     ("Arctan", "bailey_no_arctan_two_sevenths_F1",
      "**Theorem I** for `P(1, 2^B, B, A)`, every `B ≥ 1`."),
+    ("CheckedPair", "pairCost_ge",
+     "**Theorem J.** Two different formulas of the class F with the same non-zero rational\n"
+     "multiple of `π` as value cost at least 60 terms per 60 bits as a checked pair."),
+    ("CheckedPair", "checkedPair",
+     "**Theorem J**, with Takahashi's pair, which attains the bound."),
 ]
 
 OPEN = {"(": ")", "{": "}", "[": "]", "⟨": "⟩"}

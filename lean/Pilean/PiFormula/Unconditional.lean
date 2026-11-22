@@ -158,6 +158,23 @@ theorem bailey_no_arctan_two_sevenths_F1 {B : ℕ} (hB0 : 0 < B)
     (h : HasSum (baileyBlock B B a) (q * Real.arctan (2 / 7))) : q = 0 :=
   _root_.PiFormula.bailey_no_arctan_two_sevenths_F1 bakerTheorem hB0 a hq h
 
+/-- **Theorem J.** Two different formulas of the class F with the same non-zero rational
+multiple of `π` as value cost at least 60 terms per 60 bits as a checked pair. -/
+theorem pairCost_ge {N : ℕ} (hN : 0 < N) (h120 : 120 ∣ N) {ρ₁ ρ₂ : ℕ → ℚ}
+    (hp₁ : ∀ k, ρ₁ (k + N) = ρ₁ k) (hp₂ : ∀ k, ρ₂ (k + N) = ρ₂ k) {r : ℚ} (hr : r ≠ 0)
+    (h₁ : HasSum (seriesTerm ρ₁) (r * Real.pi)) (h₂ : HasSum (seriesTerm ρ₂) (r * Real.pi))
+    (hne : ρ₁ ≠ ρ₂) : 60 ≤ pairCost ρ₁ ρ₂ :=
+  _root_.PiFormula.pairCost_ge bakerTheorem hN h120 hp₁ hp₂ hr h₁ h₂ hne
+
+/-- **Theorem J**, with Takahashi's pair, which attains the bound. -/
+theorem checkedPair :
+    (∀ {N : ℕ}, 0 < N → 120 ∣ N → ∀ {ρ₁ ρ₂ : ℕ → ℚ}, (∀ k, ρ₁ (k + N) = ρ₁ k) →
+      (∀ k, ρ₂ (k + N) = ρ₂ k) → ∀ {r : ℚ}, r ≠ 0 → HasSum (seriesTerm ρ₁) (r * Real.pi) →
+      HasSum (seriesTerm ρ₂) (r * Real.pi) → ρ₁ ≠ ρ₂ → 60 ≤ pairCost ρ₁ ρ₂) ∧
+    HasSum (seriesTerm rhoTak1) Real.pi ∧ HasSum (seriesTerm rhoTak2) Real.pi ∧
+      pairCost rhoTak1 rhoTak2 = 60 :=
+  _root_.PiFormula.checkedPair bakerTheorem
+
 end Unconditional
 
 end PiFormula

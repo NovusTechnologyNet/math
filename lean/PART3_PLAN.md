@@ -423,6 +423,14 @@ whenever `x² + y² = ℓ` already has its `good_ℓ` (53, 89, 97 so far). The p
 arctangent-type orbit sum up to multiples of `2π` without computing the branch. Open: the
 arctangents of the other excluded Gaussian primes (norm 157, 178481, ...), and a criterion.
 
+**Theorem J (22 November 2026): the cheapest checked computation. DONE** in
+`CheckedPair.lean`: `pairCost_ge` (at least 60 for any two formulas of the same value) and
+`pairCost_takahashi` (his pair costs 60). The checker handles two patterns at once (`PCert`,
+`checkPair`); the certificate is large (about 31,000 lines) because the tree on the zero
+relation has 8,083 nodes: a joint tree on both patterns was five times larger, and other
+branching orders gained little. Open: uniqueness of Takahashi's pair, the bound 63 without
+repeated series, and a smaller certificate (for example a leaf rule for planes).
+
 **Baker's theorem (22 November 2026): imported. DONE.** `Baker/` holds Michail
 Karatarakis's formal proof (`Transcendental.baker`, 19 files, Apache-2.0, from the branch
 `baker` of the GitHub fork `mkaratarakis/mathlib4`, commit `1d51891b`). It compiles with

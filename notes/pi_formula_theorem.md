@@ -811,26 +811,43 @@ and S(30,15), which are the same series). So the cost of a checked computation i
 
 minimised over the zero relations z and the formulas rho of F.
 
-**Computed result (exact arithmetic on the space of Theorem C; not machine-checked).** Per
-120 positions, that is per 60 bits:
+**Theorem J (the cheapest checked computation).** Let rho_1 and rho_2 be two different
+series of F with the same non-zero rational multiple of pi as value. Then the cost of
+computing with one and checking with the other is at least 60 terms per 120 positions, that
+is, one term per bit. Takahashi's two formulas attain it: their cost is exactly 60.
 
-- Huvent's formula twice: 80.
-- Huvent's two formulas as a pair: 40 + 40 - 15 = 65, and 65 is the least cost in base 2^12.
-- No series computed twice: the least cost is 63, attained by seven supports (period 120).
-- In general: the least cost is 60, attained by exactly one pair, and that pair is
-  Takahashi's. In the coordinates of Theorem C his formulas are 8 A1 - 4 A10 and
+For comparison, per 120 positions (60 bits):
+
+- Huvent's formula twice: 80, and no single formula run twice does better (Theorem E).
+- Huvent's two formulas as a pair: 40 + 40 - 15 = 65.
+- Takahashi's pair: 60. In the coordinates of Theorem C his formulas are 8 A1 - 4 A10 and
   4 A1 - 4 A6; they have 42 and 50 terms, share 34 positions and agree at two of them
   (30 and 90), so the cost is 42 + 50 - 32 = 60.
 
 His own count, 64, treats S(12,3) and S(20,5) as different series, and likewise S(12,9) and
 S(20,15); they are the same series up to the factors 3 and 5. Merged, his pair costs 60, and
 no pair in F costs less. Merging means one modular exponentiation modulo 15(4k+1) instead of
-two; whether that is free in an implementation has not been tested. Theorem E already shows
-that Huvent's count of 40 cannot be improved by a single formula.
+two; whether that is free in an implementation has not been tested.
 
-*Limits.* A computation, by branch and bound in exact rational arithmetic, relying on
-Theorem C; it reproduces the known optima (40 in general, 42 at period 40, 60 at period 8)
-on the way. It is not in Lean. The same certificate method as for Theorem E would apply.
+*Proof.* A search tree on the 35 classes of positions. The tree first branches on the zero
+relation z: "class i vanishes or not". A branch is closed when the classes known not to
+vanish have weight at least 60. Exactly twelve branches end in a single zero relation with
+fewer than 60 terms (43, 50, 55, 55, 55, 56, 56, 57, 57, 59, 59, 59 terms). There the tree
+continues with rho inside the zero set of z, until (terms of z) + 2 (terms of rho where z
+vanishes) is at least 60. Every step comes with an integer linear identity. The tree has
+8,083 nodes on z and 180 on rho, with 17,953 derived facts; Lean checks it with a verified
+checker (`PiFormula.checkPair_sound`, `PiFormula.pairCert_ok`).
+
+*Also computed, not in Lean (python/verify_pair_optimum.py).* Takahashi's pair is the only
+one at 60. If no series may be computed twice, the least cost is 63, attained by seven
+supports of period 120. In base 2^12 alone the least cost is 65.
+
+*Limits.* The statement is for the class F and for this way of counting: one for each
+series that is computed, and a series on which the two formulas agree counted twice.
+Machine-checked: `PiFormula.Unconditional.pairCost_ge` (no hypothesis),
+`PiFormula.pairCost_takahashi`, `PiFormula.takahashi1_formula`,
+`PiFormula.takahashi2_formula` (his two formulas in Bailey's notation P(1, 2^60, 120, A),
+both equal to pi), `PiFormula.pairCost_huvent`.
 
 ### Checks on the new formula (new_formula_check.py, decompose_formula.py)
 
@@ -1154,6 +1171,13 @@ there is at present neither a candidate nor a proof of impossibility.
     `PiFormula.no_rel_gaussian`, `PiFormula.isFValue_arctan_two_sevenths_add`,
     `PiFormula.isFValue_arctan_inv_129`, unconditional). arctan(2/7), arctan(5/8) and
     arctan(4/9) are not values of F; arctan(2/7) + arctan(6/11) is.
+
+  - **Theorem J, the cheapest checked computation** (`PiFormula.pairCost_ge`, from Baker's
+    theorem; `PiFormula.pairCost_takahashi`, `PiFormula.takahashi1_formula`,
+    `PiFormula.takahashi2_formula`, `PiFormula.pairCost_huvent`). Any two different formulas
+    of F with the same value cost at least 60 as a checked pair, and Takahashi's two
+    formulas cost exactly 60. The search tree (8,083 + 180 nodes, 17,953 derived facts) is
+    a certificate checked inside Lean by a verified checker and the kernel.
 
   - **Baker's theorem, and the theorems above without a hypothesis.** Since 22 November
     2026 the library contains a formal proof of Baker's theorem by Michail Karatarakis

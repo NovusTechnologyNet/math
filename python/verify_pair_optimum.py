@@ -24,10 +24,15 @@
 #
 # and the first model is the case where the second term is 0.  Both are minimised below.
 # Takahashi's pair (his formulas (23) and (26), base -2^30) is rebuilt in our coordinates
-# as a test: it must lie in the 8-dimensional space, have value pi, and cost 64.
+# as a test: it must lie in the 8-dimensional space, have value pi, and cost 60 (he counts
+# 64, taking two pairs of equal series as different).
 #
 # The search is a branch-and-bound on the conditions "z(k) = 0", in exact rational
 # arithmetic, on the 8-dimensional space of Theorem C or on its part of a given period.
+#
+# Proved in Lean since (lean/Pilean/PiFormula/CheckedPair.lean, Theorem J): the general cost
+# is at least 60, and Takahashi's pair costs exactly 60.  Still only computed here: that his
+# pair is the only one at 60, and the least cost 63 when no series is computed twice.
 import os
 import sys
 from fractions import Fraction as Fr
