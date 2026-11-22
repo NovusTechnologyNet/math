@@ -70,6 +70,10 @@ ITEMS = [
      "multiple of `π` as value cost at least 60 terms per 60 bits as a checked pair."),
     ("CheckedPair", "checkedPair",
      "**Theorem J**, with Takahashi's pair, which attains the bound."),
+    ("LogCriterion", "not_isFValue_log_38737",
+     "`log 38737` is not a value of the class F, although 38737 is on the list A104885 of the\n"
+     "OEIS; `log 433 + log 38737` is a value (`isFValue_log_433_add_log_38737`)."),
+    ("LogCriterion", "not_isFValue_log_433", "`log 433` is not a value of the class F."),
 ]
 
 OPEN = {"(": ")", "{": "}", "[": "]", "⟨": "⟩"}

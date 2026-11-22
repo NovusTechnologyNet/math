@@ -57,6 +57,7 @@ spanned by `γ(O) + γ(O*) = 0`, `γ(O_1) = π/4`, `γ(O_6) = 0` and `γ(O_10) -
 | `Baker/` | Baker's theorem (`Transcendental.baker`), 19 files by Michail Karatarakis (Apache-2.0), see `Baker/README.md` | builds with three one-line adjustments; standard axioms only |
 | `Pilean/PiFormula/Arctan.lean` | Theorem I: relations up to a power of `a / b` (`IsRelUpToQ`, `coeff_eq_zero_upToQ`, `exponent_eq_zero_upToQ`, `support_upToQ`, `no_rel_gaussian`); Baker's theorem with one more logarithm (`baker_no_extra`); `exp_two_arctan`; `no_arctan_of_goodPrimes`, `not_isFValue_arctan`; `no_arctan_two_sevenths`, `not_isFValue_arctan_two_sevenths`, `..._five_eighths`, `..._four_ninths`, the Bailey forms; the positive half `exp_gamma`, `isFValue_arctan_inv_129`, `isFValue_arctan_two_sevenths_add` | proved (the exclusions from `BakerTheorem`; the positive half unconditionally) |
 | `Pilean/PiFormula/CheckedPair.lean` | Theorem J: `pairCost`, `zCost`, `pairCost_eq_zCost`; the certificate checker `checkPair` and `checkPair_sound`; the certificate `pairCert` (about 31,000 generated lines) and `pairCert_ok`; `pairCost_ge`; Takahashi's formulas in Bailey's notation (`takahashi1_formula`, `takahashi2_formula`), `pairCost_takahashi`, `pairCost_huvent`, `checkedPair` | proved (the bound from `BakerTheorem`; the kernel check takes about four minutes) |
+| `Pilean/PiFormula/LogCriterion.lean` | Theorem K, in part: `fValues` (the values of F as a rational vector space), `logSpan_le_fValues`; `isFValue_log_two_pow_sub_one`, `isFValue_log_L`, `isFValue_log_M`; the pair 433, 38737: `atom_R40`, `good_433`, `good_38737`, `not_isFValue_log_433`, `not_isFValue_log_38737`, `isFValue_log_433_add_log_38737` | proved (the two exclusions from `BakerTheorem`) |
 | `Pilean/PiFormula/Unconditional.lean` | `bakerTheorem`; Theorems C, D, E, G, H, the value formula and Bailey's counts with no hypothesis (`PiFormula.Unconditional.*`) | proved |
 | `TauCeti/` | 25 modules of Tau Ceti (Apache-2.0), see `TauCeti/VENDORED.md` | builds unchanged |
 
@@ -493,6 +494,23 @@ computes `π` with one formula and checks it with a second one that shares most 
 
 Not proved: that Takahashi's pair is the only one at 60, and the bound 63 when no series
 may be computed twice (both computed, `python/verify_pair_optimum.py`).
+
+**Theorem K: which logarithms are values, in part** (`LogCriterion.lean`). The note proves
+a criterion: `log y` (`y` rational) is a value of the class F exactly when it is a rational
+combination of `log 2` and the numbers `log N((1+i)^n - c)`.
+
+- `logSpan_le_fValues` (no Baker): every such combination is a value. `fValues` is the
+  space of values. `isFValue_log_two_pow_sub_one`: `log (2^m - 1)`, every `m ≥ 1`;
+  `isFValue_log_L`, `isFValue_log_M`: `log (2^n ∓ 2^((n+1)/2) + 1)`, every odd `n`.
+- The converse is not formal in general. It needs the norm from `ℚ(i, ζ_N)` to `ℚ(i)` of a
+  multiplicative relation, which is not set up here.
+- `not_isFValue_log_38737`, `not_isFValue_log_433` (from `BakerTheorem`),
+  `isFValue_log_433_add_log_38737` (no Baker): `Φ_72(2) = 433 · 38737` is the atom
+  `R 4 0 = Φ_9(4i) = -4095 - 64i` (`atom_R40`), the only atom of index 72
+  (`atoms_of_index_72`). The OEIS list A104885 contains 38737.
+
+`python/log_prime_criterion.py` decides the criterion for any prime, and `python/log_probe.py`
+is a theory-free numerical search for given primes and a given period.
 
 **Baker's theorem is proved here too** (`Baker/`, `BakerBridge.lean`, `Unconditional.lean`).
 

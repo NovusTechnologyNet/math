@@ -175,6 +175,15 @@ theorem checkedPair :
       pairCost rhoTak1 rhoTak2 = 60 :=
   _root_.PiFormula.checkedPair bakerTheorem
 
+/-- `log 38737` is not a value of the class F, although 38737 is on the list A104885 of the
+OEIS; `log 433 + log 38737` is a value (`isFValue_log_433_add_log_38737`). -/
+theorem not_isFValue_log_38737 : ¬ IsFValue (Real.log 38737) :=
+  _root_.PiFormula.not_isFValue_log_38737 bakerTheorem
+
+/-- `log 433` is not a value of the class F. -/
+theorem not_isFValue_log_433 : ¬ IsFValue (Real.log 433) :=
+  _root_.PiFormula.not_isFValue_log_433 bakerTheorem
+
 end Unconditional
 
 end PiFormula

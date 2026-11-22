@@ -633,14 +633,118 @@ the other primes by norms N(t^n - c), and it is not when p only ever occurs toge
 a partner. For example log 23 + log 89 = log(2^11 - 1) is a value (n = 22, c = -i, where
 t^22 + i = -2047 i), although neither log 23 nor log 89 is.
 
-*Limits.* As for Theorem G, the statement is for the class F (n = B or n = 2B). It is a
-list, not a criterion: each of the ten primes needed its own partner. A criterion for all
-primes at once ("log p is a value of F exactly when a power of p is, up to units, a product
-of integer powers of the numbers t^n - c") is what the 25 cases suggest; it is not proved.
+*Limits.* As for Theorem G, the statement is for the class F (n = B or n = 2B). Each of
+the ten primes needed its own partner in Lean. The criterion for all primes at once is
+Theorem K below.
 Machine-checked: `PiFormula.log_primes_below_100` (from Baker's theorem),
 `PiFormula.isFValue_log_of_mem` (the fifteen primes, unconditional),
 `PiFormula.not_isFValue_log_of_mem` (the ten primes, from Baker's theorem),
 `PiFormula.isFValue_log_23_add_log_89`.
+
+### Which logarithms have a formula: the criterion (log_prime_criterion.py, log_probe.py)
+
+**Theorem K (criterion).** Let y be a positive rational number. The following are
+equivalent.
+
+(a) log y is the value of a series of F.
+
+(b) log y is a rational combination of log 2 and the numbers log N((1+i)^n - c), with
+    n >= 1 and c in {1, -1, i, -i}.
+
+(c) Some power y^M, M >= 1, is a product of integer powers of 2, of the numbers 2^m - 1
+    (m >= 1), and of the numbers 2^n - 2^((n+1)/2) + 1 and 2^n + 2^((n+1)/2) + 1 (n odd),
+    the two factors of 4^n + 1.
+
+Moreover (d): if log y is the value of a binary degree-1 series P(1, 2^B, n, A), for any B
+and any n, then (c) holds. So no other binary family reaches a logarithm of a rational that
+F does not reach.
+
+*For a prime p this is a finite test.* Let n = ord_p(2) and let g be the primitive part
+that contains p: g = Phi_n(2) if n is not 4 modulo 8; if n = 4d with d odd, g is the one of
+|Phi_d(1+i)|^2, |Phi_2d(1+i)|^2 that p divides (their product is Phi_n(2)). Write
+g = p^x R with p not dividing R. Then log p is a value of F if and only if R = 1, or R is a
+prime q dividing n and log q is a value of F. In words: p must be alone in its primitive
+part, apart from at most one prime q dividing the index, which must pass the same test.
+
+*Proof.* (b) => (a), without Baker. Each log N(t^n - c) is a value (proof of Theorem H),
+log 2 is a value, and the values of F form a rational vector space.
+
+(b) <=> (c). For n = 2m, t^n = 2^m i^m, so N(t^n - c) is (2^m - 1)^2, (2^m + 1)^2 or
+4^m + 1, and 2^m + 1 = (2^(2m) - 1)/(2^m - 1), 4^m + 1 = (2^(4m) - 1)/(2^(2m) - 1). For n
+odd, N(t^n - 1) and N(t^n + 1) are the two factors of 4^n + 1 (Lemma 2), and so are
+N(t^n - i), N(t^n + i). Conversely (2^m - 1)^2 = N(t^(2m) - i^m). Logarithms of different
+primes are independent over the rationals, which turns (b) into (c).
+
+(a) => (c), from Baker's theorem. Let log y = sum d_r Log(1 - r/t), the sum over the N-th
+roots of unity r (Step 1). The relation sum d_r Log(1 - r/t) - log y = 0 has algebraic
+coefficients, so it is a combination of integer relations among the Log(1 - r/t), i pi and
+log y, and one of them has a non-zero coefficient m at log y:
+
+    prod (1 - r/t)^(e_r) = xi y^m,        xi a root of unity.
+
+Take the norm from K = Q(i, zeta_N) to Q(i). The norm of t - r is a power of
+a_O = prod over s in O of (t - s), where O is the set of conjugates of r over Q(i); a_O is
+a Gaussian integer. So y^(mD), D = [K : Q(i)], is, up to a unit, a product of integer
+powers of t and of numbers a_O. Each a_O is a product of integer powers of numbers t^n - c:
+if r has order M, put g = gcd(M, 4), n = M/g and c = r^n; the roots of X^n = c are the
+conjugates of r together with roots of unity of smaller order, which come in full sets of
+conjugates; so a_O = (t^n - c) / prod a_O', and one concludes by induction on M. Taking
+absolute values gives (b) for a multiple of log y.
+
+(d), sketch. The series P(1, 2^B, n, A) is sum c(k) x^k / k with x = 2^(-B/n) and c
+periodic with values in Q(x), so its value is a combination of the Log(1 - r x) with
+algebraic coefficients, and Baker's theorem gives prod (1 - r x)^(e_r) = xi y^m as before.
+Write 1/x = 2^(b/n') in lowest terms and let L be a cyclotomic field containing the r, xi
+and zeta_8. The norm from L(2^(1/n')) to L of 2^(b/n') - r is, up to sign,
+2^b - r^(n') if n' is odd and sqrt(2)^b - r^(n'/2) if n' is even; in both cases it is a
+root of unity times t^(b') - r' for some b' and some root of unity r', and
+t^(b') - r' = prod over s^(b') = r' of (t - s). So a power of y is again, up to roots of
+unity and powers of t, a product of powers of numbers t - s, and the argument for (a) => (c)
+applies.
+
+The test for a prime. The numbers of (c) are generated, up to powers, by 2 and the
+primitive parts: Phi_m(2) for m not 4 modulo 8, and for m = 4d the two numbers
+|Phi_d(1+i)|^2, |Phi_2d(1+i)|^2. A prime p divides the primitive parts of index
+ord_p(2) p^j only; for j >= 1 exactly once. In a relation p^M = 2^s prod g^(E_g), take the
+part g of largest index with E_g non-zero: its primes of exact order equal to that index
+occur in no other part of the relation, so they all equal p; this part is the g of the
+test, and its other prime, if any, divides the index. Dividing out leaves a relation for q
+among parts of smaller index.
+
+*What is machine-checked.* (b) => (a) in general (`PiFormula.logSpan_le_fValues`), with the
+families `PiFormula.isFValue_log_two_pow_sub_one` (log(2^m - 1), every m),
+`PiFormula.isFValue_log_L` and `PiFormula.isFValue_log_M` (the two factors of 4^n + 1, every
+odd n). The implication (a) => (c) is proved above and is not in Lean in general; it is in
+Lean for twelve primes: the ten of Theorem H, and 433 and 38737 below.
+
+*The list.* The test decides every prime. Below 10^7 exactly 51 primes have a formula:
+
+    2, 3, 5, 7, 11, 13, 17, 19, 29, 31, 37, 41, 43, 61, 73, 109, 113, 127, 151, 241, 257,
+    331, 337, 397, 683, 1321, 1429, 1613, 2113, 2731, 5419, 8191, 14449, 26317, 43691,
+    61681, 65537, 87211, 131071, 174763, 246241, 262657, 268501, 279073, 312709, 524287,
+    525313, 599479, 2796203, 4327489, 7416361.
+
+*Comparison with the published lists.* The list A104885 of the OEIS ("primes whose
+logarithms are known to possess binary BBP formulas", 46 terms up to 312709, from Borwein
+and Bailey's book of 2004) passes the test with one exception, 38737, and the test finds no
+other prime below 312709. Bailey's compendium of 2023, which says that its list is not
+complete, has no entry that fails the test; it does not contain 38737, and it omits, for
+example, 331 = Phi_30(2) and 65537 = Phi_32(2) (as transcribed in
+research/2026-11-22-deep/04_novelty_logarithms.md).
+
+*38737.* Phi_72(2) = 2^24 - 2^12 + 1 = 433 * 38737, and neither prime occurs anywhere else.
+So log 433 + log 38737 is a value of F and neither logarithm is. Both statements are
+machine-checked, with no hypothesis: `PiFormula.Unconditional.not_isFValue_log_38737`,
+`PiFormula.Unconditional.not_isFValue_log_433`, `PiFormula.isFValue_log_433_add_log_38737`.
+A numerical search that uses none of the theory agrees (python/log_probe.py, period 144:
+it finds log 2 and log 433 + log 38737 and neither log 433 nor log 38737; relations have
+squared length at most 7,539, non-relations about 2^69). So the entry 38737 of A104885
+appears to be an error, unless it rests on a formula of a kind that (d) does not cover; we
+know of none.
+
+*Limits.* The implication (a) => (c) and the statement (d) are proved here on paper, from
+Baker's theorem, and are not machine-checked in general. The list above is the output of the
+test, in exact arithmetic.
 
 ### Arctangents: arctan(2/7) has no binary BBP-type formula (arctan_probe.py)
 
@@ -1178,6 +1282,14 @@ there is at present neither a candidate nor a proof of impossibility.
     of F with the same value cost at least 60 as a checked pair, and Takahashi's two
     formulas cost exactly 60. The search tree (8,083 + 180 nodes, 17,953 derived facts) is
     a certificate checked inside Lean by a verified checker and the kernel.
+
+  - **Theorem K, the criterion, in part** (`PiFormula.logSpan_le_fValues`,
+    `PiFormula.isFValue_log_two_pow_sub_one`, `PiFormula.isFValue_log_L`,
+    `PiFormula.isFValue_log_M`, unconditional; `PiFormula.not_isFValue_log_38737`,
+    `PiFormula.not_isFValue_log_433`, from Baker's theorem;
+    `PiFormula.isFValue_log_433_add_log_38737`, unconditional). The half "these logarithms
+    are values" in general, and the pair 433, 38737. The half "no other logarithm of a
+    rational is a value" is proved in the note and is not in Lean in general.
 
   - **Baker's theorem, and the theorems above without a hypothesis.** Since 22 November
     2026 the library contains a formal proof of Baker's theorem by Michail Karatarakis

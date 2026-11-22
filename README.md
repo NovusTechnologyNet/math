@@ -33,9 +33,10 @@ formulas and every `P(1, 2^B, n, A)` of Bailey's compendium with `n = B` or `n =
 | Theorem H | For a prime p below 100, log p is a value of F exactly for 2, 3, 5, 7, 11, 13, 17, 19, 29, 31, 37, 41, 43, 61, 73 | Lean |
 | Theorem I | arctan(2/7) is not the value of any series of F (a question left open in Bailey's compendium), nor are arctan(5/8) and arctan(4/9); arctan(2/7) + arctan(6/11) is a value | Lean |
 | Theorem J | Computing pi with one formula and checking it with a second costs at least 60 terms per 60 bits; Takahashi's pair attains it. (One formula twice costs at least 80.) | Lean; that his pair is the only one at 60 is computed, not formal |
+| Theorem K | The criterion: log y (y rational) is a value of F exactly when a power of y is a product of powers of 2, the numbers 2^m - 1 and the two factors of 4^n + 1 (n odd). For a prime this is a finite test (`python/log_prime_criterion.py`): 51 primes below 10^7. The OEIS list A104885 passes except for 38737 | The "is a value" half: Lean, in general. The "is not" half: proved in the note from Baker's theorem; in Lean for twelve primes, among them 38737 |
 | Theorem F | The other binary families (Part IV of the note) | Written; not formal |
 
-Theorems C to J rest on Baker's theorem on linear forms in logarithms (1966). The library
+Theorems C to K rest on Baker's theorem on linear forms in logarithms (1966). The library
 has each of them in two forms. Our own files prove them from Baker's theorem as an explicit
 hypothesis, `BakerTheorem`, because Baker's theorem is not in Mathlib. `lean/Baker/` holds a
 formal proof of Baker's theorem by Michail Karatarakis, and

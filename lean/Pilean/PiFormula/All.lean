@@ -39,3 +39,4 @@ import Pilean.PiFormula.LogYes
 import Pilean.PiFormula.BakerBridge
 import Pilean.PiFormula.Arctan
 import Pilean.PiFormula.CheckedPair
+import Pilean.PiFormula.LogCriterion
