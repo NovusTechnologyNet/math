@@ -1,0 +1,22 @@
+# Certificate generators for Part III
+
+These scripts produced the generated parts of `Pilean/Pilean/PiFormula/Relations.lean` and
+`Pilean/Pilean/PiFormula/VSeries.lean`. Run them with the system Python, with sympy and mpmath
+installed.
+
+| Script | Produces |
+|---|---|
+| `m1check.py` | checks the `ℤ[i]` model of the new formula against pi_formula_120.json (M1) |
+| `relgen.py` | the 13 relations and their quotients modulo `Φ_20` / `Φ_24` (the body of `Relations.lean`) |
+| `twgen.py` | the 24 certificates of the twisted power sum modulo `Φ_24` |
+| `named.py` | the 8 named patterns (checked against decompose_formula.py), the 64 values at `k = 1..8`, and the inverse matrix used for independence |
+| `rankgen.py` | section 6 of `Rank.lean` (M5): the 13 exponent vectors, each relation in exponent form, the values of a combination at the 13 pivot exponents, `relations_span` and `rel_independent`. It prints to standard output and needs no extra package |
+| `argtable.py` | section 4 of `ExactArgs.lean` (M7): the three coefficient functions `alpha`, `beta`, `gam` and the 24 cases of `garg_table` |
+| `logforms.py` | all of `LogForms.lean` (M7): the 78 exact logarithmic forms and the six `conjlog_b`. It prints to standard output; the rational multiples it writes are recomputed by Lean |
+| `baileygen.py` | sections 2 and 3 of `TheoremD.lean` (M8): the values of a combination of the eight named patterns at 29 positions, and the certificates `coords_p8`, `coords_p12`, `coords_p24`, `coords_p40`, `coords_p60`, `coords_even`, `coords_D`, `coords_Dall`. It prints to standard output; `TheoremD.lean` is `thmD_head.lean`, this output and `thmD_tail.lean`, concatenated |
+| `fivegen.py` | M7 part 3. `python fivegen.py series`: section 3 of `FiveSeries.lean` (the five tables, the power sums and one certificate per residue, modulo `Φ_24` or `Φ_20`); the file is `five_head.lean`, this output and `five_tail.lean`. `python fivegen.py indep`: section 2 of `TheoremC3.lean` (values of the thirteen patterns, the inverse matrix, `coords13_D`); the file is `c3_head.lean`, this output and `c3_tail.lean` |
+| `egen.py` | Theorem E. `python egen.py classes`: the tables of `Classes.lean` (with `classes_head.lean`, `classes_tail.lean`). `python egen.py prime`: section 2 of `PrimeMeasure.lean`, the values on the four chains and 17 linear facts (with `prime_head.lean`, `prime_tail.lean`). `python egen.py terms`: the certificate of `FewestTerms.lean`, a branch-and-bound tree with an integer identity for every derived fact (with `terms_head.lean`, `terms_tail.lean`) |
+| `assemble.py` | glues `vseries_head.lean`, `vseries_tail.lean` and the generated parts into `VSeries.lean` |
+
+The scripts write their output to a scratch folder. Edit the paths at the top of each
+script before running it. Lean checks the certificates; the scripts only find them.

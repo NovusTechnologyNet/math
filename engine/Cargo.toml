@@ -1,0 +1,17 @@
+[package]
+name = "piwindow"
+version = "0.1.0"
+edition = "2021"
+description = "Read any window of pi's hex digits without computing the digits before it"
+
+[dependencies]
+malachite-base = "0.14.0"
+malachite-nz = "0.14.0"
+mimalloc = "0.1.52"
+rayon = "1.12.0"
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+lto = "thin"
+panic = "abort"

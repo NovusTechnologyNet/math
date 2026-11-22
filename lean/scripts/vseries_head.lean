@@ -1,0 +1,202 @@
+import Pilean.PiFormula.Relations
+
+/-!
+# The space V: eight series with rational multiples of π (Part III, Theorem C)
+
+Theorem C says that the rational patterns `ρ` (period 120) with
+`∑ ρ(k) 2^(-⌊k/2⌋) / k ∈ ℚ π` form an 8-dimensional space `V`, spanned by eight named series
+(decompose_formula.py):
+
+* `ARG(O_1) = π/4`, `ARG(O_6) = 0`, `ARG(O_10) - ARG(O_2) = π/4`;
+* `LOG(O_6) - 2 LOG(O_1) = 0`, `LOG(O_8a) - 2 LOG(O_1) = 0`, `LOG(O_10) - LOG(O_2) - 3 LOG(O_1) = 0`,
+  `LOG(O_24) - LOG(O_8b) - 2 LOG(O_1) = 0`;
+* the `√3`-twisted series `TW = √3 ∑_k -Im(t^(-k) (ζ^k - ζ^5k + ζ^13k - ζ^17k + ζ^4k - ζ^20k))/k`
+  (`ζ = ζ_24`), with value 0.
+
+This file proves the lower half of Theorem C: these eight patterns are rational, have period
+120, have the stated values (`hasSum_namedA1` ... `hasSum_namedTW`), and are linearly
+independent over ℚ (`named_linearIndependent`). The new formula is in their span
+(`rhoNew_eq_named`). That `V` is no larger needs Baker's theorem (lean/PART3_PLAN.md).
+
+The patterns are defined through `ℤ[i]` models of the power sums, as in `NewFormula.lean`:
+`ρ = -Im(P(k) U_k)/2` or `-Re(P(k) U_k)/2`. For the twisted series the power sum, which
+involves `√3 = ζ_24^2 - ζ_24^10` and single roots of order 24 and 6, is a Gaussian integer of
+period 24, checked case by case modulo `Φ_24` (`psTW_eq`). Its value is 0 by the pairing
+`g(i conj r) = -g(r)` and three explicit arguments, `π/6`, `-π/6`, `π/6`.
+-/
+
+open Polynomial Complex ComplexConjugate
+
+namespace PiFormula
+
+/-! ## 1. Patterns from `ℤ[i]` models -/
+
+/-- The `k`-th term `ρ(k) 2^(-⌊k/2⌋) / k` of the series of a pattern. -/
+noncomputable def seriesTerm (ρ : ℕ → ℚ) (k : ℕ) : ℝ := (ρ k : ℝ) / 2 ^ (k / 2) / k
+
+/-- The arctangent-type pattern of a power-sum model `P`. -/
+def rhoA (P : ℕ → GaussianInt) (k : ℕ) : ℚ := -((P k * UZ k).im : ℚ) / 2
+
+/-- The logarithm-type pattern of a power-sum model `P`. -/
+def rhoL (P : ℕ → GaussianInt) (k : ℕ) : ℚ := -((P k * UZ k).re : ℚ) / 2
+
+theorem tau_eq_rhoA {S : Multiset ℂ} {P : ℕ → GaussianInt} (hP : ∀ k, psum S k = (P k : ℂ))
+    (k : ℕ) : tau S k = seriesTerm (rhoA P) k := by
+  rw [tau, hP, mul_tC_inv_pow_im, seriesTerm, rhoA]
+  push_cast
+  ring
+
+theorem tauL_eq_rhoL {S : Multiset ℂ} {P : ℕ → GaussianInt} (hP : ∀ k, psum S k = (P k : ℂ))
+    (k : ℕ) : tauL S k = seriesTerm (rhoL P) k := by
+  rw [tauL, hP, mul_tC_inv_pow_re, seriesTerm, rhoL]
+  push_cast
+  ring
+
+/-- The constant model `1` (the orbit `O_1 = {1}`). -/
+def P1Z : ℕ → GaussianInt := fun _ => 1
+
+/-! ## 2. The seven orbit series -/
+
+def namedA1 : ℕ → ℚ := rhoA P1Z
+def namedA6 : ℕ → ℚ := rhoA P6Z
+def namedA10 : ℕ → ℚ := fun k => rhoA P10Z k - rhoA P2Z k
+def namedL6 : ℕ → ℚ := fun k => rhoL P6Z k - 2 * rhoL P1Z k
+def namedL8 : ℕ → ℚ := fun k => rhoL P8aZ k - 2 * rhoL P1Z k
+def namedL10 : ℕ → ℚ := fun k => rhoL P10Z k - rhoL P2Z k - 3 * rhoL P1Z k
+def namedL24 : ℕ → ℚ := fun k => rhoL P24Z k - rhoL P8bZ k - 2 * rhoL P1Z k
+
+theorem hO1 : ∀ r ∈ O1, ‖r‖ = 1 := fun _ hr => norm_of_mem_orbit hr
+theorem hO2 : ∀ r ∈ O2, ‖r‖ = 1 := fun _ hr => norm_of_mem_orbit hr
+theorem hO6 : ∀ r ∈ O6, ‖r‖ = 1 := fun _ hr => norm_of_mem_orbit hr
+theorem hO10 : ∀ r ∈ O10, ‖r‖ = 1 := fun _ hr => norm_of_mem_orbit hr
+
+theorem psum_P1Z (k : ℕ) : psum O1 k = ((P1Z k : GaussianInt) : ℂ) := psum_O1Z k
+
+theorem hasSum_namedA1 : HasSum (seriesTerm namedA1) (Real.pi / 4) := by
+  have h := hasSum_gamma hO1
+  rw [gamma_orbit_P0] at h
+  convert h using 1
+  funext k
+  exact (tau_eq_rhoA psum_P1Z k).symm
+
+theorem hasSum_namedA6 : HasSum (seriesTerm namedA6) 0 := by
+  have h := hasSum_gamma hO6
+  rw [gamma_orbit_Q1] at h
+  convert h using 1
+  funext k
+  exact (tau_eq_rhoA psum_O6Z k).symm
+
+theorem hasSum_namedA10 : HasSum (seriesTerm namedA10) (Real.pi / 4) := by
+  have h := (hasSum_gamma hO10).sub (hasSum_gamma hO2)
+  rw [gamma_orbit_Q2, gamma_orbit_Q0, show Real.arctan (1 / 2) - (Real.arctan (1 / 2) -
+    Real.pi / 4) = Real.pi / 4 by ring] at h
+  convert h using 1
+  funext k
+  simp only [Pi.sub_apply, tau_eq_rhoA psum_O10Z, tau_eq_rhoA psum_O2Z, seriesTerm, namedA10]
+  push_cast
+  ring
+
+theorem hasSum_namedL6 : HasSum (seriesTerm namedL6) 0 := by
+  have h := (hasSum_LOG hO6).sub ((hasSum_LOG hO1).mul_left 2)
+  rw [LOG_relations.1] at h
+  convert h using 1
+  funext k
+  simp only [tauL_eq_rhoL psum_O6Z, tauL_eq_rhoL psum_P1Z, seriesTerm, namedL6]
+  push_cast
+  ring
+
+theorem hasSum_namedL8 : HasSum (seriesTerm namedL8) 0 := by
+  have h := (hasSum_LOG (S := O8a) fun _ hr => norm_selfOrb hr).sub ((hasSum_LOG hO1).mul_left 2)
+  rw [LOG_relations.2.1] at h
+  convert h using 1
+  funext k
+  simp only [tauL_eq_rhoL psum_O8aZ, tauL_eq_rhoL psum_P1Z, seriesTerm, namedL8]
+  push_cast
+  ring
+
+theorem norm_zO_orbit (a : Atom) : ‖zO (orbit a)‖ = ‖((atom a : GaussianInt) : ℂ)‖ := by
+  have := congrArg norm (zO_orbit a)
+  rwa [norm_mul, norm_pow, norm_eq_one_of_pow_four (kappa_pow_four a), one_pow, one_mul] at this
+
+/-- `LOG(O_10) - LOG(O_2) - 3 LOG(O_1) = 0`: `|z(O_10)| = |z(O_2)| = |2 + i|`. -/
+theorem LOG_relation_10 : LOG O10 - LOG O2 - 3 * LOG O1 = 0 := by
+  have h1 := LOG_eq hO1
+  have h2 := LOG_eq hO2
+  have h10 := LOG_eq hO10
+  have e : ‖zO O10‖ = ‖zO O2‖ := by rw [O10, O2, norm_zO_orbit, norm_zO_orbit, atom_Q2, atom_Q0]
+  have c10 : Multiset.card O10 = 4 := by
+    rw [O10, card_orbit, show mOf (.Q 2) = 5 from rfl, totient_five]; rfl
+  have c2 : Multiset.card O2 = 1 := by rw [O2, card_orbit]; simp [mOf, Npow]
+  rw [norm_zO_O1, card_O1, Real.log_one] at h1
+  rw [c2] at h2
+  rw [c10, e] at h10
+  rw [h1, h2, h10]
+  push_cast
+  ring
+
+theorem hasSum_namedL10 : HasSum (seriesTerm namedL10) 0 := by
+  have h := ((hasSum_LOG hO10).sub (hasSum_LOG hO2)).sub ((hasSum_LOG hO1).mul_left 3)
+  rw [LOG_relation_10] at h
+  convert h using 1
+  funext k
+  simp only [Pi.sub_apply, tauL_eq_rhoL psum_O10Z, tauL_eq_rhoL psum_O2Z, tauL_eq_rhoL psum_P1Z,
+    seriesTerm, namedL10]
+  push_cast
+  ring
+
+theorem hasSum_namedL24 : HasSum (seriesTerm namedL24) 0 := by
+  have h := ((hasSum_LOG (S := O24) fun _ hr => norm_selfOrb hr).sub
+    (hasSum_LOG (S := O8b) fun _ hr => norm_selfOrb hr)).sub ((hasSum_LOG hO1).mul_left 2)
+  rw [LOG_relations.2.2] at h
+  convert h using 1
+  funext k
+  simp only [Pi.sub_apply, tauL_eq_rhoL psum_O24Z, tauL_eq_rhoL psum_O8bZ, tauL_eq_rhoL psum_P1Z,
+    seriesTerm, namedL24]
+  push_cast
+  ring
+
+/-! ## 3. The twisted series -/
+
+theorem z24_pow_12 : z24 ^ 12 = -1 := by
+  have h24 := z24_prim.pow_eq_one
+  have hne : z24 ^ 12 ≠ 1 := z24_prim.pow_ne_one_of_pos_of_lt (by norm_num) (by norm_num)
+  have : (z24 ^ 12 - 1) * (z24 ^ 12 + 1) = 0 := by linear_combination h24
+  rcases mul_eq_zero.1 this with h | h
+  · exact absurd (sub_eq_zero.1 h) hne
+  · linear_combination h
+
+theorem z24_pow_mod (n : ℕ) : z24 ^ n = z24 ^ (n % 24) := by
+  conv_lhs => rw [← Nat.div_add_mod n 24, pow_add, pow_mul, z24_prim.pow_eq_one, one_pow, one_mul]
+
+/-- `√3`, written as `ζ_24^2 - ζ_24^10`. -/
+noncomputable def dTW : ℂ := z24 ^ 2 - z24 ^ 10
+
+/-- The power sum of the twisted series. -/
+noncomputable def psTW (k : ℕ) : ℂ :=
+  dTW * (z24 ^ k - (z24 ^ 5) ^ k + (z24 ^ 13) ^ k - (z24 ^ 17) ^ k + (z24 ^ 4) ^ k -
+    (z24 ^ 20) ^ k)
+
+/-- Its values, of period 24. -/
+def twTable : List GaussianInt :=
+  [⟨0, 0⟩, ⟨0, 3⟩, ⟨6, 3⟩, ⟨0, 0⟩, ⟨0, 3⟩, ⟨0, -3⟩, ⟨0, 0⟩, ⟨0, 3⟩, ⟨0, 9⟩, ⟨0, 0⟩, ⟨-6, -3⟩,
+   ⟨0, -3⟩, ⟨0, 0⟩, ⟨0, 3⟩, ⟨-6, 3⟩, ⟨0, 0⟩, ⟨0, -9⟩, ⟨0, -3⟩, ⟨0, 0⟩, ⟨0, 3⟩, ⟨0, -3⟩, ⟨0, 0⟩,
+   ⟨6, -3⟩, ⟨0, -3⟩]
+
+def PTWZ (k : ℕ) : GaussianInt := twTable.getD (k % 24) 0
+
+/-- `psTW k` with the exponents reduced mod 24. -/
+theorem psTW_reduce (k : ℕ) : psTW k = dTW * (z24 ^ (k % 24) - z24 ^ (5 * (k % 24) % 24) +
+    z24 ^ (13 * (k % 24) % 24) - z24 ^ (17 * (k % 24) % 24) + z24 ^ (4 * (k % 24) % 24) -
+    z24 ^ (20 * (k % 24) % 24)) := by
+  simp only [psTW, ← pow_mul]
+  rw [z24_pow_mod k, z24_pow_mod (5 * k), z24_pow_mod (13 * k), z24_pow_mod (17 * k),
+    z24_pow_mod (4 * k), z24_pow_mod (20 * k), Nat.mul_mod 5, Nat.mul_mod 13, Nat.mul_mod 17,
+    Nat.mul_mod 4, Nat.mul_mod 20]
+
+theorem psTW_small : ∀ r < 24, dTW * (z24 ^ r - z24 ^ (5 * r % 24) + z24 ^ (13 * r % 24) -
+    z24 ^ (17 * r % 24) + z24 ^ (4 * r % 24) - z24 ^ (20 * r % 24)) =
+    ((twTable.getD r 0 : GaussianInt) : ℂ) := by
+  intro r hr
+  interval_cases r <;>
+    simp only [Nat.reduceMul, Nat.reduceMod, dTW, twTable, List.getD_cons_zero,
+      List.getD_cons_succ, GaussianInt.toComplex_def', I_z24] <;> push_cast

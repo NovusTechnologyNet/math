@@ -1,0 +1,19 @@
+# Lean build tree and the compiled Mathlib (several GB; restore with `lake exe cache get`)
+lean/.lake/
+
+# intermediate files of the certificate generators
+lean/scripts/generated/
+
+# Python
+__pycache__/
+*.pyc
+*.pkl
+*.flats2
+*.vertices
+
+# Rust build output and built programs
+engine/target/
+*.exe
+
+# downloaded papers (other people's copyright; kept on disk only)
+papers/
