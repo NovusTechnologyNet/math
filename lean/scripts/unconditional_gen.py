@@ -86,6 +86,20 @@ ITEMS = [
      "**Theorem K in elementary terms.** For a positive rational `y`, `log y` is a value of\n"
      "the class F if and only if some power `y^k`, `k ≥ 1`, is a product of integer powers of\n"
      "the numbers `2`, `2^m - 1`, `2^(2j+1) - 2^(j+1) + 1` and `2^(2j+1) + 2^(j+1) + 1`."),
+    ("LogPrimeTest", "not_isFValue_log_of_partner",
+     "**A partner excludes `ℓ`.** If a prime `q ≠ ℓ` that does not divide the order `n` of 2\n"
+     "modulo `ℓ` divides the primitive part that contains `ℓ`, then `log ℓ` is not a value of\n"
+     "the class F."),
+    ("LogPrimeTest", "isFValue_log_prime_iff",
+     "**The finite test for a prime.** For an odd prime `ℓ` not dividing `2^60 - 1`, `log ℓ`\n"
+     "is a value of the class F if and only if every prime `q ≠ ℓ` dividing the primitive\n"
+     "part that contains `ℓ` divides the order of 2 modulo `ℓ` and has `log q` a value."),
+    ("LogPrimeTest", "isFValue_log_prime_iff_explicit",
+     "**The test in the form of the note.** The primitive part is a power of `ℓ`, or a power\n"
+     "of `ℓ` times one prime `q` dividing the order with `log q` a value."),
+    ("LogPrimeTest", "isFValue_log_prime_classification",
+     "**The classification of the primes.** `log ℓ` is a value of the class F if and only if\n"
+     "`ℓ` divides `2 (2^60 - 1)` or `ℓ` passes the test."),
 ]
 
 OPEN = {"(": ")", "{": "}", "[": "]", "⟨": "⟩"}

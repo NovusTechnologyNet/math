@@ -750,8 +750,42 @@ a fourth root of unity; so it is a multiple of log|t^M - c| (`sum_log_coset_mem`
 `sum_log_mod_four_mem`, `sum_log_coprime_mem`). This replaces the induction on the order in
 the proof above by one explicit formula.
 
-Not machine-checked: the test for a prime, and (d). The test is in Lean prime by prime for
-twelve primes: the ten of Theorem H, and 433 and 38737 below.
+*The test for a prime is machine-checked too* (22 November 2026, `LogPrimeTest.lean`).
+`PiFormula.primPart ℓ` is the primitive part that contains ℓ: with n the order of 2 modulo
+ℓ, it is Phi_n(2) if n is not 4 modulo 8, and for n = 4d the one of N(Phi_d(1+i)),
+N(Phi_d(-1-i)) that ℓ divides.
+
+- `PiFormula.isFValue_log_prime_iff_explicit`: for an odd prime ℓ that does not divide
+  2^60 - 1, log ℓ is a value of F if and only if the primitive part is ℓ^x, or ℓ^x q with q a
+  prime dividing n and log q a value of F. This is the test as stated above.
+- `PiFormula.isFValue_log_prime_iff`: the same in the form "every prime q other than ℓ that
+  divides the primitive part divides n and has log q a value of F";
+  `PiFormula.primPart_intrinsic_unique`: there is at most one such q.
+- `PiFormula.isFValue_log_of_dvd`: the twelve primes that divide 2 (2^60 - 1), which are
+  2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331, 1321, all have log p a value of F.
+- `PiFormula.isFValue_log_prime_classification`: the two together, for every prime.
+- With the formal proof of Baker's theorem these hold with no hypothesis
+  (`PiFormula.Unconditional.isFValue_log_prime_classification` and the others).
+
+How the formal proof goes. (i) The logarithm of every primitive part is a value of F, with
+no Baker (`isFValue_log_cyclotomic_two`, `isFValue_log_Aplus`, `isFValue_log_Aminus`): by
+induction on n from prod over d | n of Phi_d(x) = x^n - 1, starting from the values
+log(2^n - 1) and log N(t^n -+ 1). So log ℓ is a value as soon as the other primes of the part
+have logarithms that are values, and conversely when there is only one other prime.
+(ii) A second prime q of order n in the same part excludes ℓ
+(`not_isFValue_log_of_partner`, from Baker's theorem): this is the argument of Theorem G made
+general. A prime of Phi_n(2) that does not divide n has order n; for n = 4d the two halves
+have no common prime of order n (`not_dvd_norm_P_and_Q`, from Lemma 3); so every orbit of
+roots of unity whose atom contains ℓ also has the good prime q, and `goodPrimes_ne`,
+`not_isFValue_log` apply. (iii) A prime of Phi_n(2) that divides n is the largest prime
+factor of n and divides Phi_n(2) once (from the Tau Ceti library, where these facts are
+proved for Bang's theorem), which gives the form ℓ^x q.
+
+Not machine-checked: (d). Also, Lean proves the test as a theorem; evaluating it for all
+primes below 10^7 (the list below) is a computation by python/log_prime_criterion.py in
+exact arithmetic, and is not a Lean proof prime by prime. In Lean prime by prime: the 15
+primes below 100 with a formula and the ten without (Theorem H), the twelve primes that
+divide 2 (2^60 - 1), and 433 and 38737 below.
 
 *The list.* The test decides every prime. Below 10^7 exactly 51 primes have a formula:
 
@@ -778,11 +812,33 @@ squared length at most 7,539, non-relations about 2^69). So the entry 38737 of A
 appears to be an error, unless it rests on a formula of a kind that (d) does not cover; we
 know of none.
 
-*Limits.* The equivalence of (a), (b), (c) is machine-checked. The test for a prime (the
-step from (c) to the statement about primitive parts) and the statement (d) are proved here
-on paper and are not machine-checked. The list above is the output of the test, in exact
-arithmetic; so the list of 51 primes rests on the paper proof of the test, except below 100,
-where Theorem H is formal.
+*Where 38737 comes from* (research report
+research/2026-11-22-prime-test/01_38737_and_unique_primes.md, which read the sources). The
+entry is already in the list of Chamberland's paper of 2003 (J. Integer Seq. 6, Article
+03.3.7), which says the list was obtained by calculations with Maple and gives no formula
+for 38737; 433 is not on his list, and the product 433 * 38737 is not among the products of
+two primes he lists. Borwein and Bailey's book (second edition, 2008, p. 130) and the OEIS
+entry (2005, unchanged since) repeat it. A possible cause, which is our guess and not stated
+anywhere: Chamberland's construction with Phi_144((1+i)/2^n) gives the logarithm of
+|Phi_144(1+i)| = 2^24 - 2^12 + 1 = 433 * 38737, a product, and one factor was kept. No
+erratum was found.
+
+*Unique primes.* A prime p is called unique in base 2 (Caldwell and Dubner) if it is the
+only prime of its order, that is, if Phi_n(2) divided by gcd(Phi_n(2), n) is a power of p;
+these are OEIS A144755. The 51 primes of the list are 2, the 31 unique primes of base 2
+below 10^7, and 19 further primes that are alone only in one of the two halves of a
+Phi_4d(2) (29 and 113, from Phi_28(2) = 29 * 113; 37 and 109; and so on). We checked the
+count (28 primes with n not 4 modulo 8, and 5, 13, 41 with n = 4, 12, 20). The research
+report found no earlier link between unique primes and BBP-type formulas for logarithms.
+An example where the exponent x of the test is 2: the Wieferich prime 1093 has order
+364 = 4 * 91, and 1093^2 divides its half |Phi_182(1+i)|^2 (checked); the half has other
+prime factors, so log 1093 is not a value of F.
+
+*Limits.* The equivalence of (a), (b), (c) and the test for a prime are machine-checked.
+The statement (d) is proved here on paper and is not machine-checked. The list above is the
+output of the test, computed in exact arithmetic by a program; Lean proves the test, and
+proves the individual primes named above, but does not run the test on the other primes of
+the list.
 
 ### Arctangents: arctan(2/7) has no binary BBP-type formula (arctan_probe.py)
 
@@ -1329,8 +1385,16 @@ there is at present neither a candidate nor a proof of impossibility.
     rational y, log y is a value of F if and only if a power of y is a product of integer
     powers of 2, the numbers 2^m - 1 and the two factors of 4^n + 1, n odd. Both halves, for
     every y. Also the pair 433, 38737 (`PiFormula.not_isFValue_log_38737`,
-    `PiFormula.not_isFValue_log_433`, `PiFormula.isFValue_log_433_add_log_38737`). Not in
-    Lean: the finite test for a prime, and the statement (d) on the other binary families.
+    `PiFormula.not_isFValue_log_433`, `PiFormula.isFValue_log_433_add_log_38737`).
+
+  - **Theorem K, the finite test for a prime** (`PiFormula.isFValue_log_prime_iff_explicit`,
+    `PiFormula.isFValue_log_prime_iff`, `PiFormula.not_isFValue_log_of_partner`,
+    `PiFormula.isFValue_log_prime_classification`, from Baker's theorem;
+    `PiFormula.isFValue_log_of_dvd`, `PiFormula.primPart_facts`, unconditional). For a prime
+    ℓ outside 2 (2^60 - 1): log ℓ is a value of F if and only if the primitive part that
+    contains ℓ is a power of ℓ, or a power of ℓ times one prime q that divides the order of 2
+    modulo ℓ and has log q a value. Not in Lean: the statement (d) on the other binary
+    families, and the evaluation of the test on each prime of the list of 51.
 
   - **Baker's theorem, and the theorems above without a hypothesis.** Since 22 November
     2026 the library contains a formal proof of Baker's theorem by Michail Karatarakis

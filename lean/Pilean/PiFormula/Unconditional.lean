@@ -215,6 +215,41 @@ theorem isFValue_log_rat_iff_pow {y : ℚ} (hy : 0 < y) :
         (∀ i, g i ∈ baseNumbers) ∧ y ^ k = ∏ i, (g i : ℚ) ^ e i :=
   _root_.PiFormula.isFValue_log_rat_iff_pow bakerTheorem hy
 
+/-- **A partner excludes `ℓ`.** If a prime `q ≠ ℓ` that does not divide the order `n` of 2
+modulo `ℓ` divides the primitive part that contains `ℓ`, then `log ℓ` is not a value of
+the class F. -/
+theorem not_isFValue_log_of_partner {ℓ : ℕ} (hℓ : ℓ.Prime) (hℓ2 : ℓ ≠ 2)
+    (hcop : Nat.Coprime (2 ^ 60 - 1) ℓ) {q : ℕ} (hq : q.Prime) (hqℓ : q ≠ ℓ)
+    (hqg : (q : ℤ) ∣ primPart ℓ) (hqn : ¬ q ∣ orderOf (2 : ZMod ℓ)) :
+    ¬ IsFValue (Real.log ℓ) :=
+  _root_.PiFormula.not_isFValue_log_of_partner bakerTheorem hℓ hℓ2 hcop hq hqℓ hqg hqn
+
+/-- **The finite test for a prime.** For an odd prime `ℓ` not dividing `2^60 - 1`, `log ℓ`
+is a value of the class F if and only if every prime `q ≠ ℓ` dividing the primitive
+part that contains `ℓ` divides the order of 2 modulo `ℓ` and has `log q` a value. -/
+theorem isFValue_log_prime_iff {ℓ : ℕ} (hℓ : ℓ.Prime) (hℓ2 : ℓ ≠ 2)
+    (hcop : Nat.Coprime (2 ^ 60 - 1) ℓ) :
+    IsFValue (Real.log ℓ) ↔ ∀ q : ℕ, q.Prime → (q : ℤ) ∣ primPart ℓ → q ≠ ℓ →
+      q ∣ orderOf (2 : ZMod ℓ) ∧ IsFValue (Real.log q) :=
+  _root_.PiFormula.isFValue_log_prime_iff bakerTheorem hℓ hℓ2 hcop
+
+/-- **The test in the form of the note.** The primitive part is a power of `ℓ`, or a power
+of `ℓ` times one prime `q` dividing the order with `log q` a value. -/
+theorem isFValue_log_prime_iff_explicit {ℓ : ℕ} (hℓ : ℓ.Prime)
+    (hℓ2 : ℓ ≠ 2) (hcop : Nat.Coprime (2 ^ 60 - 1) ℓ) :
+    IsFValue (Real.log ℓ) ↔ (∃ x : ℕ, primPart ℓ = (ℓ : ℤ) ^ x) ∨
+      ∃ x q : ℕ, q.Prime ∧ q ∣ orderOf (2 : ZMod ℓ) ∧ primPart ℓ = (ℓ : ℤ) ^ x * q ∧
+        IsFValue (Real.log q) :=
+  _root_.PiFormula.isFValue_log_prime_iff_explicit bakerTheorem hℓ hℓ2 hcop
+
+/-- **The classification of the primes.** `log ℓ` is a value of the class F if and only if
+`ℓ` divides `2 (2^60 - 1)` or `ℓ` passes the test. -/
+theorem isFValue_log_prime_classification {ℓ : ℕ} (hℓ : ℓ.Prime) :
+    IsFValue (Real.log ℓ) ↔ ℓ ∣ 2 * (2 ^ 60 - 1) ∨
+      ∀ q : ℕ, q.Prime → (q : ℤ) ∣ primPart ℓ → q ≠ ℓ →
+        q ∣ orderOf (2 : ZMod ℓ) ∧ IsFValue (Real.log q) :=
+  _root_.PiFormula.isFValue_log_prime_classification bakerTheorem hℓ
+
 end Unconditional
 
 end PiFormula

@@ -436,9 +436,19 @@ cleared by `cleared_upToQ`; (2) the cleared identity is an integer polynomial id
 `a ≡ 1 (mod 4)` prime to `N`; (4) Möbius inversion over "prime to `N`" reduces each sum to
 sums over full root sets of `X^M = c`, `c^4 = 1` (`sum_log_coprime_mem`). In
 `LogExplicit.lean`: the norms `N((1+i)^n - c)` computed (`norm_even_cases`,
-`norm_odd_cases`), `logSpan_eq_baseSpan`, and `log_mem_span_iff_pow`. Open: the finite test
-for a prime (the structure of primitive parts) as a Lean theorem, and statement (d) of the
-note (other binary families).
+`norm_odd_cases`), `logSpan_eq_baseSpan`, and `log_mem_span_iff_pow`.
+
+**The finite test for a prime (22 November 2026). DONE** in `LogPrimeTest.lean`:
+`isFValue_log_prime_iff_explicit` and `isFValue_log_prime_classification`. It needed no new
+theory: the "no" half is `goodPrimes_ne` + `not_isFValue_log` with the hypotheses supplied in
+general (`not_isFValue_log_of_partner`), the "yes" half is that the logarithm of every
+primitive part is a value (`primPart_facts`), and the facts about primes of `Φ_n(2)` that
+divide `n` come from Tau Ceti. Open: statement (d) of the note (other binary families);
+running the test inside Lean for a given prime (needs `orderOf` and the primitive part
+computed by the kernel; the 30 primes decided one by one in Lean were proved directly, not
+through the test); base 3 (see
+`research/2026-11-22-prime-test/02_ternary_class.md`: no classification found in the
+literature, and `t = 1 - ω` plays the role of `1 + i`).
 
 **Theorem J (22 November 2026): the cheapest checked computation. DONE** in
 `CheckedPair.lean`: `pairCost_ge` (at least 60 for any two formulas of the same value) and

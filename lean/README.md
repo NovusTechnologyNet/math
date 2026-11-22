@@ -60,7 +60,8 @@ spanned by `γ(O) + γ(O*) = 0`, `γ(O_1) = π/4`, `γ(O_6) = 0` and `γ(O_10) -
 | `Pilean/PiFormula/LogCriterion.lean` | Theorem K, in part: `fValues` (the values of F as a rational vector space), `logSpan_le_fValues`; `isFValue_log_two_pow_sub_one`, `isFValue_log_L`, `isFValue_log_M`; the pair 433, 38737: `atom_R40`, `good_433`, `good_38737`, `not_isFValue_log_433`, `not_isFValue_log_38737`, `isFValue_log_433_add_log_38737` | proved (the two exclusions from `BakerTheorem`) |
 | `Pilean/PiFormula/LogConverse.lean` | Theorem K, the converse: `aeval_pow_of_coprime`, `cleared_conj` (conjugating a cleared relation); `sum_log_coset_mem`, `sum_log_mod_four_mem`, `sum_filter_coprime`, `sum_log_coprime_mem` (sums of `log \|t - r^a\|` in `logSpan`); `log_sub_mem_logSpan_of_cleared`; `mem_logSpan_of_isFValue_log`, `isFValue_log_iff`, `isFValue_log_nat_iff`, `isFValue_log_rat_iff` | proved (from `BakerTheorem`) |
 | `Pilean/PiFormula/LogExplicit.lean` | Theorem K in elementary terms: `baseNumbers`, `baseSpan`; `gaussian_unit_cases`, `tG_pow_even`, `norm_even_cases`, `norm_odd_cases`; `logSpan_eq_baseSpan`; `log_mem_span_iff_pow`; `isFValue_log_of_pow` (no Baker), `isFValue_log_rat_iff_pow` (from `BakerTheorem`) | proved |
-| `Pilean/PiFormula/Unconditional.lean` | `bakerTheorem`; Theorems C, D, E, G, H, I, J, K, the value formula and Bailey's counts with no hypothesis (`PiFormula.Unconditional.*`, 30 theorems) | proved |
+| `Pilean/PiFormula/LogPrimeTest.lean` | Theorem K, the finite test for a prime: `isFValue_log_cyclotomic_two`, `isFValue_log_Aplus`, `isFValue_log_Aminus` (the logarithms of the primitive parts are values); `orderOf_two_of_not_dvd`, `le_of_dvd_cyclotomic` (prime divisors of `Φ_n(2)`); `dvd_norm_atom_R`, `not_dvd_norm_P_and_Q`; `primPart`, `primPart_facts`; `not_isFValue_log_of_partner`; `isFValue_log_prime_iff`, `primPart_intrinsic_unique`, `isFValue_log_prime_iff_explicit`; `isFValue_log_151`, `isFValue_log_331`, `isFValue_log_1321`, `isFValue_log_of_dvd`; `isFValue_log_prime_classification` | proved (the exclusions from `BakerTheorem`) |
+| `Pilean/PiFormula/Unconditional.lean` | `bakerTheorem`; Theorems C, D, E, G, H, I, J, K, the value formula and Bailey's counts with no hypothesis (`PiFormula.Unconditional.*`, 34 theorems) | proved |
 | `TauCeti/` | 25 modules of Tau Ceti (Apache-2.0), see `TauCeti/VENDORED.md` | builds unchanged |
 
 There is no `sorry` anywhere. `theoremA`, `theoremB`, `theoremBgamma`, `lemma2`, `size_bound` and every other theorem
@@ -456,7 +457,7 @@ theory-free numerical search that agrees.
 - `isFValue_log_23_add_log_89`: `log 23 + log 89` is a value, although neither summand is.
 
 A criterion for all positive rationals at once is Theorem K below (`LogConverse.lean`,
-`LogExplicit.lean`). Not proved in Lean: the finite test that decides it for a prime.
+`LogExplicit.lean`), with the finite test that decides it for a prime (`LogPrimeTest.lean`).
 
 **Theorem I: `arctan (2/7)` has no binary BBP-type formula** (`Arctan.lean`). Bailey's
 compendium says it is not known whether `arctan (2/7)` possesses a binary BBP formula.
@@ -534,8 +535,30 @@ and the two factors `2^n ∓ 2^((n+1)/2) + 1` of `4^n + 1`, `n` odd. Both halves
   `isFValue_log_rat_iff_pow`: `IsFValue (log y)` iff
   `∃ k > 0, ∃ n g e, (∀ i, g i ∈ baseNumbers) ∧ y ^ k = ∏ i, (g i : ℚ) ^ e i`.
   `isFValue_log_of_pow` is the "if" half, with no Baker.
-- Not formal: the finite test for a prime (the structure of the primitive parts), and the
-  statement (d) of the note about the other binary families.
+- The finite test for a prime, in `LogPrimeTest.lean`. `primPart ℓ` is the primitive part
+  that contains `ℓ`: `Φ_n(2)` with `n = orderOf (2 : ZMod ℓ)`, or for `n = 4d`, `d` odd, the
+  one of `Aplus d = N(Φ_d(1+i))`, `Aminus d = N(Φ_d(-1-i))` that `ℓ` divides
+  (`Aplus_mul_Aminus`: their product is `Φ_n(2)`).
+  - `primPart_facts`: it divides `Φ_n(2)`, is positive, is divisible by `ℓ`, and its
+    logarithm is a value of F (no Baker; `isFValue_log_cyclotomic_two`,
+    `isFValue_log_Aplus`, `isFValue_log_Aminus`, by strong induction on `n` from
+    `prod_cyclotomic_eq_X_pow_sub_one` and `prod_norm_eval_cyclotomic`).
+  - `not_isFValue_log_of_partner` (from `BakerTheorem`): a prime `q ≠ ℓ`, `q ∤ n`, dividing
+    `primPart ℓ` excludes `ℓ`. It supplies the three hypotheses of `goodPrimes_ne` in
+    general: `q` has order `n` (`orderOf_two_of_not_dvd`, from Tau Ceti's
+    `dvd_homogeneousCyclotomic_iff_orderOf_eq`); a prime of order `4 nOf (R k e)` divides
+    the norm of the atom `R k e` (`dvd_norm_atom_R`); `ℓ` does not divide both `N(P k)` and
+    `N(Q k)` (`not_dvd_norm_P_and_Q`, from `not_dvd_pair`).
+  - `isFValue_log_prime_iff`, `isFValue_log_prime_iff_explicit` (odd `ℓ`,
+    `Coprime (2^60 - 1) ℓ`): `IsFValue (log ℓ)` iff `primPart ℓ = ℓ^x`, or
+    `primPart ℓ = ℓ^x * q` with `q` prime, `q ∣ n`, `IsFValue (log q)`. Uses
+    `le_of_dvd_cyclotomic` (a prime of `Φ_n(2)` is at least every prime factor of `n`) and
+    Tau Ceti's `multiplicity_homogeneousCyclotomic_eq_one`.
+  - `isFValue_log_of_dvd`: the twelve primes dividing `2 (2^60 - 1)`;
+    `isFValue_log_prime_classification`: every prime.
+- Not formal: the statement (d) of the note about the other binary families. The list of 51
+  primes below `10^7` is the test evaluated by `python/log_prime_criterion.py`; Lean proves
+  the test, not each evaluation.
 - `not_isFValue_log_38737`, `not_isFValue_log_433` (from `BakerTheorem`),
   `isFValue_log_433_add_log_38737` (no Baker): `Φ_72(2) = 433 · 38737` is the atom
   `R 4 0 = Φ_9(4i) = -4095 - 64i` (`atom_R40`), the only atom of index 72

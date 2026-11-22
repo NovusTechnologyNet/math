@@ -42,3 +42,4 @@ import Pilean.PiFormula.CheckedPair
 import Pilean.PiFormula.LogCriterion
 import Pilean.PiFormula.LogConverse
 import Pilean.PiFormula.LogExplicit
+import Pilean.PiFormula.LogPrimeTest
