@@ -1886,6 +1886,68 @@ which goes through the root a of the base (here a = 3).
 logarithm formula of base b under a condition that holds for b = 10; Theorem M is the same
 conclusion for every degree-1 formula. We did not search for Theorem M separately.
 
+### No logarithm of an integer: Theorem N (machine-checked)
+
+**Theorem N.** Let b >= 2 be an integer that is neither a power of 2 nor a power of 3, and
+n >= 2 an integer. No degree-1 BBP-type series of base b,
+
+    sum over j >= 0 of b^(-B j) * sum_{i=1..N} c_i / (N j + i),      c_i rational,
+
+equals q pi + q' log n with q, q' rational and q' != 0. In particular log n has no such
+formula: for example no log n has a degree-1 BBP-type formula of base 10
+(`no_log_nat_bailey`, `no_log_nat_formula`, `no_log_nat_formula_ten`; for the class F_b of a
+base b >= 5 that is not a square, `not_isFBValue_mul_pi_add_log_nat`).
+
+This contains Theorem M's negative part (n = b) and goes further: Theorem M needed the primes
+of y to divide the base. In the bases 2 and 3 many log n do have formulas (Parts III and V).
+
+*Proof.* Let c0(r) be the constant term and d(r) the degree of the minimal polynomial of
+sqrt(b) - r over Z, for r a root of unity, and nu(r)^2 = c0(r)^2 / b^(d(r)), a positive
+rational number.
+
+(1) *From Baker's theorem* (`inBaseSpan_of_isFBValue`, every base b >= 2). If q pi + q' log y
+is a value of F_b, with y a positive rational and q' != 0, then some power y^k, k >= 1, is a
+product of integer powers of the numbers nu(r)^2. Indeed Baker's theorem gives an integer
+relation y^(2m) prod (1 - r/t)^(2 z_r) = 1 with m != 0 (t = sqrt b), and the norm to Q of
+1 - r/t from a number field L containing t and the roots satisfies
+Norm(1 - r/t)^2 = (nu(r)^2)^[L : Q(t - r)].
+
+(2) *A positive weight* (`posWeight`, b >= 5 not a square). There is a map L on the non-zero
+rationals, L(x) = sum over the primes p of lambda_p v_p(x), with lambda_p > 0 for every prime,
+that vanishes on every nu(r)^2; that is,
+
+    (W)    sum over p of lambda_p v_p(c0(r)) = d(r) / 2        for every root of unity r,
+
+with lambda normalized on the primes of b by L(b) = 1. The weights of the primes not dividing
+b are defined by recursion on the prime: p divides c0(r) for the roots r in its "home" (the
+order of r^2 is the order of b modulo p); there the primes are p, other primes of the same
+kind, and at most one smaller prime q (the largest prime factor of that order), with
+v_q(c0(r)) at most 2; the weight still to be shared, d(r)/2 minus the part of q, is positive,
+and it is shared among the home primes. The facts used: a prime of c0(r) does not divide b and
+has the order just described (`order_facts_of_dvd`); two roots with a common such prime have
+the same nu^2 (`nuSq_eq_of_common_prime`, by prime ideals: the two minimal polynomials agree
+up to X -> -X); every c0(r) with r^4 != 1 has a prime not dividing twice the order of r^2
+(`exists_primitive_prime`, from the good primes of Theorem G); and the degrees
+(`high_data`, `low_data`).
+
+(3) An integer n >= 2 has L(n) > 0, so L(n^k) = k L(n) > 0, while a product of powers of the
+nu(r)^2 has L = 0 (`not_inBaseSpan_nat`).
+
+(4) For a series of any step and for Bailey's form: as for Theorems L and M, through the root
+a of the base (a >= 5, not a perfect power, hence not a square), the sub-series lemma for a
+value q pi + q' log y, and the reindexing. QED.
+
+*How it was found.* The statement for primes was a conjecture; an AI subagent asked to prove
+it or find a counterexample came back with the weight argument and the stronger statement for
+all integers (research/2026-11-22-log-primes/00_summary.md, which also has the criterion for
+which logarithms do have formulas in a general base, not yet formalized). The two halves were
+then formalized by two subagents and assembled.
+
+*In print.* Borwein, Borwein and Galway (2004, Example 4) show that there is no Machin-type
+logarithm formula for ln 10 in base 10 and remark that a formula for ln n in base 10 seems
+unlikely. Theorem N is the statement for every n and every degree-1 formula. We did not find
+it in print (two research helpers looked; weak evidence).
+
 ## Part VIII. Rational bases (begun 22 November 2026)
 
 Theorem L is about integer bases. For a rational base p/q > 1 the same series make sense,

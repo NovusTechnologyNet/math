@@ -18,3 +18,4 @@ import Pilean.BaseB.Examples
 import Pilean.PiFormula.FewestTermsUnique
 import Pilean.BaseB.LogSpan
 import Pilean.RatBase.Identities
+import Pilean.BaseB.LogNat
