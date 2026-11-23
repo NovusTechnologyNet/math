@@ -24,12 +24,12 @@ This is proved here with no hypothesis and the three standard axioms. The pieces
 * `theoremB` (`TheoremB.lean`): `c_p = 0` with odd values gives `ℓ_p ≡ 0`;
 * `theoremC_of` (`TheoremC.lean`): the two congruences force every `v_p(q)` to be even.
 
-**What is still a hypothesis.** The statement about the series itself (`erdos_of_okada`,
-`erdos_pm_one_of_okada`: for odd `q` that is not a square the partial sums of `∑ f(n)/n` do not
-tend to `0`) is deduced from `OkadaOnlyIf`, the direction "sum `= 0` implies (a) and (b)" of
-Okada's criterion (T. Okada, 1982). That criterion is a published theorem resting on Baker's
-theorem and on `L(1, χ) ≠ 0`; it is NOT formalized here, so these two theorems carry it as an
-explicit hypothesis.
+**The statement about the series.** In this file it is deduced from `OkadaOnlyIf`, the
+direction "sum `= 0` implies (a) and (b)" of Okada's criterion (T. Okada, 1982), taken as a
+hypothesis (`erdos_of_okada`, `erdos_pm_one_of_okada`: for odd `q` that is not a square the
+partial sums of `∑ f(n)/n` do not tend to `0`). The criterion itself is proved in the files
+`Okada*.lean` (`okadaOnlyIf`), and `Final.lean` states the results with no hypothesis
+(`erdos_pm_one_nat`, `erdos_odd_nonsquare`).
 
 Paper proof and referee report: `research/2026-11-23-erdos-pm1/`.
 -/
