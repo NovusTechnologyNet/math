@@ -17,3 +17,7 @@ engine/target/
 
 # downloaded papers (other people's copyright; kept on disk only)
 papers/
+
+# scratch folders of agents; page images and extracted text of papers
+lean/Scratch*/
+literature/**/_scratch/
