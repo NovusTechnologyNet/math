@@ -40,3 +40,4 @@ import Pilean.Erdos.Main
 import Pilean.Erdos.OkadaStatus
 import Pilean.Erdos.Final
 import Pilean.Erdos.Summary
+import Pilean.Erdos.Squares

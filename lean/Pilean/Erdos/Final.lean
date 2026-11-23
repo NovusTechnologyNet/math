@@ -28,8 +28,10 @@ The two parts:
   logarithms of primes, and `L(1, χ) ≠ 0` as a limit of partial sums.
 * `theoremC` (`Main.lean`): (a) and (b) with odd values force `q` to be a perfect square.
 
-For odd squares the method cannot work: there are odd-valued `f` with sum `0` (paper notes,
-`research/2026-11-23-erdos-pm1/`; that converse is not formalized).
+For odd squares the method cannot work: there are odd-valued `f` with sum `0`. This converse
+is `exists_oddValued_sumIsZero` in `Squares.lean`, which also has the equivalence
+`exists_oddValued_sumIsZero_iff`: for odd `q > 1`, an odd-valued `f` with `f(0) = 0` and
+sum `0` exists if and only if `q` is a perfect square.
 -/
 
 namespace PiFormula
