@@ -139,8 +139,15 @@ number field; and of Steidl, Hanler and Tasche, Arch. Math. 53 (1989), 30-39, fo
 quadratic integers. One of these may contain Lemma 2 (and the existence part of
 Lemma 3) outright. Schinzel, Math. Comp. 61 (1993), 441-444, proves that
 A^n - zeta_k B^n has a primitive prime ideal for all sufficiently large n, without
-an explicit bound. Of these papers only Schinzel (1962) has been read for this note
-(the others were requested through interlibrary loan on 21 November 2026); the
+an explicit bound. Schinzel (1962) and Drauschke-Tasche (1987) have been read for this note
+(23 November 2026; the two Steidl papers are still on request). Drauschke and Tasche's
+Theorem 4.2 contains Lemma 2 for n >= 5 as the case e = 1 + i: for n > 4 and a Gaussian
+integer e of norm at least 2 there is a Gaussian prime z of norm > 2 with ord_z(e) = n, except
+for (n, e) = (5, -1 +- i), (6, 1 +- i), (6, 2), (10, 1 +- i). At the indices n and 2n this gives
+primitive Gaussian primes of (1+i)^n - 1 and (1+i)^n + 1, the exceptions 6 and 10 being L_3
+and L_5; and a primitive Gaussian prime above p forces ord_p(2) = 4n (reading note:
+research/2026-11-23-schinzel/03_drauschke_tasche_1987_read.md). They attribute the theorem to
+Redei (1958) and Sachs (1957), which we have not read. So Lemma 2 is known; the
 self-contained proof below is a re-derivation, and it is the one checked in Lean.
 
 *Proof.* Let t = 1 + i. For odd n, |t^n - 1|^2 and |t^n + 1|^2 are L_n and M_n in
@@ -2195,12 +2202,14 @@ there is at present neither a candidate nor a proof of impossibility.
   Adjacent recent work: Gasull, Luca and Varona, Indag. Math. 34 (2023), which
   classifies two-term formulas with arguments b/2^a and cites neither BBG nor Bailey.
   The literature databases MathSciNet and zbMATH were not searched.
-* **Still to read before submission:** Drauschke-Tasche 1987,
+* **Still to read before submission:**
   Steidl-Tasche 1989 and Steidl-Hanler-Tasche 1989 (interlibrary loan requested
   21 November 2026, needed by 19 December), and Broadhurst's unpublished manuscript
   (ask the author). Huvent's paper has been read: both optimal formulas of Theorem E
   are his. Schinzel 1962 was read on 23 November 2026 (library copy): Lemma 2 is the
-  case a = 2, b = 1 of his Theorem 2, in the form his proof gives.
+  case a = 2, b = 1 of his Theorem 2, in the form his proof gives. Drauschke-Tasche 1987
+  was read the same day: its Theorem 4.2 (credited there to Redei 1958 and Sachs 1957)
+  contains Lemma 2 for n >= 5 as the case e = 1 + i.
 * **Parts III and IV have had one independent review** (review_part3_part4.md,
   21 November 2026). It rebuilt V by a different exact method, recomputed the
   valuation table and the vertex enumeration with its own code, and confirmed
