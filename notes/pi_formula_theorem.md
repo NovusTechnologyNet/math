@@ -1127,7 +1127,12 @@ value h applied to the coefficient of pi, which is q again. Averaging over eta l
 exactly the terms with n1 | k. QED.
 
 The lemma is machine-checked, for every base that is not a perfect power (Part VII:
-`BaseB.subseries_of_kummerHom` with `BaseB.kummerHom`); Theorem F below is not.
+`BaseB.subseries_of_kummerHom` with `BaseB.kummerHom`). Of Theorem F below, the bound on
+the terms per bit is machine-checked in Bailey's form, for every integer base
+(`BaseB.terms_per_bit`: if sum_j b^(-Bj) sum_{i=1..N} c_i/(Nj+i) = q pi with q != 0
+rational, then b = 2^e and at least (2/3) e B of the c_i are non-zero;
+`terms_per_bit_attained`: Huvent's formula has 8 non-zero coefficients for 12 bits). The
+bound on the prime measure is not formalized in this generality.
 
 **Theorem F.** For every n, a series of F_n for a non-zero rational multiple of pi
 costs at least 0.5833; for odd n there is none at all. So among all binary degree-1
@@ -1784,7 +1789,10 @@ research/2026-11-22-nonbinary-pi/01_literature.md).
 - *Not a statement about digits.* The theorem excludes one kind of formula. It does not say
   that digits of pi in base 10 cannot be computed individually by some other method.
 - The sub-series lemma and the Kummer step hold for base 2 as well, so the Lemma of Part IV
-  is now machine-checked. Theorem F of Part IV (the cost bound) is not.
+  is now machine-checked, and so is the bound of Theorem F on the terms per bit
+  (`terms_per_bit`): no degree-1 BBP-type formula for pi, in any integer base and of any
+  length, uses fewer than 2/3 terms per bit, and Huvent's formulas attain this. The bound
+  of Theorem F on the prime measure is not formalized for all steps.
 
 ### The logarithm of the base: Theorem M (machine-checked)
 

@@ -12,3 +12,4 @@ import Pilean.Base5.Transcendence
 import Pilean.BaseB.NoPi
 import Pilean.BaseB.NegativeBase
 import Pilean.BaseB.LogBase
+import Pilean.BaseB.TermsPerBit
