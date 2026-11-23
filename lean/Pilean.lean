@@ -20,3 +20,8 @@ import Pilean.BaseB.LogSpan
 import Pilean.RatBase.Identities
 import Pilean.BaseB.LogNat
 import Pilean.RatBase.TheoremGR
+import Pilean.Compendium.Series
+import Pilean.Compendium.Arctan
+import Pilean.Compendium.Base5
+import Pilean.Compendium.Base2Sqrt
+import Pilean.Compendium.Base3
