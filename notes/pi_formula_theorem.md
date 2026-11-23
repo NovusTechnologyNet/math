@@ -1561,6 +1561,23 @@ would add the absence of zero relations. In print we found no statement about pi
 for a class this wide, no zero relation, and no formula for a single log p
 (research/2026-11-22-base5/00_summary.md).
 
+### Values are 0 or transcendental (machine-checked; known in print)
+
+In each of the three classes (bases 2, 3, 5) a value that is an algebraic number is 0, and a
+value alpha + gamma pi with alpha, gamma algebraic has alpha = 0. This is a theorem of
+Adhikari, Saradha, Shorey and Tijdeman (2001) for a wider family of sums; it follows from
+Baker's theorem with its constant term. It is formalized here from the same hypothesis
+(`baker_const`, `transcendental_of_isFValue`, `transcendental_of_isF3Value`,
+`transcendental_of_isF5Value`). Combined with the classifications it gives:
+
+- base 3: alpha + gamma pi is a value exactly when alpha = 0 and gamma is a rational
+  multiple of sqrt(3) (`isF3Value_add_mul_pi_iff`);
+- base 5: if S(rho) = alpha + gamma pi with alpha, gamma algebraic then rho = 0
+  (`Base5.eq_zero_of_hasSum_add_mul_pi`); so every series of F5 with a non-zero pattern has a
+  transcendental sum (`Base5.transcendental_of_hasSum`).
+
+What the cited theorem does not give, and the classifications do, is when the sum is 0.
+
 ### How the proof for base 5 was made
 
 The Lean proof for base 3 carried over, file by file, in one evening: a shared file of
