@@ -40,7 +40,9 @@ formulas and every `P(1, 2^B, n, A)` of Bailey's compendium with `n = B` or `n =
 | Theorem C3 in full (base 3) | Every base-3 series of this class whose value is an algebraic multiple of pi is a G + b Z1 + c Z2, with value a pi sqrt(3): G is the Gregory series and Z1, Z2 are two explicit zero relations. So these series have period 12 and form a space of dimension exactly 3, and the zero relations have dimension exactly 2 | Lean, unconditional (`PiFormula.Base3.Unconditional.theoremC3`, `exists_coords3`, `hasSum_zero_iff`) |
 | Theorem E3 (base 3) | A base-3 series of this class with a non-zero multiple of pi as value needs at least one term per base-3 digit (6 of the 12 entries per period). Exactly two formulas attain this: the Gregory series and pi sqrt(3) = S(0, 18, 18, 18, 0, 0, 0, -18, -18, -18, 0, 0) | Lean, unconditional (`PiFormula.Base3.Unconditional.theoremE3`), including the uniqueness |
 
-Theorems C to K, K3 and C3 rest on Baker's theorem on linear forms in logarithms (1966). The library
+| Base 5 and other bases | Exploration: in base 5 the computer finds no zero relation, no formula for a multiple of pi and no relation at all among the logarithms; the method explains why (only the roots 1 and -1 are exceptional). The same for bases 6, 7, 10, 11, 13, 14, 15, 17 | Computed (`python/base5_explore.py`); nothing proved. Part VI of the note |
+
+Theorems C to K, K3, C3 and E3 rest on Baker's theorem on linear forms in logarithms (1966). The library
 has each of them in two forms. Our own files prove them from Baker's theorem as an explicit
 hypothesis, `BakerTheorem`, because Baker's theorem is not in Mathlib. `lean/Baker/` holds a
 formal proof of Baker's theorem by Michail Karatarakis, and

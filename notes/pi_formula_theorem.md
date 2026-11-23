@@ -1424,6 +1424,103 @@ sqrt(3) log(2 + sqrt(3)) = S(2, 0); arctan(1/3) = S(0, 2, 0, 0, 0, -2, 0, 0).
 - Computed only: the list of 31 primes.
 - Next: the test for a prime in Lean; other bases.
 
+## Part VI. Base 5 and other bases (exploration; nothing here is proved)
+
+The class F5 is the set of series S(rho) = sum over k >= 1 of rho(k) 5^(-floor(k/2))/k with
+rho rational and periodic. Take t = sqrt(5). The twisted pattern is c(k) = rho(k) t^(k mod 2)
+and S(rho) = sum of d_r Log(1 - r/t) over the roots of unity r, as before.
+
+### What the method predicts
+
+For a root of unity r of order n, the question is whether t - r has a good prime: a prime
+ideal P containing t - r and an odd rational prime p, not 5 and not dividing n.
+
+- (t - r)(t + r) = 5 - r^2, and the norm of 5 - r^2 is a power of Phi_m(5), m the order of
+  r^2. By Zsigmondy's theorem Phi_m(5) has a primitive prime factor for every m >= 2 (base 5
+  has no exception), and such a prime does not divide 2n. This gives a good prime for r
+  when 5 does not divide n, or when 20 divides n.
+- When 5 divides n and 4 does not, sqrt(5) lies in Q(zeta_n) and there are two classes of
+  roots. The norms of sqrt(5) - r for the two classes divide the two Aurifeuillian factors
+  of base 5 (with h = n/5 or n/10): for odd h,
+
+      L_h, M_h = 5^(2h) + 3*5^h + 1 -+ 5^((h+1)/2) (5^h + 1),   L_h M_h = Phi_5(5^h).
+
+  For example L_1 = 11 and M_1 = 71 are the norms of sqrt(5) - zeta_5 and
+  sqrt(5) - zeta_5^2, and for n = 15 the norms are 181 and 1741, with L_3 = 71 * 181 and
+  M_3 = 11 * 1741. Here each factor needs its own primitive prime (the analogue of
+  Lemma H). In base 3 the factor L_1 is 1, which is why w is exceptional there; in base 5
+  no factor is 1.
+- The only roots left are r = 1 and r = -1: t - 1 = 2/phi and t + 1 = 2 phi, with phi the
+  golden ratio, are both divisible by the prime 2 only.
+- The two numbers 1 - 1/t and 1 + 1/t are multiplicatively independent: their product is
+  4/5 and their quotient is phi^(-2).
+
+So, if every root other than 1 and -1 has a good prime, there is no multiplicative relation
+at all among the numbers 1 - r/t, and Baker's theorem gives:
+
+**Statement C5 (not proved).** If rho is rational and periodic and S(rho) = gamma pi with
+gamma algebraic, then rho = 0. In particular:
+
+- pi is not the value of any series of F5, nor is any non-zero algebraic multiple of pi;
+- F5 has no zero relation: a number has at most one formula of this class;
+- log 5 is not a value, and no log p (p prime) is a value; the values that are logarithms of
+  rational numbers are the log y with a power of y a product of powers of the numbers
+  (5^m - 1)/5^m, L_h/5^(2h) and M_h/5^(2h). For example log(4/5), log(9/5), log(31/25),
+  log(11/25), log(71/25), log(521/625), and so log(3/2).
+
+This is the opposite of base 2 (many zero relations, a space of formulas for pi of dimension
+8) and of base 3 (two zero relations, pi sqrt(3) but not pi).
+
+### What the computer finds (python/base5_explore.py)
+
+- `primes 150`: for every order n up to 150, each class of sqrt(5) - r has an odd prime
+  factor not dividing n, except n = 1 and n = 2. The first norms: 31 (n = 3, 6), 2^2 3^2
+  (n = 4), 11 and 71 (n = 5, 10), 19531 (n = 7, 14), 181 and 1741 (n = 15, 30), 521 twice
+  (n = 20).
+- `relations N`: lattice reduction on the N numbers Log(1 - r/t), r^N = 1, together with
+  2 pi i. Base 5: no relation for N = 4, 12, 20, 24, 40, 60, 120 (the shortest vector that
+  is not a relation has squared length above 2^130). The same program in base 3 finds
+  exactly 3 relations for N = 12, 24, 36, one of them involving 2 pi i: this is the lattice
+  of Theorem C3, and it tests the program.
+- The theory-free probe (`python base3_probe.py P 5`): no zero relation among the P sums
+  S_j for P = 4, 12, 20, 24, 40, 60, 100; pi and pi sqrt(5) are not values; no single log p
+  is a value; log 2 - (1/2) log 5, log 3 - (1/2) log 5, log 7 - (3/2) log 5, log 11 - 2 log 5,
+  log 13 - (3/2) log 5, log 31 - 2 log 5, log 71 - 2 log 5 and log 521 - 4 log 5 are.
+
+### Other bases
+
+The command `relations N B` for B = 6, 7, 10, 11, 13, 14, 15, 17 and N = 24, 60 finds no
+relation either; for B = 2 and B = 3 it finds the known ones. The reason suggested by the
+method: a root of unity r is exceptional because t - r is a unit or is built from very small
+primes, and |sqrt(b) - r| = 1 is possible only for b <= 4.
+
+**Question (not proved, and checked only for the bases and periods above).** For an integer
+b >= 5 that is not a power of 2 or of 3: has the class F_b no zero relation, and is no
+non-zero algebraic multiple of pi a value?
+
+For the narrower class of Machin-type formulas (rational combinations of the series of
+arctan(b^(-m))), Borwein, Borwein and Galway proved in 2004 (Theorem 7) that pi has no
+formula in a base b > 2 that is not a proper power. A positive answer to the question would
+extend their theorem to the whole class, which also contains the series in sqrt(b), and
+would add the absence of zero relations. In print we found no statement about pi in base 5
+for a class this wide, no zero relation, and no formula for a single log p
+(research/2026-11-22-base5/00_summary.md).
+
+### What a proof for base 5 needs
+
+The Lean proof for base 3 carries over, file by file:
+
+1. The series as a combination of logarithms, with t = sqrt(5) (a copy of `Base3/Series.lean`
+   without the sign).
+2. The lemma on primes: for every odd h, each of L_h and M_h has a prime p with
+   ord_p(5) = 5h. As in `Base3/Halves.lean`, but in Z[zeta_5]: a quadratic extension of
+   Z[phi], so the norm to Z is taken in two steps, and two complex embeddings are needed for
+   the size bound. Since sqrt(5) - 1 > 1, the size bound itself is easier than in base 3.
+3. Good primes for every root other than 1 and -1 (a case analysis as in
+   `Base3/GoodPrimes.lean`, with Zsigmondy's theorem for base 5).
+4. The support theorem and Baker's theorem, as in `Base3/PiValue.lean`; the last step is the
+   independence of log(4/5) and log(phi), in place of `log_indep`.
+
 ## Why this matters for digit extraction
 
 In the prime form of the window algorithm, the per-prime state a window must read is
