@@ -1683,6 +1683,18 @@ for 6 <= b <= 130 and 3 <= m <= 240 and then fixed as a Lean statement (`SizeCon
 AI subagents wrote the three parts at the same time, each on its own files, and each file
 was compiled again and its axioms printed before it was merged.
 
+*In print, for the good primes.* The nearest published statement is Steidl, Hanler and
+Tasche, Arch. Math. 53 (1989), 30-39 (read on 23 November 2026; reading note
+research/2026-11-23-schinzel/04_steidl_hanler_tasche_1989_read.md): for an integer e of a
+quadratic field with abs(N(e)) >= 2 and every n >= 5, n != 6, some prime ideal of the field has
+ord_P(e) = n, except for (n, e) = (12, +-sqrt 2). With e = sqrt(b) this is a primitive prime
+for some root of unity of order n. It gives a good prime for every root of that order when
+sqrt(b) is not in Q(zeta_n); when it is, the cyclotomic polynomial splits over Q(sqrt b) and
+one prime ideal settles only one of the two classes, so the lemma used here (a good prime in
+both classes, by the size condition) is not contained in their theorem. Their Lemma 2.1,
+Phi_n(x) >= Phi_n(1) x^(phi(n)/2) for real x >= 0, is the lower bound used for the size
+condition in rational bases (Part VIII).
+
 ### Values are 0 or transcendental (machine-checked; known in print)
 
 In each of the three classes (bases 2, 3, 5) a value that is an algebraic number is 0, and a
@@ -2203,8 +2215,10 @@ there is at present neither a candidate nor a proof of impossibility.
   classifies two-term formulas with arguments b/2^a and cites neither BBG nor Bailey.
   The literature databases MathSciNet and zbMATH were not searched.
 * **Still to read before submission:**
-  Steidl-Tasche 1989 and Steidl-Hanler-Tasche 1989 (interlibrary loan requested
-  21 November 2026, needed by 19 December), and Broadhurst's unpublished manuscript
+  Steidl-Tasche 1989 (interlibrary loan requested 21 November 2026, needed by
+  19 December; Steidl-Hanler-Tasche 1989 arrived and was read on 23 November: a Zsigmondy
+  theorem for quadratic integers, see Part VI), Redei 1958 and Sachs 1957 (credited by
+  Drauschke and Tasche for the Gaussian case), and Broadhurst's unpublished manuscript
   (ask the author). Huvent's paper has been read: both optimal formulas of Theorem E
   are his. Schinzel 1962 was read on 23 November 2026 (library copy): Lemma 2 is the
   case a = 2, b = 1 of his Theorem 2, in the form his proof gives. Drauschke-Tasche 1987
