@@ -2020,6 +2020,82 @@ bases with p <= 15 need tables and a case-by-case treatment of the triples where
 condition fails, the classification of the bases 4/3 and 3/2, and the passage to every
 step.
 
+## Part IX. A paper verified claim by claim: Bailey's Compendium (begun 22 November 2026)
+
+The first step of a longer plan: take a paper, record every claim it makes, and check each one,
+by a Lean proof where that is in reach and by exact or high-precision computation otherwise.
+The first paper is D. H. Bailey, "A Compendium of BBP-Type Formulas for Mathematical
+Constants" (version of 8 April 2023, 38 pages). Everything is in `literature/bailey-compendium/`:
+`ledger.json` (one entry per claim), `LEDGER.md` (the same as tables), `00_summary.md` (counts,
+errata, what the project's theorems settle), `LEAN_STATUS.md` (the Lean status of each degree-1
+formula). Programs: `python/compendium_check.py`, `python/compendium_lean.py`.
+
+### What the ledger holds
+
+542 entries: 139 formulas (21 of them zero relations), the 41 rows of Table 1, 284 entries of
+the four lists (46 primes, 238 rationals), and 78 assertions made in the text.
+
+- *Numerics.* 138 of the 139 formulas have numerical content, and all 138 agree to at least 90
+  digits; the 23 formulas with a parameter b were evaluated at six values of b. The 139th is an
+  identity between integers. No formula of the paper is wrong numerically.
+- *Table 1.* The 28 rows of degree 1 are the counts of Theorems C and C3, which are Lean
+  theorems. The 13 rows of degree 2, 3, 4 were reproduced by lattice reduction: evidence, not
+  proof.
+- *The lists.* All 46 primes of list (9) pass the criterion of Theorem K; 28 primes below its
+  largest entry also pass and are missing. Each rational of lists (14), (15), (16) has an exact
+  certificate in Z[i]; the set (15) is linearly independent, exactly (the paper says it
+  "appears" to be).
+
+### Degree 1 in Lean
+
+Of the 80 formulas of degree 1, **54 are Lean theorems stated as printed** (56 theorems
+`PiFormula.Compendium.formula_N`, files `lean/Pilean/Compendium/`, standard axioms only, without
+Baker's theorem). A formula x = c P(1, b^B, n, A) is the statement `BaileyFormula x c b B n A`
+(`BaileyFormulaInt` when the base is negative), where P(1, b, n, A) = sum_k b^(-k) sum_j
+a_j/(nk + j). By group:
+
+| group | formulas | how |
+|---|---|---|
+| already theorems of the project | 1, 6, 4, 7, 70, p25.c, 69, 130, 131 | restated |
+| pi, sqrt(2) pi, sqrt(3) pi, sqrt(5) pi, and zero relations, base 2 | 2, 3, 17-22, 111-122 | the printed pattern is an explicit rational combination of the basis of Theorem C; one period of 120 is compared by `decide +kernel`; negative bases by pairing blocks |
+| logarithms, bases 2, 3, 5, 10 | 8, 67, 71-75, 84, 85, 89 | combinations of the series of log(1 - b^(-d)), d dividing n |
+| arctangents and radicals | 10, 13, 23-28, 68, 86, 87 | by hand: arctan(1/2), arctan(1/8), arctan(1/32), the series of log((1+x)/(1-x)) and arctan x at 1/sqrt(2) and 1/sqrt(5), roots of unity of order 3 and 5 |
+| explicit series and derivation steps | p02.g, p05.c, p05.e, p25.b | by hand |
+
+Not yet done (26): the 22 formulas with a general base b (90 to 110) and the telescoping example
+p04.b, which are identities in a real parameter and are in progress; formula 88 (base 5^5, with
+an irrational prefactor and nested radicals); and the two curiosities 132 (irrational base) and
+133 (coefficients from a recurrence).
+
+The 55 formulas of degree 2 to 5 are confirmed numerically only. A Lean proof needs the
+polylogarithms Li_s on the closed unit disc with their functional equations, which Mathlib does
+not have.
+
+### What was found
+
+Small errors, each re-read on the page image (the formulas themselves are right):
+
+1. Page 11: "Formula 35 = Formula 36 + 27/2^9 x Relation 123 - ..." holds with a minus sign in
+   front of 27/2^9, not as printed.
+2. Page 26, formula (91): the printed vector has b - 1 entries for length b; a final 0 is
+   missing.
+3. Page 35, formula (133): the recurrence is printed for k >= 2, which leaves D_2 undefined; it
+   is meant for k >= 1.
+4. Pages 28 and 29: "five" zero relations are said to be formulas 113 to 118, which are six
+   relations of rank 5.
+5. Page 8, list (16): 15/21 and 8/26 are 5/7 and 4/13, which are in the same list.
+6. Wrong cross-references on pages 4 and 35; reference [18] has the wrong pages.
+
+One attribution is too strong: page 2 credits Borwein, Galway and Borwein (2004) with the
+statement that pi has no degree-1 formula in a base that is not a power of two. That paper
+proves the Machin-type case and poses the general question; the statement is Theorem L of
+Part VII.
+
+Statements the paper calls unknown and the theorems of this note settle: whether log p has a
+binary formula for every prime (no: Theorems G, H, K); whether arctan(2/7) has one (no:
+Theorem I); why zero relations occur for some parameters and not others (degree 1: counted for
+every B in base 2 and base 3, none in a base b >= 5).
+
 ## Why this matters for digit extraction
 
 In the prime form of the window algorithm, the per-prime state a window must read is
