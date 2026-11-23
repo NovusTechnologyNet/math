@@ -25,8 +25,9 @@ g = p^x R with p not dividing R.  Then
 
     log p is a value of F3   <=>   R = 1,  or  R is a prime q dividing n and log q is.
 
-log 3 is a value.  Status: the criterion is proved in the note by the argument of Theorem K
-(from Baker's theorem); it is not yet machine-checked for base 3.
+log 3 is a value.  Status: the criterion and this test are machine-checked in Lean
+(lean/Pilean/Base3/LogExplicit.lean and LogPrimeTest.lean, from Baker's theorem); the list
+that this program prints is the test run on each prime, not a Lean proof prime by prime.
 """
 import sys
 from functools import lru_cache

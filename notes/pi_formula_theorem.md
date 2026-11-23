@@ -1202,16 +1202,25 @@ are the half that needs no Baker; `PiFormula.Base3.Unconditional.*` have no hypo
 Also in Lean, with no Baker: log 2, log 3, log 5, log 7, log 11, log 13, log 19, log 37 and
 pi sqrt(3) are values of F3 (`isF3Value_log_19`, `isF3Value_pi_sqrt3`, and so on).
 
-### The test for a prime, and the list (computed; python/base3_criterion.py)
+### The test for a prime (machine-checked), and the list (computed)
 
 For a prime p other than 3, let n = ord_p(3) and let g be the primitive part that contains
 p: g = Phi_n(3) if n is not 6 modulo 12; if n = 6m with m odd, g is the one of
 gcd(Phi_n(3), L_m), gcd(Phi_n(3), M_m) that p divides (they are coprime and their product is
 Phi_n(3)). Write g = p^x R. Then log p is a value of F3 if and only if R = 1, or R is a prime
-q dividing n and log q is a value of F3. This follows from (c) by the argument given for
-base 2; it is not machine-checked for base 3.
+q dividing n and log q is a value of F3.
 
-Below 10^6 the test accepts 31 primes:
+This is machine-checked (`Pilean/Base3/LogPrimeTest.lean`, `LogPrimeTestAux.lean`):
+`primPart3`, `isF3Value_log_prime_iff_explicit`, `isF3Value_log_prime_classification`, and
+with no hypothesis `PiFormula.Base3.Unconditional.isF3Value_log_prime_iff_explicit`. It holds
+for every prime other than 3; unlike base 2, no prime is excepted. Examples in Lean: log 31,
+41, 43, 61 and 73 are values (no hypothesis), log 17 and log 23 are not. The negative
+direction does not use the bookkeeping of base 2: from a relation p^k = product of base
+numbers it builds a rational combination of valuations at primes that vanishes on every
+base number and equals 1 at p.
+
+The list below is the test run by a program (python/base3_criterion.py), not a Lean proof
+prime by prime. Below 10^6 the test accepts 31 primes:
 
     2, 3, 5, 7, 11, 13, 19, 31, 37, 41, 43, 61, 73, 271, 547, 757, 1093, 1181, 2269, 4561,
     6481, 19441, 19927, 25411, 176419, 368089, 387631, 398581, 530713, 755551, 797161.
@@ -1441,9 +1450,10 @@ sqrt(3) log(2 + sqrt(3)) = S(2, 0); arctan(1/3) = S(0, 2, 0, 0, 0, -2, 0, 0).
   gamma in Q sqrt(3); pi is not a value; every formula is a G + b Z1 + c Z2; period 12;
   dimension 3; the zero relations have dimension 2); Theorem E3 (at least 6 terms per
   period; exactly two formulas attain it).
-- Proved on paper only: the test for a prime (by the argument for base 2).
-- Computed only: the list of 31 primes.
-- Next: the test for a prime in Lean; other bases.
+  The test for a prime (`isF3Value_log_prime_iff_explicit`). The results in Bailey's
+  notation, with the printed relations 130 and 131 (`Pilean/Base3/Bailey.lean`).
+- Computed only: the list of 31 primes below 10^6 (the test run by a program).
+- Next: other bases (Part VI).
 
 ## Part VI. Base 5 (machine-checked) and other bases (exploration)
 
