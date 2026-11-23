@@ -19,6 +19,7 @@ for coprime integers p > q >= 1 (q = 1 is the integer base p of baseb_explore.py
     python ratbase_explore.py formulas                the two formulas (a), (b) of P03, by direct summation
     python ratbase_explore.py sums P Q PERIOD [T ...] theory-free probe: pi (or targets T) and class sums
     python ratbase_explore.py step P Q n N            2 pi i and Log(1 - r (Q/P)^(1/n)), r^N = 1
+    python ratbase_explore.py steps PROCS P:Q:n:N ... several such runs, one line each
 
 Needs mpmath, sympy and python-flint (python-flint on PYTHONPATH, as for baseb_explore.py).
 Prints ASCII only. Findings: research/2026-11-22-rational-bases/00_summary.md.
@@ -54,7 +55,9 @@ Vocabulary (as in baseb_explore.py, with d the squarefree part of pq).
               is supported on R0.
   size cond.  SC(p, q, m): Phi_m(p, q) > g (sqrt p + sqrt q)^phi(m), g = q0 (the largest prime
               factor of m) if q0 divides Phi_m(p, q), else 1. It implies a good prime for every
-              root r with ord(r^2) = m (summary, section 3).
+              root r with ord(r^2) = m (summary, section 3). SC2(p, q, m) is the same with
+              U_m(p, q) = prod over the primitive m-th roots s of (p + q + sqrt(2pq(1 + Re s)))^(1/2)
+              in place of (sqrt p + sqrt q)^phi(m); it is weaker than SC and gives the same.
 """
 import sys
 import time
@@ -720,6 +723,105 @@ def sc_failures(p, q, crude=False):
     return [m for m in range(3, mmax + 1) if totient(m) <= F and not sc_holds(p, q, m, crude)]
 
 
+def u_log(p, q, m):
+    """log U_m(p, q), U_m = prod over the primitive m-th roots s of (p + q + sqrt(2pq(1 + Re s)))^(1/2).
+
+    U_m^k bounds the cofactor: for each primitive n-th root r' at most one of sqrt(p) -+ r' sqrt(q)
+    is left to the cofactor, and max |sqrt(p) -+ r' sqrt(q)|^2 = p + q + 2 sqrt(pq) |Re r'|,
+    |Re r'|^2 = (1 + Re r'^2)/2. So SC2(p, q, m): Phi_m(p, q) > g U_m(p, q) gives a good prime
+    as SC does, and SC implies SC2 because U_m <= (sqrt p + sqrt q)^phi(m)."""
+    tot = mpf(0)
+    for j in range(1, m + 1):
+        if gcd(j, m) == 1:
+            tot += log(p + q + sqrt(2 * p * q * (1 + mp.cospi(mpf(2 * j) / m)))) / 2
+    return tot
+
+
+def sc2_holds(p, q, m):
+    """SC2(p, q, m): Phi_m(p, q) > g U_m(p, q), decided with 25 guard digits. A difference
+    below 10^-15 counts as a failure (equality occurs: Phi_6(3, 1) = U_6(3, 1) = 7)."""
+    from sympy import primefactors
+    Phi = cyclo_hom(m, p, q)
+    q0 = max(primefactors(m))
+    g = q0 if Phi % q0 == 0 else 1
+    old = mp.dps
+    mp.dps = 40
+    diff = log(mpf(Phi)) - log(g) - u_log(p, q, m)
+    mp.dps = old
+    return diff > mpf(10) ** (-15)
+
+
+def phi_bound2(p, q):
+    """A number F such that SC2(p, q, m) holds for every m >= 3 with phi(m) >= F; None if there
+    is none (only for 2/1). Uses U_m <= W^(phi/2), W = p + q + sqrt(2pq(1 + 1/phi)) (the arithmetic
+    mean bounds the geometric mean, and the primitive m-th roots have sum mu(m)), g <= phi + 1,
+    and the lower bounds (M), (E) of phi_bound for Phi_m(p, q). With a(x) = log(c) - log(W(x))/2
+    increasing in x, the function y a(x) - log(y + 1) - E of y >= x is convex, so it stays
+    positive once it is positive at y = x with slope a(x) - 1/(x + 1) >= 0."""
+    best = None
+    for logc, E in ((flog(p * p - p * q + q * q) / 2, 0.0), (flog(p), -flog(euler_fn(q / p)))):
+        if logc <= flog(p + q + fsqrt(2 * p * q)) / 2 + 1e-9:
+            continue
+        F = 2
+        while True:
+            a = logc - flog(p + q + fsqrt(2 * p * q * (1 + 1.0 / F))) / 2
+            if F * a > flog(F + 1) + E + 1e-9 and a > 1.0 / (F + 1) + 1e-12:
+                break
+            F += 1
+        best = F if best is None else min(best, F)
+    return best
+
+
+def sc2_failures(p, q):
+    """All m >= 3 where SC2(p, q, m) fails, or None when it fails for infinitely many m."""
+    from sympy import totient
+    F = phi_bound2(p, q)
+    if F is None:
+        return None
+    mmax = max(6, 2 * F * F)                 # phi(m) >= sqrt(m/2)
+    return [m for m in range(3, mmax + 1) if totient(m) < F and not sc2_holds(p, q, m)]
+
+
+def cofactor_test(p, q, m, max_pairs=12):
+    """The exact cofactor test at (p, q, m): no Galois theory, a finite check.
+
+    With n = m (m odd) or 2m, the cofactor of the proof is C' = prod of |+-sqrt(p) - r' sqrt(q)|
+    over a set that contains at most one of the two signs for each primitive n-th root r' and is
+    closed under complex conjugation; |sqrt(p) -+ r' sqrt(q)|^2 = p + q -+ 2 sqrt(pq) Re r'. If
+    the root r has no good prime then C' = Phi_m(p, q)^k / C with C^2 = q0^j, 0 <= j <= 2k
+    (j = 0 if q0 does not divide Phi_m). Returns (number of selections whose product is such a
+    value, smallest |log difference| among the others), or None if there are too many
+    selections. 0 matches: every root r with ord(r^2) = m has a good prime."""
+    from sympy import primefactors, totient
+    n = m if m % 2 else 2 * m
+    reps = [a for a in range(1, n // 2 + 1) if gcd(a, n) == 1]          # r' and its conjugate
+    if len(reps) > max_pairs:
+        return None
+    k = int(totient(n)) // int(totient(m))
+    Phi = cyclo_hom(m, p, q)
+    q0 = max(primefactors(m))
+    old = mp.dps
+    mp.dps = 40
+    A, B = mpf(p + q), 2 * sqrt(mpf(p * q))
+    opts = []
+    for a in reps:
+        c = mp.cospi(mpf(2 * a) / n)
+        opts.append((mpf(0), 2 * log(A - B * c), 2 * log(A + B * c)))   # log of the factor of C'^2
+    targets = [2 * k * log(mpf(Phi)) - j * log(q0) for j in range(2 * k + 1 if Phi % q0 == 0 else 1)]
+    sums = [mpf(0)]
+    for o in opts:
+        sums = [s + x for s in sums for x in o]
+    matches, gap = 0, None
+    for s in sums:
+        dmin = min(abs(s - t) for t in targets)
+        if dmin < mpf(10) ** (-25):
+            matches += 1
+        elif gap is None or dmin < gap:
+            gap = dmin
+    mp.dps = old
+    return matches, float(gap)
+
+
 def direct_look(p, q, m):
     """The classes of the roots r with ord(r^2) = m: [(n, label, norm, has a good prime)]."""
     s, d, f = base_data(p, q)
@@ -738,7 +840,7 @@ def direct_look(p, q, m):
 def cmd_size(pmax):
     from sympy import totient
     print("Size condition SC(p, q, m): Phi_m(p, q) > g (sqrt p + sqrt q)^phi(m), m >= 3.")
-    print("Proved for every m when p >= 17 (summary, section 3). Below: every coprime p > q, p <= %d."
+    print("Proved for every m when p >= 16 (summary, section 3). Below: every coprime p > q, p <= %d."
           % pmax)
     inf, total, genuine = [], 0, []
     allm = 0
@@ -775,11 +877,36 @@ def cmd_size(pmax):
     for p, q, m, n, label, N in genuine:
         print("   %d/%d, m = %d: order %d%s, norm %s" % (p, q, m, n, "" if label == "all" else label,
                                                         show_int(N)))
-    # the bound used in the proof for p >= 17
+    # the bound used in the proof for p >= 16
     worst = min(fsqrt(p * p - p * q + q * q) / (fsqrt(p) + fsqrt(q))
-                for p in range(17, 400) for q in range(1, p))
-    print("check of the proof for p >= 17: min of sqrt(p^2-pq+q^2)/(sqrt p + sqrt q) over"
-          " 17 <= p < 400 is %.4f > sqrt 3 = %.4f" % (worst, fsqrt(3)))
+                for p in range(16, 400) for q in range(1, p))
+    print("check of the proof for p >= 16: min of sqrt(p^2-pq+q^2)/(sqrt p + sqrt q) over"
+          " 16 <= p < 400 is %.4f > sqrt 3 = %.4f" % (worst, fsqrt(3)))
+    print()
+    print("Sharper condition SC2(p, q, m): Phi_m(p, q) > g U_m(p, q) (see u_log). SC implies SC2.")
+    genuine2, n2 = [], 0
+    for p, q in coprime_pairs(pmax):
+        fails = sc2_failures(p, q)
+        if fails is None:
+            print("%d/%d: p^2 <= p + q + sqrt(2pq): fails for all large m" % (p, q))
+            continue
+        if not fails:
+            continue
+        n2 += len(fails)
+        print("%d/%d: holds for phi(m) >= %d; fails at m = %s" % (p, q, phi_bound2(p, q), fails))
+        tests = [(m, cofactor_test(p, q, m)) for m in fails]
+        print("      exact cofactor test (m: matching selections, smallest other gap): %s"
+              % ", ".join("%d: %s" % (m, "not run" if t is None else "%d, %.2g" % t) for m, t in tests))
+        for m in fails:
+            for n, label, N, good in direct_look(p, q, m):
+                if not good:
+                    genuine2.append("%d/%d m=%d (order %d%s)" % (p, q, m, n, "" if label == "all" else label))
+                if sc_failures(p, q) is None:
+                    print("      m = %d, order %d%s: norm %s%s"
+                          % (m, n, "" if label == "all" else label, show_int(N),
+                             "" if good else "   NO GOOD PRIME"))
+    print("SC2 fails at %d triples in all (2/1 apart); classes with no good prime among them: %s"
+          % (n2, ", ".join(genuine2)))
 
 
 # ---------------------------------------------------------------------------------------
