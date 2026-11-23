@@ -13,3 +13,5 @@ import Pilean.BaseB.NoPi
 import Pilean.BaseB.NegativeBase
 import Pilean.BaseB.LogBase
 import Pilean.BaseB.TermsPerBit
+import Pilean.BaseB.Combination
+import Pilean.BaseB.Examples

@@ -1700,7 +1700,9 @@ A degree-1 BBP-type formula of base b is a series of Bailey's form P(1, b^B, N, 
 B, N >= 1 and let a_1, ..., a_N be rational. If the series above equals q pi with q
 rational, then q = 0.
 
-In particular there is no such formula for pi in base 10, for any B and N. For the powers
+In particular there is no such formula for pi in base 10, for any B and N; nor in base 26
+(the alphabet) or base 36 (letters and digits), while the bases 16, 32 and 64 do have
+formulas (`no_pi_bailey_ten`, `no_pi_bailey_26`, `no_pi_bailey_36`). For the powers
 of 2 there are formulas (Bailey, Borwein and Plouffe, 1995), so the statement is an
 equivalence, and it holds for negative bases too:
 
@@ -1791,13 +1793,15 @@ research/2026-11-22-nonbinary-pi/01_literature.md).
   statement, no use of Baker's theorem for BBP-type formulas, and no counterexample. This is
   weak evidence: about 15 searches; MathSciNet and zbMATH were not searched; earlier versions
   of the Compendium and other work of the three authors were not read.
-- Theorem L answers Comment (10), for every integer base, in the case of a single series
-  P(1, b^B, N, a): the understanding of Q[zeta_n, b^(1/n)] that is needed is the Kummer step
-  and the sub-series lemma, and the rest is Baker's theorem and Theorem G. Comment (10) asks
-  about linear combinations of series with several B and N; these regroup into one series
-  (their Appendix B, Lemma 8), a routine step that is not formalized here. Theorem G itself
-  (no zero relation and no algebraic multiple of pi, for every b >= 5) is not stated in any
-  source we read.
+- Theorem L answers Comment (10) for every integer base: the understanding of
+  Q[zeta_n, b^(1/n)] that is needed is the Kummer step and the sub-series lemma, and the rest
+  is Baker's theorem and Theorem G. Comment (10) asks about linear combinations of series
+  with several exponents and lengths; finitely many series of the same base regroup into
+  one (`exists_bailey_of_sum`), and the statement in the notation of the paper is
+  machine-checked as `no_pi_L_comb`: for b >= 2 not a power of 2, no rational combination
+  of the series L(1, b^m, n, j) = sum over k >= 0 of b^(-mk)/(nk + j), with any m >= 1 and
+  1 <= j <= n, is a non-zero rational multiple of pi. Theorem G itself (no zero relation
+  and no algebraic multiple of pi, for every b >= 5) is not stated in any source we read.
 - An independent audit of the two Lean statements (research/2026-11-22-nonbinary-pi/
   02_audit_theorem_L.md) found them faithful to what is claimed here, not vacuous, and free
   of gaps; the dependency cone, Baker's proof included, was re-checked with a second type
