@@ -41,3 +41,7 @@ import Pilean.Erdos.OkadaStatus
 import Pilean.Erdos.Final
 import Pilean.Erdos.Summary
 import Pilean.Erdos.Squares
+import Pilean.Compendium.Degree2Base64
+import Pilean.Compendium.Degree2Base16
+import Pilean.Compendium.Degree2Base3
+import Pilean.Polylog.Clausen
