@@ -1,0 +1,16 @@
+math: theorems about pi and the primes, with Lean proofs and exact computer checks
+Copyright 2026 Novus Technology and the contributors to this repository
+
+Licensed under the Apache License, Version 2.0 (see the file LICENSE).
+
+This repository includes other people's work, each under the Apache License 2.0 and
+with its own notices kept in place:
+
+- lean/TauCeti/: 25 modules of the Tau Ceti library, copyright the Tau Ceti
+  contributors (https://github.com/TauCetiProject/TauCeti). See lean/TauCeti/VENDORED.md.
+- lean/Baker/: a formal proof of Baker's theorem, copyright (c) 2026 Michail
+  Karatarakis (branch `baker` of https://github.com/mkaratarakis/mathlib4).
+  See lean/Baker/README.md.
+
+The Lean library depends on Mathlib (https://github.com/leanprover-community/mathlib4,
+Apache License 2.0), which is not included here.

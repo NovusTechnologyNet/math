@@ -34,3 +34,4 @@ import Pilean.Compendium.GeneralArctan
 import Pilean.Compendium.GeneralSqrt
 import Pilean.Compendium.Curiosities
 import Pilean.Erdos.AbstractA
+import Pilean.Erdos.TheoremC

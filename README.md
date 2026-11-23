@@ -50,6 +50,7 @@ formulas and every `P(1, 2^B, n, A)` of Bailey's compendium with `n = B` or `n =
 | Theorem N (no logarithm of an integer) | In a base that is neither a power of 2 nor of 3, no degree-1 BBP-type series equals q pi + q' log n with n >= 2 an integer and q' != 0. So no log n has a degree-1 BBP-type formula of base 10. The proof assigns positive weights to the primes so that every building block of the base has weight zero | Lean, unconditional (`PiFormula.BaseB.no_log_nat_bailey`, `no_log_nat_formula_ten`, `posWeight`, `inBaseSpan_of_isFBValue`; `Pilean/BaseB/LogNat.lean`) |
 | Rational bases: Theorem R | For coprime p > q >= 1, call a relation a series sum rho(k) (q/p)^(floor(k/2))/k with rho rational, periodic, not zero, and value an algebraic multiple of pi (0 allowed). **The base p/q has a relation if and only if it is one of 2, 3, 4, 3/2, 4/3.** In every other rational base: pi is not a value, nor any algebraic multiple of pi; no zero relation; at most one formula for a number. Among the five: pi/4 has a formula in base 3/2 (period 24), so "only powers of 2" holds for integer bases, not for rational ones; pi sqrt(3) has formulas in bases 3, 4, 4/3 (the one in base 4/3 is in print in an equivalent form). On paper only: pi itself has a formula in a rational base iff the base is a power of 2 or of 3/2 | Lean, no hypothesis: `PiFormula.RatBase.hasRelation_iff`, `TheoremR.eq_zero_of_hasSum_mul_pi`, `pi_base_three_halves`, `sqrt_three_pi_base_four_thirds`, `hasSum_rhoFour` (`Pilean/RatBase/`). The statement about pi itself: not machine-checked |
 | Verification of a paper: Bailey's Compendium of BBP-type formulas (2023 version) | Every claim of the paper is recorded in a ledger (542 entries: 139 formulas, the 41 rows of its Table 1, 284 list entries, 78 assertions in prose). All 138 formulas with numerical content agree to 90 digits. **All 80 formulas of degree 1 are Lean theorems stated as printed** (the 23 with a parameter b for real b in a stated range and for natural b >= 2). The 55 formulas of degree 2 and higher are checked numerically only (Mathlib has no polylogarithms). Small errors in the paper (a sign, a count, duplicates in a list, references) and one overstated attribution are listed with page numbers | Ledger and checks: `literature/bailey-compendium/`, `python/compendium_check.py`. Lean: `Pilean/Compendium/` (`formula_1`, ..., 104 theorems), status table `literature/bailey-compendium/LEAN_STATUS.md` |
+| Erdos's conjecture on sum f(n)/n (in progress) | Conjecture (Erdos): if f is periodic mod q with f(n) = +-1 for q not dividing n and f(n) = 0 for q dividing n, then sum f(n)/n is not 0. Claim: this holds for every odd q that is not a perfect square (more generally for f with odd rational values); for odd squares the method cannot work. The argument combines Okada's criterion (1982, which rests on Baker's theorem) with a new 2-adic argument | **Not finished and not reviewed by a specialist.** Paper proof with one independent AI referee report and exact computations (all odd composite q <= 12000): `research/2026-11-23-erdos-pm1/`. Lean so far (`lean/Pilean/Erdos/`): the statements, the algebraic core `abstractTheoremA`, `theoremB`, `theoremC_of`; the step from the core to Theorem A is in progress; Okada's criterion is used as a hypothesis (`OkadaOnlyIf`), not formalized. Whether the claim is new is not settled: searches found it nowhere in print, and a submitted paper by specialists on the conjecture could not be seen |
 
 Theorems C to N, K3, C3, E3, C5 and K5 rest on Baker's theorem on linear forms in logarithms (1966). The library
 has each of them in two forms. Our own files prove them from Baker's theorem as an explicit
@@ -73,8 +74,42 @@ hypothesis (`PiFormula.Unconditional.*`). Those depend only on Lean's three stan
 - `lean/Baker/`: Baker's theorem, 19 files by Michail Karatarakis, Apache License 2.0.
   See `lean/Baker/README.md`.
 
-## Status
+## License
 
-A private working repository. No license has been chosen yet for the original work. The
-mathematics was worked out with an AI assistant; every Lean proof is checked by Lean's
-kernel and depends only on the three standard axioms.
+Apache License 2.0: see `LICENSE` and `NOTICE`. Everything here may be used, changed and
+passed on by anyone for any purpose, on the terms of that license. That includes moving
+lemmas or proofs into Mathlib or any other library: no permission is needed. The two folders
+of other people's code above keep their own notices.
+
+## How this work was made
+
+The mathematics, the Lean proofs, the programs and the notes were written by AI models
+(Anthropic's Claude, running as coding agents), directed by the owner of this repository,
+who chose the questions and the direction of the work. What that means for a reader:
+
+- **Lean.** Every statement marked "Lean" is checked by Lean's kernel, with no `sorry`, no
+  `native_decide` and no axioms beyond the three standard ones (`propext`,
+  `Classical.choice`, `Quot.sound`). `lake build` in `lean/` re-checks all of it. What a
+  theorem says is still worth reading with care: the statements and definitions were also
+  written by AI.
+- **Everything else** (proofs on paper, computations, claims about what is known) is
+  labeled as such where it appears and carries no such guarantee.
+- **Research reports** in `research/` are summaries written by AI helpers from sources they
+  read. They mark what was read and what was inferred, and they can be wrong. "Not found
+  in the literature" means that searches found nothing; it is weak evidence of novelty.
+- Nothing here has been peer reviewed. Corrections are welcome: open an issue.
+
+## Using the Lean library
+
+Lean 4.36.0 and Mathlib v4.36.0. To depend on it from another Lake project:
+
+```toml
+[[require]]
+name = "pilean"
+git = "https://github.com/NovusTechnologyNet/math"
+subDir = "lean"
+rev = "main"
+```
+
+The library is one package with three parts: `Pilean` (this project), and the vendored
+`TauCeti` and `Baker`. Names and file layout may still change.
