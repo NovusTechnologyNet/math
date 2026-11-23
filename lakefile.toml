@@ -1,6 +1,9 @@
 name = "pilean"
 version = "0.1.0"
-keywords = ["math"]
+description = "Machine-checked theorems about pi and the primes: BBP-type formulas, Bailey's Compendium, primitive prime divisors, a case of a conjecture of Erdos"
+homepage = "https://github.com/NovusTechnologyNet/math"
+license = "Apache-2.0"
+keywords = ["math", "number-theory", "pi"]
 defaultTargets = ["Pilean", "Baker"]
 
 [leanOptions]
@@ -14,11 +17,16 @@ name = "mathlib"
 scope = "leanprover-community"
 rev = "v4.36.0"
 
+# The Lean sources are in the folder `lean/`.
+
 [[lean_lib]]
 name = "Pilean"
+srcDir = "lean"
 
 [[lean_lib]]
 name = "TauCeti"
+srcDir = "lean"
 
 [[lean_lib]]
 name = "Baker"
+srcDir = "lean"

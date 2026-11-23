@@ -9,7 +9,7 @@ hexadecimal digit of pi without computing the digits before it.
 | Folder | What it holds |
 |---|---|
 | `notes/` | The mathematics, written up. Start with `pi_formula_theorem.md`. |
-| `lean/` | The Lean 4 library, on Mathlib. Every result marked "Lean" below is proved there. |
+| `lean/` | The Lean 4 library, on Mathlib. Every result marked "Lean" below is proved there. The package files (`lakefile.toml`, `lake-manifest.json`, `lean-toolchain`) are at the top level, so Lake commands run from the top folder. |
 | `python/` | Exact computer checks, searches and experiments cited in the notes. |
 | `engine/` | The fast digit program (Rust and CUDA) that runs the formulas. |
 | `research/` | Literature research: what is known, what is open, where results could go. |
@@ -61,8 +61,8 @@ hypothesis (`PiFormula.Unconditional.*`). Those depend only on Lean's three stan
 
 ## Building and running
 
-- Lean: `lean/README.md`. In short, `lake exe cache get` once, then `lake build`, inside
-  `lean/`. Lean 4.36.0, Mathlib v4.36.0.
+- Lean: `lean/README.md`. In short, `lake exe cache get` once, then `lake build`, in the
+  top folder of the repository. Lean 4.36.0, Mathlib v4.36.0.
 - Python: Python 3 with `sympy` and `mpmath` (a few scripts need `python-flint`). Run the
   scripts inside `python/`; each one says at the top what it checks.
 - Engine: `engine/build.ps1` (Rust; the CUDA toolkit is needed only to rebuild the kernel).
@@ -89,7 +89,7 @@ who chose the questions and the direction of the work. What that means for a rea
 
 - **Lean.** Every statement marked "Lean" is checked by Lean's kernel, with no `sorry`, no
   `native_decide` and no axioms beyond the three standard ones (`propext`,
-  `Classical.choice`, `Quot.sound`). `lake build` in `lean/` re-checks all of it. What a
+  `Classical.choice`, `Quot.sound`). `lake build` in the top folder re-checks all of it. What a
   theorem says is still worth reading with care: the statements and definitions were also
   written by AI.
 - **Everything else** (proofs on paper, computations, claims about what is known) is
@@ -107,7 +107,6 @@ Lean 4.36.0 and Mathlib v4.36.0. To depend on it from another Lake project:
 [[require]]
 name = "pilean"
 git = "https://github.com/NovusTechnologyNet/math"
-subDir = "lean"
 rev = "main"
 ```
 

@@ -1,5 +1,5 @@
 # Lean build tree and the compiled Mathlib (several GB; restore with `lake exe cache get`)
-lean/.lake/
+.lake/
 
 # intermediate files of the certificate generators
 lean/scripts/generated/
@@ -20,4 +20,5 @@ papers/
 
 # scratch folders of agents; page images and extracted text of papers
 lean/Scratch*/
+Scratch*/
 literature/**/_scratch/

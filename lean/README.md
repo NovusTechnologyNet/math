@@ -672,8 +672,9 @@ and about 1,800 nodes.
 
 ## Building
 
-This folder is a Lake project (`lakefile.toml`, `lean-toolchain`, `lake-manifest.json`).
-With Lean installed (elan):
+The Lake package is at the top of the repository (`lakefile.toml`, `lean-toolchain`,
+`lake-manifest.json` are there); this folder holds its sources. With Lean installed (elan),
+run in the top folder of the repository:
 
 ```powershell
 lake exe cache get      # once: download the compiled Mathlib
