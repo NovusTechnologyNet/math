@@ -1128,7 +1128,7 @@ exactly the terms with n1 | k. QED.
 
 The lemma is machine-checked, for every base that is not a perfect power (Part VII:
 `BaseB.subseries_of_kummerHom` with `BaseB.kummerHom`). Of Theorem F below, the bound on
-the terms per bit is machine-checked in Bailey's form, for every integer base
+the terms per bit is machine-checked in Bailey's form, for every base b >= 2
 (`BaseB.terms_per_bit`: if sum_j b^(-Bj) sum_{i=1..N} c_i/(Nj+i) = q pi with q != 0
 rational, then b = 2^e and at least (2/3) e B of the c_i are non-zero;
 `terms_per_bit_attained`: Huvent's formula has 8 non-zero coefficients for 12 bits). The
@@ -1791,10 +1791,17 @@ research/2026-11-22-nonbinary-pi/01_literature.md).
   statement, no use of Baker's theorem for BBP-type formulas, and no counterexample. This is
   weak evidence: about 15 searches; MathSciNet and zbMATH were not searched; earlier versions
   of the Compendium and other work of the three authors were not read.
-- Theorem L answers Comment (10) for every integer base: the understanding of
-  Q[zeta_n, b^(1/n)] that is needed is the Kummer step and the sub-series lemma, and the rest
-  is Baker's theorem and Theorem G. Theorem G itself (no zero relation and no algebraic
-  multiple of pi, for every b >= 5) is not stated in any source we read.
+- Theorem L answers Comment (10), for every integer base, in the case of a single series
+  P(1, b^B, N, a): the understanding of Q[zeta_n, b^(1/n)] that is needed is the Kummer step
+  and the sub-series lemma, and the rest is Baker's theorem and Theorem G. Comment (10) asks
+  about linear combinations of series with several B and N; these regroup into one series
+  (their Appendix B, Lemma 8), a routine step that is not formalized here. Theorem G itself
+  (no zero relation and no algebraic multiple of pi, for every b >= 5) is not stated in any
+  source we read.
+- An independent audit of the two Lean statements (research/2026-11-22-nonbinary-pi/
+  02_audit_theorem_L.md) found them faithful to what is claimed here, not vacuous, and free
+  of gaps; the dependency cone, Baker's proof included, was re-checked with a second type
+  checker. The audit did not read the proof of Baker's theorem.
 
 **Scope and limits.**
 
@@ -1811,7 +1818,7 @@ research/2026-11-22-nonbinary-pi/01_literature.md).
   that digits of pi in base 10 cannot be computed individually by some other method.
 - The sub-series lemma and the Kummer step hold for base 2 as well, so the Lemma of Part IV
   is now machine-checked, and so is the bound of Theorem F on the terms per bit
-  (`terms_per_bit`): no degree-1 BBP-type formula for pi, in any integer base and of any
+  (`terms_per_bit`): no degree-1 BBP-type formula for pi, in any base b >= 2 and of any
   length, uses fewer than 2/3 terms per bit, and Huvent's formulas attain this. The bound
   of Theorem F on the prime measure is not formalized for all steps.
 

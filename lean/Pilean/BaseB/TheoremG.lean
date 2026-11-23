@@ -74,6 +74,31 @@ theorem eq_zero_of_hasSum_zero {b : ℕ} (hb : 5 ≤ b) {N : ℕ} (hN : 0 < N) {
   have h1 : HasSum (seriesTermB b ρ) ((0 : ℝ) * Real.pi) := by rwa [zero_mul]
   exact eq_zero_of_hasSum_mul_pi hb hN hρ isAlgebraic_zero h1
 
+/-- A series of the class `F_b`, `b ≥ 5`, has sum 0 exactly when all its coefficients are
+zero. -/
+theorem hasSum_zero_iff {b : ℕ} (hb : 5 ≤ b) {N : ℕ} (hN : 0 < N) {ρ : ℕ → ℚ}
+    (hρ : ∀ k, ρ (k + N) = ρ k) : HasSum (seriesTermB b ρ) 0 ↔ ρ = 0 :=
+  hasSum_zero_iff_of_goodPrimesB bakerTheorem hb (goodPrimesB hb) hN hρ
+
+/-- **A number has at most one formula in a base `b ≥ 5`:** two rational periodic patterns
+with the same sum are equal. -/
+theorem eq_of_hasSum {b : ℕ} (hb : 5 ≤ b) {N N' : ℕ} (hN : 0 < N) (hN' : 0 < N')
+    {ρ ρ' : ℕ → ℚ} (hρ : ∀ k, ρ (k + N) = ρ k) (hρ' : ∀ k, ρ' (k + N') = ρ' k) {x : ℝ}
+    (h : HasSum (seriesTermB b ρ) x) (h' : HasSum (seriesTermB b ρ') x) : ρ = ρ' :=
+  eq_of_hasSum_of_goodPrimesB bakerTheorem hb (goodPrimesB hb) hN hN' hρ hρ' h h'
+
+/-- **In a base `b ≥ 5` every series of the class with a non-zero pattern has a
+transcendental sum.** -/
+theorem transcendental_of_hasSum {b : ℕ} (hb : 5 ≤ b) {N : ℕ} (hN : 0 < N) {ρ : ℕ → ℚ}
+    (hρ : ∀ k, ρ (k + N) = ρ k) (hρ0 : ρ ≠ 0) {x : ℝ} (h : HasSum (seriesTermB b ρ) x) :
+    Transcendental ℚ x :=
+  transcendental_of_hasSum_of_goodPrimesB bakerTheorem hb (goodPrimesB hb) hN hρ hρ0 h
+
+/-- In every base `b ≥ 2`, a non-zero value of the class `F_b` is transcendental. -/
+theorem transcendental_of_isFBValue {b : ℕ} (hb : 2 ≤ b) {x : ℝ} (h : IsFBValue b x)
+    (hx : x ≠ 0) : Transcendental ℚ x :=
+  BaseB.transcendental_of_isFBValue bakerTheorem hb h hx
+
 end Unconditional
 
 end BaseB
