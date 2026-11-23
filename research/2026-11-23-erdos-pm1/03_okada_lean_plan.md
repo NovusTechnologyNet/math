@@ -299,6 +299,8 @@ Lean notes for the workers (met in this session):
 - Sums over the units: `Fintype.sum_equiv (Equiv.mulRight (ZMod.unitOfCoprime n hn))` with
   `ZMod.coe_unitOfCoprime`; over Z/q: `Fintype.sum_equiv (Units.mulLeft h)`.
 
+**Update, 23 November 2026 (evening): complete.** WP4 (`okadaUnitReduction`, `OkadaReduction.lean`), WP5 (`okadaLayerSum`, `OkadaLayerAux.lean`, `OkadaLayer.lean`) and WP6 (`okadaLOne`, `OkadaLOne.lean`; by partial summation, without integrals) are proved. `okadaOnlyIf : OkadaOnlyIf` and the statements without hypothesis are in `Final.lean`.
+
 ## 7. Session log
 
 2026-11-23, first session (design and start). Route fixed after numerical checks (section 5);
