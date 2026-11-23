@@ -2010,15 +2010,61 @@ and the classification from good primes and Baker's theorem (`eq_zero_of_goodPri
 which holds for every rational base except 3, the only one where the four roots 1, -1, i,
 -i carry a relation).
 
-*The classification, on paper* (research/2026-11-22-rational-bases/00_summary.md). Theorem R:
-relations exist exactly for p/q in {2, 3, 4, 3/2, 4/3}. Theorem L': a degree-1 formula with
-rational coefficients for a non-zero rational multiple of pi exists in the rational base
-beta, |beta| > 1, if and only if |beta| is a power of 2 or of 3/2; in base (3/2)^B it needs
-12 | B, so the formula above is the smallest. Proved on paper up to finite computations;
-lattice searches over all 79 coprime pairs with p <= 16 agree. Not machine-checked: the
-bases with p <= 15 need tables and a case-by-case treatment of the triples where the size
-condition fails, the classification of the bases 4/3 and 3/2, and the passage to every
-step.
+### Theorem R: exactly five rational bases have a relation (machine-checked, 23 November 2026)
+
+Call a *relation* in the base p/q a series sum rho(k) (q/p)^(floor(k/2))/k with rho rational,
+periodic and not zero, whose value is gamma pi for an algebraic number gamma (gamma = 0, a
+zero relation, is allowed).
+
+**Theorem R.** Let p > q >= 1 be coprime integers. The base p/q has a relation if and only if
+p/q is one of 2, 3, 4, 3/2, 4/3.
+
+In Lean: `PiFormula.RatBase.hasRelation_iff` (file `Pilean/RatBase/TheoremR.lean`), with no
+hypothesis and the standard axioms only. For every other rational base
+(`TheoremR.eq_zero_of_hasSum_mul_pi`, `mul_pi_eq_zero`, `not_isFRValue_pi`,
+`hasSum_zero_iff`): pi is not a value, nor is any non-zero algebraic multiple of pi; there is no
+zero relation; a number has at most one formula.
+
+*The five bases.* A relation in each:
+
+| base | pattern rho | value | Lean |
+|---|---|---|---|
+| 2 | the pattern of the formula of Bailey, Borwein and Plouffe | pi/4 | `hasSum_namedA1` |
+| 3 | 6, 0, -6, 0 (period 4) | pi sqrt(3) | `Base3.hasSum_gregory3` |
+| 4 | 1/2, 1, 0, -1, -1/2, 0 (period 6) | pi sqrt(3)/9 | `hasSum_rhoFour` |
+| 3/2 | period 24, above | pi/4 | `hasSum_rhoTH` |
+| 4/3 | period 12, above | pi sqrt(3)/9 | `hasSum_rhoFT` |
+
+*Every other base.* What was missing after the case p >= 16 were the bases with p <= 15. For
+q = 1 and p >= 5 they are the integer bases of Theorem G. For 2 <= q < p <= 15 (55 pairs outside
+3/2 and 4/3):
+
+1. *The size condition, outside twelve triples* (`sizeSmall`, files `SizeSmall*.lean`). The
+   lower bound Phi_m(p, q)^2 >= (p^2 - pq + q^2)^phi(m) (`pow_totient_le_sq_cycValR`: from
+   |p - sq|^2 = (p - q)^2 + pq |1 - s|^2 over the primitive m-th roots s) gives the size
+   condition as soon as phi(m) > F, with an explicit F <= 50 for each pair (F = 50 for 5/4, 39
+   for 5/3, at most 16 otherwise). A bound for m in terms of phi(m) leaves m <= 360, and the
+   remaining rows are checked on integers by the kernel (`smallCerts_ok`; 1057 rows, 348 of
+   them integer checks; the table is written by `python/ratbase_size_tables.py`).
+2. *The twelve triples* (p, q, m) = (5,2,3), (5,2,14), (5,4,6), (5,4,18), (6,5,22), (7,2,6),
+   (7,3,10), (7,5,6), (8,7,6), (8,7,10), (11,7,6), (11,10,6), where the size condition fails
+   (`leftoverGood`, files `Leftover*.lean`). No size is used. A primitive prime factor l of
+   p^m - q^m lies under a prime ideal containing p - q r^2, hence u - q r or u + q r
+   (u = sqrt(pq)). In all twelve cases sqrt(pq) is not in the cyclotomic field of r, and a
+   conjugation zeta -> zeta^a of a larger cyclotomic field fixes r and sends u to -u; it is
+   made explicit by writing u with Gauss sums (for 2, -1, -3, 5, -7, -11). One general
+   statement, `hasGoodPrimeR_of_primitive`, and one instance per triple.
+
+With the good primes (`goodPrimesR_all`), the classification from Baker's theorem is the one
+used for p >= 16.
+
+*Still on paper* (research/2026-11-22-rational-bases/00_summary.md). Theorem L': a degree-1
+formula with rational coefficients for a non-zero rational multiple of pi exists in the
+rational base beta, |beta| > 1, if and only if |beta| is a power of 2 or of 3/2; in base (3/2)^B
+it needs 12 | B. Not machine-checked: that no rational multiple of pi is a value in the bases 4
+and 4/3 (their relations give pi sqrt(3) only; this needs the classification of these two
+bases), and the passage from the class above to Bailey's form with every exponent and length
+(the sub-series lemma and the Kummer step for a rational base).
 
 ## Part IX. A paper verified claim by claim: Bailey's Compendium (begun 22 November 2026)
 
