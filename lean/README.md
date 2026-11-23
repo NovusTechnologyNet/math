@@ -95,6 +95,11 @@ spanned by `γ(O) + γ(O*) = 0`, `γ(O_1) = π/4`, `γ(O_6) = 0` and `γ(O_10) -
 | `Pilean/BaseB/SubseriesAux.lean`, `Subseries.lean` | The sub-series lemma: `hasSum_periodic_logs`, `baker_galoisF`, `twisted_value`, `subseries_of_kummerHom` | proved from `BakerTheorem` and `KummerHom b n` |
 | `Pilean/BaseB/Reindex.lean`, `BaileyForm.lean` | `isFBValue_of_hasSum_subseries` (the sub-series is a series of step 2); `baileyBlock`, `hasSum_bailey_iff`, `exists_step_of_bailey` (Bailey's `P(1, b^B, N, a)` is a series of step `N / gcd(B, N)`) | proved |
 | `Pilean/BaseB/NoPi.lean` | Theorem L: `rat_mul_pi_step`, `no_pi_bailey` (no degree-1 BBP-type formula for a non-zero rational multiple of `π` in a base that is not a power of 2), `no_pi_bailey_ten` | proved, no hypothesis |
+| `Pilean/BaseB/Sharpness.lean`, `NegativeBase.lean` | `bbp_formula` (the 1995 formula as `HasSum (baileyBlock 16 1 8 ![4,0,0,-2,-1,-1,0,0]) π`), `exists_bailey_pi_of_two_pow`, `bailey_pi_iff` (a formula for a non-zero rational multiple of `π` exists in base `b` iff `b` is a power of 2); `baileyBlockInt`, `no_pi_bailey_int`, `bailey_int_pi_iff` (integer bases, possibly negative) | proved, no hypothesis |
+| `Pilean/BaseB/SubseriesLog.lean` | `subseries_log_of_kummerHom`: the sub-series lemma for a value `q π + q' log y` | proved from `BakerTheorem` and `KummerHom b n` |
+| `Pilean/BaseB/LogNonValueAux.lean`, `LogNonValue.lean` | `not_isFBValue_mul_pi_add_log`: for `b ≥ 5`, `b ≠ 9`, `q π + q' log y` is not a value of `F_b` when the prime factors of `y ≠ 1` divide `b`; `not_isFBValue_log_self`; base-10 examples | proved from `BakerTheorem`; versions with no hypothesis in `Unconditional` |
+| `Pilean/BaseB/LogSelf.lean` | `hasSum_log_two`, `hasSum_log_three`, and formulas for `log(2^e)` in base `2^e` and `log(3^e)` in base `3^e` | proved (no Baker) |
+| `Pilean/BaseB/LogBase.lean` | Theorem M: `no_log_step`, `no_log_bailey`, `no_log_self_bailey`, `bailey_log_self_iff` (`log b` has a degree-1 formula of base `b` iff `b` is a power of 2 or 3), `no_log_bailey_ten` | proved, no hypothesis |
 | `TauCeti/` | 25 modules of Tau Ceti (Apache-2.0), see `TauCeti/VENDORED.md` | builds unchanged |
 
 There is no `sorry` anywhere. `theoremA`, `theoremB`, `theoremBgamma`, `lemma2`, `size_bound` and every other theorem

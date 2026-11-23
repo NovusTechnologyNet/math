@@ -1696,12 +1696,19 @@ B, N >= 1 and let a_1, ..., a_N be rational. If the series above equals q pi wit
 rational, then q = 0.
 
 In particular there is no such formula for pi in base 10, for any B and N. For the powers
-of 2 there are formulas (Bailey, Borwein and Plouffe, 1995), so the bases with a formula of
-this kind for pi are exactly the powers of 2.
+of 2 there are formulas (Bailey, Borwein and Plouffe, 1995), so the statement is an
+equivalence, and it holds for negative bases too:
 
-In Lean: `PiFormula.BaseB.no_pi_bailey`, `no_pi_bailey_ten` (file `Pilean/BaseB/NoPi.lean`),
-with no hypothesis and Lean's three standard axioms only; Baker's theorem enters through
-the imported proof.
+**Theorem L, two-way form (machine-checked).** Let beta be an integer with |beta| >= 2. A
+series sum_j beta^(-B j) sum_{i=1..N} a_i/(N j + i) with rational a_i and value q pi, q a
+non-zero rational, exists if and only if |beta| is a power of 2.
+
+In Lean: `PiFormula.BaseB.no_pi_bailey`, `no_pi_bailey_ten` (file `Pilean/BaseB/NoPi.lean`);
+`bailey_pi_iff`, and the formula of 1995 itself in the same definition,
+`bbp_formula : HasSum (baileyBlock 16 1 8 ![4, 0, 0, -2, -1, -1, 0, 0]) pi`
+(`Sharpness.lean`); `no_pi_bailey_int`, `bailey_int_pi_iff` for an integer base
+(`NegativeBase.lean`). No hypothesis, Lean's three standard axioms only; Baker's theorem
+enters through the imported proof.
 
 **The same for every step.** Let b = 3 or b >= 5, not a perfect power, n >= 1, rho rational
 and periodic. If sum over k >= 1 of rho(k) b^(-floor(k/n)) / k = q pi with q rational, then
@@ -1772,12 +1779,58 @@ research/2026-11-22-nonbinary-pi/01_literature.md).
   multiples are excluded as well (Theorem G); for n >= 3 the sub-series lemma needs q
   rational, and Part IV shows that irrational multiples do occur in base 2.
 - *Integer bases.* A formula with the sign (-1)^j, that is base -b, is a formula of base
-  b^2 with 2N terms, so it is covered (this remark is not formalized). Non-integer bases
+  b^2 with 2N terms, so negative bases are covered (`no_pi_bailey_int`). Non-integer bases
   (the golden ratio, Pisot numbers) are not.
 - *Not a statement about digits.* The theorem excludes one kind of formula. It does not say
   that digits of pi in base 10 cannot be computed individually by some other method.
 - The sub-series lemma and the Kummer step hold for base 2 as well, so the Lemma of Part IV
   is now machine-checked. Theorem F of Part IV (the cost bound) is not.
+
+### The logarithm of the base: Theorem M (machine-checked)
+
+**Theorem M.** For an integer b >= 2, the number log b has a degree-1 BBP-type formula of
+base b,
+
+    log b = sum over j >= 0 of b^(-B j) * sum_{i=1..N} c_i / (N j + i),      c_i rational,
+
+if and only if b is a power of 2 or a power of 3 (`bailey_log_self_iff`).
+
+More generally (`no_log_bailey`): let b be neither a power of 2 nor a power of 3, and y != 1
+a positive rational all of whose prime factors divide b. Then no such series equals
+q pi + q' log y with q, q' rational and q' != 0. For example none of log 2, log 5, log 10 has
+a degree-1 BBP-type formula of base 10 (`no_log_bailey_ten`).
+
+The formulas for the powers of 2 and 3 are explicit (`LogSelf.lean`):
+
+    log 2 = sum_j 2^(-j) (1/2)/(j + 1),        log 3 = sum_j 9^(-j) ( 1/(2j+1) + (1/9)/(2j+2) ),
+
+and for base 2^e, 3^e the same series regrouped, multiplied by e.
+
+*Proof of the negative part.* As for Theorem L: the base is a^j with a >= 5 not a perfect
+power; the series is a series of some step n in base a; the sub-series lemma holds for a
+value q pi + q' log y as well (`subseries_log_of_kummerHom`: the extra logarithm has a
+rational coefficient, which the field homomorphism fixes); so q pi + q' log y would be a
+value of the class F_a. It is not (`not_isFBValue_mul_pi_add_log`, for a base b >= 5, b != 9):
+by Baker's theorem there would be an integer relation
+
+    z0 (pi i) + sum_r z_r Log(1 - r/sqrt(b)) + z_y log y = 0      with z_y != 0.
+
+A root r with a good prime P has z_r = 0 as before, since y is a unit at P (the primes of y
+divide b, and P lies over a prime that does not). On the four roots the absolute value gives
+
+    y^(2 z_y) (t-1)^(2 z1) (t+1)^(2 z2) (b+1)^(z3+z4) = b^(z1+z2+z3+z4),      t = sqrt(b),
+
+and the valuations at the primes that do not divide b force z1 = z2 = 0 and z3 + z4 = 0
+(one lemma: for n >= 4, if e1 v_p(n-1) + e2 v_p(n+1) = 0 at every prime p not dividing n,
+then e1 = e2 = 0). Then y^(2 z_y) = 1, so z_y = 0. QED.
+
+*Base 9 is a true exception for the class F_b:* log 3 = -2 log(1 - 1/3) + log(1 + 1/3) is a
+value of F_9, because 3 - 1 and 3 + 1 are both powers of 2. This does not affect Theorem M,
+which goes through the root a of the base (here a = 3).
+
+*In print.* Borwein, Borwein and Galway (2004, Example 4) show that log b has no Machin-type
+logarithm formula of base b under a condition that holds for b = 10; Theorem M is the same
+conclusion for every degree-1 formula. We did not search for Theorem M separately.
 
 ## Why this matters for digit extraction
 
