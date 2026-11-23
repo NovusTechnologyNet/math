@@ -1126,6 +1126,9 @@ rho(k) replaced by eta^k rho(k); and h(d) = sum_j h(x_j) e_j, so that series has
 value h applied to the coefficient of pi, which is q again. Averaging over eta leaves
 exactly the terms with n1 | k. QED.
 
+The lemma is machine-checked, for every base that is not a perfect power (Part VII:
+`BaseB.subseries_of_kummerHom` with `BaseB.kummerHom`); Theorem F below is not.
+
 **Theorem F.** For every n, a series of F_n for a non-zero rational multiple of pi
 costs at least 0.5833; for odd n there is none at all. So among all binary degree-1
 BBP-type formulas for pi, of any base 2^B and any period, the formula of Theorem E is
@@ -1455,7 +1458,7 @@ sqrt(3) log(2 + sqrt(3)) = S(2, 0); arctan(1/3) = S(0, 2, 0, 0, 0, -2, 0, 0).
 - Computed only: the list of 31 primes below 10^6 (the test run by a program).
 - Next: other bases (Part VI).
 
-## Part VI. Base 5 (machine-checked) and other bases (exploration)
+## Part VI. Base 5 and every base b >= 5 (machine-checked)
 
 The class F5 is the set of series S(rho) = sum over k >= 1 of rho(k) 5^(-floor(k/2))/k with
 rho rational and periodic. Take t = sqrt(5). The twisted pattern is c(k) = rho(k) t^(k mod 2)
@@ -1555,57 +1558,104 @@ dimension 8) and of base 3 (two zero relations, pi sqrt(3) but not pi).
   is a value; log 2 - (1/2) log 5, log 3 - (1/2) log 5, log 7 - (3/2) log 5, log 11 - 2 log 5,
   log 13 - (3/2) log 5, log 31 - 2 log 5, log 71 - 2 log 5 and log 521 - 4 log 5 are.
 
-### Other bases (computed; a proof for all b >= 5 is in progress)
+### Every base b >= 5: Theorem G (machine-checked)
 
-A systematic study (python/baseb_explore.py; report in
-research/2026-11-22-base5/06_other_bases_computations.md) of the bases 2 to 40, squares and
-prime powers included:
+**Theorem G (machine-checked, from Baker's theorem).** Let b >= 5 be an integer. If rho is
+rational and periodic and
 
-- **A relation among 2 pi i and the Log(1 - r/sqrt(b)) exists for b = 2, 3 and 4, and for no
-  other base up to 40.** The ranks are 13, 3 and 2. Base 4 has one zero relation and a
-  formula for pi sqrt(3), both inside base 2.
-- Bases 8, 9, 16, 25, 27, 32 have none: the class of base c^j is only the part of the class
-  of base c supported on the multiples of j, and the relations do not survive.
-- The exceptional roots are as predicted for b up to 300: for b >= 5 only 1, -1 (when b - 1
-  is a power of 2) or i, -i (when b + 1 is), and these carry no relation.
-- Why 2, 3, 4: a relation needs sqrt(b) - r to be a unit or to share all its primes with
-  other roots; every conjugate of sqrt(b) - r has absolute value at least sqrt(b) - 1, so a
-  unit needs b <= 4.
+    sum over k >= 1 of rho(k) b^(-floor(k/2)) / k  =  gamma pi
 
-**Statement G (not proved; for b = 5 it is Theorem C5).** For every integer b >= 5 the
-numbers 2 pi i and Log(1 - r/sqrt(b)), r over all roots of unity, are linearly independent
-over Q. So F_b has no zero relation and contains no non-zero algebraic multiple of pi; F_b
-has a zero relation, or a multiple of pi, exactly for b = 2, 3, 4, and pi itself only for
-b = 2.
+with gamma algebraic, then rho = 0. So in the class F_b, for every b >= 5:
 
-*Plan of proof, one argument for all b >= 6.* Let r be a root of unity with r^4 not 1, m >= 3
-the order of r^2, q the largest prime factor of m, L = Q(sqrt(b), r) and N the norm from L.
-Put x = sqrt(b) - r, x' = sqrt(b) + r, so x x' = b - r^2 and N(x) N(x') = Phi_m(b)^k,
-k = [L : Q]/phi(m). A prime factor of Phi_m(b) is good (odd, prime to b and to the order of
-r) unless it is q, and q divides Phi_m(b) at most once. So if x has no good prime,
-|N(x)| <= q^k. But every conjugate of x' has absolute value at most sqrt(b) + 1, so
-|N(x)| >= Phi_m(b)^k / (sqrt(b) + 1)^(phi(m) k). This is impossible as soon as
+- pi is not a value, nor is any non-zero algebraic multiple of pi;
+- there is no zero relation, and a number has at most one formula;
+- every value other than 0 is transcendental.
 
-    Phi_m(b) > q (sqrt(b) + 1)^phi(m),
+In Lean (`Pilean/BaseB`): `PiFormula.BaseB.Unconditional.eq_zero_of_hasSum_mul_pi`,
+`mul_pi_eq_zero`, `not_isFBValue_pi`, `eq_zero_of_hasSum_zero`, with no hypothesis and Lean's
+three standard axioms only; `transcendental_of_hasSum_of_goodPrimesB` and, from Baker's
+theorem alone and for every b >= 2, `transcendental_of_isFBValue`. Squares are included
+(sqrt(b) is then rational); for b = 5 this is Theorem C5 again.
 
-which follows from Phi_m(b) > (b - 1)^phi(m) and (sqrt(b) - 1)^(q-1) >= q for b >= 8, and
-from a few exact values for b = 6, 7. No lemma on Aurifeuillian factors and no case
-distinction is needed. The four roots with r^4 = 1 carry no relation for b >= 5 (the numbers
-(b-1)/b, (b+1)/b and (sqrt(b)+1)/(sqrt(b)-1) are independent, and (sqrt(b)-i)/(sqrt(b)+i)
-is a root of unity only for b = 1, 3). This argument is ours and has not been reviewed.
+Equivalently: for b >= 5 the numbers 2 pi i and Log(1 - r/sqrt(b)), r over all roots of
+unity, are linearly independent over Q. A relation exists for b = 2, 3 and 4 only: the
+classes of base 2 and 3 are described in Parts III and V, and in base 4 a computation finds
+one zero relation and a formula for pi sqrt(3), both inside base 2.
 
-**What Statement G does not cover.** The class F_b has the weights b^(-floor(k/2)), that
-is, Bailey's P(1, b^m, n, A) with n = m or n = 2m. For a base that is a perfect power it is
-a small class (the classical formula for pi in base 16 is in F_2, not in F_16). The series
-with weights b^(-floor(k/n)), n >= 3, need the analogue of Part IV.
+*Proof.* Write t = sqrt(b). There are three steps; only the first is new compared with
+base 5.
 
-For the narrower class of Machin-type formulas (rational combinations of the series of
-arctan(b^(-m))), Borwein, Borwein and Galway proved in 2004 (Theorem 7) that pi has no
-formula in a base b > 2 that is not a proper power. A positive answer to the question would
-extend their theorem to the whole class, which also contains the series in sqrt(b), and
-would add the absence of zero relations. In print we found no statement about pi in base 5
-for a class this wide, no zero relation, and no formula for a single log p
-(research/2026-11-22-base5/00_summary.md).
+*Step 1: good primes (`goodPrimesB`).* For every root of unity r with r^4 not 1, some prime
+ideal of the algebraic integers contains t - r and an odd rational prime p that divides
+neither b nor the order of r. For b = 5 this is the lemma on Aurifeuillian factors. For
+b >= 6 there is one argument for all bases, with no norm and no Galois theory. Let
+x = t - r, n the order of r, m >= 3 the order of r^2, and c0 the constant term of the
+minimal polynomial mu of x over Z.
+
+(a) *Every prime factor p of c0 lies under a prime ideal that contains x*
+(`hasPrime_of_dvd_minpoly_eval_zero`). Otherwise U(x) p + V(x) x = 1 for integer polynomials
+U, V; mu divides U p + V X - 1 in Z[X]; at 0 this says c0 divides U(0) p - 1, so p divides 1.
+
+(b) *Symmetrization* (`exists_symmetrize`). For G in Z[X], the function
+z -> G(t - z) G(-t - z) is an integer polynomial S_G in z: write G(t - z) = A(z) + t B(z) by
+induction on G, then G(-t - z) = A(z) - t B(z) and S_G = A^2 - b B^2. Take G = Phi_n. Then
+S_G(x) = 0, so mu divides S_G and c0 divides
+
+    S_G(0) = Phi_n(t) Phi_n(-t) = Phi_m(b)^k,     phi(n) = k phi(m).
+
+Take G = mu. Then S_mu(r) = 0, so Phi_n divides S_mu: for every primitive n-th root r', one
+of t - r', -t - r' is a root of mu. These are phi(n) different numbers, so mu has degree at
+least phi(n), and the cofactor h = Phi_m(b)^k / c0 is, up to sign, a product of at most
+phi(n) numbers of the form (+-t) - r' (`exists_cofactor`):
+
+    |h| <= (t + 1)^phi(n).
+
+(c) *Which primes can divide c0.* A prime factor of Phi_m(b) does not divide b. If it does
+not divide m, the order of b modulo it is m, so it is 1 modulo m: odd, prime to the order of
+r, hence a good prime by (a). If it divides m, it is the largest prime factor q of m and
+q^2 does not divide Phi_m(b). So if x has no good prime, |c0| is 1 or a power of q with
+exponent at most k, and
+
+    Phi_m(b)^k = |c0| |h| <= q^k (t + 1)^(k phi(m)).
+
+(d) *Size (`sizeCond`).* For every b >= 6 and m >= 3: Phi_m(b) > (t + 1)^phi(m), and
+Phi_m(b) > q (t + 1)^phi(m) for every prime q dividing both m and Phi_m(b). This contradicts
+(c). It follows from Phi_m(b) > (b - 1)^phi(m) and (t - 1)^phi(m) >= q, except at the six
+pairs (b, m) = (6, 3), (6, 5), (6, 6), (6, 10), (7, 3), (7, 6), where the exact values 43,
+1555, 31, 1111, 57, 43 are used. The condition fails at (5, 6): Phi_6(5) = 21 = 3 * 7 and
+3 (sqrt(5) + 1)^2 = 31.4. That is why base 5 needs its own lemma.
+
+*Step 2: the support (`support_subset_fourth_roots`).* As in Parts III, V and VI: in a
+multiplicative relation among the numbers 1 - r/t, a root with a good prime has exponent 0.
+So a relation is supported on the four roots 1, -1, i, -i.
+
+*Step 3: the four roots (`intRel_eq_zeroB`).* Let z1, z2, z3, z4 be the exponents at
+1, -1, i, -i. The real part of the relation says
+
+    (t - 1)^(2 z1) (t + 1)^(2 z2) (b + 1)^(z3 + z4) = b^(z1 + z2 + z3 + z4).
+
+If b is not a square, ((t+1)/(t-1))^(z1 - z2) is then rational, and since
+(t+1)/(t-1) = (b + 1 + 2t)/(b - 1) has irrational powers, z1 = z2; a prime factor of b,
+which divides neither b - 1 nor b + 1, gives 2 z1 + z3 + z4 = 0, and then
+((b-1)/(b+1))^(2 z1) = 1 gives z1 = 0. If b = c^2, a prime factor of c and an odd prime
+factor of c^2 + 1 do the same. Then the relation reads ((t - i)/(t + i))^(2 z3) = 1, and
+w = (t - i)/(t + i) is not a root of unity for b >= 4: w + 1/w = 2(b - 1)/(b + 1) would be
+an integer. (Step 3 works for every b >= 4. In base 4 it is Step 1 that fails. In base 3
+this last step fails too: w + 1/w = 1, so w is a sixth root of unity, which is where the
+formulas for pi sqrt(3) come from.)
+
+Baker's theorem then gives the statement, exactly as in base 5. QED.
+
+*What the computer finds* (python/baseb_explore.py; report in
+research/2026-11-22-base5/06_other_bases_computations.md), bases 2 to 40: a relation among
+2 pi i and the Log(1 - r/sqrt(b)) exists for b = 2, 3 and 4 and for no other base; the ranks
+are 13, 3 and 2. This agreed with the theorem before it was proved.
+
+*How the proof was made.* The plan of Step 1 (the constant term of the minimal polynomial in
+place of a norm) was worked out first on paper; the size condition was checked by computer
+for 6 <= b <= 130 and 3 <= m <= 240 and then fixed as a Lean statement (`SizeCond`); three
+AI subagents wrote the three parts at the same time, each on its own files, and each file
+was compiled again and its axioms printed before it was merged.
 
 ### Values are 0 or transcendental (machine-checked; known in print)
 
@@ -1634,6 +1684,73 @@ literature position is as for base 3: for the narrower class of Machin-type form
 absence of pi in bases above 2 is a theorem of Borwein, Borwein and Galway (2004); for this
 class, and for the absence of zero relations, we found nothing in print, which is weak
 evidence.
+
+## Part VII. Every integer base: formulas for pi exist only in powers of 2
+
+A degree-1 BBP-type formula of base b is a series of Bailey's form P(1, b^B, N, a):
+
+    sum over j >= 0 of b^(-B j) * sum_{i=1..N} a_i / (N j + i),      a_i rational.
+
+**Theorem L (machine-checked).** Let b >= 2 be an integer that is not a power of 2, let
+B, N >= 1 and let a_1, ..., a_N be rational. If the series above equals q pi with q
+rational, then q = 0.
+
+In particular there is no such formula for pi in base 10, for any B and N. For the powers
+of 2 there are formulas (Bailey, Borwein and Plouffe, 1995), so the bases with a formula of
+this kind for pi are exactly the powers of 2.
+
+In Lean: `PiFormula.BaseB.no_pi_bailey`, `no_pi_bailey_ten` (file `Pilean/BaseB/NoPi.lean`),
+with no hypothesis and Lean's three standard axioms only; Baker's theorem enters through
+the imported proof.
+
+**The same for every step.** Let b = 3 or b >= 5, not a perfect power, n >= 1, rho rational
+and periodic. If sum over k >= 1 of rho(k) b^(-floor(k/n)) / k = q pi with q rational, then
+q = 0 (`rat_mul_pi_step`).
+
+*Proof.* Four reductions and Theorem G.
+
+1. *The base.* Every b >= 2 is a^j with a not a perfect power
+   (`exists_root_notPerfectPower`), and the series is the series of base a with exponent
+   j B. Since b is not a power of 2, a is 3 or at least 5.
+2. *Bailey's form is a series of step n* (`exists_step_of_bailey`), n = N / gcd(B, N). With
+   B' = B / gcd(B, N) and k' = B' (N j + i): floor(k'/n) = B j + floor(B' i / n), so
+   a^(-B j) / (N j + i) = B' a^(floor(B' i / n)) * a^(-floor(k'/n)) / k'.
+3. *The sub-series lemma* (`subseries_of_kummerHom`; Part IV, Lemma, for a general base).
+   If a series of step n equals q pi with q rational, its sub-series over the k divisible
+   by n1 (n1 = n/2 for even n, n1 = n for odd n) already equals q pi. Proof as in Part IV:
+   with c = a^(1/n) and the twisted pattern rho(k) c^(k mod n), Baker's theorem writes the
+   coefficient vector as a combination of integer relation vectors with coefficients in the
+   number field Q(zeta_P, c); a field homomorphism sigma with sigma(c) = eta c fixing the
+   roots of unity (eta^n1 = 1) maps the relation to the one for the pattern eta^k rho(k),
+   and keeps q; averaging over eta leaves the terms with n1 | k.
+4. *The Kummer step* (`kummerHom`): such a sigma exists when a is not a perfect power. The
+   proof avoids the irreducibility criterion for X^n - a (Mathlib has it for odd n only).
+   Let L = Q(zeta_(Mn)), f the minimal polynomial of c over L, d its degree. The roots of f
+   are roots of X^n - a, so the constant term of f is a root of unity times c^d: c^d is in
+   L. Complex conjugation commutes with every automorphism of L, so every conjugate of the
+   real number c^d is real, hence +-c^d, and c^(2d) is rational. Its n-th power is a^(2d), and
+   a is not a perfect power, so n divides 2d and n1 divides d. So f = X^d - c^d, and eta c
+   is another root of f.
+5. *The sub-series is a series of the class F_a* (`isFBValue_of_hasSum_subseries`): for
+   even n, floor(n1 k'/n) = floor(k'/2); for odd n the series is supported on even indices
+   of F_a. By Theorem G (a >= 5), or by Theorem C3 (a = 3: the values of the class that are
+   algebraic multiples of pi are the rational multiples of pi sqrt(3)), q = 0. QED.
+
+**Scope and limits.**
+
+- *Degree 1 only.* The terms are a_i / (N j + i) to the first power. Formulas of higher
+  degree (polylogarithmic) are not covered: pi^2 has formulas in base 3 (Broadhurst).
+- *Rational coefficients, rational multiples.* In base 3 the irrational multiple pi sqrt(3)
+  has formulas. For a base a >= 5 that is not a perfect power and step n <= 2, algebraic
+  multiples are excluded as well (Theorem G); for n >= 3 the sub-series lemma needs q
+  rational, and Part IV shows that irrational multiples do occur in base 2.
+- *Integer bases.* A formula with the sign (-1)^j, that is base -b, is a formula of base
+  b^2 with 2N terms, so it is covered (this remark is not formalized). Non-integer bases
+  (the golden ratio, Pisot numbers) are not.
+- *Not a statement about digits.* The theorem excludes one kind of formula. It does not say
+  that digits of pi in base 10 cannot be computed individually by some other method.
+- The sub-series lemma and the Kummer step hold for base 2 as well, so the Lemma of Part IV
+  is now machine-checked. Theorem F of Part IV (the cost bound) is not.
 
 ## Why this matters for digit extraction
 
