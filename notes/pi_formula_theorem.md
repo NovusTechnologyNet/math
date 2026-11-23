@@ -1542,16 +1542,49 @@ dimension 8) and of base 3 (two zero relations, pi sqrt(3) but not pi).
   is a value; log 2 - (1/2) log 5, log 3 - (1/2) log 5, log 7 - (3/2) log 5, log 11 - 2 log 5,
   log 13 - (3/2) log 5, log 31 - 2 log 5, log 71 - 2 log 5 and log 521 - 4 log 5 are.
 
-### Other bases
+### Other bases (computed; a proof for all b >= 5 is in progress)
 
-The command `relations N B` for B = 6, 7, 10, 11, 13, 14, 15, 17 and N = 24, 60 finds no
-relation either; for B = 2 and B = 3 it finds the known ones. The reason suggested by the
-method: a root of unity r is exceptional because t - r is a unit or is built from very small
-primes, and |sqrt(b) - r| = 1 is possible only for b <= 4.
+A systematic study (python/baseb_explore.py; report in
+research/2026-11-22-base5/06_other_bases_computations.md) of the bases 2 to 40, squares and
+prime powers included:
 
-**Question (not proved, and checked only for the bases and periods above).** For an integer
-b >= 5 that is not a power of 2 or of 3: has the class F_b no zero relation, and is no
-non-zero algebraic multiple of pi a value?
+- **A relation among 2 pi i and the Log(1 - r/sqrt(b)) exists for b = 2, 3 and 4, and for no
+  other base up to 40.** The ranks are 13, 3 and 2. Base 4 has one zero relation and a
+  formula for pi sqrt(3), both inside base 2.
+- Bases 8, 9, 16, 25, 27, 32 have none: the class of base c^j is only the part of the class
+  of base c supported on the multiples of j, and the relations do not survive.
+- The exceptional roots are as predicted for b up to 300: for b >= 5 only 1, -1 (when b - 1
+  is a power of 2) or i, -i (when b + 1 is), and these carry no relation.
+- Why 2, 3, 4: a relation needs sqrt(b) - r to be a unit or to share all its primes with
+  other roots; every conjugate of sqrt(b) - r has absolute value at least sqrt(b) - 1, so a
+  unit needs b <= 4.
+
+**Statement G (not proved; for b = 5 it is Theorem C5).** For every integer b >= 5 the
+numbers 2 pi i and Log(1 - r/sqrt(b)), r over all roots of unity, are linearly independent
+over Q. So F_b has no zero relation and contains no non-zero algebraic multiple of pi; F_b
+has a zero relation, or a multiple of pi, exactly for b = 2, 3, 4, and pi itself only for
+b = 2.
+
+*Plan of proof, one argument for all b >= 6.* Let r be a root of unity with r^4 not 1, m >= 3
+the order of r^2, q the largest prime factor of m, L = Q(sqrt(b), r) and N the norm from L.
+Put x = sqrt(b) - r, x' = sqrt(b) + r, so x x' = b - r^2 and N(x) N(x') = Phi_m(b)^k,
+k = [L : Q]/phi(m). A prime factor of Phi_m(b) is good (odd, prime to b and to the order of
+r) unless it is q, and q divides Phi_m(b) at most once. So if x has no good prime,
+|N(x)| <= q^k. But every conjugate of x' has absolute value at most sqrt(b) + 1, so
+|N(x)| >= Phi_m(b)^k / (sqrt(b) + 1)^(phi(m) k). This is impossible as soon as
+
+    Phi_m(b) > q (sqrt(b) + 1)^phi(m),
+
+which follows from Phi_m(b) > (b - 1)^phi(m) and (sqrt(b) - 1)^(q-1) >= q for b >= 8, and
+from a few exact values for b = 6, 7. No lemma on Aurifeuillian factors and no case
+distinction is needed. The four roots with r^4 = 1 carry no relation for b >= 5 (the numbers
+(b-1)/b, (b+1)/b and (sqrt(b)+1)/(sqrt(b)-1) are independent, and (sqrt(b)-i)/(sqrt(b)+i)
+is a root of unity only for b = 1, 3). This argument is ours and has not been reviewed.
+
+**What Statement G does not cover.** The class F_b has the weights b^(-floor(k/2)), that
+is, Bailey's P(1, b^m, n, A) with n = m or n = 2m. For a base that is a perfect power it is
+a small class (the classical formula for pi in base 16 is in F_2, not in F_16). The series
+with weights b^(-floor(k/n)), n >= 3, need the analogue of Part IV.
 
 For the narrower class of Machin-type formulas (rational combinations of the series of
 arctan(b^(-m))), Borwein, Borwein and Galway proved in 2004 (Theorem 7) that pi has no
