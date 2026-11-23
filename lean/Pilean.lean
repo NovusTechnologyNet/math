@@ -25,3 +25,4 @@ import Pilean.Compendium.Arctan
 import Pilean.Compendium.Base5
 import Pilean.Compendium.Base2Sqrt
 import Pilean.Compendium.Base3
+import Pilean.RatBase.GoodPrimesSmall
