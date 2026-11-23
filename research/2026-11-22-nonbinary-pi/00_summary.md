@@ -33,7 +33,22 @@ extracted text of the two sources (marked *checked*).
 5. **No counterexample was found.** Known formulas in other bases are for pi sqrt(3) (base 3),
    pi^2 (base 3, degree 2), or use non-integer bases; Euler's formula with (-1/4)^k is base 16.
 
+6. **Added 23 November 2026: the 1997 paper reports a proof by Buhler** (*checked* in the text
+   of the preprint, section 6, "Relation bounds"). Bailey, Borwein and Plouffe write that
+   J. P. Buhler has reported a proof that any identity for pi of the form
+   sum n^(-k) (a_1/(mk+1) + ... + a_m/(mk+m)) must have n = 2^K or n = sqrt(2)^K; no proof,
+   no reference. Found by a helper of the wide pass (report P04) and flagged by the
+   synthesis; the printed version (Math. Comp. 66 (1997)) was not read. Two of the three
+   authors of the 2004 paper pose the general case as a question seven years later, so the
+   reported proof was evidently not available to them in written form; that is our inference.
+
 ## What this changes
+
+- Because of item 6, Theorem L must not be called the first proof. Wording that is supported:
+  a proof was reported in 1997 and, as far as we found, never published; the 2004 paper
+  proves a special case and asks the general question; the Compendium states the result as
+  known; ours is a written, machine-checked proof. Whether to ask J. P. Buhler if a proof was
+  written down is the user's decision.
 
 - Theorem L should not be called a new statement: it is in the standard reference as a known
   fact. What we can say: the reference given for it proves a special case and asks the

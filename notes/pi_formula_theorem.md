@@ -1779,6 +1779,15 @@ a power of b is what the computation of digits in base b needs.
 **What is in print** (literature check of 22 November 2026;
 research/2026-11-22-nonbinary-pi/01_literature.md).
 
+- The statement goes back to the paper of Bailey, Borwein and Plouffe itself (1997, section
+  6). After reporting that a computer search found no identity of the form
+  pi = sum n^(-k) (a_1/(mk+1) + ... + a_m/(mk+m)) for 2 <= n <= 128 other than n = 16, the
+  authors write that J. P. Buhler has reported a proof that any identity for pi of this form
+  must have n = 2^K or n = sqrt(2)^K, and that this does not exclude more complicated
+  formulas. No proof and no reference is given, and we found none in print. (We checked the
+  passage in the text of the preprint; the printed version in Math. Comp. was not read.) So
+  Theorem L is not the first proof of the statement that someone has had; as far as we found
+  it is the first that is written down, and it is machine-checked.
 - Borwein, Borwein and Galway (Canad. J. Math. 56 (2004), 897-925) prove the statement for
   the narrower class of Machin-type formulas: for b > 2 not a proper power, pi is not a
   rational combination of the numbers arctan(b^(-m)) (their Theorem 7). The proof uses Bang's
