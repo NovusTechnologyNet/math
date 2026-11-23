@@ -28,3 +28,4 @@ import Pilean.Compendium.Base3
 import Pilean.RatBase.GoodPrimesSmall
 import Pilean.RatBase.Leftover
 import Pilean.RatBase.TheoremR
+import Pilean.Erdos.AbstractDefs
