@@ -67,7 +67,12 @@ spanned by `γ(O) + γ(O*) = 0`, `γ(O_1) = π/4`, `γ(O_6) = 0` and `γ(O_10) -
 | `Pilean/Base3/LogConverse.lean` | Base 3: `logSpan3`, `logSpan3_le_f3Values`; `cleared_conj3`, `sum_log_coset_mem3`, `sum_log_mod_three_mem`, `sum_log_coprime_mem3`, `log_sub_mem_logSpan3_of_cleared`; `mem_logSpan3_of_isF3Value_log`, `isF3Value_log_rat_iff` | proved (from `BakerTheorem`) |
 | `Pilean/Base3/LogExplicit.lean` | Base 3: `baseNumbers3`, `norm_sq_even`, `norm_sq_odd`, `logSpan3_eq_baseSpan3`, `isF3Value_log_of_pow` (no Baker), `isF3Value_log_rat_iff_pow` (from `BakerTheorem`); `isF3Value_log_2`, `_5`, `_7`, `_11`, `_13`, `_19`, `_37` | proved |
 | `Pilean/Base3/PiSqrt3.lean` | Base 3: `hasSum_gregory3`, `isF3Value_pi_sqrt3` | proved |
-| `Pilean/Base3/Unconditional.lean` | Base 3: the criterion with no hypothesis (`PiFormula.Base3.Unconditional.*`) | proved |
+| `Pilean/Base3/Support.lean` | Base 3: `IsRelation3`, `coeff_eq_zero_of_private_ideal3`, the exceptional roots `R03`, `HasGoodPrime3`, `GoodPrimes3`, `support_subset_R03` | proved (the last from `GoodPrimes3`) |
+| `Pilean/Base3/PiValue.lean` | Base 3: `lamOf3`, `intRel_support`, `intRel_im`, the arguments `theta3_one`, ..., `fourier_pi_combination`, `pi_multiple_of_goodPrimes3`, `not_isF3Value_pi_of_goodPrimes3` | proved (from `BakerTheorem` and `GoodPrimes3`) |
+| `Pilean/Base3/HasPrime.lean` | Base 3: `HasPrime`, `hasPrime_of_not_unit` (lying over), `hasPrime_conj` (conjugation without automorphisms), `hasPrime_of_dvd_norm`, `goodPrime_of_coset` | proved |
+| `Pilean/Base3/GoodPrimes.lean` | Base 3: `PrimitiveHalves3` (a classical statement, **not proved**), `goodPrimes3_of_halves` | proved from `PrimitiveHalves3` |
+| `Pilean/Base3/PiTheorem.lean` | Base 3: `isF3Value_mul_pi_iff`, `not_isF3Value_pi`, `not_isF3Value_rat_mul_pi` | proved from `BakerTheorem` and `PrimitiveHalves3` |
+| `Pilean/Base3/Unconditional.lean` | Base 3: the criterion for logarithms with no hypothesis; the theorems on `π` with the single hypothesis `PrimitiveHalves3` (`PiFormula.Base3.Unconditional.*`) | proved |
 | `TauCeti/` | 25 modules of Tau Ceti (Apache-2.0), see `TauCeti/VENDORED.md` | builds unchanged |
 
 There is no `sorry` anywhere. `theoremA`, `theoremB`, `theoremBgamma`, `lemma2`, `size_bound` and every other theorem

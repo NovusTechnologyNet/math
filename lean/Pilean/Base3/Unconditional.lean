@@ -1,4 +1,4 @@
-import Pilean.Base3.PiSqrt3
+import Pilean.Base3.PiTheorem
 import Pilean.PiFormula.Unconditional
 
 /-!
@@ -35,6 +35,17 @@ theorem isF3Value_log_rat_iff_pow {y : ℚ} (hy : 0 < y) :
       ∃ k : ℕ, 0 < k ∧ ∃ (n : ℕ) (g : Fin n → ℤ) (e : Fin n → ℤ),
         (∀ i, g i ∈ baseNumbers3) ∧ y ^ k = ∏ i, (g i : ℚ) ^ e i :=
   Base3.isF3Value_log_rat_iff_pow bakerTheorem hy
+
+/-- **Which multiples of `π` are values of F3**, from `PrimitiveHalves3` alone: for an
+algebraic real `γ`, `γ π` is a value of the class F3 if and only if `γ` is a rational multiple
+of `√3`. -/
+theorem isF3Value_mul_pi_iff (hH : PrimitiveHalves3) {γ : ℝ} (hγ : IsAlgebraic ℚ γ) :
+    IsF3Value (γ * Real.pi) ↔ ∃ q : ℚ, γ = q * Real.sqrt 3 :=
+  Base3.isF3Value_mul_pi_iff bakerTheorem hH hγ
+
+/-- **`π` is not the value of any series of the class F3**, from `PrimitiveHalves3` alone. -/
+theorem not_isF3Value_pi (hH : PrimitiveHalves3) : ¬ IsF3Value Real.pi :=
+  Base3.not_isF3Value_pi bakerTheorem hH
 
 end Unconditional
 
