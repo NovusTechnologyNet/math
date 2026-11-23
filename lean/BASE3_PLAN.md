@@ -89,11 +89,19 @@ How it went, compared with base 2 (`Rank.lean`, `TheoremC2.lean`, `TheoremC3.lea
 - `coeffs_spanIn` isolates the use of Baker's theorem (it repeats the first half of
   `pi_multiple_of_goodPrimes3`, which could now be rewritten to call it).
 
+## Done: the optimum
+
+`Optimum.lean`. `theoremE3`: a pattern whose series is a non-zero algebraic multiple of `π`
+has at least 6 non-zero entries per period of 12, and exactly 6 only for the multiples of
+`rhoGregory` and of `rhoSecond = (0, 18, 18, 18, 0, 0, 0, -18, -18, -18, 0, 0)`. Unlike
+base 2 (`FewestTerms.lean`, 5000 lines, uniqueness not formal), this is 300 lines and
+includes the uniqueness: the count is written as a sum of indicators of eight linear forms
+in `(a, b, c)` (`termCount3_comb3`), the facts about the forms are proved by `linarith`, and
+`omega` does the counting.
+
 ## Next
 
-- **The optimum**: 6 terms per period 12, with its two formulas; now a finite statement
-  about the family `rhoGregory + b Z₁ + c Z₂` (at most five of its eleven linear forms in
-  `(b, c)` vanish together). Bailey's notation `P(1, 3^B, n, A)`.
+- Bailey's notation `P(1, 3^B, n, A)` for the two formulas with 6 terms.
 - **The test for a prime in base 3** (as `LogPrimeTest.lean`).
 - Base 5 and other bases: the criterion of Theorem K only needs a root of unity `ε` and a
   number `t` in `ℚ(ε)` with `t² = ±b·(unit)`; for which bases this exists, and what replaces

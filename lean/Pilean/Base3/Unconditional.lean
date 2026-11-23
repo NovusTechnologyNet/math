@@ -1,4 +1,4 @@
-import Pilean.Base3.Dimension
+import Pilean.Base3.Optimum
 import Pilean.PiFormula.Unconditional
 
 /-!
@@ -86,6 +86,18 @@ theorem theoremC3 {N : ℕ} (hN : 0 < N) (h12 : 12 ∣ N) :
     (∀ ρ ∈ algSpace3 N, ∀ k, ρ (k + 12) = ρ k) ∧
       Module.finrank ℚ (algSpace3 N) = 3 ∧ Module.finrank ℚ (zeroSpace3 N) = 2 :=
   Base3.theoremC3 bakerTheorem hN h12
+
+/-- **Theorem E3: no formula beats the Gregory series.** Let `ρ` be a rational periodic
+pattern whose series `∑ ρ(k) 3^(-⌊k/2⌋)/k` is a non-zero algebraic multiple of `π`. Then at
+least 6 of its 12 entries per period are non-zero, that is, at least one term per base-3
+digit; and exactly 6 are non-zero if and only if `ρ` is a rational multiple of
+`rhoGregory = (6, 0, -6, 0, 6, 0, -6, 0, 6, 0, -6, 0)` or of
+`rhoSecond = (0, 18, 18, 18, 0, 0, 0, -18, -18, -18, 0, 0)`. -/
+theorem theoremE3 {N : ℕ} (hN : 0 < N) {ρ : ℕ → ℚ} (hρ : ∀ k, ρ (k + N) = ρ k) {γ : ℝ}
+    (hγ : IsAlgebraic ℚ γ) (hγ0 : γ ≠ 0) (h : HasSum (seriesTerm3 ρ) (γ * Real.pi)) :
+    6 ≤ termCount3 ρ ∧
+      (termCount3 ρ = 6 ↔ ∃ a : ℚ, ρ = a • rhoGregory ∨ ρ = a • rhoSecond) :=
+  Base3.theoremE3 bakerTheorem hN hρ hγ hγ0 h
 
 end Unconditional
 

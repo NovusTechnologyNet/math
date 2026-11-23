@@ -1371,12 +1371,38 @@ rational. Finally H = G/3 - Z2 and F = Z2 - 2 Z1. (4) Conversely the same expans
 S(H) = pi sqrt(3)/3 and S(F) = 0, from the arguments pi/6, -pi/6, 0, 0, -pi/6, pi/6 of the
 six numbers 1 - r/t and the norms above.
 
-**The cheapest formula (computed).** Among the formulas for pi sqrt(3) of period 12, the
-fewest non-zero terms is 6 per period, one term per base-3 digit, and exactly two formulas
-attain it:
+### No formula beats the Gregory series (machine-checked)
+
+**Theorem E3 (machine-checked, from Baker's theorem).** Let rho be a rational periodic
+pattern whose series is a non-zero algebraic multiple of pi. Then at least 6 of its 12
+entries per period are non-zero: at least one term per base-3 digit. Exactly 6 are
+non-zero if and only if rho is a rational multiple of one of two patterns:
 
     pi sqrt(3) = S(6, 0, -6, 0)                      (the Gregory series at 1/sqrt(3)),
     pi sqrt(3) = S(0, 18, 18, 18, 0, 0, 0, -18, -18, -18, 0, 0).
+
+Written out, the second formula is
+
+    pi sqrt(3) = sum over j >= 0 of 729^(-j) [ 3/(6j+1) + 2/(4j+1) + 1/(6j+2)
+                 - (1/18)/(3j+2) - (2/27)/(4j+3) - (1/27)/(6j+5) ].
+
+In Lean (`Pilean/Base3/Optimum.lean`): `theoremE3`, `hasSum_rhoSecond`,
+`termCount3_rhoGregory`, `termCount3_rhoSecond`; with no hypothesis,
+`PiFormula.Base3.Unconditional.theoremE3`.
+
+*Proof.* By Theorem C3 in full, rho = a G + b Z1 + c Z2 with a not 0. Its entries at
+k = 1, ..., 11 are
+
+    6a + c,  b - 3c,  -(6a + 2b + 4c),  -3c,  6a + b + c,  4b,
+    -(6a + c),  3(b + c),  6a + 2b + 4c,  4b + 3c,  -(6a + b + c).
+
+The three forms 6a + c, 6a + 2b + 4c, 6a + b + c occur twice each, and they cannot all
+vanish (that would force a = 0). The five forms b - 3c, c, b, b + c, 4b + 3c all vanish when
+b = c = 0; otherwise at most one of them vanishes, since any two of them have only the
+common zero b = c = 0. So the number of non-zero entries is at least 2 * 3 = 6 when
+b = c = 0, and at least 2 + 4 = 6 otherwise. Equality in the second case needs two of the
+three forms to vanish and one of the five: the three pairs give (b, c) = (0, -6a), (9a, -6a)
+and (-9a, 3a), and only the first lies on one of the five lines (b = 0).
 
 The formulas in print found by the research (Adegoke's 2.14 and 2.15, the compendium's 92 at
 b = 3, all forms of the Gregory series; and the compendium's 69, with 7 terms per 6 digits)
@@ -1392,12 +1418,11 @@ sqrt(3) log(2 + sqrt(3)) = S(2, 0); arctan(1/3) = S(0, 2, 0, 0, 0, -2, 0, 0).
 - Proved and machine-checked, with no hypothesis beyond Lean's standard axioms: Theorem K3
   and the values named above; Lemma H; Theorem C3 in full (gamma pi is a value exactly for
   gamma in Q sqrt(3); pi is not a value; every formula is a G + b Z1 + c Z2; period 12;
-  dimension 3; the zero relations have dimension 2).
+  dimension 3; the zero relations have dimension 2); Theorem E3 (at least 6 terms per
+  period; exactly two formulas attain it).
 - Proved on paper only: the test for a prime (by the argument for base 2).
-- Computed only: the list of 31 primes; the cheapest formula (6 terms per period, attained
-  by exactly two formulas). The second is now a finite statement about the family
-  G + b Z1 + c Z2 and could be proved in Lean.
-- Next: the optimum; the test for a prime in Lean.
+- Computed only: the list of 31 primes.
+- Next: the test for a prime in Lean; other bases.
 
 ## Why this matters for digit extraction
 
