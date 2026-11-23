@@ -5,10 +5,11 @@ import Pilean.Erdos.ArithWeight
 # Theorem A from the abstract theorem
 
 Goal of the files `Arith*.lean`: `theoremA_of_abstract : AbstractTheoremA → TheoremA`.
-NOT YET REACHED. What is proved here: `theoremA_of_lemma1_ell`, Theorem A from the abstract
-theorem and the two statements `Arith.Lemma1Prop` and `Arith.EllProp` (both are `Prop`s defined
-in `ArithDefs.lean`, both still to be proved). Lemma 2 (`Arith.mainEq : Arith.MainEqProp`) is
-proved. Work stopped on 23 Nov 2026 (machine reboot); no `sorry` anywhere.
+REACHED (23 Nov 2026): it is in `Main.lean`. This file proves `theoremA_of_lemma1_ell`, Theorem A
+from the abstract theorem and the two statements `Arith.Lemma1Prop` and `Arith.EllProp`
+(`Prop`s defined in `ArithDefs.lean`); these are proved in `ArithLemma1.lean` (`Arith.lemma1`)
+and `ArithEll.lean` (`Arith.ellProp`), following the plans kept below. Lemma 2
+(`Arith.mainEq : Arith.MainEqProp`) is in `ArithWeight.lean`. No `sorry` anywhere.
 
 ## Status, file by file (all seven files compile)
 
@@ -36,7 +37,7 @@ proved. Work stopped on 23 Nov 2026 (machine reboot); no `sorry` anywhere.
   (`∑_{r : p r = r'} W(r) = p W(r')`, from `sum_wLoc_fiber` and `wLoc_natCast_mul`);
   `wGlob_eq` (`W(r) = o(P - n) a_n N_{P - n} [cl(r)]`); `sum_wGlob`; `mainEq`.
 
-## Left to do
+## The plans for the last two statements (both carried out)
 
 1. `Lemma1Prop`. Put `e = (1/2) • (g_n - ν N_n)`, `ν = ∏_{p ∈ n} k_p`. The coefficient of `σ` in
    `g_n` is `o(n)^(-1) ∑ f(r)` over `T = {r : n(r) = n, cl(r) = σ}`; `T` is empty unless

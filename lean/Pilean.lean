@@ -36,3 +36,4 @@ import Pilean.Compendium.Curiosities
 import Pilean.Erdos.AbstractA
 import Pilean.Erdos.TheoremC
 import Pilean.Erdos.ArithA
+import Pilean.Erdos.Main
