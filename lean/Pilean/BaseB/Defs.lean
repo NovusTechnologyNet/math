@@ -117,6 +117,21 @@ theorem goodPrimesB_five : GoodPrimesB 5 := by
   · rw [tB_five]
     exact hxP
 
+/-! ## 4. The size condition -/
+
+/-- The size condition at `(b, m)`: the value `Φ_m(b)` of the `m`-th cyclotomic polynomial
+exceeds `(√b + 1)^φ(m)`, and it exceeds `q (√b + 1)^φ(m)` for every prime `q` that divides
+both `m` and `Φ_m(b)`.
+
+It holds for every `b ≥ 6` and `m ≥ 3` (file `Size`), and it fails at `(b, m) = (5, 6)`,
+where `Φ_6(5) = 21 = 3 · 7` and `3 (√5 + 1)² ≈ 31.4`. For a root of unity `r` with
+`m = orderOf (r ^ 2) ≥ 3` it gives a good prime for `r` (file `Reduction`). -/
+def SizeCond (b m : ℕ) : Prop :=
+  (Real.sqrt (b : ℝ) + 1) ^ m.totient < (((cyclotomic m ℤ).eval (b : ℤ) : ℤ) : ℝ) ∧
+    ∀ q : ℕ, q.Prime → q ∣ m → (q : ℤ) ∣ (cyclotomic m ℤ).eval (b : ℤ) →
+      (q : ℝ) * (Real.sqrt (b : ℝ) + 1) ^ m.totient <
+        (((cyclotomic m ℤ).eval (b : ℤ) : ℤ) : ℝ)
+
 end BaseB
 
 end PiFormula
