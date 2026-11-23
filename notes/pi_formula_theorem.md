@@ -1995,10 +1995,30 @@ in base 4/3 is equivalent to one of Adegoke and Layeni (2010). A formula for pi 
 was not found; this is weak evidence. It was found here by a research helper, by computation.
 It is not a formula for extracting digits: no such method is known in base 3/2.
 
-*Open.* Which rational bases admit a formula? The triangles suggest that relations exist
-exactly for p/q in {2, 3, 4, 3/2, 4/3}, and a formula for a rational multiple of pi exactly
-for the powers of 2 and of 3/2. This is a conjecture; the proof of Theorem G should carry
-over with the homogeneous cyclotomic values Phi_m(p, q), and is being worked out.
+**No relation in a rational base p/q with p >= 16 (machine-checked).** Let p > q >= 1 be
+coprime integers with p >= 16. If sum rho(k) (q/p)^(floor(k/2))/k = gamma pi with rho rational
+and periodic and gamma algebraic, then rho = 0. So in these bases there is no formula for
+pi or for any algebraic multiple of pi, no zero relation, and a number has at most one
+formula (`RatBase.Unconditional.eq_zero_of_hasSum_mul_pi`, `not_isFRValue_pi`,
+`hasSum_zero_iff`; file `Pilean/RatBase/TheoremGR.lean`). The proof is that of Theorem G with
+u = sqrt(pq), the algebraic integers u - q r in place of sqrt(b) - r, and the homogeneous
+cyclotomic values Phi_m(p, q): the size condition Phi_m(p, q) > l (sqrt p + sqrt q)^phi(m)
+for p >= 16 (`sizeCondR_of_sixteen_le`, from the two lower bounds (p - q)^phi and
+(sqrt p sqrt q)^phi); a good prime from the size condition (`hasGoodPrimeR_of_sizeCondR`; the
+powers of q are removed by showing that q^(deg) divides the square of the constant term);
+and the classification from good primes and Baker's theorem (`eq_zero_of_goodPrimesR`,
+which holds for every rational base except 3, the only one where the four roots 1, -1, i,
+-i carry a relation).
+
+*The classification, on paper* (research/2026-11-22-rational-bases/00_summary.md). Theorem R:
+relations exist exactly for p/q in {2, 3, 4, 3/2, 4/3}. Theorem L': a degree-1 formula with
+rational coefficients for a non-zero rational multiple of pi exists in the rational base
+beta, |beta| > 1, if and only if |beta| is a power of 2 or of 3/2; in base (3/2)^B it needs
+12 | B, so the formula above is the smallest. Proved on paper up to finite computations;
+lattice searches over all 79 coprime pairs with p <= 16 agree. Not machine-checked: the
+bases with p <= 15 need tables and a case-by-case treatment of the triples where the size
+condition fails, the classification of the bases 4/3 and 3/2, and the passage to every
+step.
 
 ## Why this matters for digit extraction
 
