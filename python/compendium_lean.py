@@ -1,6 +1,8 @@
 """Lean statements and proofs for the degree-1 formulas of Bailey's Compendium.
 
-    python compendium_lean.py [--write] [--axioms]
+    python compendium_lean.py [--write] [--status] [--axioms]
+
+(--status writes LEAN_STATUS.md only and leaves the generated Lean files alone.)
 
 Reads  literature/bailey-compendium/ledger.json  (the source of truth: for each formula its
 constant, prefactor, base, length and integer vector, and for the formulas that follow from
@@ -18,6 +20,13 @@ lean/Pilean/Compendium (Defs.lean, Series.lean, Arctan.lean, Base5.lean) are wri
 for each theorem `formula_*` in them this program builds the statement from the ledger (or,
 for the formulas that are not in the notation P, takes it from HAND_TEXT below) and checks
 that the file contains it, character for character up to white space.
+
+The formulas with a parameter b (section "General bases", the telescoping example of page 4),
+the two curiosities (132, 133) and formula 88 are in the hand-written files GeneralLog.lean,
+GeneralArctan.lean, GeneralSqrt.lean and Curiosities.lean (with GeneralDefs.lean and
+GeneralCore.lean): see GENERAL below.  For these the program checks the ledger entry
+numerically and checks that each named theorem is in its file; the statements themselves were
+compared with the ledger numerically when they were written.
 
 Before anything is written, every formula that gets a Lean statement is checked numerically
 from the ledger, vector and value, at 70 digits; agreement to 50 digits is required.  A
@@ -129,17 +138,82 @@ HAND_TEXT = {
 # and (2) as the explicit series that are printed (the ledger records them in the notation P).
 EXTRA_THEOREMS = [("formula_1_series", "Series"), ("formula_2_series", "Series")]
 
-# Not done: id -> reason.  Every degree-1 formula is in GENERATED, HAND or here.
-NOT_DONE = {
-    "88": "not attempted: base 5^5, irrational prefactor 1/(2 5^(13/4)); the value needs "
-          "the arguments of 1 - z/5 for the fifth roots of unity z (nested radicals)",
-    "p04.b": "not attempted: general base b (telescoping example)",
-    "132": "not attempted: curiosity, irrational base (2/phi)^10",
-    "133": "not attempted: curiosity, coefficients from a recurrence",
+# Formulas with a parameter b, the curiosities 132 and 133, and formula 88 (irrational
+# prefactor and left side; it is in Curiosities.lean): id -> (file, theorems, range, how).
+# `theorems` lists the Lean theorems: `formula_N_real` (real parameter b, in the form
+# BaileyFormulaReal of GeneralDefs.lean) and `formula_N` (natural b >= 2, in the form
+# BaileyFormula / BaileyFormulaInt).  `range` is the set of real b of the real version.
+_W3 = "w a cube root of unity"
+_EIS = "c = (3 + i sqrt 3)/2"
+GENERAL = {
+    "p04.b": ("GeneralLog", ["formula_p04_b_real", "formula_p04_b"], "b < -1 or b > 1",
+              "the series of -log(1 - 1/b) and the same series without its first two terms"),
+    "90": ("GeneralLog", ["formula_90_real", "formula_90"], "b < -1 or b > 1",
+           "the series of -log(1 - 1/b) and the real part of the series of -log(1 - w/b), "
+           + _W3),
+    "91": ("GeneralLog", ["formula_91"], None,
+           "natural b >= 2 only (the length is b): a series of step 1, a combination of "
+           "log(1 - 1/b) and log(1 - b^(-b)); the printed vector has b - 1 entries, the "
+           "entry a_b = 0 is supplied"),
+    "92": ("GeneralSqrt", ["formula_92_real", "formula_92"], "b > 1",
+           "the series of arctan at x = 1/sqrt(b), summed in pairs"),
+    "93": ("GeneralArctan", ["formula_93_real", "formula_93"], "b < -1 or b > 1",
+           "the imaginary part of the series of -log(1 + w/b), " + _W3),
+    "94": ("GeneralArctan", ["formula_94_real", "formula_94"], "b < -1 or b > 1",
+           "the imaginary part of the series of -log(1 - w/b), " + _W3),
+    "95": ("GeneralArctan", ["formula_95_real", "formula_95"], "2 b^2 > 1",
+           "the imaginary part of the series of -log(1 - (1+i)/(2b))"),
+    "96": ("GeneralArctan", ["formula_96_real", "formula_96"], "2 b^2 > 1",
+           "the imaginary part of the series of -log(1 + (1+i)/(2b))"),
+    "97": ("GeneralSqrt", ["formula_97_real", "formula_97"], "b > 1",
+           "the imaginary parts of the series of -log(1 - v(1+i)) at v and at -v, "
+           "v = 1/sqrt(2b)"),
+    "98": ("GeneralArctan", ["formula_98_real", "formula_98"], "3 b^2 > 1",
+           "the imaginary part of the series of -log(1 - c/(3b)), " + _EIS),
+    "99": ("GeneralArctan", ["formula_99_real", "formula_99"], "3 b^2 > 1",
+           "the imaginary part of the series of -log(1 + c/(3b)), " + _EIS),
+    "100": ("GeneralSqrt", ["formula_100_real", "formula_100"], "b > 1",
+            "the imaginary parts of the series of -log(1 - v c) at v and at -v, "
+            "v = 1/sqrt(3b), " + _EIS),
+    "101": ("GeneralLog", ["formula_101_real", "formula_101"], "b < -1 or b > 1",
+            "the series of -log(1 + 1/b)"),
+    "102": ("GeneralLog", ["formula_102_real", "formula_102"], "b < -1 or b > 1",
+            "the series of -log(1 - 1/b)"),
+    "103": ("GeneralSqrt", ["formula_103_real", "formula_103"], "b > 1",
+            "the series of log((1+x)/(1-x)) at x = 1/sqrt(b)"),
+    "104": ("GeneralLog", ["formula_104_real", "formula_104"], "b < -1 or b > 1",
+            "the real part of the series of -log(1 - w/b), " + _W3),
+    "105": ("GeneralLog", ["formula_105_real", "formula_105"], "b < -1 or b > 1",
+            "the real part of the series of -log(1 + w/b), " + _W3),
+    "106": ("GeneralLog", ["formula_106_real", "formula_106"], "2 b^2 > 1",
+            "the real part of the series of -log(1 - (1+i)/(2b))"),
+    "107": ("GeneralLog", ["formula_107_real", "formula_107"], "2 b^2 > 1",
+            "the real part of the series of -log(1 + (1+i)/(2b))"),
+    "108": ("GeneralSqrt", ["formula_108_real", "formula_108"], "b > 1",
+            "the real parts of the series of -log(1 - v(1+i)) at v and at -v, "
+            "v = 1/sqrt(2b)"),
+    "109+": ("GeneralLog", ["formula_109_plus_real", "formula_109_plus"], "3 b^2 > 1",
+             "the real part of the series of -log(1 + c/(3b)), " + _EIS),
+    "109-": ("GeneralLog", ["formula_109_minus_real", "formula_109_minus"], "3 b^2 > 1",
+             "the real part of the series of -log(1 - c/(3b)), " + _EIS),
+    "110": ("GeneralSqrt", ["formula_110_real", "formula_110"], "b > 1",
+            "the real parts of the series of -log(1 - v c) at v and at -v, v = 1/sqrt(3b), "
+            + _EIS),
+    "88": ("Curiosities", ["formula_88"], None,
+           "the series of sin(2 pi k/5) x^k / k and of sin(4 pi k/5) x^k / k at x = 1/5, with "
+           "the values t1 and t2; the two arctangents of the print are t2 - t1 and t1 + t2, "
+           "and 5^(1/4) = 2 sin(pi/5) sqrt(phi)"),
+    "132": ("Curiosities", ["formula_132"], None,
+            "stated with `BaileyFormulaReal` (irrational base and coefficients): the series "
+            "of sin(k pi/5) x^k / k at x = phi/2 = cos(pi/5)"),
+    "133": ("Curiosities", ["formula_133"], None,
+            "for every sequence with D_0 = D_1 = 1 and D_(k+1) = D_k - 5 D_(k-1) for k >= 1 "
+            "(the print says k >= 2, which leaves D_2 free): the imaginary part of the series "
+            "of -log(1 - a/10), a = (1 + i sqrt 19)/2"),
 }
-for _i in list(range(90, 109)) + [110]:
-    NOT_DONE[str(_i)] = "not attempted: general base b (left for later)"
-NOT_DONE["109+"] = NOT_DONE["109-"] = "not attempted: general base b (left for later)"
+
+# Not done: id -> reason.  Every degree-1 formula is in GENERATED, HAND, GENERAL or here.
+NOT_DONE = {}
 
 
 # ---- ledger expressions as Lean terms --------------------------------------------------
@@ -708,6 +782,22 @@ def status_md(rows, counts):
            "formulas 1 and 2 as the series that are printed. Formulas 2, 3, 18, 19 have a "
            "negative base and are stated",
            "with `BaileyFormulaInt` (not in a paired positive form).", "",
+           "The formulas with a parameter `b` (90 to 110) have two theorems each: "
+           "`formula_N_real`, for a real `b` in the",
+           "range given in the last column, stated as `BaileyFormulaReal x c β n A` (real "
+           "base `β`, real coefficients;",
+           "`GeneralDefs.lean`), and `formula_N`, for a natural number `b >= 2`, stated as "
+           "`BaileyFormula` or `BaileyFormulaInt`",
+           "like the other formulas (a base `-b^3` is the integer `-(b : ℤ) ^ 3` with "
+           "`B = 1`). The paper gives no range for `b`.",
+           "Formula 91 has the length `b` and is stated for natural `b >= 2` only. The "
+           "example p04.b is stated as `HasSum` of",
+           "the printed term, in the same two versions. Formula 132 has an irrational base "
+           "and is stated with",
+           "`BaileyFormulaReal`. Formula 133 is stated for every sequence `D` with "
+           "`D_0 = D_1 = 1` and the recurrence for",
+           "`k >= 1`: the series of the printed term has a sum `S`, and the constant is "
+           "`S/10`.", "",
            "Every stated formula was checked numerically from the ledger to at least %d digits "
            "before it was written;" % NEED,
            "the logarithm formulas of `Logs.lean` also exactly, as identities between "
@@ -729,19 +819,19 @@ def main():
     byid = {e["id"]: e for e in E}
     assert len(E) == 80
     gen_ids = [i for _, _, ids in GENERATED for i in ids]
-    covered = gen_ids + list(HAND) + list(NOT_DONE)
+    covered = gen_ids + list(HAND) + list(GENERAL) + list(NOT_DONE)
     assert sorted(covered) == sorted(byid), sorted(set(byid) ^ set(covered))
     # 1. numerical check of everything that is stated
     bad = []
-    for i in gen_ids + list(HAND):
+    for i in gen_ids + list(HAND) + list(GENERAL):
         d = numeric_digits(byid[i])
         if d < NEED:
             bad.append(i)
             print("formula %s: numerical check FAILED (%d digits)" % (i, d))
     print("numerical check at %d digits: %d formulas, %d failed" %
-          (mp.dps, len(gen_ids) + len(HAND), len(bad)))
+          (mp.dps, len(gen_ids) + len(HAND) + len(GENERAL), len(bad)))
     F = {i: Formula(byid[i]) for i in byid
-         if byid[i]["content"]["type"] == "P" and i not in NOT_DONE}
+         if byid[i]["content"]["type"] == "P" and i not in NOT_DONE and i not in GENERAL}
     # 2. generated files
     files, hows = {}, {}
     for name, title, ids in GENERATED:
@@ -762,6 +852,19 @@ def main():
             print("formula %s: statement not found in %s.lean:\n%s" %
                   (i, fname, want.encode("ascii", "backslashreplace").decode()))
     print("hand-written statements: %d expected, %d missing" % (len(HAND), len(missing)))
+    # 3b. the files of the formulas with a parameter contain the named theorems
+    gen_missing = 0
+    for i, (fname, names, rng, how) in GENERAL.items():
+        path = os.path.join(LEAN_DIR, fname + ".lean")
+        src = normalize(io.open(path, encoding="utf-8").read()) if os.path.exists(path) else ""
+        for nm in names:
+            if not re.search(r"theorem %s[ :({]" % re.escape(nm), src):
+                gen_missing += 1
+                if i not in missing:
+                    missing.append(i)
+                print("formula %s: theorem %s not found in %s.lean" % (i, nm, fname))
+    print("theorems of the formulas with a parameter: %d expected, %d missing" %
+          (sum(len(v[1]) for v in GENERAL.values()), gen_missing))
     # 4. status table
     rows = []
     done = 0
@@ -782,6 +885,14 @@ def main():
             why = NOT_DONE.get(i, "numerical check failed" if i in bad else
                                "statement missing from the hand-written file")
             rows.append([i, str(e["page"]), const, printed, "", "", why])
+        elif i in GENERAL:
+            done += 1
+            fname, names, rng, how = GENERAL[i]
+            how = "by hand: " + how
+            if rng is not None:
+                how = "real b with %s, and natural b >= 2; %s" % (rng, how)
+            rows.append([i, str(e["page"]), const, printed,
+                         ", ".join("`%s`" % nm for nm in names), "`%s.lean`" % fname, how])
         else:
             done += 1
             if i in HAND:
@@ -793,6 +904,10 @@ def main():
                          "`%s.lean`" % fname, how])
     md = status_md(rows, (done, 80 - done))
     print("degree-1 formulas: 80; with a Lean theorem: %d; not done: %d" % (done, 80 - done))
+    if "--status" in args and "--write" not in args:
+        with io.open(STATUS_MD, "w", encoding="utf-8", newline="\n") as fh:
+            fh.write(md)
+        print("wrote literature/bailey-compendium/LEAN_STATUS.md")
     if "--write" in args:
         os.makedirs(LEAN_DIR, exist_ok=True)
         for name, text in files.items():
@@ -805,9 +920,12 @@ def main():
             fh.write(md)
         print("wrote literature/bailey-compendium/LEAN_STATUS.md")
     if "--axioms" in args:
-        mods = [name for name, _, _ in GENERATED] + sorted(set(v[0] for v in HAND.values()))
+        mods = [name for name, _, _ in GENERATED] + sorted(
+            set(v[0] for v in HAND.values()) | set(v[0] for v in GENERAL.values()))
         names = [thm_name(i) for i in gen_ids + list(HAND) if i not in bad and i not in missing]
         names += [n for n, _ in EXTRA_THEOREMS]
+        names += [nm for i, v in GENERAL.items() if i not in bad and i not in missing
+                  for nm in v[1]]
         lines = ["import Pilean.Compendium.%s" % m for m in mods]
         lines += ["", "open PiFormula.Compendium", ""]
         lines += ["#print axioms %s" % n for n in names]

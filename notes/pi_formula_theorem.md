@@ -2114,11 +2114,12 @@ the four lists (46 primes, 238 rationals), and 78 assertions made in the text.
 
 ### Degree 1 in Lean
 
-Of the 80 formulas of degree 1, **54 are Lean theorems stated as printed** (56 theorems
+**All 80 formulas of degree 1 are Lean theorems stated as printed** (104 theorems
 `PiFormula.Compendium.formula_N`, files `lean/Pilean/Compendium/`, standard axioms only, without
-Baker's theorem). A formula x = c P(1, b^B, n, A) is the statement `BaileyFormula x c b B n A`
-(`BaileyFormulaInt` when the base is negative), where P(1, b, n, A) = sum_k b^(-k) sum_j
-a_j/(nk + j). By group:
+Baker's theorem; completed 23 November 2026). A formula x = c P(1, b^B, n, A) is the statement
+`BaileyFormula x c b B n A` (`BaileyFormulaInt` when the base is negative,
+`BaileyFormulaReal` when the base or the coefficients are real numbers), where
+P(1, b, n, A) = sum_k b^(-k) sum_j a_j/(nk + j). By group:
 
 | group | formulas | how |
 |---|---|---|
@@ -2127,11 +2128,17 @@ a_j/(nk + j). By group:
 | logarithms, bases 2, 3, 5, 10 | 8, 67, 71-75, 84, 85, 89 | combinations of the series of log(1 - b^(-d)), d dividing n |
 | arctangents and radicals | 10, 13, 23-28, 68, 86, 87 | by hand: arctan(1/2), arctan(1/8), arctan(1/32), the series of log((1+x)/(1-x)) and arctan x at 1/sqrt(2) and 1/sqrt(5), roots of unity of order 3 and 5 |
 | explicit series and derivation steps | p02.g, p05.c, p05.e, p25.b | by hand |
+| general base b | 90 to 110 (22 formulas), p04.b | identities in a real parameter: two theorems each, `formula_N_real` for real b and `formula_N` for natural b >= 2; from seven core series (Re and Im of the series of -log(1 - z) at multiples of 1, 1+i, a cube root of unity, (3 + i sqrt 3)/2) and a regrouping lemma |
+| base 5^5 with an irrational prefactor | 88 | by hand: the arguments of 1 - z/5 for the fifth roots of unity z, and an addition formula for the two arctangents |
+| curiosities | 132 (base (2/phi)^10), 133 (coefficients from a recurrence) | by hand |
 
-Not yet done (26): the 22 formulas with a general base b (90 to 110) and the telescoping example
-p04.b, which are identities in a real parameter and are in progress; formula 88 (base 5^5, with
-an irrational prefactor and nested radicals); and the two curiosities 132 (irrational base) and
-133 (coefficients from a recurrence).
+*The general-base formulas.* The paper gives no range for b (its definition takes b an
+integer). The real versions are proved for: every real b with abs(b) > 1 (90, 93, 94, 101, 102,
+104, 105, p04.b); 2b^2 > 1 (95, 96, 106, 107); 3b^2 > 1 (98, 99, 109 with both signs); b > 1
+(92, 97, 100, 103, 108, 110, where sqrt(b) occurs). Formula 91 has length b and is stated for
+natural b >= 2, with the final 0 that the print omits. Formula 133 is stated for every sequence
+with D_0 = D_1 = 1 and the recurrence from k >= 1; that the printed range k >= 2 is too weak
+is clear (D_2 is then free) but is not a Lean theorem.
 
 The 55 formulas of degree 2 to 5 are confirmed numerically only. A Lean proof needs the
 polylogarithms Li_s on the closed unit disc with their functional equations, which Mathlib does

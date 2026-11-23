@@ -12,10 +12,19 @@ Formulas 1, 2, 3 are printed as explicit series and stated in the notation P, as
 formulas 1 and 2 as the series that are printed. Formulas 2, 3, 18, 19 have a negative base and are stated
 with `BaileyFormulaInt` (not in a paired positive form).
 
+The formulas with a parameter `b` (90 to 110) have two theorems each: `formula_N_real`, for a real `b` in the
+range given in the last column, stated as `BaileyFormulaReal x c β n A` (real base `β`, real coefficients;
+`GeneralDefs.lean`), and `formula_N`, for a natural number `b >= 2`, stated as `BaileyFormula` or `BaileyFormulaInt`
+like the other formulas (a base `-b^3` is the integer `-(b : ℤ) ^ 3` with `B = 1`). The paper gives no range for `b`.
+Formula 91 has the length `b` and is stated for natural `b >= 2` only. The example p04.b is stated as `HasSum` of
+the printed term, in the same two versions. Formula 132 has an irrational base and is stated with
+`BaileyFormulaReal`. Formula 133 is stated for every sequence `D` with `D_0 = D_1 = 1` and the recurrence for
+`k >= 1`: the series of the printed term has a sum `S`, and the constant is `S/10`.
+
 Every stated formula was checked numerically from the ledger to at least 50 digits before it was written;
 the logarithm formulas of `Logs.lean` also exactly, as identities between logarithms of primes.
 
-Proved: 54 of 80. Not done: 26.
+Proved: 80 of 80. Not done: 0.
 
 | id | page | constant | printed as | Lean theorem | file | proof, or why not |
 |---|---|---|---|---|---|---|
@@ -24,7 +33,7 @@ Proved: 54 of 80. Not done: 26.
 | 3 | 2 | pi | 1/2^26 P(1, -2^30, 60, ...) | `formula_3` | `Base2Pi.lean` | the pattern is a combination of namedA6, namedA10 (one period of 120 by `decide +kernel`), after pairing the blocks of the negative base |
 | 4 | 2 | log 2 | explicit series | `formula_4` | `Series.lean` | by hand: from `hasSum_log_two` |
 | p02.g | 2 | pi | explicit series | `formula_p02_g` | `Series.lean` | by hand: from `bbp_formula`, the four fractions combined |
-| p04.b | 4 | b + 1/2 (telescoping example) | explicit series |  |  | not attempted: general base b (telescoping example) |
+| p04.b | 4 | b + 1/2 (telescoping example) | explicit series | `formula_p04_b_real`, `formula_p04_b` | `GeneralLog.lean` | real b with b < -1 or b > 1, and natural b >= 2; by hand: the series of -log(1 - 1/b) and the same series without its first two terms |
 | 6 | 5 | pi | P(1, 16, 8, ...) | `formula_6` | `Base2Pi.lean` | restated from the existing theorem `BaseB.bbp_formula` |
 | 7 | 5 | log 2 | 1/2 P(1, 2, 1, ...) | `formula_7` | `Logs.lean` | restated from the existing theorem `BaseB.hasSum_log_two` |
 | 8 | 5 | log 3 | P(1, 4, 2, ...) | `formula_8` | `Logs.lean` | series of step 1: a combination of log(1 - b^(-d)), d dividing n |
@@ -59,30 +68,30 @@ Proved: 54 of 80. Not done: 26.
 | 85 | 26 | log(3/2) | 2/5 P(1, 25, 2, ...) | `formula_85` | `Logs.lean` | series of step 1: a combination of log(1 - b^(-d)), d dividing n |
 | 86 | 26 | sqrt(5) log(phi) | P(1, 5, 2, ...) | `formula_86` | `Arctan.lean` | by hand: the series of log((1+x)/(1-x)) at x = 1/sqrt(5) |
 | 87 | 26 | (25/2) log((781/256) ((57 - 5 sqrt 5)/(57 + 5 sqrt 5))^sqrt(5)) | P(1, 5^5, 5, ...) | `formula_87` | `Base5.lean` | by hand: the series of cos(k t) x^k / k at x = 1/5, t = 2 pi/5 and 4 pi/5, with log(1 - 1/5) and log(1 - 5^(-5)) |
-| 88 | 26 | phi^(-1/2) arctan(5^(1/4) phi^(-1/2) (233 - 329 sqrt 5)/5938) + phi^(1/2) arctan(5^(1/4) phi^(-1/2) (939 + 281 sqrt 5)/5938) | 1/(2*5^(13/4)) P(1, 5^5, 5, ...) |  |  | not attempted: base 5^5, irrational prefactor 1/(2 5^(13/4)); the value needs the arguments of 1 - z/5 for the fifth roots of unity z (nested radicals) |
+| 88 | 26 | phi^(-1/2) arctan(5^(1/4) phi^(-1/2) (233 - 329 sqrt 5)/5938) + phi^(1/2) arctan(5^(1/4) phi^(-1/2) (939 + 281 sqrt 5)/5938) | 1/(2*5^(13/4)) P(1, 5^5, 5, ...) | `formula_88` | `Curiosities.lean` | by hand: the series of sin(2 pi k/5) x^k / k and of sin(4 pi k/5) x^k / k at x = 1/5, with the values t1 and t2; the two arctangents of the print are t2 - t1 and t1 + t2, and 5^(1/4) = 2 sin(pi/5) sqrt(phi) |
 | 89 | 26 | log(1111111111/387420489) | 1/10^8 P(1, 10^10, 10, ...) | `formula_89` | `Logs.lean` | series of step 1: a combination of log(1 - b^(-d)), d dividing n |
-| 90 | 26 | b^2 log((b^2+b+1)/(b^2-2b+1)) | 3 P(1, b^3, 3, ...) |  |  | not attempted: general base b (left for later) |
-| 91 | 26 | b^(b-2) log((b^b-1)/(b-1)^b) | P(1, b^b, b, ...) |  |  | not attempted: general base b (left for later) |
-| 92 | 27 | sqrt(b) arctan(1/sqrt(b)) | 1/b P(1, b^2, 4, ...) |  |  | not attempted: general base b (left for later) |
-| 93 | 27 | b^2 sqrt(3) arctan(sqrt(3)/(2b-1)) | 3/2 P(1, -b^3, 3, ...) |  |  | not attempted: general base b (left for later) |
-| 94 | 27 | b^2 sqrt(3) arctan(sqrt(3)/(2b+1)) | 3/2 P(1, b^3, 3, ...) |  |  | not attempted: general base b (left for later) |
-| 95 | 27 | b^7 arctan(1/(2b-1)) | 1/16 P(1, 16*b^8, 8, ...) |  |  | not attempted: general base b (left for later) |
-| 96 | 27 | b^7 arctan(1/(2b+1)) | 1/16 P(1, 16*b^8, 8, ...) |  |  | not attempted: general base b (left for later) |
-| 97 | 27 | b^3 sqrt(b) sqrt(2) arctan(sqrt(2) sqrt(b)/(b-1)) | 2 P(1, b^4, 8, ...) |  |  | not attempted: general base b (left for later) |
-| 98 | 27 | 9 b^5 sqrt(3) arctan(1/(sqrt(3)(2b-1))) | 1/2 P(1, -27*b^6, 6, ...) |  |  | not attempted: general base b (left for later) |
-| 99 | 27 | 9 b^5 sqrt(3) arctan(1/(sqrt(3)(2b+1))) | 1/2 P(1, -27*b^6, 6, ...) |  |  | not attempted: general base b (left for later) |
-| 100 | 27 | b^2 sqrt(b) arctan(sqrt(b)/(b-1)) | P(1, -b^3, 6, ...) |  |  | not attempted: general base b (left for later) |
-| 101 | 27 | log((b+1)/b) | 1/b^2 P(1, b^2, 2, ...) |  |  | not attempted: general base b (left for later) |
-| 102 | 27 | log((b-1)/b) | -1/b^2 P(1, b^2, 2, ...) |  |  | not attempted: general base b (left for later) |
-| 103 | 27 | sqrt(b) log((sqrt(b)+1)/(sqrt(b)-1)) | 2 P(1, b, 2, ...) |  |  | not attempted: general base b (left for later) |
-| 104 | 28 | log((b^2+b+1)/b^2) | 1/b^3 P(1, b^3, 3, ...) |  |  | not attempted: general base b (left for later) |
-| 105 | 28 | log((b^2-b+1)/b^2) | -1/b^3 P(1, -b^3, 3, ...) |  |  | not attempted: general base b (left for later) |
-| 106 | 28 | log((2b^2-2b+1)/(2b^2)) | -1/(2*b^4) P(1, -4*b^4, 4, ...) |  |  | not attempted: general base b (left for later) |
-| 107 | 28 | log((2b^2+2b+1)/(2b^2)) | 1/(2*b^4) P(1, -4*b^4, 4, ...) |  |  | not attempted: general base b (left for later) |
-| 108 | 28 | (b sqrt(b)/sqrt(2)) log((b + sqrt(2) sqrt(b) + 1)/(b - sqrt(2) sqrt(b) + 1)) | 2 P(1, -b^2, 4, ...) |  |  | not attempted: general base b (left for later) |
-| 109+ | 28 | log((3b^2+3b+1)/(3b^2)) | 1/(27*b^6) P(1, -27*b^6, 6, ...) |  |  | not attempted: general base b (left for later) |
-| 109- | 28 | log((3b^2-3b+1)/(3b^2)) | -1/(27*b^6) P(1, -27*b^6, 6, ...) |  |  | not attempted: general base b (left for later) |
-| 110 | 28 | (b^2 sqrt(b)/sqrt(3)) log((b + sqrt(3) sqrt(b) + 1)/(b - sqrt(3) sqrt(b) + 1)) | 2 P(1, -b^3, 6, ...) |  |  | not attempted: general base b (left for later) |
+| 90 | 26 | b^2 log((b^2+b+1)/(b^2-2b+1)) | 3 P(1, b^3, 3, ...) | `formula_90_real`, `formula_90` | `GeneralLog.lean` | real b with b < -1 or b > 1, and natural b >= 2; by hand: the series of -log(1 - 1/b) and the real part of the series of -log(1 - w/b), w a cube root of unity |
+| 91 | 26 | b^(b-2) log((b^b-1)/(b-1)^b) | P(1, b^b, b, ...) | `formula_91` | `GeneralLog.lean` | by hand: natural b >= 2 only (the length is b): a series of step 1, a combination of log(1 - 1/b) and log(1 - b^(-b)); the printed vector has b - 1 entries, the entry a_b = 0 is supplied |
+| 92 | 27 | sqrt(b) arctan(1/sqrt(b)) | 1/b P(1, b^2, 4, ...) | `formula_92_real`, `formula_92` | `GeneralSqrt.lean` | real b with b > 1, and natural b >= 2; by hand: the series of arctan at x = 1/sqrt(b), summed in pairs |
+| 93 | 27 | b^2 sqrt(3) arctan(sqrt(3)/(2b-1)) | 3/2 P(1, -b^3, 3, ...) | `formula_93_real`, `formula_93` | `GeneralArctan.lean` | real b with b < -1 or b > 1, and natural b >= 2; by hand: the imaginary part of the series of -log(1 + w/b), w a cube root of unity |
+| 94 | 27 | b^2 sqrt(3) arctan(sqrt(3)/(2b+1)) | 3/2 P(1, b^3, 3, ...) | `formula_94_real`, `formula_94` | `GeneralArctan.lean` | real b with b < -1 or b > 1, and natural b >= 2; by hand: the imaginary part of the series of -log(1 - w/b), w a cube root of unity |
+| 95 | 27 | b^7 arctan(1/(2b-1)) | 1/16 P(1, 16*b^8, 8, ...) | `formula_95_real`, `formula_95` | `GeneralArctan.lean` | real b with 2 b^2 > 1, and natural b >= 2; by hand: the imaginary part of the series of -log(1 - (1+i)/(2b)) |
+| 96 | 27 | b^7 arctan(1/(2b+1)) | 1/16 P(1, 16*b^8, 8, ...) | `formula_96_real`, `formula_96` | `GeneralArctan.lean` | real b with 2 b^2 > 1, and natural b >= 2; by hand: the imaginary part of the series of -log(1 + (1+i)/(2b)) |
+| 97 | 27 | b^3 sqrt(b) sqrt(2) arctan(sqrt(2) sqrt(b)/(b-1)) | 2 P(1, b^4, 8, ...) | `formula_97_real`, `formula_97` | `GeneralSqrt.lean` | real b with b > 1, and natural b >= 2; by hand: the imaginary parts of the series of -log(1 - v(1+i)) at v and at -v, v = 1/sqrt(2b) |
+| 98 | 27 | 9 b^5 sqrt(3) arctan(1/(sqrt(3)(2b-1))) | 1/2 P(1, -27*b^6, 6, ...) | `formula_98_real`, `formula_98` | `GeneralArctan.lean` | real b with 3 b^2 > 1, and natural b >= 2; by hand: the imaginary part of the series of -log(1 - c/(3b)), c = (3 + i sqrt 3)/2 |
+| 99 | 27 | 9 b^5 sqrt(3) arctan(1/(sqrt(3)(2b+1))) | 1/2 P(1, -27*b^6, 6, ...) | `formula_99_real`, `formula_99` | `GeneralArctan.lean` | real b with 3 b^2 > 1, and natural b >= 2; by hand: the imaginary part of the series of -log(1 + c/(3b)), c = (3 + i sqrt 3)/2 |
+| 100 | 27 | b^2 sqrt(b) arctan(sqrt(b)/(b-1)) | P(1, -b^3, 6, ...) | `formula_100_real`, `formula_100` | `GeneralSqrt.lean` | real b with b > 1, and natural b >= 2; by hand: the imaginary parts of the series of -log(1 - v c) at v and at -v, v = 1/sqrt(3b), c = (3 + i sqrt 3)/2 |
+| 101 | 27 | log((b+1)/b) | 1/b^2 P(1, b^2, 2, ...) | `formula_101_real`, `formula_101` | `GeneralLog.lean` | real b with b < -1 or b > 1, and natural b >= 2; by hand: the series of -log(1 + 1/b) |
+| 102 | 27 | log((b-1)/b) | -1/b^2 P(1, b^2, 2, ...) | `formula_102_real`, `formula_102` | `GeneralLog.lean` | real b with b < -1 or b > 1, and natural b >= 2; by hand: the series of -log(1 - 1/b) |
+| 103 | 27 | sqrt(b) log((sqrt(b)+1)/(sqrt(b)-1)) | 2 P(1, b, 2, ...) | `formula_103_real`, `formula_103` | `GeneralSqrt.lean` | real b with b > 1, and natural b >= 2; by hand: the series of log((1+x)/(1-x)) at x = 1/sqrt(b) |
+| 104 | 28 | log((b^2+b+1)/b^2) | 1/b^3 P(1, b^3, 3, ...) | `formula_104_real`, `formula_104` | `GeneralLog.lean` | real b with b < -1 or b > 1, and natural b >= 2; by hand: the real part of the series of -log(1 - w/b), w a cube root of unity |
+| 105 | 28 | log((b^2-b+1)/b^2) | -1/b^3 P(1, -b^3, 3, ...) | `formula_105_real`, `formula_105` | `GeneralLog.lean` | real b with b < -1 or b > 1, and natural b >= 2; by hand: the real part of the series of -log(1 + w/b), w a cube root of unity |
+| 106 | 28 | log((2b^2-2b+1)/(2b^2)) | -1/(2*b^4) P(1, -4*b^4, 4, ...) | `formula_106_real`, `formula_106` | `GeneralLog.lean` | real b with 2 b^2 > 1, and natural b >= 2; by hand: the real part of the series of -log(1 - (1+i)/(2b)) |
+| 107 | 28 | log((2b^2+2b+1)/(2b^2)) | 1/(2*b^4) P(1, -4*b^4, 4, ...) | `formula_107_real`, `formula_107` | `GeneralLog.lean` | real b with 2 b^2 > 1, and natural b >= 2; by hand: the real part of the series of -log(1 + (1+i)/(2b)) |
+| 108 | 28 | (b sqrt(b)/sqrt(2)) log((b + sqrt(2) sqrt(b) + 1)/(b - sqrt(2) sqrt(b) + 1)) | 2 P(1, -b^2, 4, ...) | `formula_108_real`, `formula_108` | `GeneralSqrt.lean` | real b with b > 1, and natural b >= 2; by hand: the real parts of the series of -log(1 - v(1+i)) at v and at -v, v = 1/sqrt(2b) |
+| 109+ | 28 | log((3b^2+3b+1)/(3b^2)) | 1/(27*b^6) P(1, -27*b^6, 6, ...) | `formula_109_plus_real`, `formula_109_plus` | `GeneralLog.lean` | real b with 3 b^2 > 1, and natural b >= 2; by hand: the real part of the series of -log(1 + c/(3b)), c = (3 + i sqrt 3)/2 |
+| 109- | 28 | log((3b^2-3b+1)/(3b^2)) | -1/(27*b^6) P(1, -27*b^6, 6, ...) | `formula_109_minus_real`, `formula_109_minus` | `GeneralLog.lean` | real b with 3 b^2 > 1, and natural b >= 2; by hand: the real part of the series of -log(1 - c/(3b)), c = (3 + i sqrt 3)/2 |
+| 110 | 28 | (b^2 sqrt(b)/sqrt(3)) log((b + sqrt(3) sqrt(b) + 1)/(b - sqrt(3) sqrt(b) + 1)) | 2 P(1, -b^3, 6, ...) | `formula_110_real`, `formula_110` | `GeneralSqrt.lean` | real b with b > 1, and natural b >= 2; by hand: the real parts of the series of -log(1 - v c) at v and at -v, v = 1/sqrt(3b), c = (3 + i sqrt 3)/2 |
 | 111 | 31 | 0 | P(1, 16, 8, ...) | `formula_111` | `Base2Zero.lean` | the pattern is a combination of namedL8 (one period of 120 by `decide +kernel`) |
 | 112 | 31 | 0 | P(1, 64, 6, ...) | `formula_112` | `Base2Zero.lean` | the pattern is a combination of namedL8, namedL24 (one period of 120 by `decide +kernel`) |
 | 113 | 31 | 0 | P(1, 2^12, 24, ...) | `formula_113` | `Base2Zero.lean` | the pattern is a combination of namedA6, namedL6, namedL8, namedL24 (one period of 120 by `decide +kernel`) |
@@ -97,5 +106,5 @@ Proved: 54 of 80. Not done: 26.
 | 122 | 31 | 0 | P(1, 2^20, 40, ...) | `formula_122` | `Base2Zero.lean` | the pattern is a combination of namedA1, namedA10 (one period of 120 by `decide +kernel`) |
 | 130 | 34 | 0 | P(1, 729, 12, ...) | `formula_130` | `Base3.lean` | restated from the existing theorem `Base3.relation130` |
 | 131 | 34 | 0 | P(1, 729, 12, ...) | `formula_131` | `Base3.lean` | restated from the existing theorem `Base3.relation131` |
-| 132 | 35 | 3 pi sqrt(phi)/5^(5/4) | 1/2^9 P(1, (2/phi)^10, 10, ...) |  |  | not attempted: curiosity, irrational base (2/phi)^10 |
-| 133 | 35 | (1/sqrt 19) arccos(9/10) | series with a recurrence |  |  | not attempted: curiosity, coefficients from a recurrence |
+| 132 | 35 | 3 pi sqrt(phi)/5^(5/4) | 1/2^9 P(1, (2/phi)^10, 10, ...) | `formula_132` | `Curiosities.lean` | by hand: stated with `BaileyFormulaReal` (irrational base and coefficients): the series of sin(k pi/5) x^k / k at x = phi/2 = cos(pi/5) |
+| 133 | 35 | (1/sqrt 19) arccos(9/10) | series with a recurrence | `formula_133` | `Curiosities.lean` | by hand: for every sequence with D_0 = D_1 = 1 and D_(k+1) = D_k - 5 D_(k-1) for k >= 1 (the print says k >= 2, which leaves D_2 free): the imaginary part of the series of -log(1 - a/10), a = (1 + i sqrt 19)/2 |

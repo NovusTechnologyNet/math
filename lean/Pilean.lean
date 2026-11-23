@@ -29,3 +29,7 @@ import Pilean.RatBase.GoodPrimesSmall
 import Pilean.RatBase.Leftover
 import Pilean.RatBase.TheoremR
 import Pilean.Erdos.AbstractDefs
+import Pilean.Compendium.GeneralLog
+import Pilean.Compendium.GeneralArctan
+import Pilean.Compendium.GeneralSqrt
+import Pilean.Compendium.Curiosities
