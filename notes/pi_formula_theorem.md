@@ -1318,20 +1318,58 @@ n = 2m, pi is not a rational combination of the numbers
 L(1, 3^m, n, j) = sum over k >= 0 of 1/((nk + j) 3^(mk)), 1 <= j <= n. Other pairs (b, n)
 with b a power of 3 are not covered by the class F3.
 
-Computed (lattice reduction, every period 12, 24, ..., 144, 180):
+### Every formula in base 3 (machine-checked)
 
-- there are exactly two independent zero relations, both of period 12:
+Three patterns of period 12, written for k = 1, ..., 12:
 
-      (1, 0, -10, -3, 4, 12, -1, 12, 10, 15, -4, 0),   (0, 1, -2, 0, 1, 4, 0, 3, 2, 4, -1, 0);
+    G  = (6, 0, -6, 0, 6, 0, -6, 0, 6, 0, -6, 0)          the Gregory series,
+    Z1 = (0, 1, -2, 0, 1, 4, 0, 3, 2, 4, -1, 0),
+    Z2 = (1, -3, -4, -3, 1, 0, -1, 3, 4, 3, -1, 0).
 
-- the patterns whose series is a rational multiple of pi sqrt(3) form a space of dimension
-  3, all of period 12;
-- pi itself is not found as a value at any of these periods.
+**Theorem C3, in full (machine-checked, from Baker's theorem).** Let rho be a rational
+periodic pattern. Then S(rho) is an algebraic multiple of pi if and only if
 
-**Still computed only.** That every series of F3 whose value is an algebraic multiple of pi
-has period 12, and that these series form a space of dimension 3. Both would follow from
-step (2) above (the coefficients d_r vanish outside six roots of order dividing 12) by a
-finite computation at period 12; they are not stated in Lean yet.
+    rho = a G + b Z1 + c Z2     with a, b, c rational,
+
+and then S(rho) = a pi sqrt(3). Consequently:
+
+- every series of F3 whose value is an algebraic multiple of pi has period 12;
+- for every N divisible by 12, these patterns of period N form a space of dimension
+  exactly 3;
+- the zero relations are exactly the combinations b Z1 + c Z2: a space of dimension
+  exactly 2. (The relation (1, 0, -10, -3, 4, 12, -1, 12, 10, 15, -4, 0) found earlier by
+  lattice reduction is 3 Z1 + Z2.)
+
+In Lean (`Pilean/Base3/Dimension.lean`): `exists_coords3`, `hasSum_comb3`, `period_twelve`,
+`hasSum_zero_iff`, `theoremC3`; with no hypothesis, `PiFormula.Base3.Unconditional.theoremC3`
+and the others in the same namespace. Standard axioms only. python/
+base3_classification_check.py checks the three values to 60 digits, independently.
+
+*Proof.* Let d_r be the coefficients of S(rho) = sum of d_r Log(1 - r/t). By Baker's theorem
+(d_r) is a combination, with algebraic coefficients, of integer relations z among i pi and
+the Log(1 - r/t). (1) Such a relation is supported on the six exceptional roots (step (2)
+of the proof above). (2) Its real part is a relation among real logarithms. The six numbers
+|1 - r/t|^2 are 4/3, 4/3 (r = 1, -1), (2/3)/(2 + sqrt(3)), (2/3)(2 + sqrt(3)) (r = i, -i)
+and 1/3, 1/3 (r = w, -w^2), so the real part reads
+
+    A log 2 + B log 3 + C log(2 + sqrt(3)) = 0,
+    A = 2(z_1 + z_(-1)) + z_i + z_(-i),   C = z_(-i) - z_i,
+    B = -(z_1 + z_(-1) + z_i + z_(-i) + z_w + z_(-w^2)).
+
+The three logarithms are independent over Z (`log_indep`: a power of 2 + sqrt(3) with
+non-zero exponent is irrational, and 2^A 3^B = 1 forces A = B = 0). Hence z_i = z_(-i) and
+z_1 + z_(-1) = z_w + z_(-w^2) = -z_i. (3) These three linear conditions pass to the d_r, so
+(d_r) lies in a space of dimension 3, and by Fourier inversion the twisted pattern
+rho(k) t^(k mod 2) (-1)^floor(k/2) is a combination of the three sequences
+
+    1 - (-1)^k,   w^k - (-w^2)^k,   1 + (-1)^k - 2 i^k - 2 (-i)^k + w^k + (-w^2)^k.
+
+These are the twisted forms of G, of H = (1, 3, 2, 3, 1, 0, -1, -3, -2, -3, -1, 0) and of
+F = (1, -5, 0, -3, -1, -8, -1, -3, 0, -5, 1, 0), up to the factors 3t, -t and 1. So
+rho = A G + B H + C F with complex A, B, C; the values at k = 1, 2, 3 show that A, B, C are
+rational. Finally H = G/3 - Z2 and F = Z2 - 2 Z1. (4) Conversely the same expansions give
+S(H) = pi sqrt(3)/3 and S(F) = 0, from the arguments pi/6, -pi/6, 0, 0, -pi/6, pi/6 of the
+six numbers 1 - r/t and the norms above.
 
 **The cheapest formula (computed).** Among the formulas for pi sqrt(3) of period 12, the
 fewest non-zero terms is 6 per period, one term per base-3 digit, and exactly two formulas
@@ -1352,13 +1390,14 @@ sqrt(3) log(2 + sqrt(3)) = S(2, 0); arctan(1/3) = S(0, 2, 0, 0, 0, -2, 0, 0).
 ### What is and is not established in base 3
 
 - Proved and machine-checked, with no hypothesis beyond Lean's standard axioms: Theorem K3
-  and the values named above; Lemma H; Theorem C3 (gamma pi is a value exactly for gamma in
-  Q sqrt(3); pi is not a value).
+  and the values named above; Lemma H; Theorem C3 in full (gamma pi is a value exactly for
+  gamma in Q sqrt(3); pi is not a value; every formula is a G + b Z1 + c Z2; period 12;
+  dimension 3; the zero relations have dimension 2).
 - Proved on paper only: the test for a prime (by the argument for base 2).
-- Computed only: the list of 31 primes; the two zero relations and that there are no others;
-  period 12 and dimension 3 for the formulas of pi sqrt(3); the cheapest formula.
-- Next: the dimension count at period 12 (period 12 and dimension 3, from the support
-  theorem); the optimum; the test for a prime in Lean.
+- Computed only: the list of 31 primes; the cheapest formula (6 terms per period, attained
+  by exactly two formulas). The second is now a finite statement about the family
+  G + b Z1 + c Z2 and could be proved in Lean.
+- Next: the optimum; the test for a prime in Lean.
 
 ## Why this matters for digit extraction
 

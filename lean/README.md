@@ -73,7 +73,8 @@ spanned by `γ(O) + γ(O*) = 0`, `γ(O_1) = π/4`, `γ(O_6) = 0` and `γ(O_10) -
 | `Pilean/Base3/GoodPrimes.lean` | Base 3: the statement `PrimitiveHalves3`, `goodPrimes3_of_halves` | proved (the second from the first) |
 | `Pilean/Base3/Halves.lean` | Base 3: the Eisenstein integers `Eis`, `moebius_formula3`, `norm_cyclotomic_mul_three`, `half_mul_half`, `half_lower`, `exists_primitive_of_dvd_Phi6`, `primitiveHalves3` (each Aurifeuillian factor of `3^(3E) + 1` has a prime of order `6E`), `goodPrimes3` | proved |
 | `Pilean/Base3/PiTheorem.lean` | Base 3: `isF3Value_mul_pi_iff`, `not_isF3Value_pi`, `not_isF3Value_rat_mul_pi` | proved from `BakerTheorem` |
-| `Pilean/Base3/Unconditional.lean` | Base 3: the criterion for logarithms and the theorems on `π`, with no hypothesis (`PiFormula.Base3.Unconditional.*`) | proved |
+| `Pilean/Base3/Dimension.lean` | Base 3, every formula: `log_indep` (`log 2`, `log 3`, `log(2 + √3)` independent over `ℤ`), `intRel_re`, `hasSum_of_twist3`, the patterns `rhoZ1`, `rhoZ2`, `hasSum_comb3`, `exists_coords3`, `period_twelve`, `hasSum_zero_iff`, `algSpace3`, `zeroSpace3`, `theoremC3` (period 12, dimension exactly 3; zero relations of dimension exactly 2) | proved from `BakerTheorem` (the values of the series with no hypothesis) |
+| `Pilean/Base3/Unconditional.lean` | Base 3: the criterion for logarithms, the theorems on `π` and the classification of the formulas, with no hypothesis (`PiFormula.Base3.Unconditional.*`) | proved |
 | `TauCeti/` | 25 modules of Tau Ceti (Apache-2.0), see `TauCeti/VENDORED.md` | builds unchanged |
 
 There is no `sorry` anywhere. `theoremA`, `theoremB`, `theoremBgamma`, `lemma2`, `size_bound` and every other theorem

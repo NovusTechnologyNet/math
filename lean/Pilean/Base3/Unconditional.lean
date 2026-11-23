@@ -1,11 +1,12 @@
-import Pilean.Base3.PiTheorem
+import Pilean.Base3.Dimension
 import Pilean.PiFormula.Unconditional
 
 /-!
 # Base 3: the theorems without a hypothesis
 
-`Base3/LogConverse.lean`, `Base3/LogExplicit.lean` and `Base3/PiTheorem.lean` prove the
-criterion for logarithms and the theorem on `π` from `BakerTheorem : Prop`. Here the
+`Base3/LogConverse.lean`, `Base3/LogExplicit.lean`, `Base3/PiTheorem.lean` and
+`Base3/Dimension.lean` prove the criterion for logarithms, the theorem on `π` and the
+classification of the formulas from `BakerTheorem : Prop`. Here the
 hypothesis is discharged by the formal proof of Baker's theorem in `Baker/`
 (`PiFormula.bakerTheorem`, see `PiFormula/Unconditional.lean`). The theorems below depend
 only on Lean's three standard axioms.
@@ -53,6 +54,38 @@ theorem not_isF3Value_rat_mul_pi {q : ℚ} (h : IsF3Value ((q : ℝ) * Real.pi))
 periodic.** -/
 theorem not_isF3Value_pi : ¬ IsF3Value Real.pi :=
   Base3.not_isF3Value_pi bakerTheorem
+
+/-- **Every formula for a multiple of `π` in base 3.** If a rational periodic pattern `ρ` has
+`∑ ρ(k) 3^(-⌊k/2⌋)/k = γ π` with `γ` algebraic, then `ρ = a rhoGregory + b Z₁ + c Z₂` with
+`a, b, c` rational, and `γ = a √3`. Here, for `k = 1, ..., 12`,
+`rhoGregory = (6, 0, -6, 0, 6, 0, -6, 0, 6, 0, -6, 0)`,
+`Z₁ = (0, 1, -2, 0, 1, 4, 0, 3, 2, 4, -1, 0)` and
+`Z₂ = (1, -3, -4, -3, 1, 0, -1, 3, 4, 3, -1, 0)`. -/
+theorem exists_coords3 {N : ℕ} (hN : 0 < N) {ρ : ℕ → ℚ} (hρ : ∀ k, ρ (k + N) = ρ k) {γ : ℝ}
+    (hγ : IsAlgebraic ℚ γ) (h : HasSum (seriesTerm3 ρ) (γ * Real.pi)) :
+    ∃ a b c : ℚ, ρ = comb3 a b c ∧ γ = a * Real.sqrt 3 :=
+  Base3.exists_coords3 bakerTheorem hN hρ hγ h
+
+/-- **Every such series has period 12.** -/
+theorem period_twelve {N : ℕ} (hN : 0 < N) {ρ : ℕ → ℚ} (hρ : ∀ k, ρ (k + N) = ρ k) {γ : ℝ}
+    (hγ : IsAlgebraic ℚ γ) (h : HasSum (seriesTerm3 ρ) (γ * Real.pi)) (k : ℕ) :
+    ρ (k + 12) = ρ k :=
+  Base3.period_twelve bakerTheorem hN hρ hγ h k
+
+/-- **The zero relations of base 3.** A rational periodic pattern has
+`∑ ρ(k) 3^(-⌊k/2⌋)/k = 0` if and only if `ρ = b Z₁ + c Z₂` with `b, c` rational. -/
+theorem hasSum_zero_iff {N : ℕ} (hN : 0 < N) {ρ : ℕ → ℚ} (hρ : ∀ k, ρ (k + N) = ρ k) :
+    HasSum (seriesTerm3 ρ) 0 ↔ ∃ b c : ℚ, ρ = comb3 0 b c :=
+  Base3.hasSum_zero_iff bakerTheorem hN hρ
+
+/-- **Theorem C3 in full.** Let `N` be a multiple of 12. Among the rational patterns of period
+`N`, those whose series `∑ ρ(k) 3^(-⌊k/2⌋)/k` is an algebraic multiple of `π` have period 12
+and form a space of dimension exactly 3; those whose series is 0 form a subspace of dimension
+exactly 2. -/
+theorem theoremC3 {N : ℕ} (hN : 0 < N) (h12 : 12 ∣ N) :
+    (∀ ρ ∈ algSpace3 N, ∀ k, ρ (k + 12) = ρ k) ∧
+      Module.finrank ℚ (algSpace3 N) = 3 ∧ Module.finrank ℚ (zeroSpace3 N) = 2 :=
+  Base3.theoremC3 bakerTheorem hN h12
 
 end Unconditional
 

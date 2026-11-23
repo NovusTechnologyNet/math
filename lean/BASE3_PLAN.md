@@ -65,14 +65,35 @@ No orbit bookkeeping (`Atom`, `base`, `nOf` of base 2) was needed: the reduction
 replaces it. `python/base3_halves_check.py` remains as an independent numerical check of
 `primitiveHalves3` (`E ≤ 3001`).
 
+## Done: every formula (period 12, dimension 3)
+
+`Dimension.lean`. `exists_coords3`: a pattern whose series is `γ π` (`γ` algebraic) is
+`a rhoGregory + b Z₁ + c Z₂`, and `γ = a √3`. `hasSum_comb3`: the converse, with the value
+`a π√3`. `theoremC3`: period 12, dimension exactly 3, zero relations of dimension exactly 2.
+`hasSum_zero_iff`: the zero relations are the `b Z₁ + c Z₂`.
+
+How it went, compared with base 2 (`Rank.lean`, `TheoremC2.lean`, `TheoremC3.lean`, about
+2000 lines): one file of 1000 lines, because only six roots carry coefficients.
+
+- The relations among the six logarithms are found from their real parts alone: a relation
+  becomes `A log 2 + B log 3 + C log(2 + √3) = 0`, and `log_indep` (elementary: irrationality
+  of powers of `2 + √3`, and `2^A 3^B = 1`) gives three linear conditions (`intRel_re`). No
+  prime ideals are needed at this step.
+- The patterns `H` and `F` of the proof are defined by closed formulas in `eisRe`, `eisB`
+  (the coordinates of `ω^k`), so that their twisted forms are proved by one symbolic
+  computation each (`twist3_rhoH`, `twist3_rhoF`), not by twelve cases. The tables `Z₁`, `Z₂`
+  are compared with them by `decide +kernel` on one period (`rhoH_eq`, `rhoF_eq`).
+- `hasSum_of_twist3`: a series whose twisted pattern is `∑ e_i r_i^k` has the value
+  `-∑ e_i Log(1 - r_i/t)`. With the arguments (`theta3_*`) and norms (`two_ell3_*`) at the
+  six roots this gives `S(H) = π√3/3` and `S(F) = 0`.
+- `coeffs_spanIn` isolates the use of Baker's theorem (it repeats the first half of
+  `pi_multiple_of_goodPrimes3`, which could now be rewritten to call it).
+
 ## Next
 
-- **Period 12 and dimension 3.** `support_subset_R03` says the `d_r` vanish outside six roots
-  of order dividing 12. State and prove: every series of F3 with value in `ℚ̄ π` has
-  period 12, and these series form a space of dimension 3 (linear algebra at period 12, as
-  `TheoremC2.lean` and `TheoremC3.lean` but much smaller).
-- **The optimum**: 6 terms per period 12, with its two formulas; Bailey's notation
-  `P(1, 3^B, n, A)`.
+- **The optimum**: 6 terms per period 12, with its two formulas; now a finite statement
+  about the family `rhoGregory + b Z₁ + c Z₂` (at most five of its eleven linear forms in
+  `(b, c)` vanish together). Bailey's notation `P(1, 3^B, n, A)`.
 - **The test for a prime in base 3** (as `LogPrimeTest.lean`).
 - Base 5 and other bases: the criterion of Theorem K only needs a root of unity `ε` and a
   number `t` in `ℚ(ε)` with `t² = ±b·(unit)`; for which bases this exists, and what replaces
