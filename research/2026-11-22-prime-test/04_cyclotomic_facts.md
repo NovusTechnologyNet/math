@@ -198,5 +198,5 @@ Machine endpoints used: OpenAlex (one query on "Zsigmondy primes Roitman"; it re
 - [Mathlib docs/1000.yaml](https://raw.githubusercontent.com/leanprover-community/mathlib4/master/docs/1000.yaml)
 - [AFP number-theory topic page](https://www.isa-afp.org/topics/mathematics/number-theory/) and [AFP Wieferich-Kempner entry](https://www.isa-afp.org/entries/Wieferich_Kempner.html)
 - Crossref API records for Stevenhagen, Roitman, Brent, Glasby et al. (https://api.crossref.org/works/10.1017/S1446788715000269) and Murty-Seguin (https://api.crossref.org/works/10.1016/j.jnt.2019.02.016)
-- Local file: Mathlib checkout at C:\Users\Spontaneous\Documents\github\math\lean\.lake\packages\mathlib (commit fc4f59e5, 16 Nov 2026): Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.lean, Mathlib/NumberTheory/PrimesCongruentOne.lean
+- Local file: Mathlib checkout at lean\.lake\packages\mathlib (commit fc4f59e5, 16 Nov 2026): Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.lean, Mathlib/NumberTheory/PrimesCongruentOne.lean
 - Pages that failed: AFP Zsigmondy_Theorem (404), Conrad notes guess (404), Mathlib docs Zsigmondy (404), AMS PDFs for Roitman and Granville-Pleasants (403), ScienceDirect (403), Dartmouth/Murty PDFs (redirect or unavailable), Allombert-Belabas HAL (bot check), umontreal Granville PDF (404), Belabas bordeaux URL (404).

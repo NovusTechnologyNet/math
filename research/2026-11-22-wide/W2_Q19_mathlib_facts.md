@@ -1,7 +1,7 @@
 # W2-Q19: which classical prime-and-pi facts are in Mathlib (checked 22 Nov 2026)
 
 Method: I read the Mathlib source itself, from the project's own checkout at
-`C:\Users\Spontaneous\Documents\github\math\lean\.lake\packages\mathlib`, which is commit
+`lean\.lake\packages\mathlib`, which is commit
 fc4f59e577 ("chore: bump toolchain to v4.36.0 (#46085)", committed 16 Nov 2026). Everything
 marked [READ] below was read in that source tree (grep plus reading the files). Open and
 closed pull requests were read through the GitHub REST API (unauthenticated; the search

@@ -238,7 +238,7 @@ corollaries with short statements stateable without number-theory background (le
 - https://ar5iv.labs.arxiv.org/html/1308.6451 (Chatterjee-Gun), https://ar5iv.labs.arxiv.org/html/1604.02896 (Euler-Briggs constants)
 - https://arxiv.org/abs/2408.15180 (Mason-Stothers)
 - zbMATH Open API records and reviews (Murty-Saradha, ASST, Murty-Murty, Gun-Saha-Sinha, Bundschuh 1979, Weatherby)
-- Local: C:\Users\Spontaneous\Documents\github\math\lean\Baker\README.md, \lean\Baker\Basic.lean (not opened in full), \lean\Pilean\PiFormula\Transcendence.lean
+- Local: lean\Baker\README.md, \lean\Baker\Basic.lean (not opened in full), \lean\Pilean\PiFormula\Transcendence.lean
 
 Page text that addressed an agent: none seen.
 Endpoints that refused automated access: export.arxiv.org API (HTTP 429, repeatedly), OpenAlex (429 with a long Retry-After),

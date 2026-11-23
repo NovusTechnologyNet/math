@@ -7,7 +7,7 @@ OpenAlex, Crossref, zbMATH Open, Semantic Scholar, OEIS, GitHub); so about 36 se
 thread. Rules for helpers: `00_RULES.md`. At most 20 agents run at once.
 
 Every helper prompt is: "You are a research helper for a mathematics project. First read the
-file C:\Users\Spontaneous\Documents\github\math\research\2026-11-22-wide\00_RULES.md
+file research\2026-11-22-wide\00_RULES.md
 completely and follow it exactly (privacy, the search budget of at most 6 WebSearch calls plus
 at least 30 endpoint queries, marking of statements, report format, search log). Thread ...
 Questions: ... Write your report to <this folder>\<ID>_<slug>.md". Model: Sonnet.
