@@ -70,9 +70,10 @@ spanned by `γ(O) + γ(O*) = 0`, `γ(O_1) = π/4`, `γ(O_6) = 0` and `γ(O_10) -
 | `Pilean/Base3/Support.lean` | Base 3: `IsRelation3`, `coeff_eq_zero_of_private_ideal3`, the exceptional roots `R03`, `HasGoodPrime3`, `GoodPrimes3`, `support_subset_R03` | proved (the last from `GoodPrimes3`) |
 | `Pilean/Base3/PiValue.lean` | Base 3: `lamOf3`, `intRel_support`, `intRel_im`, the arguments `theta3_one`, ..., `fourier_pi_combination`, `pi_multiple_of_goodPrimes3`, `not_isF3Value_pi_of_goodPrimes3` | proved (from `BakerTheorem` and `GoodPrimes3`) |
 | `Pilean/Base3/HasPrime.lean` | Base 3: `HasPrime`, `hasPrime_of_not_unit` (lying over), `hasPrime_conj` (conjugation without automorphisms), `hasPrime_of_dvd_norm`, `goodPrime_of_coset` | proved |
-| `Pilean/Base3/GoodPrimes.lean` | Base 3: `PrimitiveHalves3` (a classical statement, **not proved**), `goodPrimes3_of_halves` | proved from `PrimitiveHalves3` |
-| `Pilean/Base3/PiTheorem.lean` | Base 3: `isF3Value_mul_pi_iff`, `not_isF3Value_pi`, `not_isF3Value_rat_mul_pi` | proved from `BakerTheorem` and `PrimitiveHalves3` |
-| `Pilean/Base3/Unconditional.lean` | Base 3: the criterion for logarithms with no hypothesis; the theorems on `π` with the single hypothesis `PrimitiveHalves3` (`PiFormula.Base3.Unconditional.*`) | proved |
+| `Pilean/Base3/GoodPrimes.lean` | Base 3: the statement `PrimitiveHalves3`, `goodPrimes3_of_halves` | proved (the second from the first) |
+| `Pilean/Base3/Halves.lean` | Base 3: the Eisenstein integers `Eis`, `moebius_formula3`, `norm_cyclotomic_mul_three`, `half_mul_half`, `half_lower`, `exists_primitive_of_dvd_Phi6`, `primitiveHalves3` (each Aurifeuillian factor of `3^(3E) + 1` has a prime of order `6E`), `goodPrimes3` | proved |
+| `Pilean/Base3/PiTheorem.lean` | Base 3: `isF3Value_mul_pi_iff`, `not_isF3Value_pi`, `not_isF3Value_rat_mul_pi` | proved from `BakerTheorem` |
+| `Pilean/Base3/Unconditional.lean` | Base 3: the criterion for logarithms and the theorems on `π`, with no hypothesis (`PiFormula.Base3.Unconditional.*`) | proved |
 | `TauCeti/` | 25 modules of Tau Ceti (Apache-2.0), see `TauCeti/VENDORED.md` | builds unchanged |
 
 There is no `sorry` anywhere. `theoremA`, `theoremB`, `theoremBgamma`, `lemma2`, `size_bound` and every other theorem

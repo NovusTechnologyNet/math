@@ -23,9 +23,9 @@ were copied and adapted rather than generalized. What was reused unchanged: `coe
 (`LogYes.lean`); `log_mem_span_iff_pow` (`LogExplicit.lean`). Base 3 avoids a ring of
 Eisenstein integers: the generators are written with complex norms `‖t3^n - c‖`.
 
-## Done (23 November 2026): `π` is not a value, from one hypothesis
+## Done (23 November 2026): `π` is not a value
 
-`Unconditional.not_isF3Value_pi : PrimitiveHalves3 → ¬ IsF3Value Real.pi`, and
+`Unconditional.not_isF3Value_pi : ¬ IsF3Value Real.pi`, with no hypothesis, and
 `isF3Value_mul_pi_iff`: for `γ` algebraic, `γ π` is a value exactly when `γ ∈ ℚ√3`.
 
 - `Support.lean`: `IsRelation3`, the six exceptional roots `R03 = {1, -1, i, -i, ω, -ω²}`,
@@ -42,43 +42,30 @@ Eisenstein integers: the generators are written with complex norms `‖t3^n - c�
   `|t^E - r^E|²` with `ord_p(3) · h = 2M`, `h ∣ 8`, gives a good prime for `r`).
 - `GoodPrimes.lean`: the case analysis by `gcd(M, 6)` and `r^E` (table in the docstring),
   with primes from Tau Ceti's `exists_prime_orderOf_eq` (Zsigmondy for every base) and, for
-  the Aurifeuillian cases, from the hypothesis `PrimitiveHalves3`.
+  the Aurifeuillian cases, from `PrimitiveHalves3`.
+- `Halves.lean`: `primitiveHalves3`, the statement `PrimitiveHalves3` as a theorem (for odd
+  `E ≥ 3`, each of `3^E ∓ 3^((E+1)/2) + 1` has a prime `p` with `ord_p(3) = 6E`). How it
+  went:
+  - The ring is Mathlib's `QuadraticAlgebra ℤ (-1) (-1)` (`Eis`), with its multiplicative
+    norm and conjugation; `t = 1 + 2ω`. This made the file a close copy of `Lemma2.lean`
+    (which uses `GaussianInt`), and no integrality lemma was needed.
+  - Write `E = 3^a m`, `3 ∤ m`, `T = t^(3^a)`; the halves are `N(Φ_m(ωT))`, `N(Φ_m(ω²T))`.
+  - `moebius_formula3`: `N(Φ_n(z)) = ∏_{ab = n} N(z^b - 1)^{μ(a)}`. It is used twice: for the
+    size bound, and to prove `N(Φ_{3m}(x)) = N(Φ_m(ωx)) N(Φ_m(ω²x))`
+    (`norm_cyclotomic_mul_three`) without touching roots of unity, from
+    `N(x^(3b) - 1) = N(x^b - 1) N((ωx)^b - 1) N((ω²x)^b - 1)` (`norm_twist`).
+  - Size (`half_lower`): `9 N(Φ_m(z)) ≥ 3^φ(m)`, uniformly in `a`, by real analysis
+    (`(s^b - 1)² ≤ N(z^b - 1) ≤ (s^b + 1)²`, a Weierstrass product bound, and a geometric
+    series), instead of the integer criterion plus `decide` of base 2. Comparing with the
+    prime factors of `m` needs only `p ≤ φ(m) + 1`, so no lower bound for `φ(m)` in terms
+    of `m` is needed.
 - `PiTheorem.lean`, `Unconditional.lean`: the statements.
 
-No ring `ℤ[ω]` was needed, and no orbit bookkeeping (`Atom`, `base`, `nOf` of base 2): the
-reduction lemma replaces it.
+No orbit bookkeeping (`Atom`, `base`, `nOf` of base 2) was needed: the reduction lemma
+replaces it. `python/base3_halves_check.py` remains as an independent numerical check of
+`primitiveHalves3` (`E ≤ 3001`).
 
-## Next: prove `PrimitiveHalves3`
-
-The statement: for odd `E ≥ 3`, each of `L_E = 3^E - 3^((E+1)/2) + 1` and
-`M_E = 3^E + 3^((E+1)/2) + 1` has a prime `p` with `ord_p(3) = 6E`.
-`python/base3_halves_check.py` checks it for `E ≤ 3001`. It is of the kind proved by Schinzel
-(1962); we have not matched it against his statement.
-
-Plan (the analogue of `Lemma2.lean` for base 2).
-
-1. **The halves of `Φ_{6E}(3)`.** With `z = ω t` (so `z² = -3ω²`, `|z|² = 3`):
-   `L_E M_E = 3^(2E) - 3^E + 1 = Φ_6(3^E)`, which `Φ_{6E}(3)` divides, so
-   `Φ_{6E}(3) = H₁ H₂` with `H₁ ∣ L_E`, `H₂ ∣ M_E`. Concretely `H = |Φ_m(z)|²` for a suitable `m` and the two choices
-   `z = ω t`, `z = ω² t`; the identity `Φ_m(ωx) Φ_m(ω²x) = Φ_{3m}(x)` (for `3 ∤ m`) and
-   Mathlib's `cyclotomic_expand_eq_cyclotomic(_mul)`, `cyclotomic_two_mul_of_odd` give the
-   product.
-2. **Möbius product.** `|Φ_m(z)| = ∏_{ab = m} |z^b - 1|^{μ(a)}`, from
-   `prod_eq_iff_prod_pow_moebius_eq_of_ne_zero` (as `moebius_formula` in `Lemma2.lean`).
-3. **Size.** `|Φ_m(z)|² ≥ s^{2φ(m)} ∏_{b ∣ m} (1 - s^{-b})²` with `s = |z| = √3`; the product
-   is bounded below by an absolute constant (about 0.128), so each half exceeds the largest
-   prime factor of `6E` once `E` is past a small bound; small `E` by `decide`. A bound
-   without Möbius fails only for `E` with very many prime factors, so step 2 is needed for
-   all `E`.
-4. **Integrality.** `|aeval ω F|²` is an integer for `F ∈ ℤ[X]` (reduce modulo
-   `X² + X + 1`).
-5. **Conclude.** A prime factor of `Φ_n(3)` that is not of order `n` is the largest prime
-   factor of `n` and divides `Φ_n(3)` once (Tau Ceti:
-   `le_of_dvd_homogeneousCyclotomic_of_prime_of_dvd`,
-   `multiplicity_homogeneousCyclotomic_eq_one`). So a half larger than that prime has a
-   prime of order `6E`.
-
-## After that
+## Next
 
 - **Period 12 and dimension 3.** `support_subset_R03` says the `d_r` vanish outside six roots
   of order dividing 12. State and prove: every series of F3 with value in `ℚ̄ π` has

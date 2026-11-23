@@ -1,9 +1,10 @@
-"""Check the statement PrimitiveHalves3 for small E.
+"""Check the statement PrimitiveHalves3 for small E, independently of the Lean proof.
 
     python base3_halves_check.py [BOUND]        (default BOUND = 3001; needs sympy)
 
-PrimitiveHalves3 (lean/Pilean/Base3/GoodPrimes.lean) is the one statement that the Lean proof
-of "pi is not the value of any base-3 series of the class F3" takes as a hypothesis:
+PrimitiveHalves3 is the lemma on primes used by the Lean proof of "pi is not the value of any
+base-3 series of the class F3". It is proved in lean/Pilean/Base3/Halves.lean
+(`primitiveHalves3`); this script is a separate numerical check, written before that proof:
 
     for every odd E >= 3, each of the two Aurifeuillian factors
         L_E = 3^E - 3^((E+1)/2) + 1,    M_E = 3^E + 3^((E+1)/2) + 1
@@ -17,8 +18,7 @@ half that is larger than q has a prime factor of order 6E.  The program checks H
 H2 > q for every odd E from 3 to BOUND, and for E <= 45 it also factors the halves and
 exhibits the primes.
 
-This is evidence, not a proof: the statement for all E is a theorem of the kind proved by
-Schinzel (1962), and is not formalized here.
+By itself this is evidence, not a proof; the proof for all E is the Lean file named above.
 """
 import sys
 from math import gcd, log

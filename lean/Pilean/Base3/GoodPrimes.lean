@@ -4,14 +4,15 @@ import TauCeti.NumberTheory.PrimitivePrimeDivisors.Zsigmondy
 /-!
 # Base 3: every root of unity outside the six exceptional ones has a good prime
 
-`goodPrimes3_of_halves`: `GoodPrimes3` holds, given one classical statement about the
-Aurifeuillian factors of `3^(3E) + 1`:
+`goodPrimes3_of_halves`: `GoodPrimes3` holds, given one statement about the Aurifeuillian
+factors of `3^(3E) + 1`:
 
 `PrimitiveHalves3`: for every odd `E ≥ 3`, each of `3^E - 3^((E+1)/2) + 1` and
 `3^E + 3^((E+1)/2) + 1` has a prime factor `p` with `ord_p(3) = 6E`.
 
-(Schinzel 1962 proved the existence of primitive prime factors of Aurifeuillian parts in
-general. It is not proved here.)
+This statement is proved in `Halves.lean` (`primitiveHalves3`), so `GoodPrimes3` holds with no
+hypothesis (`goodPrimes3`, in the same file). It is kept as a hypothesis here only to
+separate the two arguments.
 
 The proof. Let `r` have order `M`, `g = gcd(M, 6)`, `E = M/g`, `c = r^E`, a root of unity of
 order `g`. By `goodPrime_of_coset` it suffices to find a prime `p` with `ord_p(3) = n`, where
@@ -40,9 +41,9 @@ namespace PiFormula
 
 namespace Base3
 
-/-- **The classical input.** For every odd `E = 2k + 1 ≥ 3`, each of the two Aurifeuillian
-factors `3^E ∓ 3^((E+1)/2) + 1` of `3^(3E) + 1` has a prime factor `p` with
-`ord_p(3) = 6E`. -/
+/-- For every odd `E = 2k + 1 ≥ 3`, each of the two Aurifeuillian factors
+`3^E ∓ 3^((E+1)/2) + 1` of `3^(3E) + 1` has a prime factor `p` with `ord_p(3) = 6E`.
+Proved in `Halves.lean` (`primitiveHalves3`). -/
 def PrimitiveHalves3 : Prop :=
   ∀ k : ℕ, 1 ≤ k →
     (∃ p : ℕ, p.Prime ∧ orderOf (3 : ZMod p) = 6 * (2 * k + 1) ∧
@@ -213,7 +214,7 @@ theorem goodPrimes3_of_halves (hH : PrimitiveHalves3) : GoodPrimes3 := by
     omega
   have hgle : g ≤ 6 := Nat.le_of_dvd (by norm_num) hg6
   have hg4 : g = 1 ∨ g = 2 ∨ g = 3 ∨ g = 6 := by
-    interval_cases g <;> first | omega | exact absurd hg6 (by decide)
+    interval_cases g <;> omega
   have h2M : 2 * orderOf r = 2 * (g * E) := by rw [hMdef, hE]
   rcases hg4 with rfl | rfl | rfl | rfl
   · -- `g = 1`: `c = 1`, `E` odd
