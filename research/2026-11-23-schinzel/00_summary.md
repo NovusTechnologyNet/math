@@ -8,6 +8,13 @@ mathematics. The question here is only how to cite it.
 One research helper, about 20 searches and page reads. Its report is
 `01_schinzel_aurifeuillian.md`. Statements are the helper's unless marked.
 
+**Update, 23 November 2026 (later).** The user obtained the paper from a library and it has
+now been read in full: see `02_paper_read.md`. Point 1 below is superseded. In short: the
+base-3 lemma is the case a = 3, b = 1 of Schinzel's Theorem 2 (only exception n = 6); the
+theorem is stated as "at least two primitive prime factors", and "one in each Aurifeuillian
+factor" is what its proof shows; the two secondary summaries that could not be reconciled
+describe two different theorems of the paper (Theorem 2 and Theorem 3).
+
 ## What was found
 
 1. **Schinzel's paper could not be read** (A. Schinzel, On primitive prime factors of

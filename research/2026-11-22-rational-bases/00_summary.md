@@ -241,8 +241,9 @@ numerically by `aurif`). For 3/2 this and (M) give a good prime in both classes 
 for odd j >= 5; j = 3 is computed (norms 181^2, 37^2 73^2). A second proof for base 3/2.
 The exceptions are those of Schinzel's theorem (1962) on a^n - b^n with n/(eta k(ab)) an odd
 integer: as I recall the list, (a, b, n) = (2, 1, 4), (2, 1, 12), (2, 1, 20), (3, 1, 6), (4, 1, 3),
-(4, 3, 6), (3, 2, 12) for a > b > 0, n >= 3. **From memory, not checked against the paper** (the
-project could not obtain it: research/2026-11-23-schinzel). It matches every computation here.
+(4, 3, 6), (3, 2, 12) for a > b > 0, n >= 3. *Checked on 23 November 2026 against the paper
+(library copy; research/2026-11-23-schinzel/02_paper_read.md): this is exactly the list of his
+Theorem 2 for a > b > 0, n >= 3.* It matches every computation here.
 
 ## 4. The four roots, and the proofs of Theorems R, C(3/2), C(4/3)
 

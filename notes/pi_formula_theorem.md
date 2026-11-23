@@ -118,9 +118,15 @@ order of 2 mod p equal to N.
 prime factor that is primitive for 4n. For every odd n >= 7, so does L_n.
 (L_1 = 1, L_3 = 5 and L_5 = 25 do not.)
 
-This is in substance a special case of Schinzel's theorem on primitive prime factors
-of a^n - b^n through Aurifeuillian factorizations (Proc. Cambridge Philos. Soc. 58
-(1962), 555-562; Stewart, arXiv:1008.1274, describes the result). Equivalently, since
+This is the case a = 2, b = 1 of Schinzel's theorem on primitive prime factors of
+a^n - b^n through Aurifeuillian factorizations (Proc. Cambridge Philos. Soc. 58 (1962),
+555-562; read in the paper on 23 November 2026, notes in
+research/2026-11-23-schinzel/02_paper_read.md). His Theorem 2: with k(ab) the square-free
+kernel and eta = 1 or 2 according as k(ab) is 1 or is 2, 3 modulo 4, if n/(eta k(ab)) is odd
+then a^n - b^n has at least two primitive prime factors, with a finite list of exceptions;
+for 2^n - 1 the condition is that n/4 is odd and the exceptions are n = 4, 12, 20. His proof
+splits Phi_n(a, b) into its two Aurifeuillian factors and shows that each has a primitive
+prime factor, which is the form stated here. Equivalently, since
 L_n and M_n are the norms of (1+i)^n -+ 1, it is a statement about primitive prime
 divisors of the Gaussian Mersenne numbers. The factorization Phi_4n(2) = A_n * A'_n
 used below is Example 3.2 of Chamberland, J. Integer Sequences 6 (2003), 03.3.7.
@@ -133,9 +139,9 @@ number field; and of Steidl, Hanler and Tasche, Arch. Math. 53 (1989), 30-39, fo
 quadratic integers. One of these may contain Lemma 2 (and the existence part of
 Lemma 3) outright. Schinzel, Math. Comp. 61 (1993), 441-444, proves that
 A^n - zeta_k B^n has a primitive prime ideal for all sufficiently large n, without
-an explicit bound. None of the four earlier papers has been read for this note
-(copies were requested through interlibrary loan on 21 November 2026); the
-self-contained proof below is offered as a re-derivation.
+an explicit bound. Of these papers only Schinzel (1962) has been read for this note
+(the others were requested through interlibrary loan on 21 November 2026); the
+self-contained proof below is a re-derivation, and it is the one checked in Lean.
 
 *Proof.* Let t = 1 + i. For odd n, |t^n - 1|^2 and |t^n + 1|^2 are L_n and M_n in
 some order (their real parts differ by 2 Re t^n = +-2^((n+1)/2)). Also
@@ -163,10 +169,11 @@ the statement was checked directly by computer (machin_theorem.py, Parts 0 and 1
 M_1, M_3, M_5 = 5, 13, 41 are primitive for 4, 12, 20. QED.
 
 In Schinzel's language, the exceptions are n = 4, 12 and 20 for 2^n - 1 (the cases
-4m with m = 1, 3, 5, where one Aurifeuillian part has no primitive prime). That list
-comes from the computation above, not from Schinzel's paper. One secondary summary
-gives 4, 6 and 12 for a related statement; the original must be checked before
-quoting either list.
+4m with m = 1, 3, 5, where one Aurifeuillian part has no primitive prime). The
+computation above and the list printed in his Theorem 2 agree. The list 4, 6, 12 found in
+a secondary summary belongs to a different statement of the same paper (his Theorem 3:
+the greatest prime factor of a^n - b^n is at least 2n + 1 when k(ab) = +-2 and n > 2,
+excluding n = 4, 6, 12 for 2^n - 1).
 
 ## Proof of the theorem
 
@@ -1291,11 +1298,13 @@ factor of 6E, and divides Phi_6E(3) only once (the lemma behind Zsigmondy's theo
 the Tau Ceti library). So a divisor of Phi_6E(3) that is neither 1 nor a prime factor of 6E
 has a prime factor of order 6E, and by (3) each h_u is such a divisor.
 
-On the literature: this is a statement of the kind proved by Schinzel (1962) on primitive
-prime factors of Aurifeuillian parts. We could not read his paper; a research pass
-(research/2026-11-23-schinzel) found the base-2 analogue attributed to it, and no source
-that states the base-3 form. We do not claim the lemma is new; we give a proof so that
-nothing rests on a citation we have not read. python/base3_halves_check.py checks the
+On the literature: this is the case a = 3, b = 1 of Schinzel's Theorem 2 (1962; read on
+23 November 2026, research/2026-11-23-schinzel/02_paper_read.md): k(ab) = 3, eta = 2, so
+3^n - 1 has at least two primitive prime factors when n/6 is odd, the only exception being
+n = 6. His theorem is stated as "at least two"; that the two lie one in each Aurifeuillian
+factor is what his proof shows where its size inequality holds, with the small cases
+examined directly and not written out. So we do not claim the lemma is new, and we keep our
+own proof, which is the one checked in Lean. python/base3_halves_check.py checks the
 lemma independently for every odd E from 3 to 3001 and exhibits the primes for E <= 45.
 
 **Theorem C3 (machine-checked, from Baker's theorem).** Let gamma be an algebraic real
@@ -2058,6 +2067,17 @@ q = 1 and p >= 5 they are the integer bases of Theorem G. For 2 <= q < p <= 15 (
 With the good primes (`goodPrimesR_all`), the classification from Baker's theorem is the one
 used for p >= 16.
 
+*The five bases and Schinzel's exceptions.* Schinzel's Theorem 2 (1962) says that a^n - b^n
+has two primitive prime factors when n/(eta k(ab)) is odd, with a finite list of exceptions.
+For a > b > 0 and n >= 3 the exceptions are (a, b, n) = (4, 1, 3), (2, 1, 4), (3, 1, 6),
+(4, 3, 6), (2, 1, 12), (3, 2, 12), (2, 1, 20). The pairs (a, b) that occur are (2, 1), (3, 1),
+(4, 1), (3, 2), (4, 3): the five bases of Theorem R, and no others. In each case the
+exceptional n is where one Aurifeuillian factor is 1 or has no primitive prime, and that is
+where the relation of the base comes from (the unit sqrt(3) - r of order 12 in base 3,
+2 - v of norm 3 in base 4, the units of order 12 and 24 in bases 4/3 and 3/2, and
+L_1, L_3, L_5 in base 2). His paper is about prime factors only; the link with series is
+ours. The proof of Theorem R does not use his theorem.
+
 *Still on paper* (research/2026-11-22-rational-bases/00_summary.md). Theorem L': a degree-1
 formula with rational coefficients for a non-zero rational multiple of pi exists in the
 rational base beta, |beta| > 1, if and only if |beta| is a power of 2 or of 3/2; in base (3/2)^B
@@ -2168,11 +2188,12 @@ there is at present neither a candidate nor a proof of impossibility.
   Adjacent recent work: Gasull, Luca and Varona, Indag. Math. 34 (2023), which
   classifies two-term formulas with arguments b/2^a and cites neither BBG nor Bailey.
   The literature databases MathSciNet and zbMATH were not searched.
-* **Still to read before submission:** Schinzel 1962, Drauschke-Tasche 1987,
+* **Still to read before submission:** Drauschke-Tasche 1987,
   Steidl-Tasche 1989 and Steidl-Hanler-Tasche 1989 (interlibrary loan requested
   21 November 2026, needed by 19 December), and Broadhurst's unpublished manuscript
   (ask the author). Huvent's paper has been read: both optimal formulas of Theorem E
-  are his.
+  are his. Schinzel 1962 was read on 23 November 2026 (library copy): Lemma 2 is the
+  case a = 2, b = 1 of his Theorem 2, in the form his proof gives.
 * **Parts III and IV have had one independent review** (review_part3_part4.md,
   21 November 2026). It rebuilt V by a different exact method, recomputed the
   valuation table and the vertex enumeration with its own code, and confirmed
