@@ -1474,8 +1474,8 @@ In Lean (`Pilean/Base5`): `PiFormula.Base5.Unconditional.eq_zero_of_hasSum_mul_p
 and Lean's three standard axioms only. The proof has the three parts described below:
 the lemma on primes (`primitiveHalves5`), good primes for every root other than 1 and -1
 (`goodPrimes5_of_halves`), and the support theorem with Baker's theorem
-(`eq_zero_of_goodPrimes5`). The statements on logarithms at the end of the next section are
-not proved yet.
+(`eq_zero_of_goodPrimes5`). The criterion for logarithms is Theorem K5, at the end of the
+next section.
 
 ### The argument
 
@@ -1518,10 +1518,23 @@ all among the numbers 1 - r/t, and Baker's theorem gives Theorem C5. Each step i
 - the support theorem and the last step, `support_subset_pm_one`, `log_indep5`,
   `eq_zero_of_goodPrimes5` (`Base5/Support.lean`, `Base5/Classification.lean`).
 
-**Statement K5 (not proved; in progress).** log 5 is not a value, and no log p (p prime) is
-a value; the values that are logarithms of rational numbers are the log y with a power of y
-a product of powers of the numbers (5^m - 1)/5^m, L_h/5^(2h) and M_h/5^(2h). For example
-log(4/5), log(9/5), log(31/25), log(11/25), log(71/25), log(521/625), and so log(3/2).
+**Theorem K5 (machine-checked, from Baker's theorem).** For a positive rational y, log y is
+a value of F5 if and only if a power of y is a product of integer powers of the numbers
+(5^m - 1)/5^m, L_h/5^(2h) and M_h/5^(2h) (h odd). For example log(4/5), log(9/5),
+log(31/25), log(11/25), log(71/25), and so log(3/2), are values. And log 5, log 2 and log 3
+are not values: in base 5 the logarithm of the base itself has no formula, because no
+sqrt(5) - r is a unit.
+
+In Lean (`Pilean/Base5/LogValues.lean`, `LogConverse.lean`, `LogExplicit.lean`,
+`LogNonValues.lean`): `isF5Value_log_rat_iff_pow`, `isF5Value_log_of_pow` (no hypothesis),
+`isF5Value_log_three_halves`, `not_isF5Value_log_five`, `not_isF5Value_log_two`,
+`not_isF5Value_log_three`; with no hypothesis in `PiFormula.Base5.Unconditional`. Two points
+differ from bases 2 and 3. The converse averages over all conjugations, which send t to
++-t, and needs the relation to have total degree 0, since log 5 is not there to absorb
+powers of t. And the non-values do not follow from the criterion alone: they use the good
+primes of Theorem C5. Whether log p - w log 5 is a value for a given prime p and rational w
+(numerically: w = 1/2 for 2 and 3, 3/2 for 7 and 13, 2 for 11, 31, 71) is contained in the
+criterion; a finite test for a prime, as in bases 2 and 3, is not formalized.
 
 Base 5 is the opposite of base 2 (many zero relations, a space of formulas for pi of
 dimension 8) and of base 3 (two zero relations, pi sqrt(3) but not pi).

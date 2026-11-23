@@ -1,4 +1,11 @@
 import Pilean.PiFormula
 import Pilean.PiFormula.All
 import Pilean.PiFormula.Unconditional
+import Pilean.PiFormula.Transcendence
 import Pilean.Base3.Unconditional
+import Pilean.Base3.Bailey
+import Pilean.Base3.LogPrimeTestUnconditional
+import Pilean.Base3.Transcendence
+import Pilean.Base5.Unconditional
+import Pilean.Base5.LogUnconditional
+import Pilean.Base5.Transcendence
