@@ -1748,6 +1748,27 @@ q = 0 (`rat_mul_pi_step`).
    of F_a. By Theorem G (a >= 5), or by Theorem C3 (a = 3: the values of the class that are
    algebraic multiples of pi are the rational multiples of pi sqrt(3)), q = 0. QED.
 
+*What the computer finds for every step* (python/basebn_explore.py;
+research/2026-11-22-general-step/00_summary.md). Lattice searches for the bases 5, 6, 7, 10
+and 12 at the steps n = 1, 2, 3, 4, 6 and the periods up to 144 (base 10: up to 240), 2434
+runs in all, found no relation in any run: neither a multiple of pi, rational or algebraic,
+nor a series with sum zero. So in these bases the classes of every step look as empty of
+relations as the class of step 2 is by Theorem G. This is evidence only (each search bounds
+the size of the coefficients, and looks at one period), and for the steps n >= 3 the absence
+of zero series is not proved. In base 3 the steps 4 and 6 contain series for irrational
+multiples of pi that are outside the class of step 2, for example
+
+    2 pi 3^(1/6) = sum over j >= 0 of 9^(-j) ( 9/(12j+1) - 3/(12j+4) - 3/(12j+7) - 3/(12j+10) )
+
+(found by the search, checked to 80 digits; whether it is in print was not checked).
+
+*Two remarks from the same check.* The sub-series lemma needs the base not to be a perfect
+power: as stated it fails for b = 9, n = 4 and for b = 8, n = 3 (for b = a^j the right
+modulus is n1 / gcd(n1, j)). Theorem L avoids this by passing to the root a. And in
+Theorem L "a formula of base b" allows every power b^B: for the literal bases 2, 4 and 8
+(B = 1) a computation finds no formula for pi, and the first one is in base 16. A formula in
+a power of b is what the computation of digits in base b needs.
+
 **What is in print** (literature check of 22 November 2026;
 research/2026-11-22-nonbinary-pi/01_literature.md).
 
