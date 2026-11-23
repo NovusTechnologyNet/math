@@ -28,7 +28,7 @@ formulas and every `P(1, 2^B, n, A)` of Bailey's compendium with `n = B` or `n =
 | Theorem C | The formulas for pi in F form a space of dimension exactly 8 (13 for algebraic multiples of pi); every zero relation is known | Lean |
 | Theorem D | No formula for pi in F avoids the slowly converging terms | Lean |
 | Bailey's table | The number of independent zero relations of `P(1, 2^B, 2B, .)` and `P(1, 2^B, B, .)`, for every B | Lean |
-| Theorem E | A formula for pi in F needs at least 2/3 of a term per bit; Huvent's formulas attain it. For a second cost measure the least value is 7/24, attained by a new formula | Lean; the uniqueness statements are not formal |
+| Theorem E | A formula for pi in F needs at least 2/3 of a term per bit; Huvent's formulas attain it. For a second cost measure the least value is 7/24, attained by a new formula | Lean; the uniqueness for 2/3 is formal too (`termCount_eq_forty_iff`: only Huvent's two formulas attain it); the uniqueness statement for 7/24 is not formal |
 | Theorem G | log 23 is not the value of any series of F | Lean |
 | Theorem H | For a prime p below 100, log p is a value of F exactly for 2, 3, 5, 7, 11, 13, 17, 19, 29, 31, 37, 41, 43, 61, 73 | Lean |
 | Theorem I | arctan(2/7) is not the value of any series of F (a question left open in Bailey's compendium), nor are arctan(5/8) and arctan(4/9); arctan(2/7) + arctan(6/11) is a value | Lean |

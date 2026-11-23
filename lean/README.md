@@ -103,6 +103,7 @@ spanned by `γ(O) + γ(O*) = 0`, `γ(O_1) = π/4`, `γ(O_6) = 0` and `γ(O_10) -
 | `Pilean/BaseB/TermsPerBit.lean` | `terms_per_bit`: a degree-1 BBP-type formula `P(1, b^B, N, c)` for a non-zero rational multiple of `π` has `b = 2^e` and at least `(2/3) e B` non-zero coefficients; `terms_per_bit_attained` (Huvent's formula: 8 coefficients, 12 bits) | proved, no hypothesis |
 | `Pilean/BaseB/Combination.lean` | `exists_bailey_of_sum` (finitely many degree-1 series of the same base are one such series), `no_pi_bailey_sum`, `no_pi_bailey_comb`, `no_pi_L_comb` (no rational combination of the series `∑_k b^(-mk)/(nk+j)` is a non-zero rational multiple of `π`, for `b` not a power of 2), `no_log_bailey_sum` | proved, no hypothesis |
 | `Pilean/BaseB/Examples.lean` | Named cases: `no_pi_bailey_26`, `no_pi_bailey_36`, `no_log_self_bailey_26`, `no_log_self_bailey_36` | proved, no hypothesis |
+| `Pilean/PiFormula/FewestTermsUniqueCert.lean`, `FewestTermsUnique.lean` | Uniqueness in Theorem E: `termCount_eq_forty_iff` (exactly 40 non-zero entries per 120 iff the pattern is a non-zero rational multiple of `rhoHuvent1` or `rhoHuvent2`), `termCount_ge_forty_one`; certificate `theUCert` checked by `decide +kernel` | proved (from `BakerTheorem`; versions with no hypothesis in `Unconditional`) |
 | `TauCeti/` | 25 modules of Tau Ceti (Apache-2.0), see `TauCeti/VENDORED.md` | builds unchanged |
 
 There is no `sorry` anywhere. `theoremA`, `theoremB`, `theoremBgamma`, `lemma2`, `size_bound` and every other theorem
