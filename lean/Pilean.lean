@@ -10,3 +10,5 @@ import Pilean.Base5.Unconditional
 import Pilean.Base5.LogUnconditional
 import Pilean.Base5.Transcendence
 import Pilean.BaseB.NoPi
+import Pilean.BaseB.NegativeBase
+import Pilean.BaseB.LogBase
