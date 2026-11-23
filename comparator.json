@@ -1,0 +1,7 @@
+{
+  "challenge_module": "Pilean.Challenge.Erdos",
+  "solution_module": "Pilean.Erdos.Final",
+  "theorem_names": ["PiFormula.Erdos.erdos_pm_one_nat"],
+  "definition_names": [],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}
