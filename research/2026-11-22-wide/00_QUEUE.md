@@ -104,6 +104,19 @@ and from which b? (2) Adhikari-Saradha-Shorey-Tijdeman and Saradha-Tijdeman: exa
 (3) Lehmer 1975, Murty-Saradha. (4) Open problems. (5) Is the general-step question implied
 by a published theorem for large b?
 
-## Later waves (to plan from the leads of wave 1)
+## Wave 1: done
 
-Wave 2: about 550 further searches on pi and 650 on primes; wave 3: about 250 beyond.
+All 30 threads reported, plus F3 (rational bases in the literature), started after P03 found a
+formula for pi in base 3/2. Totals by the helpers' own search logs, attempted queries: pi about
+950 (51 WebSearch calls), primes about 675 (36), beyond about 450 (35); about 2075 in all, of
+which roughly a quarter were refused or rate-limited. The synthesis is `00_summary.md`.
+
+## Wave 2, started 22 November 2026 (night): 14 threads, mostly primes
+
+W2_Q11 Erdos's +-1 conjecture, state of the art, and a check of a helper's claim; W2_Q12
+Zsigmondy in formal libraries; W2_Q13 open tasks in the Lean prime number theorem projects;
+W2_Q14 OEIS entries to check; W2_Q15 exact statements of Schinzel's theorems; W2_Q16
+cyclotomic primes (Pomerance); W2_Q17 every claim in Chamberland 2003; W2_Q18 primality
+certificates in Lean; W2_Q19 which prime-and-pi facts are in Mathlib; W2_Q20 covering
+problems and Erdos 203; W2_P14 Gibbons's spigot conjecture; W2_P15 existing formal work on
+BBP; W2_R08 venues in detail; W2_R09 recent overlapping preprints.

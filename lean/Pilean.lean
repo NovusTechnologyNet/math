@@ -16,3 +16,5 @@ import Pilean.BaseB.TermsPerBit
 import Pilean.BaseB.Combination
 import Pilean.BaseB.Examples
 import Pilean.PiFormula.FewestTermsUnique
+import Pilean.BaseB.LogSpan
+import Pilean.RatBase.Identities

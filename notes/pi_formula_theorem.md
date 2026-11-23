@@ -1877,6 +1877,58 @@ which goes through the root a of the base (here a = 3).
 logarithm formula of base b under a condition that holds for b = 10; Theorem M is the same
 conclusion for every degree-1 formula. We did not search for Theorem M separately.
 
+## Part VIII. Rational bases (begun 22 November 2026)
+
+Theorem L is about integer bases. For a rational base p/q > 1 the same series make sense,
+
+    sum over k >= 1 of rho(k) (q/p)^(floor(k/2)) / k        (rho rational and periodic),
+
+and in Bailey's form sum_j (q/p)^(Bj) sum_{i=1..N} a_i/(Nj + i). Here the picture changes.
+
+**A formula for pi in base 3/2 (machine-checked).**
+
+    pi/4 = sum over k >= 1 of rho(k) (2/3)^(floor(k/2)) / k,
+
+where rho(k) = (-1)^(floor(k/12)) c(k mod 12), with c = 1/2 at 1, 2, 5, 7, 10, 11, c = 1 at 6 and
+c = 0 at 0, 3, 4, 8, 9. In blocks: pi/4 = sum_j (2/3)^(12j) sum_{i=1..24} a_i/(24j + i) with
+
+    a = (1/2, 1/3, 0, 0, 2/9, 8/27, 4/27, 0, 0, 16/243, 16/243, 0, -32/729, -64/2187, 0, 0,
+         -128/6561, -512/19683, -256/19683, 0, 0, -1024/177147, -1024/177147, 0).
+
+**A formula for pi sqrt(3) in base 4/3 (machine-checked).**
+
+    sqrt(3) pi / 9 = sum over k >= 1 of rho(k) (3/4)^(floor(k/2)) / k,
+
+rho of period 12 with values (1/4, 1/2, 1/2, 1/2, 1/4, 0, -1/4, -1/2, -1/2, -1/2, -1/4, 0).
+
+In Lean (`Pilean/RatBase`): `pi_base_three_halves`, `hasSum_rhoTH`,
+`sqrt_three_pi_base_four_thirds`, `hasSum_rhoFT`; `baileyBlockRat p q B N a` is the block of
+the rational base, and for q = 1 it is the block of the integer base (`baileyBlockRat_one`).
+
+*Why.* Each formula is the imaginary part of -Log(1 - w) for one or two numbers w of absolute
+value sqrt(q/p), and behind it is an identity saying that a product of the numbers
+sqrt(p) - zeta sqrt(q) is a root of unity:
+
+    (sqrt 3 - sqrt 2 zeta)(sqrt 3 - sqrt 2 zeta^5) = -i,   zeta = e^(i pi/12)
+                                                          (`sqrt_three_sub_sqrt_two_mul`),
+    2 - sqrt 3 e^(i pi/6) = e^(-i pi/3)                    (`two_sub_sqrt_three_mul_exp`).
+
+These are the analogues of 1 - (1 + i)/2 = (1 - i)/2 behind the binary formulas. For an
+integer base b >= 5 no such product exists (Theorem G); for the rational base 3/2 it does.
+
+*In print* (research/2026-11-22-wide/F3_rational_bases_literature.md; one helper, about 80
+queries). The construction, a triangle with rational angles and side ratio r giving a series
+in powers of r, is in Adegoke (2010), Adegoke and Layeni (2010, 2013) and Kristensen and
+Mathiasen (2023, Theorem 1), who keep to integer and Pisot bases. The formula for pi sqrt(3)
+in base 4/3 is equivalent to one of Adegoke and Layeni (2010). A formula for pi in base 3/2
+was not found; this is weak evidence. It was found here by a research helper, by computation.
+It is not a formula for extracting digits: no such method is known in base 3/2.
+
+*Open.* Which rational bases admit a formula? The triangles suggest that relations exist
+exactly for p/q in {2, 3, 4, 3/2, 4/3}, and a formula for a rational multiple of pi exactly
+for the powers of 2 and of 3/2. This is a conjecture; the proof of Theorem G should carry
+over with the homogeneous cyclotomic values Phi_m(p, q), and is being worked out.
+
 ## Why this matters for digit extraction
 
 In the prime form of the window algorithm, the per-prime state a window must read is
