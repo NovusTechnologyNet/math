@@ -1345,6 +1345,25 @@ In Lean (`Pilean/Base3/Dimension.lean`): `exists_coords3`, `hasSum_comb3`, `peri
 and the others in the same namespace. Standard axioms only. python/
 base3_classification_check.py checks the three values to 60 digits, independently.
 
+*What is in print, and what the theorem adds.* The three patterns are known. In the notation
+P(1, 729, 12, A) of Bailey's compendium (a_j = rho(j) 3^(-floor(j/2))):
+
+- 243 Z1 is relation 130 of the compendium, 0 = P(1, 729, 12, (0, 81, -162, 0, 27, 36, 0, 9,
+  6, 4, -1, 0)), which the compendium says was found experimentally;
+- 243 Z2 is a zero relation of Adegoke (2010), (243, -243, -324, -81, 27, 0, -9, 9, 12, 3,
+  -1, 0), quoted again by Kristensen and Mathiasen (2022);
+- relation 131 of the compendium is 243 (Z2 - Z1);
+- Broadhurst's formula for pi sqrt(3) (compendium 69) is G - 9 Z1 + 3 Z2.
+
+These identifications are checked by `python/base3_classification_check.py`; the sources
+were read by a research helper (research/2026-11-22-base5/05_pi_other_bases_claims.md), not
+by us. So the theorem does not find new relations. It proves the two known ones (one of
+which is recorded as experimental), and it proves that there is nothing else: every zero
+relation of this class in base 3 is a combination of them, and every formula for a multiple
+of pi is the Gregory series plus such a combination. The compendium says of zero relations
+in general that their origin is not understood; here it is the three multiplicative
+relations among the six numbers 1 - r/t.
+
 *Proof.* Let d_r be the coefficients of S(rho) = sum of d_r Log(1 - r/t). By Baker's theorem
 (d_r) is a combination, with algebraic coefficients, of integer relations z among i pi and
 the Log(1 - r/t). (1) Such a relation is supported on the six exceptional roots (step (2)
@@ -1406,9 +1425,11 @@ and (-9a, 3a), and only the first lies on one of the five lines (b = 0).
 
 The formulas in print found by the research (Adegoke's 2.14 and 2.15, the compendium's 92 at
 b = 3, all forms of the Gregory series; and the compendium's 69, with 7 terms per 6 digits)
-do not include the second one. So in base 3 nothing beats the Gregory series, in contrast
-with base 2, where there are many zero relations and the optimum 2/3 is below every
-classical formula.
+do not include the second one as such. It is the compendium's formula 69 minus 1/27 of its
+relation 131 (that is, formula 69 - 9 (Z2 - Z1)), so it follows at once from printed
+identities; we do not claim it is new. So in base 3 nothing beats the Gregory series, in
+contrast with base 2, where there are many zero relations and the optimum 2/3 is below
+every classical formula.
 
 Other values (each checked to 50 digits): log 2 = S(0, 4, 0, 0); log 3 = S(0, 6, 0, 2);
 sqrt(3) log(2 + sqrt(3)) = S(2, 0); arctan(1/3) = S(0, 2, 0, 0, 0, -2, 0, 0).

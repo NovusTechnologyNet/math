@@ -59,6 +59,22 @@ if __name__ == "__main__":
     print("S(F)                 = %s" % mp.nstr(series(F), 5))
     print("checked: H = G/3 - Z2, F = Z2 - 2 Z1, and (1, 0, -10, ...) = 3 Z1 + Z2")
 
+    # What is in print (Bailey's compendium, P(1, 729, 12, A) with a_j = rho(j) 3^(-floor(j/2))):
+    # relation 130 is 243 Z1, relation 131 is 243 (Z2 - Z1), Adegoke's zero relation is 243 Z2,
+    # and Broadhurst's formula 69 for pi sqrt(3) is G - 9 Z1 + 3 Z2.
+    def to_rho(a, scale=1):
+        return [Fraction(a[j - 1] * 3 ** (j // 2), scale) for j in range(1, 13)]
+    rel130 = [0, 81, -162, 0, 27, 36, 0, 9, 6, 4, -1, 0]
+    rel131 = [243, -324, -162, -81, 0, -36, -9, 0, 6, -1, 0, 0]
+    adegoke = [243, -243, -324, -81, 27, 0, -9, 9, 12, 3, -1, 0]
+    f69 = [81, -54, 0, -9, 0, -12, -3, -2, 0, -1, 0, 0]          # with the factor 1/9
+    assert to_rho(rel130) == [243 * x for x in Z1]
+    assert to_rho(rel131) == [243 * (y - x) for x, y in zip(Z1, Z2)]
+    assert to_rho(adegoke) == [243 * y for y in Z2]
+    assert to_rho(f69, 9) == [g - 9 * x + 3 * y for g, x, y in zip(G, Z1, Z2)]
+    print("checked: compendium relations 130, 131, Adegoke's relation and formula 69 in terms "
+          "of G, Z1, Z2")
+
     # Theorem E3 (lean/Pilean/Base3/Optimum.lean): the two formulas with 6 terms per period
     second = [0, 18, 18, 18, 0, 0, 0, -18, -18, -18, 0, 0]
     assert all(second[i] == G[i] - 6 * Z2[i] for i in range(12))

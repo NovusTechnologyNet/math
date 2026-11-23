@@ -45,8 +45,48 @@ helpers' unless marked *checked by us*. Our own computations are in Part VI of
    prime of given order of 5), A138935 (Phi_k(5) prime). Cunningham tables:
    https://homes.cerias.purdue.edu/~ssw/cun/index.html
 
+## Second pass (three more helpers; reports 03, 04, 05)
+
+9. **Schinzel's theorem, third attempt** (`03_schinzel_statement.md`). The 1962 paper could
+   not be read (paywalled). Stewart's 2013 paper (arXiv 1008.1274) states it as: for coprime
+   a, b with ab a square or twice a square, a^n - b^n has at least two primitive divisors,
+   with the exceptions (2,1,4), (2,1,6), (2,1,12). In that form it does not cover (3,1) or
+   (5,1). Wagstaff (Integers 10, 2010) says 3^(3(2k-1)) + 1 has at least two primitive prime
+   factors for k > 1. No source read says that each Aurifeuillian factor has one. So our
+   Lemma H (base 3, proved in Lean) and the base-5 analogue are not covered by anything we
+   could read; we still do not claim they are new.
+
+10. **Sums that vanish** (`04_vanishing_periodic_sums.md`). Adhikari, Saradha, Shorey and
+    Tijdeman (2001), as restated in Tijdeman's survey: for algebraic alpha and rational
+    functions P/Q with simple rational poles, the sum of alpha^n P(n)/Q(n) is rational or
+    transcendental, and 0 or transcendental when the poles lie in [-1, 0). So "a value of our
+    class is 0 or transcendental" is known. They give no classification of the vanishing
+    case for alpha other than 1; Baker, Birch and Wirsing (1973) and Okada (1982) classify it
+    for alpha = 1 only. The compendium says zero relations are not understood. No
+    classification of zero sums and no independence result for x = 1/b or 1/sqrt(b) was
+    found. This is the right prior art to cite for transcendence.
+
+11. **pi in other bases, and base-3 zero relations** (`05_pi_other_bases_claims.md`).
+    - No rational-coefficient degree-1 formula for pi in an integer base that is not a power
+      of 2 was found in any source. Kristensen and Mathiasen (arXiv 2208.07696) have pi only
+      in irrational Pisot bases. Bailey's compendium words the theorem of Borwein, Borwein
+      and Galway more broadly than it is.
+    - **Base-3 zero relations are in print.** The compendium's relations 130 and 131 (base
+      729, found experimentally) and Adegoke's ternary zero relation (NYJM 2010; quoted by
+      Kristensen and Mathiasen). *Checked by us* (`python/base3_classification_check.py`):
+      relation 130 is 243 Z1, Adegoke's is 243 Z2, relation 131 is 243 (Z2 - Z1), and
+      Broadhurst's formula 69 is G - 9 Z1 + 3 Z2, in the notation of Part V of the note.
+    - The second formula with 6 terms, (0, 18, 18, 18, 0, 0, 0, -18, -18, -18, 0, 0), is
+      formula 69 minus 1/27 of relation 131: not printed as such, but immediate from printed
+      identities.
+
 ## What this changes
 
+- **Base 3:** the two zero relations and the formulas were known. What Theorem C3 adds is
+  completeness (dimension exactly 2 and exactly 3, period 12), a proof of a relation that
+  the compendium records as experimental, and the reason for the relations. The note now
+  says so. The same caution applies to base 2, where the zero relations are Lafont's and
+  others'.
 - The absence of pi in base 5 for a class wider than "Machin-type" is, as far as this pass
   shows, not in print. Our computations say more: no zero relations and no relation at all
   among the logarithms. "Not found" is weak evidence; a proof would be the real content.
