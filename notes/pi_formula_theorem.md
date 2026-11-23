@@ -1736,6 +1736,33 @@ q = 0 (`rat_mul_pi_step`).
    of F_a. By Theorem G (a >= 5), or by Theorem C3 (a = 3: the values of the class that are
    algebraic multiples of pi are the rational multiples of pi sqrt(3)), q = 0. QED.
 
+**What is in print** (literature check of 22 November 2026;
+research/2026-11-22-nonbinary-pi/01_literature.md).
+
+- Borwein, Borwein and Galway (Canad. J. Math. 56 (2004), 897-925) prove the statement for
+  the narrower class of Machin-type formulas: for b > 2 not a proper power, pi is not a
+  rational combination of the numbers arctan(b^(-m)) (their Theorem 7). The proof uses Bang's
+  theorem on primitive prime divisors and the Gaussian primes, and no transcendence theorem.
+- The general class is posed there as a question. Their closing Comment (10) writes
+  L(1, b, n, j) through the logarithms ln(1 - zeta b^(-1/n)), zeta an n-th root of unity, and
+  asks whether their techniques can decide if pi is a linear combination of the
+  L(1, b^m, n, j); they add that this would probably need a good understanding of the field
+  Q[zeta_n, b^(1/n)]. Their Comment (3) notes that the classical formula of 1995 does not
+  appear to be of Machin type. (We checked both passages in the text of the paper.)
+- Bailey's Compendium of BBP-type formulas (version of April 2023, page 2) says that the
+  2004 paper showed that there are no degree-1 BBP-type formulas for pi except those whose
+  base is a power of two, without the restriction to Machin type. Mendonca
+  (arXiv:1209.2348) repeats this; MathWorld gives the Machin-type version.
+- So, as far as we found, Theorem L is stated in print as known, with a reference that
+  proves a special case and asks the general question. We found no proof of the general
+  statement, no use of Baker's theorem for BBP-type formulas, and no counterexample. This is
+  weak evidence: about 15 searches; MathSciNet and zbMATH were not searched; earlier versions
+  of the Compendium and other work of the three authors were not read.
+- Theorem L answers Comment (10) for every integer base: the understanding of
+  Q[zeta_n, b^(1/n)] that is needed is the Kummer step and the sub-series lemma, and the rest
+  is Baker's theorem and Theorem G. Theorem G itself (no zero relation and no algebraic
+  multiple of pi, for every b >= 5) is not stated in any source we read.
+
 **Scope and limits.**
 
 - *Degree 1 only.* The terms are a_i / (N j + i) to the first power. Formulas of higher
