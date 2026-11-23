@@ -1445,13 +1445,29 @@ sqrt(3) log(2 + sqrt(3)) = S(2, 0); arctan(1/3) = S(0, 2, 0, 0, 0, -2, 0, 0).
 - Computed only: the list of 31 primes.
 - Next: the test for a prime in Lean; other bases.
 
-## Part VI. Base 5 and other bases (exploration; nothing here is proved)
+## Part VI. Base 5 (machine-checked) and other bases (exploration)
 
 The class F5 is the set of series S(rho) = sum over k >= 1 of rho(k) 5^(-floor(k/2))/k with
 rho rational and periodic. Take t = sqrt(5). The twisted pattern is c(k) = rho(k) t^(k mod 2)
 and S(rho) = sum of d_r Log(1 - r/t) over the roots of unity r, as before.
 
-### What the method predicts
+**Theorem C5 (machine-checked, from Baker's theorem).** If rho is rational and periodic and
+S(rho) = gamma pi with gamma algebraic, then rho = 0. In particular:
+
+- pi is not the value of any series of F5, nor is any non-zero algebraic multiple of pi;
+- F5 has no zero relation;
+- a number has at most one formula of this class: two rational periodic patterns with the
+  same sum are equal.
+
+In Lean (`Pilean/Base5`): `PiFormula.Base5.Unconditional.eq_zero_of_hasSum_mul_pi`,
+`not_isF5Value_pi`, `hasSum_zero_iff`, `eq_of_hasSum`, `mul_pi_eq_zero`, with no hypothesis
+and Lean's three standard axioms only. The proof has the three parts described below:
+the lemma on primes (`primitiveHalves5`), good primes for every root other than 1 and -1
+(`goodPrimes5_of_halves`), and the support theorem with Baker's theorem
+(`eq_zero_of_goodPrimes5`). The statements on logarithms at the end of the next section are
+not proved yet.
+
+### The argument
 
 For a root of unity r of order n, the question is whether t - r has a good prime: a prime
 ideal P containing t - r and an odd rational prime p, not 5 and not dividing n.
@@ -1476,21 +1492,29 @@ ideal P containing t - r and an odd rational prime p, not 5 and not dividing n.
 - The two numbers 1 - 1/t and 1 + 1/t are multiplicatively independent: their product is
   4/5 and their quotient is phi^(-2).
 
-So, if every root other than 1 and -1 has a good prime, there is no multiplicative relation
-at all among the numbers 1 - r/t, and Baker's theorem gives:
+So every root other than 1 and -1 has a good prime, there is no multiplicative relation at
+all among the numbers 1 - r/t, and Baker's theorem gives Theorem C5. Each step is in Lean:
 
-**Statement C5 (not proved).** If rho is rational and periodic and S(rho) = gamma pi with
-gamma algebraic, then rho = 0. In particular:
+- the lemma on primes, `primitiveHalves5` (`Base5/Zeta5.lean`, `Base5/Halves.lean`): for
+  every odd h, each of L_h and M_h has a prime p with ord_p(5) = 5h. It is proved in
+  Z[zeta_5], taken as a quadratic extension of Z[phi], with the norm to Z in two steps; the
+  size bound uses the two real embeddings of Z[phi];
+- good primes, `goodPrimes5_of_halves` (`Base5/GoodPrimes.lean`). With m the order of r^2
+  and p a prime with ord_p(5) = m, a prime ideal above p contains 5 - r^2 = (t - r)(t + r).
+  One passes from t + r to t - r by a conjugation that fixes or reverses t (t is a Gauss sum
+  of fifth roots of unity), except when m = 5h with h odd: there, t + r in the ideal would
+  put both L_h and M_h in it, hence their difference 2 * 5^((h+1)/2) (5^h + 1), against the
+  order of 5;
+- the support theorem and the last step, `support_subset_pm_one`, `log_indep5`,
+  `eq_zero_of_goodPrimes5` (`Base5/Support.lean`, `Base5/Classification.lean`).
 
-- pi is not the value of any series of F5, nor is any non-zero algebraic multiple of pi;
-- F5 has no zero relation: a number has at most one formula of this class;
-- log 5 is not a value, and no log p (p prime) is a value; the values that are logarithms of
-  rational numbers are the log y with a power of y a product of powers of the numbers
-  (5^m - 1)/5^m, L_h/5^(2h) and M_h/5^(2h). For example log(4/5), log(9/5), log(31/25),
-  log(11/25), log(71/25), log(521/625), and so log(3/2).
+**Statement K5 (not proved; in progress).** log 5 is not a value, and no log p (p prime) is
+a value; the values that are logarithms of rational numbers are the log y with a power of y
+a product of powers of the numbers (5^m - 1)/5^m, L_h/5^(2h) and M_h/5^(2h). For example
+log(4/5), log(9/5), log(31/25), log(11/25), log(71/25), log(521/625), and so log(3/2).
 
-This is the opposite of base 2 (many zero relations, a space of formulas for pi of dimension
-8) and of base 3 (two zero relations, pi sqrt(3) but not pi).
+Base 5 is the opposite of base 2 (many zero relations, a space of formulas for pi of
+dimension 8) and of base 3 (two zero relations, pi sqrt(3) but not pi).
 
 ### What the computer finds (python/base5_explore.py)
 
@@ -1527,20 +1551,16 @@ would add the absence of zero relations. In print we found no statement about pi
 for a class this wide, no zero relation, and no formula for a single log p
 (research/2026-11-22-base5/00_summary.md).
 
-### What a proof for base 5 needs
+### How the proof for base 5 was made
 
-The Lean proof for base 3 carries over, file by file:
-
-1. The series as a combination of logarithms, with t = sqrt(5) (a copy of `Base3/Series.lean`
-   without the sign).
-2. The lemma on primes: for every odd h, each of L_h and M_h has a prime p with
-   ord_p(5) = 5h. As in `Base3/Halves.lean`, but in Z[zeta_5]: a quadratic extension of
-   Z[phi], so the norm to Z is taken in two steps, and two complex embeddings are needed for
-   the size bound. Since sqrt(5) - 1 > 1, the size bound itself is easier than in base 3.
-3. Good primes for every root other than 1 and -1 (a case analysis as in
-   `Base3/GoodPrimes.lean`, with Zsigmondy's theorem for base 5).
-4. The support theorem and Baker's theorem, as in `Base3/PiValue.lean`; the last step is the
-   independence of log(4/5) and log(phi), in place of `log_indep`.
+The Lean proof for base 3 carried over, file by file, in one evening: a shared file of
+definitions (`Base5/Defs.lean`) fixed the statements `GoodPrimes5` and `PrimitiveHalves5`,
+and the three parts were then written at the same time by three AI subagents, each on its
+own files, and checked independently afterwards (compiled again, axioms printed). The
+literature position is as for base 3: for the narrower class of Machin-type formulas the
+absence of pi in bases above 2 is a theorem of Borwein, Borwein and Galway (2004); for this
+class, and for the absence of zero relations, we found nothing in print, which is weak
+evidence.
 
 ## Why this matters for digit extraction
 

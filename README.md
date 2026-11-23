@@ -40,9 +40,11 @@ formulas and every `P(1, 2^B, n, A)` of Bailey's compendium with `n = B` or `n =
 | Theorem C3 in full (base 3) | Every base-3 series of this class whose value is an algebraic multiple of pi is a G + b Z1 + c Z2, with value a pi sqrt(3): G is the Gregory series and Z1, Z2 are two explicit zero relations. So these series have period 12 and form a space of dimension exactly 3, and the zero relations have dimension exactly 2 | Lean, unconditional (`PiFormula.Base3.Unconditional.theoremC3`, `exists_coords3`, `hasSum_zero_iff`) |
 | Theorem E3 (base 3) | A base-3 series of this class with a non-zero multiple of pi as value needs at least one term per base-3 digit (6 of the 12 entries per period). Exactly two formulas attain this: the Gregory series and pi sqrt(3) = S(0, 18, 18, 18, 0, 0, 0, -18, -18, -18, 0, 0) | Lean, unconditional (`PiFormula.Base3.Unconditional.theoremE3`), including the uniqueness |
 
-| Base 5 and other bases | Exploration: in base 5 the computer finds no zero relation, no formula for a multiple of pi and no relation at all among the logarithms; the method explains why (only the roots 1 and -1 are exceptional). The same for bases 6, 7, 10, 11, 13, 14, 15, 17 | Computed (`python/base5_explore.py`); nothing proved. Part VI of the note |
+| Base 3 in Bailey's notation | The printed identities (the compendium's relations 130 and 131, Adegoke's zero relation, Broadhurst's formula 69) and, for every B, the number of independent zero relations of P(1, 3^B, 2B, .) (2 if 6 divides B, else 0) and of P(1, 3^B, B, .) (0) | Lean (`Pilean/Base3/Bailey.lean`); the counts from Baker's theorem |
+| Theorem C5 (base 5) | A base-5 series of this class whose value is an algebraic multiple of pi has all coefficients zero. So pi is not a value, there is no zero relation, and a number has at most one formula | Lean, unconditional (`PiFormula.Base5.Unconditional.eq_zero_of_hasSum_mul_pi`, `not_isF5Value_pi`, `hasSum_zero_iff`, `eq_of_hasSum`). Part VI of the note |
+| Other bases | Exploration: bases 6, 7, 10, 11, 13, 14, 15, 17 show no relation among the logarithms either; only bases 2 and 3 do | Computed (`python/base5_explore.py`); nothing proved |
 
-Theorems C to K, K3, C3 and E3 rest on Baker's theorem on linear forms in logarithms (1966). The library
+Theorems C to K, K3, C3, E3 and C5 rest on Baker's theorem on linear forms in logarithms (1966). The library
 has each of them in two forms. Our own files prove them from Baker's theorem as an explicit
 hypothesis, `BakerTheorem`, because Baker's theorem is not in Mathlib. `lean/Baker/` holds a
 formal proof of Baker's theorem by Michail Karatarakis, and
