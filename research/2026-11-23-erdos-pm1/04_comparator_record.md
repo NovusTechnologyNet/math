@@ -16,9 +16,9 @@ then the partial sums of `∑ f(n)/n` do not tend to `0`.
 | Test | Status |
 |---|---|
 | 1. The Lean statement matches the informal one | The statement uses notions of Mathlib only (`Odd`, `IsSquare`, `Finset.sum`, `Filter.Tendsto`); the trusted copy is `lean/Pilean/Challenge/Erdos.lean`, which imports three Mathlib modules and nothing from this project. Read by the project only; no outside reader yet |
-| 2. The code compiles | Yes on the development machine (full build, 18,779 jobs). On a clean Linux machine building from the public repository: everything except one file, `Pilean/PiFormula/CheckedPair.lean`, which needs more than 22 GB of memory (killed by the kernel at 22 GB resident) and is in the import cone of the theorem although the proof does not use it. Being fixed |
-| 3. The code proves the theorem as stated (`lake comparator`) | **Accepted**, on exports (see below) |
-| 4. Independent kernels (`lake comparator --paranoid`) | **Accepted by all six** (see below) |
+| 2. The code compiles | Yes, twice: on the development machine, and on a clean Linux machine from a fresh clone of the public repository at commit `0ed6ebf` (full build, 18,795 jobs, 1 min 55 s on 12 cores, peak memory about 10 GB). An earlier attempt at commit `8545da0` failed on one file that needed more than 22 GB; that file was restructured in `0ed6ebf` |
+| 3. The code proves the theorem as stated (`lake comparator`) | **Accepted**, with the build and the export done inside the sandbox (second run below); earlier also on exports |
+| 4. Independent kernels (`lake comparator --paranoid`) | **Accepted by all six**, in both runs |
 
 ## What was run
 
@@ -59,6 +59,29 @@ Paranoid mode (7 min 1 s), exit code 0, each line as printed:
 - con-ron kernel accepts the solution (accepted 73,381 declarations, `--verified`)
 - Lean default kernel accepts the solution
 
+## Second run: the full pipeline, build inside the sandbox (same day, commit `0ed6ebf`)
+
+After the memory-heavy file was restructured (`0ed6ebf`: its certificate is checked in 156
+pieces, largest Lean process about 4 GB, and it is no longer in the import cone of the
+theorem), the judge machine could run the tool as intended. In the fresh clone, updated to
+`0ed6ebf`, the project's build products were deleted first (`rm -rf .lake/build`; the compiled
+Mathlib from `lake exe cache get` was kept), then, with the sandbox active and no export
+options:
+
+    lake comparator
+    lake comparator --paranoid
+
+- Normal mode (5 min 21 s): the tool built the challenge and the solution inside the sandbox
+  ("Build completed successfully (18543 jobs)"), exported them, and printed "Lean default
+  kernel accepts the solution", "Your solution is okay!"; exit code 0.
+- Paranoid mode (7 min 2 s), exit code 0: Lean paranoid kernel, lean4lean (73,382
+  declarations), nanoda, con-leche (73,381 declarations, `--verified`), con-ron (73,381,
+  `--verified`) and the Lean default kernel all accept; "Your solution is okay!".
+- Then `lake build` of the whole library: "Build completed successfully (18795 jobs)".
+
+This closes the gap of the first run: nothing came from outside the sandbox except the
+public repository and the compiled Mathlib cache.
+
 ## What this establishes, and what it does not
 
 Established: the exported proof of `PiFormula.Erdos.erdos_pm_one_nat` has exactly the
@@ -68,11 +91,10 @@ verified.
 
 Not established by this run:
 
-- That the exports come from this repository. The tool says so itself for the
-  `--*-from-export` options: the build and the export were done outside the sandbox, on the
-  development machine. The full pipeline (build and export inside the sandbox from the public
-  repository) could not run on the 22 GB judge machine because of the one memory-heavy file.
-  Anyone with a larger Linux machine can run plain `lake comparator` in a clone.
+- (First run only: that the exports came from this repository. The second run removes this
+  reservation.) The judge machine is the project's own virtual machine; an independent party
+  repeating `lake comparator` in a clone would add to it. The compiled Mathlib was taken from
+  the community cache, as in any Mathlib project.
 - That the statement is the right formalization of the conjecture (test 1 needs human
   readers).
 - That the result is new (see `E1_priority_check.md`, `E2_wide_priority_search.md`).
