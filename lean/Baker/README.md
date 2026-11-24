@@ -8,6 +8,9 @@ logarithms, by **Michail Karatarakis**. They are not our work.
 - Commit: `1d51891b5be7ceeca95b4583cad39e0681c5e453` (24 September 2026), fetched on
   22 November 2026. The branch was 76 commits ahead of Mathlib commit `a0e13008` and added
   only these 19 files, their lines in `Mathlib.lean` and entries in `docs/references.bib`.
+- Checked again on 24 November 2026: the branch was still at that commit, so this copy is
+  current. The author's other branch `baker-padic` adds a p-adic version in ten new files
+  and does not change these 19; Mathlib's main branch does not contain the proof.
 - License: Apache License 2.0, copyright (c) 2026 Michail Karatarakis; each file keeps its
   header, and the license text is in `LICENSE` here.
 - Status upstream when fetched: not merged into Mathlib and, as far as we could find, not
