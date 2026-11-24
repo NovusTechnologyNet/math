@@ -1,26 +1,30 @@
-/-
-Binary Machin-type formulas for π: what Lean has checked so far.
+module
+
+public import Mathlib
+
+/-!
+# Binary Machin-type formulas for π: the first file
 
 Everything in this file is either a complete proof or the *statement* of a claim
 (a `def ... : Prop`). Nothing is assumed: there is no `sorry` and no axiom.
 
-Checked here
-  §1  the three formulas R1, R2, R3 and Euler's formula hold;
-  §2  every combination allowed by the classification really is a relation;
-  §3  Aurifeuille's factorization L_n * M_n = 4^n + 1 for every odd n;
-  §4  the Gaussian-integer factorizations used in the finite core;
-  §5  the small cases of Lemma 2;
-  §6  the linear algebra of Corollary B2 (nothing is faster than 3/2; uniqueness);
-  §6b the value of the cheaper formula of Part III (Euler's plus a series for zero).
+Checked here:
 
-Stated but NOT yet proved in Lean
-  §7  Bang's theorem, Lemma 2, and Theorem A itself.
-The missing work is the number theory: unique factorization arguments in ℤ[i],
-Bang's theorem, and Lemma 2. See pi_formula_theorem.md for the written proof.
+* §1: the three formulas R1, R2, R3 and Euler's formula hold;
+* §2: every combination allowed by the classification really is a relation;
+* §3: Aurifeuille's factorization `L_n * M_n = 4^n + 1` for every odd `n`;
+* §4: the Gaussian-integer factorizations used in the finite core;
+* §5: the small cases of Lemma 2;
+* §6: the linear algebra of Corollary B2 (nothing is faster than 3/2; uniqueness);
+* §6b: the value of the cheaper formula of Part III (Euler's plus a series for zero).
+
+Stated here and proved in later files:
+
+* §7: Bang's theorem (`PiFormula.bang`, in `PiFormula/Bang.lean`), Lemma 2 and Theorem A
+  (`PiFormula.lemma2`, `PiFormula.theoremA`, in `PiFormula/Lemma2.lean`).
+
+The written proof is in `notes/pi_formula_theorem.md`.
 -/
-module
-
-public import Mathlib
 
 @[expose] public section
 
@@ -160,7 +164,7 @@ theorem new_formula :
   rw [zero_series_value, add_zero]
   exact euler
 
-/-! ## §7. Statements still to be proved in Lean -/
+/-! ## §7. Statements proved in later files (`PiFormula/Bang.lean`, `PiFormula/Lemma2.lean`) -/
 
 /-- Bang's theorem (1886): for N ≥ 2, N ≠ 6, some prime p has 2 of order exactly N. -/
 def BangTheorem : Prop :=

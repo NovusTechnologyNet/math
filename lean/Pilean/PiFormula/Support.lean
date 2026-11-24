@@ -48,7 +48,8 @@ theorem isIntegral_of_finOrder {r : ℂ} (h : IsOfFinOrder r) : IsIntegral ℤ r
 theorem isOfFinOrder_I : IsOfFinOrder I :=
   isOfFinOrder_iff_pow_eq_one.2 ⟨4, by norm_num, Complex.I_pow_four⟩
 
-theorem isIntegral_tC : IsIntegral ℤ tC := isIntegral_one.add (isIntegral_of_finOrder isOfFinOrder_I)
+theorem isIntegral_tC : IsIntegral ℤ tC :=
+  isIntegral_one.add (isIntegral_of_finOrder isOfFinOrder_I)
 
 theorem isIntegral_intCast (a : ℤ) : IsIntegral ℤ (a : ℂ) := by
   simpa using isIntegral_algebraMap (R := ℤ) (A := ℂ) (x := a)
@@ -147,9 +148,10 @@ theorem inP_prod [P.IsPrime] {ι : Type*} (s : Finset ι) (f : ι → ℂ)
     · obtain ⟨i, hi, h⟩ := ih (fun i hi => hf i (Finset.mem_insert_of_mem hi)) h
       exact ⟨i, Finset.mem_insert_of_mem hi, h⟩
 
-theorem inP_prod_of_mem {ι : Type*} [DecidableEq ι] {s : Finset ι} (f : ι → ℂ)
+theorem inP_prod_of_mem {ι : Type*} {s : Finset ι} (f : ι → ℂ)
     (hf : ∀ i ∈ s, IsIntegral ℤ (f i)) {a : ι} (ha : a ∈ s) (h : InP P (f a)) :
     InP P (∏ i ∈ s, f i) := by
+  classical
   rw [← Finset.mul_prod_erase s f ha]
   exact h.mul_right (IsIntegral.prod _ fun i hi => hf i (Finset.mem_of_mem_erase hi))
 
@@ -206,7 +208,8 @@ theorem orderOf_eq_prime_pow_of_inP {P : Ideal Aint} [P.IsPrime] {p : ℕ} (hp :
     rw [hΦ]
     classical
     exact inP_prod_of_mem _ (fun μ hμ' => isIntegral_one.sub
-      (isIntegral_of_finOrder (((mem_primitiveRoots hℓ.pos).1 hμ').isOfFinOrder hℓ.ne_zero))) hvmem (hμ v hvmem)
+      (isIntegral_of_finOrder (((mem_primitiveRoots hℓ.pos).1 hμ').isOfFinOrder hℓ.ne_zero)))
+      hvmem (hμ v hvmem)
   exact not_inP_coprime ((Nat.coprime_primes hℓ hp).2 hne) hℓP hpP
 
 /-! ## 3. Relations and the private prime -/

@@ -117,7 +117,7 @@ variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℂ E] [CompleteSpace V
 
 omit [NormedSpace ℂ E] [CompleteSpace V] in
 private lemma mem_eball_coe {y : E} (hy : ‖y‖ < R) : y ∈ eball (0 : E) R := by
-  rw [mem_eball_zero_iff, enorm_eq_nnnorm, ENNReal.coe_lt_coe]
+  rw [mem_eball_zero_iff, eNorm_eq_nnNorm, ENNReal.coe_lt_coe]
   exact_mod_cast hy
 
 /-- **Cauchy's estimate for the homogeneous terms of a power series.**
@@ -149,8 +149,8 @@ theorem norm_apply_le (hF : HasFPowerSeriesOnBall F p 0 R) {M : ℝ}
   have hC : ∀ w ∈ sphere (0 : ℂ) 1, ‖(F ∘ u) w‖ ≤ M := by
     intro w hw
     have hw' := hmaps w (sphere_subset_closedBall hw)
-    rw [mem_eball_zero_iff, enorm_eq_nnnorm, ENNReal.coe_lt_coe, ← NNReal.coe_lt_coe,
-      coe_nnnorm] at hw'
+    rw [mem_eball_zero_iff, eNorm_eq_nnNorm, ENNReal.coe_lt_coe, ← NNReal.coe_lt_coe,
+      coe_nnNorm] at hw'
     exact hM _ hw'
   have hcauchy := Complex.norm_iteratedDeriv_le_of_forall_mem_sphere_norm_le n one_pos
     (hdiff.diffContOnCl_ball subset_rfl) hC

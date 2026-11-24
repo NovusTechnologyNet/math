@@ -168,7 +168,9 @@ theorem norm_sq_odd_add (m u : ℕ) :
     linear_combination ((-3 : ℝ) ^ m - 1 / 2) ^ 2 * h3
 
 theorem neg_three_pow_sq (m : ℕ) : ((-3 : ℝ) ^ m) ^ 2 = ((3 : ℝ) ^ m) ^ 2 := by
-  rcases neg_three_pow_cases m with h | h <;> rw [h] <;> ring
+  rcases neg_three_pow_cases m with h | h
+  · rw [h]
+  · rw [h, neg_sq]
 
 theorem neg_three_pow_odd {m : ℕ} (hm : Odd m) : (-3 : ℝ) ^ m = -(3 : ℝ) ^ m := hm.neg_pow 3
 
@@ -368,13 +370,13 @@ theorem goodPrimes3_of_halves (hH : PrimitiveHalves3) : GoodPrimes3 := by
           have h := norm_sq_odd 0 u
           simp only [Nat.mul_zero, Nat.zero_add] at h
           rw [h]
-          simp only [hu3, h2, ↓reduceIte, show (2 : ℕ) ≠ 1 by norm_num]
+          simp only [h2, ↓reduceIte, show (2 : ℕ) ≠ 1 by norm_num]
           norm_num)
     · obtain ⟨⟨p₁, hp₁, hord₁, hd₁⟩, ⟨p₂, hp₂, hord₂, hd₂⟩⟩ := hH m hm0
       have hnorm := norm_sq_odd m u
       rcases hcases with h1 | h2
       · -- `3 s² - 3 s + 1`
-        simp only [hu3, h1, ↓reduceIte] at hnorm
+        simp only [h1, ↓reduceIte] at hnorm
         rcases neg_three_pow_cases m with hs | hs
         · refine goodPrime_of_order hr hE0 hgE hp₁ (by omega) hord₁ (h := 1) (by norm_num)
             (by rw [h2M]; ring) ?_
@@ -391,7 +393,7 @@ theorem goodPrimes3_of_halves (hH : PrimitiveHalves3) : GoodPrimes3 := by
             push_cast
             ring)
       · -- `3 s² + 3 s + 1`
-        simp only [hu3, h2, ↓reduceIte, show (2 : ℕ) ≠ 1 by norm_num] at hnorm
+        simp only [h2, ↓reduceIte, show (2 : ℕ) ≠ 1 by norm_num] at hnorm
         rcases neg_three_pow_cases m with hs | hs
         · refine goodPrime_of_order hr hE0 hgE hp₂ (by omega) hord₂ (h := 1) (by norm_num)
             (by rw [h2M]; ring) ?_
@@ -504,7 +506,7 @@ theorem goodPrimes3_of_halves (hH : PrimitiveHalves3) : GoodPrimes3 := by
           exact hasPrime_add (by norm_num) 1 u (D := 7) (dvd_refl _) (by
             simp only [Nat.mul_zero, Nat.zero_add] at hnorm
             rw [hnorm]
-            simp only [hu3, h1, ↓reduceIte]
+            simp only [h1, ↓reduceIte]
             norm_num)
         · exfalso
           apply hr0
@@ -513,7 +515,7 @@ theorem goodPrimes3_of_halves (hH : PrimitiveHalves3) : GoodPrimes3 := by
       · obtain ⟨⟨p₁, hp₁, hord₁, hd₁⟩, ⟨p₂, hp₂, hord₂, hd₂⟩⟩ := hH m hm0
         rcases hcases with h1 | h2
         · -- `3 s² + 3 s + 1`
-          simp only [hu3, h1, ↓reduceIte] at hnorm
+          simp only [h1, ↓reduceIte] at hnorm
           rcases neg_three_pow_cases m with hs | hs
           · refine goodPrime_of_order hr hE0 hgE hp₂ (by omega) hord₂ (h := 2) (by norm_num)
               (by rw [h2M]; ring) ?_
@@ -530,7 +532,7 @@ theorem goodPrimes3_of_halves (hH : PrimitiveHalves3) : GoodPrimes3 := by
               push_cast
               ring)
         · -- `3 s² - 3 s + 1`
-          simp only [hu3, h2, ↓reduceIte, show (2 : ℕ) ≠ 1 by norm_num] at hnorm
+          simp only [h2, ↓reduceIte, show (2 : ℕ) ≠ 1 by norm_num] at hnorm
           rcases neg_three_pow_cases m with hs | hs
           · refine goodPrime_of_order hr hE0 hgE hp₁ (by omega) hord₁ (h := 2) (by norm_num)
               (by rw [h2M]; ring) ?_

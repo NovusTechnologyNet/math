@@ -125,7 +125,7 @@ theorem taylorCoeff_finset_sum {β : Type*} (s : Finset β) {f : β → (ι → 
 omit [DecidableEq ι] [CompleteSpace F] in
 private lemma norm_lt_of_mem_eball {y : ι → 𝕜} {ρ : ℝ≥0} (hy : y ∈ eball (0 : ι → 𝕜) ρ) :
     ‖y‖ < ρ := by
-  rw [mem_eball_zero_iff, enorm_eq_nnnorm, ENNReal.coe_lt_coe] at hy
+  rw [mem_eball_zero_iff, eNorm_eq_nnNorm, ENNReal.coe_lt_coe] at hy
   exact_mod_cast hy
 
 /-- **Coefficients from an expansion.**  If `f (x + y)` is the sum of a normally convergent
@@ -187,7 +187,7 @@ theorem exists_hasSum_of_analyticAt {f : (ι → 𝕜) → F} {x : ι → 𝕜} 
   refine ⟨ρ, hρ0, by simpa [htc] using hsum, fun y hy => ?_⟩
   have hy₁ : ‖y‖ < (r₁ : ℝ) := hy.trans (by exact_mod_cast hρr₁)
   have hyρ : ‖y‖₊ ≤ ρ := by
-    rw [← NNReal.coe_le_coe, coe_nnnorm]
+    rw [← NNReal.coe_le_coe, coe_nnNorm]
     exact hy.le
   have := hasSum_coeff hp1 hy₁ (by simpa using hconv ‖y‖₊ hyρ)
   simpa [htc] using this

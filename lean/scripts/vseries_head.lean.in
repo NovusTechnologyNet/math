@@ -10,8 +10,8 @@ Theorem C says that the rational patterns `ρ` (period 120) with
 (decompose_formula.py):
 
 * `ARG(O_1) = π/4`, `ARG(O_6) = 0`, `ARG(O_10) - ARG(O_2) = π/4`;
-* `LOG(O_6) - 2 LOG(O_1) = 0`, `LOG(O_8a) - 2 LOG(O_1) = 0`, `LOG(O_10) - LOG(O_2) - 3 LOG(O_1) = 0`,
-  `LOG(O_24) - LOG(O_8b) - 2 LOG(O_1) = 0`;
+* `LOG(O_6) - 2 LOG(O_1) = 0`, `LOG(O_8a) - 2 LOG(O_1) = 0`,
+  `LOG(O_10) - LOG(O_2) - 3 LOG(O_1) = 0`, `LOG(O_24) - LOG(O_8b) - 2 LOG(O_1) = 0`;
 * the `√3`-twisted series `TW = √3 ∑_k -Im(t^(-k) (ζ^k - ζ^5k + ζ^13k - ζ^17k + ζ^4k - ζ^20k))/k`
   (`ζ = ζ_24`), with value 0.
 

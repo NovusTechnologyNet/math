@@ -197,8 +197,7 @@ theorem exists_gaussian_prime_above {p : ℕ} (hp : p.Prime) (h4 : p % 4 = 1) :
     refine ⟨fun hu => ?_, fun x y hxy => ?_⟩
     · have := (Zsqrtd.norm_eq_one_iff).2 hu
       rw [hnorm] at this
-      simp at this
-      exact hp.one_lt.ne' this
+      exact hp.one_lt.ne' (by simpa using this)
     · have hn := congrArg Zsqrtd.norm hxy
       rw [Zsqrtd.norm_mul, hnorm] at hn
       have hn' : p = x.norm.natAbs * y.norm.natAbs := by

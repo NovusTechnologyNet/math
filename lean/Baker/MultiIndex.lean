@@ -413,7 +413,7 @@ theorem hasSum_coeff [CompleteSpace F] {p : FormalMultilinearSeries 𝕜 (ι →
     rwa [hkey] at hs
   -- so the doubly indexed sum is `f z`
   have hball : z ∈ Metric.eball (0 : ι → 𝕜) r := by
-    rw [mem_eball_zero_iff, enorm_eq_nnnorm, ENNReal.coe_lt_coe]
+    rw [mem_eball_zero_iff, eNorm_eq_nnNorm, ENNReal.coe_lt_coe]
     exact_mod_cast hz
   have hfz : HasSum (fun k => p k fun _ => z) (f z) := by simpa using hf.hasSum hball
   have heq : (∑' kα, u kα) = f z := (hsummable.hasSum.prod_fiberwise hfib).unique hfz

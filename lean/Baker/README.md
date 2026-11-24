@@ -53,6 +53,15 @@ version the proof was written for:
 | `TaylorCoeff.lean` | added `public import Mathlib.Analysis.Analytic.Constructions` | `AnalyticAt.add`, `AnalyticAt.sub` and two more lemmas are no longer imported indirectly |
 | `SchwarzProduct.lean`, line 544 | `coeff_smul` became `Polynomial.coeff_smul` | that lemma is now `protected` |
 
+Eight renames on 24 November 2026, to names that Mathlib v4.36.0 no longer marks as
+deprecated (the old names still worked, with a warning):
+
+| File | Change |
+|---|---|
+| `AnalyticTsum.lean` (line 85), `MultiIndex.lean` (416), `Interpolation.lean` (120, 152), `TaylorCoeff.lean` (128) | `enorm_eq_nnnorm` became `eNorm_eq_nnNorm` |
+| `Interpolation.lean` (153), `TaylorCoeff.lean` (190) | `coe_nnnorm` became `coe_nnNorm` |
+| `SchwarzProduct.lean` (544) | `Polynomial.coeff_smul` became `AddMonoidAlgebra.coeff_smul_apply` |
+
 Nothing else was changed.
 
 ## How it is used

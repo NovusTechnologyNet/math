@@ -82,7 +82,7 @@ theorem hasFPowerSeriesOnBall_tsum {ι : Type*} {g : ι → E → F}
   refine ⟨hradius, by exact_mod_cast hr, fun {y} hy => ?_⟩
   have hynorm : ‖y‖ < (r : ℝ) := by
     have h : ‖y‖ₑ < (r : ℝ≥0∞) := mem_eball_zero_iff.1 hy
-    rw [enorm_eq_nnnorm, ENNReal.coe_lt_coe] at h
+    rw [eNorm_eq_nnNorm, ENNReal.coe_lt_coe] at h
     exact_mod_cast h
   -- The doubly indexed family of terms is summable.
   have hdbl : Summable fun ki : ℕ × ι => p ki.2 ki.1 fun _ => y := by

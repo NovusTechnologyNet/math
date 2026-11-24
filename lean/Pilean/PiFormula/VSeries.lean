@@ -10,8 +10,8 @@ Theorem C says that the rational patterns `ρ` (period 120) with
 (decompose_formula.py):
 
 * `ARG(O_1) = π/4`, `ARG(O_6) = 0`, `ARG(O_10) - ARG(O_2) = π/4`;
-* `LOG(O_6) - 2 LOG(O_1) = 0`, `LOG(O_8a) - 2 LOG(O_1) = 0`, `LOG(O_10) - LOG(O_2) - 3 LOG(O_1) = 0`,
-  `LOG(O_24) - LOG(O_8b) - 2 LOG(O_1) = 0`;
+* `LOG(O_6) - 2 LOG(O_1) = 0`, `LOG(O_8a) - 2 LOG(O_1) = 0`,
+  `LOG(O_10) - LOG(O_2) - 3 LOG(O_1) = 0`, `LOG(O_24) - LOG(O_8b) - 2 LOG(O_1) = 0`;
 * the `√3`-twisted series `TW = √3 ∑_k -Im(t^(-k) (ζ^k - ζ^5k + ζ^13k - ζ^17k + ζ^4k - ζ^20k))/k`
   (`ζ = ζ_24`), with value 0.
 
@@ -211,12 +211,14 @@ theorem psTW_small : ∀ r < 24, dTW * (z24 ^ r - z24 ^ (5 * r % 24) + z24 ^ (13
     rw [show twTable.getD 1 0 = (⟨0, 3⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
     push_cast
-    linear_combination (z24 ^ 22 + z24 ^ 19 + z24 ^ 18 - z24 ^ 14 - 2 * z24 ^ 11 - 2 * z24 ^ 10 - 2 * z24 ^ 6 + z24 ^ 3) * cyc24
+    linear_combination (z24 ^ 22 + z24 ^ 19 + z24 ^ 18 - z24 ^ 14 - 2 * z24 ^ 11 - 2 * z24 ^ 10 -
+        2 * z24 ^ 6 + z24 ^ 3) * cyc24
   · simp only [Nat.reduceMul, Nat.reduceMod]
     rw [show twTable.getD 2 0 = (⟨6, 3⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
     push_cast
-    linear_combination (z24 ^ 18 + z24 ^ 14 + 2 * z24 ^ 12 - 2 * z24 ^ 10 + 2 * z24 ^ 8 - 3 * z24 ^ 6 - 4 * z24 ^ 4 - 6) * cyc24
+    linear_combination (z24 ^ 18 + z24 ^ 14 + 2 * z24 ^ 12 - 2 * z24 ^ 10 + 2 * z24 ^ 8 -
+        3 * z24 ^ 6 - 4 * z24 ^ 4 - 6) * cyc24
   · simp only [Nat.reduceMul, Nat.reduceMod]
     rw [show twTable.getD 3 0 = (⟨0, 0⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
@@ -231,7 +233,8 @@ theorem psTW_small : ∀ r < 24, dTW * (z24 ^ r - z24 ^ (5 * r % 24) + z24 ^ (13
     rw [show twTable.getD 5 0 = (⟨0, -3⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
     push_cast
-    linear_combination (-z24 ^ 22 - z24 ^ 19 - z24 ^ 18 + z24 ^ 14 + 2 * z24 ^ 11 + 2 * z24 ^ 10 + 2 * z24 ^ 6 - z24 ^ 3) * cyc24
+    linear_combination (-z24 ^ 22 - z24 ^ 19 - z24 ^ 18 + z24 ^ 14 + 2 * z24 ^ 11 + 2 * z24 ^ 10 +
+        2 * z24 ^ 6 - z24 ^ 3) * cyc24
   · simp only [Nat.reduceMul, Nat.reduceMod]
     rw [show twTable.getD 6 0 = (⟨0, 0⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
@@ -241,7 +244,8 @@ theorem psTW_small : ∀ r < 24, dTW * (z24 ^ r - z24 ^ (5 * r % 24) + z24 ^ (13
     rw [show twTable.getD 7 0 = (⟨0, 3⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
     push_cast
-    linear_combination (z24 ^ 25 + z24 ^ 22 + z24 ^ 18 - 2 * z24 ^ 17 - z24 ^ 14 - 2 * z24 ^ 10 + z24 ^ 9 - 2 * z24 ^ 6) * cyc24
+    linear_combination (z24 ^ 25 + z24 ^ 22 + z24 ^ 18 - 2 * z24 ^ 17 - z24 ^ 14 - 2 * z24 ^ 10 +
+        z24 ^ 9 - 2 * z24 ^ 6) * cyc24
   · simp only [Nat.reduceMul, Nat.reduceMod]
     rw [show twTable.getD 8 0 = (⟨0, 9⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
@@ -256,12 +260,14 @@ theorem psTW_small : ∀ r < 24, dTW * (z24 ^ r - z24 ^ (5 * r % 24) + z24 ^ (13
     rw [show twTable.getD 10 0 = (⟨-6, -3⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
     push_cast
-    linear_combination (-z24 ^ 18 - z24 ^ 14 - 2 * z24 ^ 12 + 2 * z24 ^ 10 - 2 * z24 ^ 8 + 3 * z24 ^ 6 + 4 * z24 ^ 4 + 6) * cyc24
+    linear_combination (-z24 ^ 18 - z24 ^ 14 - 2 * z24 ^ 12 + 2 * z24 ^ 10 - 2 * z24 ^ 8 +
+        3 * z24 ^ 6 + 4 * z24 ^ 4 + 6) * cyc24
   · simp only [Nat.reduceMul, Nat.reduceMod]
     rw [show twTable.getD 11 0 = (⟨0, -3⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
     push_cast
-    linear_combination (-z24 ^ 25 - z24 ^ 22 - z24 ^ 18 + 2 * z24 ^ 17 + z24 ^ 14 + 2 * z24 ^ 10 - z24 ^ 9 + 2 * z24 ^ 6) * cyc24
+    linear_combination (-z24 ^ 25 - z24 ^ 22 - z24 ^ 18 + 2 * z24 ^ 17 + z24 ^ 14 + 2 * z24 ^ 10 -
+        z24 ^ 9 + 2 * z24 ^ 6) * cyc24
   · simp only [Nat.reduceMul, Nat.reduceMod]
     rw [show twTable.getD 12 0 = (⟨0, 0⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
@@ -271,12 +277,14 @@ theorem psTW_small : ∀ r < 24, dTW * (z24 ^ r - z24 ^ (5 * r % 24) + z24 ^ (13
     rw [show twTable.getD 13 0 = (⟨0, 3⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
     push_cast
-    linear_combination (z24 ^ 22 + z24 ^ 19 + z24 ^ 18 - z24 ^ 14 - 2 * z24 ^ 11 - 2 * z24 ^ 10 - 2 * z24 ^ 6 + z24 ^ 3) * cyc24
+    linear_combination (z24 ^ 22 + z24 ^ 19 + z24 ^ 18 - z24 ^ 14 - 2 * z24 ^ 11 - 2 * z24 ^ 10 -
+        2 * z24 ^ 6 + z24 ^ 3) * cyc24
   · simp only [Nat.reduceMul, Nat.reduceMod]
     rw [show twTable.getD 14 0 = (⟨-6, 3⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
     push_cast
-    linear_combination (2 * z24 ^ 24 + 2 * z24 ^ 20 + z24 ^ 18 - 4 * z24 ^ 16 + z24 ^ 14 - 6 * z24 ^ 12 - 2 * z24 ^ 10 - 3 * z24 ^ 6 + 6 * z24 ^ 4 + 6) * cyc24
+    linear_combination (2 * z24 ^ 24 + 2 * z24 ^ 20 + z24 ^ 18 - 4 * z24 ^ 16 + z24 ^ 14 -
+        6 * z24 ^ 12 - 2 * z24 ^ 10 - 3 * z24 ^ 6 + 6 * z24 ^ 4 + 6) * cyc24
   · simp only [Nat.reduceMul, Nat.reduceMod]
     rw [show twTable.getD 15 0 = (⟨0, 0⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
@@ -291,7 +299,8 @@ theorem psTW_small : ∀ r < 24, dTW * (z24 ^ r - z24 ^ (5 * r % 24) + z24 ^ (13
     rw [show twTable.getD 17 0 = (⟨0, -3⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
     push_cast
-    linear_combination (-z24 ^ 22 - z24 ^ 19 - z24 ^ 18 + z24 ^ 14 + 2 * z24 ^ 11 + 2 * z24 ^ 10 + 2 * z24 ^ 6 - z24 ^ 3) * cyc24
+    linear_combination (-z24 ^ 22 - z24 ^ 19 - z24 ^ 18 + z24 ^ 14 + 2 * z24 ^ 11 + 2 * z24 ^ 10 +
+        2 * z24 ^ 6 - z24 ^ 3) * cyc24
   · simp only [Nat.reduceMul, Nat.reduceMod]
     rw [show twTable.getD 18 0 = (⟨0, 0⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
@@ -301,7 +310,8 @@ theorem psTW_small : ∀ r < 24, dTW * (z24 ^ r - z24 ^ (5 * r % 24) + z24 ^ (13
     rw [show twTable.getD 19 0 = (⟨0, 3⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
     push_cast
-    linear_combination (z24 ^ 25 + z24 ^ 22 + z24 ^ 18 - 2 * z24 ^ 17 - z24 ^ 14 - 2 * z24 ^ 10 + z24 ^ 9 - 2 * z24 ^ 6) * cyc24
+    linear_combination (z24 ^ 25 + z24 ^ 22 + z24 ^ 18 - 2 * z24 ^ 17 - z24 ^ 14 - 2 * z24 ^ 10 +
+        z24 ^ 9 - 2 * z24 ^ 6) * cyc24
   · simp only [Nat.reduceMul, Nat.reduceMod]
     rw [show twTable.getD 20 0 = (⟨0, -3⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
@@ -316,12 +326,14 @@ theorem psTW_small : ∀ r < 24, dTW * (z24 ^ r - z24 ^ (5 * r % 24) + z24 ^ (13
     rw [show twTable.getD 22 0 = (⟨6, -3⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
     push_cast
-    linear_combination (-2 * z24 ^ 24 - 2 * z24 ^ 20 - z24 ^ 18 + 4 * z24 ^ 16 - z24 ^ 14 + 6 * z24 ^ 12 + 2 * z24 ^ 10 + 3 * z24 ^ 6 - 6 * z24 ^ 4 - 6) * cyc24
+    linear_combination (-2 * z24 ^ 24 - 2 * z24 ^ 20 - z24 ^ 18 + 4 * z24 ^ 16 - z24 ^ 14 +
+        6 * z24 ^ 12 + 2 * z24 ^ 10 + 3 * z24 ^ 6 - 6 * z24 ^ 4 - 6) * cyc24
   · simp only [Nat.reduceMul, Nat.reduceMod]
     rw [show twTable.getD 23 0 = (⟨0, -3⟩ : GaussianInt) from rfl, GaussianInt.toComplex_def',
       I_z24, dTW]
     push_cast
-    linear_combination (-z24 ^ 25 - z24 ^ 22 - z24 ^ 18 + 2 * z24 ^ 17 + z24 ^ 14 + 2 * z24 ^ 10 - z24 ^ 9 + 2 * z24 ^ 6) * cyc24
+    linear_combination (-z24 ^ 25 - z24 ^ 22 - z24 ^ 18 + 2 * z24 ^ 17 + z24 ^ 14 + 2 * z24 ^ 10 -
+        z24 ^ 9 + 2 * z24 ^ 6) * cyc24
 
 theorem psTW_eq (k : ℕ) : psTW k = ((PTWZ k : GaussianInt) : ℂ) := by
   rw [psTW_reduce, PTWZ]
@@ -621,44 +633,76 @@ theorem named_linearIndependent :
   intro g hg
   have e1 := congrFun hg 1
   simp only [Finset.sum_apply, Pi.smul_apply, smul_eq_mul, Fin.sum_univ_eight,
-    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val, Pi.zero_apply, namedA1_at_1, namedA6_at_1, namedA10_at_1, namedL6_at_1, namedL8_at_1, namedL10_at_1, namedL24_at_1, namedTW_at_1] at e1
+    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val, Pi.zero_apply, namedA1_at_1,
+    namedA6_at_1, namedA10_at_1, namedL6_at_1, namedL8_at_1, namedL10_at_1, namedL24_at_1,
+    namedTW_at_1] at e1
   have e2 := congrFun hg 2
   simp only [Finset.sum_apply, Pi.smul_apply, smul_eq_mul, Fin.sum_univ_eight,
-    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val, Pi.zero_apply, namedA1_at_2, namedA6_at_2, namedA10_at_2, namedL6_at_2, namedL8_at_2, namedL10_at_2, namedL24_at_2, namedTW_at_2] at e2
+    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val, Pi.zero_apply, namedA1_at_2,
+    namedA6_at_2, namedA10_at_2, namedL6_at_2, namedL8_at_2, namedL10_at_2, namedL24_at_2,
+    namedTW_at_2] at e2
   have e3 := congrFun hg 3
   simp only [Finset.sum_apply, Pi.smul_apply, smul_eq_mul, Fin.sum_univ_eight,
-    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val, Pi.zero_apply, namedA1_at_3, namedA6_at_3, namedA10_at_3, namedL6_at_3, namedL8_at_3, namedL10_at_3, namedL24_at_3, namedTW_at_3] at e3
+    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val, Pi.zero_apply, namedA1_at_3,
+    namedA6_at_3, namedA10_at_3, namedL6_at_3, namedL8_at_3, namedL10_at_3, namedL24_at_3,
+    namedTW_at_3] at e3
   have e4 := congrFun hg 4
   simp only [Finset.sum_apply, Pi.smul_apply, smul_eq_mul, Fin.sum_univ_eight,
-    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val, Pi.zero_apply, namedA1_at_4, namedA6_at_4, namedA10_at_4, namedL6_at_4, namedL8_at_4, namedL10_at_4, namedL24_at_4, namedTW_at_4] at e4
+    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val, Pi.zero_apply, namedA1_at_4,
+    namedA6_at_4, namedA10_at_4, namedL6_at_4, namedL8_at_4, namedL10_at_4, namedL24_at_4,
+    namedTW_at_4] at e4
   have e5 := congrFun hg 5
   simp only [Finset.sum_apply, Pi.smul_apply, smul_eq_mul, Fin.sum_univ_eight,
-    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val, Pi.zero_apply, namedA1_at_5, namedA6_at_5, namedA10_at_5, namedL6_at_5, namedL8_at_5, namedL10_at_5, namedL24_at_5, namedTW_at_5] at e5
+    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val, Pi.zero_apply, namedA1_at_5,
+    namedA6_at_5, namedA10_at_5, namedL6_at_5, namedL8_at_5, namedL10_at_5, namedL24_at_5,
+    namedTW_at_5] at e5
   have e6 := congrFun hg 6
   simp only [Finset.sum_apply, Pi.smul_apply, smul_eq_mul, Fin.sum_univ_eight,
-    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val, Pi.zero_apply, namedA1_at_6, namedA6_at_6, namedA10_at_6, namedL6_at_6, namedL8_at_6, namedL10_at_6, namedL24_at_6, namedTW_at_6] at e6
+    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val, Pi.zero_apply, namedA1_at_6,
+    namedA6_at_6, namedA10_at_6, namedL6_at_6, namedL8_at_6, namedL10_at_6, namedL24_at_6,
+    namedTW_at_6] at e6
   have e7 := congrFun hg 7
   simp only [Finset.sum_apply, Pi.smul_apply, smul_eq_mul, Fin.sum_univ_eight,
-    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val, Pi.zero_apply, namedA1_at_7, namedA6_at_7, namedA10_at_7, namedL6_at_7, namedL8_at_7, namedL10_at_7, namedL24_at_7, namedTW_at_7] at e7
+    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val, Pi.zero_apply, namedA1_at_7,
+    namedA6_at_7, namedA10_at_7, namedL6_at_7, namedL8_at_7, namedL10_at_7, namedL24_at_7,
+    namedTW_at_7] at e7
   have e8 := congrFun hg 8
   simp only [Finset.sum_apply, Pi.smul_apply, smul_eq_mul, Fin.sum_univ_eight,
-    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val, Pi.zero_apply, namedA1_at_8, namedA6_at_8, namedA10_at_8, namedL6_at_8, namedL8_at_8, namedL10_at_8, namedL24_at_8, namedTW_at_8] at e8
+    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val, Pi.zero_apply, namedA1_at_8,
+    namedA6_at_8, namedA10_at_8, namedL6_at_8, namedL8_at_8, namedL10_at_8, namedL24_at_8,
+    namedTW_at_8] at e8
   have g0 : g 0 = 0 := by
-    linear_combination (1445 / 1312 : ℚ) * e1 + (1061 / 2624 : ℚ) * e2 + (143 / 656 : ℚ) * e3 + (405 / 2624 : ℚ) * e4 + (21 / 328 : ℚ) * e5 + (-89 / 656 : ℚ) * e6 + (55 / 164 : ℚ) * e7 + (93 / 1312 : ℚ) * e8
+    linear_combination (1445 / 1312 : ℚ) * e1 + (1061 / 2624 : ℚ) * e2 + (143 / 656 : ℚ) * e3 +
+        (405 / 2624 : ℚ) * e4 + (21 / 328 : ℚ) * e5 + (-89 / 656 : ℚ) * e6 + (55 / 164 : ℚ) * e7 +
+        (93 / 1312 : ℚ) * e8
   have g1 : g 1 = 0 := by
-    linear_combination (-621 / 1312 : ℚ) * e1 + (-653 / 2624 : ℚ) * e2 + (-135 / 656 : ℚ) * e3 + (3 / 2624 : ℚ) * e4 + (-29 / 328 : ℚ) * e5 + (-127 / 656 : ℚ) * e6 + (-115 / 164 : ℚ) * e7 + (59 / 1312 : ℚ) * e8
+    linear_combination (-621 / 1312 : ℚ) * e1 + (-653 / 2624 : ℚ) * e2 + (-135 / 656 : ℚ) * e3 +
+        (3 / 2624 : ℚ) * e4 + (-29 / 328 : ℚ) * e5 + (-127 / 656 : ℚ) * e6 + (-115 / 164 : ℚ) * e7 +
+        (59 / 1312 : ℚ) * e8
   have g2 : g 2 = 0 := by
-    linear_combination (61 / 328 : ℚ) * e1 + (-51 / 656 : ℚ) * e2 + (-1 / 164 : ℚ) * e3 + (-51 / 656 : ℚ) * e4 + (1 / 82 : ℚ) * e5 + (27 / 164 : ℚ) * e6 + (-13 / 41 : ℚ) * e7 + (-19 / 328 : ℚ) * e8
+    linear_combination (61 / 328 : ℚ) * e1 + (-51 / 656 : ℚ) * e2 + (-1 / 164 : ℚ) * e3 +
+        (-51 / 656 : ℚ) * e4 + (1 / 82 : ℚ) * e5 + (27 / 164 : ℚ) * e6 + (-13 / 41 : ℚ) * e7 +
+        (-19 / 328 : ℚ) * e8
   have g3 : g 3 = 0 := by
-    linear_combination (475 / 1312 : ℚ) * e1 + (603 / 2624 : ℚ) * e2 + (-239 / 656 : ℚ) * e3 + (-53 / 2624 : ℚ) * e4 + (75 / 328 : ℚ) * e5 + (57 / 656 : ℚ) * e6 + (9 / 164 : ℚ) * e7 + (51 / 1312 : ℚ) * e8
+    linear_combination (475 / 1312 : ℚ) * e1 + (603 / 2624 : ℚ) * e2 + (-239 / 656 : ℚ) * e3 +
+        (-53 / 2624 : ℚ) * e4 + (75 / 328 : ℚ) * e5 + (57 / 656 : ℚ) * e6 + (9 / 164 : ℚ) * e7 +
+        (51 / 1312 : ℚ) * e8
   have g4 : g 4 = 0 := by
-    linear_combination (63 / 164 : ℚ) * e1 + (-11 / 328 : ℚ) * e2 + (3 / 82 : ℚ) * e3 + (-11 / 328 : ℚ) * e4 + (-3 / 41 : ℚ) * e5 + (1 / 82 : ℚ) * e6 + (33 / 82 : ℚ) * e7 + (-25 / 164 : ℚ) * e8
+    linear_combination (63 / 164 : ℚ) * e1 + (-11 / 328 : ℚ) * e2 + (3 / 82 : ℚ) * e3 +
+        (-11 / 328 : ℚ) * e4 + (-3 / 41 : ℚ) * e5 + (1 / 82 : ℚ) * e6 + (33 / 82 : ℚ) * e7 +
+        (-25 / 164 : ℚ) * e8
   have g5 : g 5 = 0 := by
-    linear_combination (-57 / 164 : ℚ) * e1 + (-33 / 328 : ℚ) * e2 + (9 / 82 : ℚ) * e3 + (-33 / 328 : ℚ) * e4 + (-9 / 41 : ℚ) * e5 + (3 / 82 : ℚ) * e6 + (-12 / 41 : ℚ) * e7 + (7 / 164 : ℚ) * e8
+    linear_combination (-57 / 164 : ℚ) * e1 + (-33 / 328 : ℚ) * e2 + (9 / 82 : ℚ) * e3 +
+        (-33 / 328 : ℚ) * e4 + (-9 / 41 : ℚ) * e5 + (3 / 82 : ℚ) * e6 + (-12 / 41 : ℚ) * e7 +
+        (7 / 164 : ℚ) * e8
   have g6 : g 6 = 0 := by
-    linear_combination (723 / 2624 : ℚ) * e1 + (-13 / 5248 : ℚ) * e2 + (-71 / 1312 : ℚ) * e3 + (643 / 5248 : ℚ) * e4 + (-93 / 656 : ℚ) * e5 + (113 / 1312 : ℚ) * e6 + (61 / 328 : ℚ) * e7 + (-37 / 2624 : ℚ) * e8
+    linear_combination (723 / 2624 : ℚ) * e1 + (-13 / 5248 : ℚ) * e2 + (-71 / 1312 : ℚ) * e3 +
+        (643 / 5248 : ℚ) * e4 + (-93 / 656 : ℚ) * e5 + (113 / 1312 : ℚ) * e6 + (61 / 328 : ℚ) * e7 +
+        (-37 / 2624 : ℚ) * e8
   have g7 : g 7 = 0 := by
-    linear_combination (73 / 656 : ℚ) * e1 + (25 / 1312 : ℚ) * e2 + (-95 / 984 : ℚ) * e3 + (25 / 1312 : ℚ) * e4 + (-23 / 164 : ℚ) * e5 + (35 / 328 : ℚ) * e6 + (-5 / 246 : ℚ) * e7 + (-55 / 656 : ℚ) * e8
+    linear_combination (73 / 656 : ℚ) * e1 + (25 / 1312 : ℚ) * e2 + (-95 / 984 : ℚ) * e3 +
+        (25 / 1312 : ℚ) * e4 + (-23 / 164 : ℚ) * e5 + (35 / 328 : ℚ) * e6 + (-5 / 246 : ℚ) * e7 +
+        (-55 / 656 : ℚ) * e8
   intro i
   fin_cases i
   · exact g0

@@ -82,7 +82,7 @@ theorem IsRelJ.zsmul {J : Finset ℕ} {f : ℕ → ℤ} (hf : IsRelJ J f) (c : �
   refine ⟨ξ ^ c, isOfFinOrder_zpow' hξ c, ?_⟩
   rw [← h1, ← Finset.prod_zpow]
   exact Finset.prod_congr rfl fun j _ => by
-    show wJ j ^ (c * f j) = (wJ j ^ f j) ^ c
+    change wJ j ^ (c * f j) = (wJ j ^ f j) ^ c
     rw [mul_comm, zpow_mul]
 
 theorem IsRelJ.congr {J : Finset ℕ} {f g : ℕ → ℤ} (hf : IsRelJ J f)
@@ -118,7 +118,7 @@ theorem isRelation_of_isRelJ {J : Finset ℕ} (hJ : ∀ j ∈ J, j < 120) {f : �
   refine ⟨ξ, hξ, ?_⟩
   rw [Finset.prod_image (fun i hi j hj hij => ζ120_prim.pow_inj (hJ i hi) (hJ j hj) hij), ← h1]
   exact Finset.prod_congr rfl fun j hj => by
-    show (1 - ζ120 ^ j / tC) ^ f (idx (ζ120 ^ j)) = wJ j ^ f j
+    change (1 - ζ120 ^ j / tC) ^ f (idx (ζ120 ^ j)) = wJ j ^ f j
     rw [idx_pow (hJ j hj)]
     rfl
 
@@ -1219,31 +1219,31 @@ theorem rel_independent {c : Fin 13 → ℤ} (h : ∀ j ∈ R0Exps, comb c j = 0
   rw [comb_at_85] at h85
   intro k
   fin_cases k
-  · show c 0 = 0
+  · change c 0 = 0
     omega
-  · show c 1 = 0
+  · change c 1 = 0
     omega
-  · show c 2 = 0
+  · change c 2 = 0
     omega
-  · show c 3 = 0
+  · change c 3 = 0
     omega
-  · show c 4 = 0
+  · change c 4 = 0
     omega
-  · show c 5 = 0
+  · change c 5 = 0
     omega
-  · show c 6 = 0
+  · change c 6 = 0
     omega
-  · show c 7 = 0
+  · change c 7 = 0
     omega
-  · show c 8 = 0
+  · change c 8 = 0
     omega
-  · show c 9 = 0
+  · change c 9 = 0
     omega
-  · show c 10 = 0
+  · change c 10 = 0
     omega
-  · show c 11 = 0
+  · change c 11 = 0
     omega
-  · show c 12 = 0
+  · change c 12 = 0
     omega
 
 /-! ## 7. All relations among the `1 - r/t`, for arbitrary roots of unity `r` -/

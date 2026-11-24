@@ -541,7 +541,7 @@ theorem newton_eq_zero_of_taylor {W : Type*} [NormedAddCommGroup W] [NormedSpace
     rw [hQ]
     simp_rw [← smul_eq_C_mul]
     rw [map_sum, finsetSum_coeff]
-    simp_rw [LinearMap.map_smul, Polynomial.coeff_smul, smul_eq_mul]
+    simp_rw [LinearMap.map_smul, AddMonoidAlgebra.coeff_smul_apply, smul_eq_mul]
     rw [← hφ]
     exact Finset.sum_congr rfl fun k _ => mul_comm _ _
   have hdvd : ∀ ζ ∈ E, (X - C ζ) ^ m ∣ Q := by
