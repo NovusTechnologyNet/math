@@ -103,3 +103,13 @@ A first attempt with exports made by `leanexport <module> -- <theorem>` alone wa
 ("Const not found in challenge 'semiOutParam'"): the comparator also requires the kernel's
 built-in names in the challenge export. The argument list above is the one from the tool's
 source (`Lake/CLI/Check.lean`, `compareIt`).
+
+## Status after 24 November 2026
+
+Everything above was run at commit `0ed6ebf`. On 24 November 2026 the sources changed in three
+commits: every file was ported to Lean's module system (`6460e75`), the vendored Tau Ceti files
+were refreshed from upstream (`af549c8`), and compiler warnings were cleared (`69d6152`). The
+statement of `erdos_pm_one_nat` is textually unchanged in `Final.lean` and in the challenge file,
+the library builds, and `#print axioms` still gives the three standard axioms; but tests 3 and 4
+have **not** been rerun on these commits. `scripts/run_comparator.sh` reruns them on a Linux
+machine in one command; the result will be added here.
