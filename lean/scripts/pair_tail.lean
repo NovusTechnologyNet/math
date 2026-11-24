@@ -1,10 +1,44 @@
-/-! ## 5. The bound -/
+/-!
+# The cheapest checked computation of `π` with two formulas (Theorem J)
 
--- The kernel evaluates the checker on the whole certificate, which takes several minutes and
--- far more than the default heartbeat budget.
-set_option maxHeartbeats 0 in
-/-- The certificate passes the checker (kernel computation). -/
-theorem pairCert_ok : checkPair [] [] [] [] pairCert = true := by decide +kernel
+Takahashi (Ramanujan J. 51 (2020), 177-186) computes hexadecimal digits of `π` with one
+BBP-type formula and checks them with a second formula that shares most of its series.
+`pairCost ρ₁ ρ₂` (`CheckedPairDefs.lean`) is the cost of that, per period of 120 (60 bits),
+for two patterns `ρ₁`, `ρ₂` of the class F.
+
+* `pairCost_ge` (from Baker's theorem): `60 ≤ pairCost ρ₁ ρ₂` for any two different patterns
+  of the class F with the same non-zero rational multiple of `π` as value.
+* `pairCost_takahashi`: Takahashi's two formulas, in Bailey's notation `P(1, 2^60, 120, A)`,
+  have `pairCost = 60`. So his pair is the best possible, at one term per bit. (His own count
+  is 64, because he counts as different series `S(12,3)` and `S(20,5)`, and `S(12,9)` and
+  `S(20,15)`, which are the same series up to the factors 3 and 5.)
+* For comparison: one formula twice costs at least 80 (`theoremE`), and Huvent's two formulas
+  as a pair cost 65 (`pairCost_huvent`).
+
+The bound is proved by a search tree and a verified checker. The proof is spread over several
+files, so that no file needs much memory to compile:
+
+* `CheckedPairDefs.lean`: the costs, the certificates (`PCert`), the checker (`checkPair`) and
+  its soundness (`checkPair_sound`), sections 1 to 3;
+* `CheckedPairCert1.lean`, `CheckedPairCert2.lean`, ...: the search tree, cut into closed
+  pieces, each checked by `decide +kernel`;
+* this file: the branches of the tree above the pieces (`pairCert`, `pairCert_ok`, section 4),
+  the bound (section 5), and Takahashi's pair (section 6).
+
+All these files are written by scripts/pairgen.py, from `pair_head.lean`, `pair_tail.lean` and
+the tree that it finds.
+
+Not proved here: that Takahashi's pair is the only one at 60 (found by exact computation,
+python/verify_pair_optimum.py).
+-/
+
+open Complex
+
+namespace PiFormula
+
+-- PAIR_CERT
+
+/-! ## 5. The bound -/
 
 /-- For a zero relation `namedComb w ≠ 0` and a pattern `namedComb q` of non-zero value, the
 cost is at least 60. -/

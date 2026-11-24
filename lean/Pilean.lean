@@ -1,6 +1,7 @@
 import Pilean.PiFormula
 import Pilean.PiFormula.All
 import Pilean.PiFormula.Unconditional
+import Pilean.PiFormula.UnconditionalPair
 import Pilean.PiFormula.Transcendence
 import Pilean.Base3.Unconditional
 import Pilean.Base3.Bailey
