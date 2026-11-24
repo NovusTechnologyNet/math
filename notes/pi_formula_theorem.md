@@ -2214,11 +2214,15 @@ there is at present neither a candidate nor a proof of impossibility.
   Adjacent recent work: Gasull, Luca and Varona, Indag. Math. 34 (2023), which
   classifies two-term formulas with arguments b/2^a and cites neither BBG nor Bailey.
   The literature databases MathSciNet and zbMATH were not searched.
-* **Still to read before submission:**
-  Steidl-Tasche 1989 (interlibrary loan requested 21 November 2026, needed by
-  19 December; Steidl-Hanler-Tasche 1989 arrived and was read on 23 November: a Zsigmondy
-  theorem for quadratic integers, see Part VI), Redei 1958 and Sachs 1957 (credited by
-  Drauschke and Tasche for the Gaussian case), and Broadhurst's unpublished manuscript
+* **Still to read before submission:** Redei 1958 and Sachs 1957 (credited by Drauschke
+  and Tasche for the Gaussian case), and Broadhurst's unpublished manuscript. The four
+  papers requested by interlibrary loan have all arrived and been read (reading notes in
+  research/2026-11-23-schinzel/): Schinzel 1962, Drauschke-Tasche 1987,
+  Steidl-Hanler-Tasche 1989 (a Zsigmondy theorem for quadratic integers, see Part VI) and
+  Steidl-Tasche 1989 (the prime-ideal factorization of Phi_n(e) in a number field: the
+  published general form of the fact that the non-primitive part of a cyclotomic value is at
+  most one prime; explicit for Z[sqrt 2] and the Eisenstein integers). Not yet asked:
+  Broadhurst's manuscript
   (ask the author). Huvent's paper has been read: both optimal formulas of Theorem E
   are his. Schinzel 1962 was read on 23 November 2026 (library copy): Lemma 2 is the
   case a = 2, b = 1 of his Theorem 2, in the form his proof gives. Drauschke-Tasche 1987
