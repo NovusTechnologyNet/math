@@ -34,4 +34,11 @@ Every Lean file of the library uses Lean's module system: it starts with `module
 are `public import`, and its body is in `@[expose] public section`. The head fragments have
 these lines, and so do the scripts that write whole files (`pairgen.py`,
 `unconditional_gen.py`, `logforms.py`, and `python/compendium_lean.py`,
-`python/ratbase_size_tables.py` at the top of the repository).
+`python/ratbase_size_tables.py`, `python/fewest_terms_unique_cert.py` at the top of the
+repository). The same places carry the copyright header that every file of the project opens
+with.
+
+Two generated files were edited by hand afterwards and will not come out of their scripts
+unchanged: in `Relations.lean` and `VSeries.lean` the lines longer than 100 characters were
+rewrapped (24 November 2026), and `VSeries.lean` already differed from the output of
+`assemble.py` before that.

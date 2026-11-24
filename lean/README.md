@@ -700,4 +700,19 @@ that other files can use every declaration and unfold every definition as before
 needs the same three things; a `private` declaration stays private to its file. The pieces of
 generated files in `scripts/` have the extension `.lean.in`, because they are not modules.
 
+Every file of this project opens with the copyright header that Mathlib's linter checks,
+before `module`:
+
+```
+/-
+Copyright (c) 2026 Novus Technology. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Novus Technology
+-/
+```
+
+The files in `TauCeti/` and `Baker/` keep their authors' own headers. How the work was made
+(by AI models, directed by the owner of the repository) is described in the `README.md` at
+the top of the repository.
+
 Toolchain: Lean 4.36.0, Mathlib v4.36.0.

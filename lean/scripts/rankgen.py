@@ -162,6 +162,6 @@ for p in piv:
 w("  intro k\n  fin_cases k\n")
 order = piv  # relation k (0-based) has pivot piv[k]
 for k in range(13):
-    w("  · show c %d = 0\n    omega\n" % k)
+    w("  · change c %d = 0\n    omega\n" % k)
 w("\n")
 sys.stdout.buffer.write(out.getvalue().encode("utf-8"))

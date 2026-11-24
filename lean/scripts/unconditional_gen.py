@@ -166,7 +166,12 @@ def restatements(items):
     return out.getvalue()
 
 
-MAIN_HEAD = """module
+MAIN_HEAD = """/-
+Copyright (c) 2026 Novus Technology. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Novus Technology
+-/
+module
 
 public import Pilean.PiFormula.All
 public import Baker.Basic
@@ -202,7 +207,12 @@ theorem bakerTheorem : BakerTheorem :=
 namespace Unconditional
 """
 
-PAIR_HEAD = """module
+PAIR_HEAD = """/-
+Copyright (c) 2026 Novus Technology. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Novus Technology
+-/
+module
 
 public import Pilean.PiFormula.Unconditional
 public import Pilean.PiFormula.CheckedPair

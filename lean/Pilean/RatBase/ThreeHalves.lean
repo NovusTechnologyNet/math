@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Novus Technology. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Novus Technology
+-/
 module
 
 public import Pilean.RatBase.Defs
