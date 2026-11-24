@@ -1,4 +1,6 @@
-import Pilean.Base5.Support
+module
+
+public import Pilean.Base5.Support
 
 /-!
 # Base 5: no algebraic multiple of `π` is a value, and there is no zero relation
@@ -27,6 +29,8 @@ than zero (`intRel_eq_zero`):
 
 So every `d_r` is zero, and by Fourier inversion the pattern is zero.
 -/
+
+@[expose] public section
 
 open Complex
 

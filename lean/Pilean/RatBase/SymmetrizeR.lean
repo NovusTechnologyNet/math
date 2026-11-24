@@ -1,4 +1,6 @@
-import Pilean.RatBase.ClassDefs
+module
+
+public import Pilean.RatBase.ClassDefs
 
 /-!
 # Rational bases: symmetrization, and the scaled cyclotomic polynomial
@@ -16,6 +18,8 @@ The symmetrization of `Ψ` in base `pq` is then the polynomial
 `F(z) = Ψ(u - z) Ψ(-u - z) = ∏ ((z + q r')² - pq)` of the research note
 (`research/2026-11-22-rational-bases/00_summary.md`, section 3.3), which vanishes at `u - q r`.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

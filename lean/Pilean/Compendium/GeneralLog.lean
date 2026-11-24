@@ -1,4 +1,6 @@
-import Pilean.Compendium.GeneralCore
+module
+
+public import Pilean.Compendium.GeneralCore
 
 /-!
 # Bailey's Compendium, general bases: logarithms of rational functions of `b`
@@ -24,6 +26,8 @@ Formula (91) is printed with the vector `(b^(b-2), b^(b-3), …, b², b, 1)`, wh
 entries for the length `b`; it is stated with the last entry `a_b = 0`, as the ledger records
 it (formula (89) is the case `b = 10`, printed with that `0`).
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

@@ -1,6 +1,8 @@
-import Mathlib.Data.ZMod.Basic
-import Mathlib.Topology.Algebra.InfiniteSum.Real
-import Mathlib.Analysis.SpecificLimits.Basic
+module
+
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
+public import Mathlib.Analysis.SpecificLimits.Basic
 
 /-!
 # Challenge file: the statement of the Erdős case, with Mathlib only
@@ -19,6 +21,8 @@ with `f(n) = 0` when `q ∣ n` and `f(n) = ±1` otherwise. Then the partial sums
 This is the case "odd `q` that is not a perfect square" of a conjecture of Erdős on
 `∑ f(n)/n`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

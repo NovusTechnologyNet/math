@@ -1,8 +1,10 @@
-import Pilean.Erdos.OkadaDefs
-import Mathlib.Analysis.Complex.AbelLimit
-import Mathlib.Analysis.SpecialFunctions.Complex.LogBounds
-import Mathlib.Analysis.SpecificLimits.Normed
-import Mathlib.NumberTheory.LegendreSymbol.AddCharacter
+module
+
+public import Pilean.Erdos.OkadaDefs
+public import Mathlib.Analysis.Complex.AbelLimit
+public import Mathlib.Analysis.SpecialFunctions.Complex.LogBounds
+public import Mathlib.Analysis.SpecificLimits.Normed
+public import Mathlib.NumberTheory.LegendreSymbol.AddCharacter
 
 /-!
 # The value of `∑ f(n)/n` as a linear form in logarithms
@@ -20,6 +22,8 @@ The steps:
 * `fourier_inversion_zmod`: `f(n) = ∑_a f^(a) ζ^(a n)`.
 * The term `a = 0` vanishes because `f^(0) = (1/q) ∑_r f(r) = 0`.
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

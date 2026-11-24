@@ -1,5 +1,7 @@
-import Pilean.BaseB.GoodPrimes
-import Pilean.BaseB.LogDefs
+module
+
+public import Pilean.BaseB.GoodPrimes
+public import Pilean.BaseB.LogDefs
 
 /-!
 # The constant term of the minimal polynomial of `√b - r`: its primes
@@ -22,6 +24,8 @@ the algebraic integers, as in `Support`; there is no Galois theory.
 * **F4** (`exists_primitive_prime`): for `b ≥ 5` and `r⁴ ≠ 1`, `c₀(r)` has a prime factor that
   does not divide `2m` (from `goodPrimesB`).
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

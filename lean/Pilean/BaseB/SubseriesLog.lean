@@ -1,4 +1,6 @@
-import Pilean.BaseB.Subseries
+module
+
+public import Pilean.BaseB.Subseries
 
 /-!
 # The sub-series lemma for a value `q π + q' log y`
@@ -23,6 +25,8 @@ the relation of Baker's theorem:
 * The mean over the `n₁` roots `η` of `X^(n₁) = 1` gives the theorem, with `Λ = log y`:
   `exp(log y) = y` is rational.
 -/
+
+@[expose] public section
 
 open Complex
 

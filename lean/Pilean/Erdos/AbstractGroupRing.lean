@@ -1,9 +1,11 @@
-import Pilean.Erdos.AbstractDefs
-import Mathlib.Algebra.MonoidAlgebra.MapDomain
-import Mathlib.Algebra.Ring.GeomSum
-import Mathlib.Algebra.BigOperators.Group.Finset.Powerset
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.LinearCombination
+module
+
+public import Pilean.Erdos.AbstractDefs
+public import Mathlib.Algebra.MonoidAlgebra.MapDomain
+public import Mathlib.Algebra.Ring.GeomSum
+public import Mathlib.Algebra.BigOperators.Group.Finset.Powerset
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # The algebraic core of Theorem A, part 2: identities in the group ring `R[S]`
@@ -20,6 +22,8 @@ For `R = ℚ`: `aug` is a ring homomorphism (`augHom`), `x * N_S = ε(x) N_S`
 (`mul_normElt_univ`), and the elements with coefficients in `ℤ_(2)` are closed under the ring
 operations and contain the image of `ℤ[S]` (`toQ`).
 -/
+
+@[expose] public section
 
 set_option linter.unusedSectionVars false
 set_option linter.unusedFintypeInType false

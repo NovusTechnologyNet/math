@@ -1,4 +1,6 @@
-import Pilean.PiFormula.Baker
+module
+
+public import Pilean.PiFormula.Baker
 
 /-!
 # Part III, the setting: `S(ρ)` as a combination of logarithms (milestone M6, second half)
@@ -20,6 +22,8 @@ Joined with `baker_step1` this gives **Step 1 of Theorem C for the series themse
 of `π`, then the coefficients `d_r` vanish outside the 24 roots of `R0`, and on `R0` they are a
 combination of the 13 relations with algebraic coefficients.
 -/
+
+@[expose] public section
 
 open Complex
 

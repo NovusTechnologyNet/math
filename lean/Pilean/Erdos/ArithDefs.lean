@@ -1,7 +1,9 @@
-import Pilean.Erdos.AbstractDefs
-import Pilean.Erdos.ArithLocal
-import Pilean.Erdos.ArithChar
-import Mathlib.Data.ZMod.QuotientRing
+module
+
+public import Pilean.Erdos.AbstractDefs
+public import Pilean.Erdos.ArithLocal
+public import Pilean.Erdos.ArithChar
+public import Mathlib.Data.ZMod.QuotientRing
 
 /-!
 # Theorem A from the abstract theorem, part 3: the instance of the abstract setting
@@ -21,6 +23,8 @@ multiplicatively):
 * `oRat q n = o(n) = ∏_{p ∈ n} (p - 1)/2^(s_p)`;
 * `gElt q χ f n = g_n = o(n)^(-1) ∑_{r : n(r) = n} f(r) [cl(r)]`.
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

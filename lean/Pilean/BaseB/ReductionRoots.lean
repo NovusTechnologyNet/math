@@ -1,4 +1,6 @@
-import Pilean.BaseB.Symmetrize
+module
+
+public import Pilean.BaseB.Symmetrize
 
 /-!
 # A general base `b`: the cofactor of the minimal polynomial of `√b - r`
@@ -16,6 +18,8 @@ polynomial over `ℤ` of `x = t - r`.
   `n`-th roots `r'`), monic of degree `2 φ(n)`; so `H` is monic of degree at most `φ(n)`, and
   each of its roots has absolute value at most `√b + 1`.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

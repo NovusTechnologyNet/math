@@ -1,5 +1,7 @@
-import Pilean.RatBase.ThreeHalves
-import Pilean.RatBase.FourThirds
+module
+
+public import Pilean.RatBase.ThreeHalves
+public import Pilean.RatBase.FourThirds
 
 /-!
 # The multiplicative identities behind the two formulas, in terms of roots of unity
@@ -17,6 +19,8 @@ So, in the form of `BaseB.hasSum_periodic_logs`, the two formulas are
   `π√3/9 = -(1/√3) Im Log(1 - x ζ_12)` at `x = √(3/4)`,
   `π/4 = -(1/2) Im (Log(1 - x ζ_24) + Log(1 - x ζ_24^5))` at `x = √(2/3)`.
 -/
+
+@[expose] public section
 
 open Complex
 

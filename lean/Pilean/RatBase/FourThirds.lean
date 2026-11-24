@@ -1,4 +1,6 @@
-import Pilean.RatBase.Defs
+module
+
+public import Pilean.RatBase.Defs
 
 /-!
 # A degree-1 BBP-type formula for `π√3` in base `4/3`
@@ -22,6 +24,8 @@ so `∑_{k ≥ 1} Im(w^k) / k = -arg(1 - w) = arctan √3 = π/3`. On the other 
 `w^2 = (3/2) w - 3/4` and `w^6 = -27/64`, which give `Im(w^k) = √3 ρ(k) (3/4)^⌊k/2⌋`
 (`wFT_pow_im`): the weights `x^k sin(kπ/6)` are `√3` times rational numbers.
 -/
+
+@[expose] public section
 
 open Complex
 

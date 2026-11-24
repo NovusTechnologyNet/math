@@ -1,5 +1,7 @@
-import Pilean.Base3.Optimum
-import Pilean.PiFormula.BaileySums
+module
+
+public import Pilean.Base3.Optimum
+public import Pilean.PiFormula.BaileySums
 
 /-!
 # Base 3 in Bailey's notation
@@ -56,6 +58,8 @@ this file. With `G`, `Z₁`, `Z₂` the three patterns of `Dimension.lean`:
 The theorems of the second list take `BakerTheorem` as a hypothesis, as `Dimension.lean` does;
 `PiFormula.bakerTheorem` (`PiFormula/Unconditional.lean`) discharges it.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

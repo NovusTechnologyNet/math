@@ -1,5 +1,7 @@
-import Pilean.Compendium.Defs
-import Pilean.Polylog.Defs
+module
+
+public import Pilean.Compendium.Defs
+public import Pilean.Polylog.Defs
 
 /-!
 # Bailey's Compendium: the statements of degree `s` and the statements of degree 1
@@ -15,6 +17,8 @@ The formulas of degree 2 are in `Degree2Base64` ((30), (32)), `Degree2Base16` (t
 Catalan's constant, (29), (31), (33)) and `Degree2Base3` ((76), (77)); the plan for the others
 is `literature/bailey-compendium/DEGREE2_PLAN.md`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

@@ -694,4 +694,10 @@ On Windows, Mathlib's deep folders can overflow the 260-character path limit whe
 project sits in a long path; enabling long paths in Windows avoids that. `build.ps1` runs
 the same build and prints only errors and the final line.
 
+Every `.lean` file here is a module of Lean's module system (as in Mathlib): it starts with
+`module`, its imports are `public import`, and its body is in `@[expose] public section`, so
+that other files can use every declaration and unfold every definition as before. A new file
+needs the same three things; a `private` declaration stays private to its file. The pieces of
+generated files in `scripts/` have the extension `.lean.in`, because they are not modules.
+
 Toolchain: Lean 4.36.0, Mathlib v4.36.0.

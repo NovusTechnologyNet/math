@@ -1,4 +1,6 @@
-import Pilean.BaseB.Defs
+module
+
+public import Pilean.BaseB.Defs
 
 /-!
 # A general base `b`: symmetrization, and the primes of a constant term
@@ -14,6 +16,8 @@ Two tools for the file `Reduction`, with `t = √b` (which may be rational).
   minimal polynomial over `ℤ` of the algebraic integer `x`, then a prime ideal of the
   algebraic integers contains `p` and `x`.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

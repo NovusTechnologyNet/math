@@ -1,4 +1,6 @@
-import Pilean.PiFormula.Bailey
+module
+
+public import Pilean.PiFormula.Bailey
 
 /-!
 # Bailey's sums and the patterns: the re-indexing (milestone M8)
@@ -27,6 +29,8 @@ None of this uses Baker's theorem. With it:
 * `bailey_count_F1`: `P(1, 2^B, B, ·)` has one zero relation if `6 ∣ B`, and none otherwise;
 * `bailey_table`: the 27 rows of Bailey's Table 1 (binary, degree 1), as stated by Bailey.
 -/
+
+@[expose] public section
 
 open Complex
 

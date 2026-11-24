@@ -1,4 +1,6 @@
-import Pilean.PiFormula.TheoremE
+module
+
+public import Pilean.PiFormula.TheoremE
 
 /-!
 # The cheapest checked computation of `π` with two formulas: the costs and the checker
@@ -41,6 +43,8 @@ Why in pieces: the kernel gives back the memory of a computation only when the d
 finished. One `decide +kernel` on the whole tree needs more than 22 GB; piece by piece, a few
 GB are enough for each file.
 -/
+
+@[expose] public section
 
 open Complex
 

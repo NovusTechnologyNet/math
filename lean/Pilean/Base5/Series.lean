@@ -1,4 +1,6 @@
-import Pilean.Base5.Defs
+module
+
+public import Pilean.Base5.Defs
 
 /-!
 # Base 5: the series of the class F5 as combinations of logarithms
@@ -16,6 +18,8 @@ With `t = √5` one has `t² = 5`, so `ρ(k) 5^(-⌊k/2⌋) = c(k) t^(-k)` for t
 Base 3 uses `t = √-3` and needs a sign `(-1)^⌊k/2⌋` in the twist; here `t² = +5` and there is
 no sign, so the period only has to be even.
 -/
+
+@[expose] public section
 
 open Complex
 

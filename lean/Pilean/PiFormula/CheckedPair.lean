@@ -1,9 +1,11 @@
-import Pilean.PiFormula.CheckedPairCert1
-import Pilean.PiFormula.CheckedPairCert2
-import Pilean.PiFormula.CheckedPairCert3
-import Pilean.PiFormula.CheckedPairCert4
-import Pilean.PiFormula.CheckedPairCert5
-import Pilean.PiFormula.CheckedPairCert6
+module
+
+public import Pilean.PiFormula.CheckedPairCert1
+public import Pilean.PiFormula.CheckedPairCert2
+public import Pilean.PiFormula.CheckedPairCert3
+public import Pilean.PiFormula.CheckedPairCert4
+public import Pilean.PiFormula.CheckedPairCert5
+public import Pilean.PiFormula.CheckedPairCert6
 
 /-!
 # The cheapest checked computation of `π` with two formulas (Theorem J)
@@ -32,12 +34,14 @@ files, so that no file needs much memory to compile:
 * this file: the branches of the tree above the pieces (`pairCert`, `pairCert_ok`, section 4),
   the bound (section 5), and Takahashi's pair (section 6).
 
-All these files are written by scripts/pairgen.py, from `pair_head.lean`, `pair_tail.lean` and
-the tree that it finds.
+All these files are written by scripts/pairgen.py, from `pair_head.lean.in`,
+`pair_tail.lean.in` and the tree that it finds.
 
 Not proved here: that Takahashi's pair is the only one at 60 (found by exact computation,
 python/verify_pair_optimum.py).
 -/
+
+@[expose] public section
 
 open Complex
 

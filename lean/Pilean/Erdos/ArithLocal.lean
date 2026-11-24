@@ -1,6 +1,8 @@
-import Mathlib.Data.ZMod.Basic
-import Mathlib.NumberTheory.Padics.PadicVal.Basic
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+module
+
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.NumberTheory.Padics.PadicVal.Basic
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
 /-!
 # Theorem A from the abstract theorem, part 1: the ring `ℤ/p^k`
@@ -17,6 +19,8 @@ and proves how they behave under multiplication by `p` (`loc_p_mul`) and by an i
 `p` (`loc_natCast_mul`), what the fibres of multiplication by `p` are (`sum_fiber_p_mul`), and
 how many `x` have a given exponent and a residue with a given property (`card_locV_locR`).
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

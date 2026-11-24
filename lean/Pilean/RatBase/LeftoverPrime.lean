@@ -1,4 +1,6 @@
-import Pilean.RatBase.LeftoverConj
+module
+
+public import Pilean.RatBase.LeftoverConj
 
 /-!
 # Rational bases: a good prime from a primitive prime factor and a conjugation
@@ -20,6 +22,8 @@ The proof, with `u = √(pq)`.
 3. In the second case, `ζ ↦ ζ ^ a` fixes `r` (because `a ≡ 1 (mod 2m)` and `r^(2m) = 1`) and
    sends `u` to `-u`: it sends `u - q r` to `-(u + q r)` (`ConjPair.hasPrime`).
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

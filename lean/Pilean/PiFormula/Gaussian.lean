@@ -1,4 +1,6 @@
-import Pilean.PiFormula.Bridge
+module
+
+public import Pilean.PiFormula.Bridge
 
 /-!
 # The private-prime argument in the Gaussian integers
@@ -15,6 +17,8 @@ Facts 1 and 2 of pi_formula_theorem.md, and their combination:
 * `coeff_eq_zero_of_private_prime`: in an arctangent relation, a term `arctan (1/n₀)`
   with a prime `p ≡ 1 (mod 4)` dividing `n₀² + 1` and no other `n² + 1` has coefficient 0.
 -/
+
+@[expose] public section
 
 open Complex
 

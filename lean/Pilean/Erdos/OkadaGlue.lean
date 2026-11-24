@@ -1,4 +1,6 @@
-import Pilean.Erdos.OkadaDefs
+module
+
+public import Pilean.Erdos.OkadaDefs
 
 /-!
 # Okada's criterion, the direction "sum `= 0` implies (a) and (b)": the main deduction
@@ -21,6 +23,8 @@ on the units, which is condition (a); and `∑_{p ∣ q} c_p log p = 0` gives `c
 The other deductions are in `OkadaGlueTwist.lean` (`OkadaTwistInvariance`),
 `OkadaGlueChar.lean` (`OkadaUnitNonvanishing`) and `OkadaGlueWindow.lean`.
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

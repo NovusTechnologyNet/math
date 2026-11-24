@@ -1,4 +1,6 @@
-import Pilean.BaseB.GeneralDefs
+module
+
+public import Pilean.BaseB.GeneralDefs
 
 /-!
 # Two lemmas for the Kummer homomorphisms
@@ -10,6 +12,8 @@ import Pilean.BaseB.GeneralDefs
   abelian, so every automorphism `τ` commutes with complex conjugation; hence `τ β` is real,
   and `(τ β)^k = β^k` gives `τ β = ± β`. So `β²` is fixed by the whole Galois group.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

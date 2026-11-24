@@ -1,4 +1,6 @@
-import Pilean.Compendium.Defs
+module
+
+public import Pilean.Compendium.Defs
 
 /-!
 # Bailey's Compendium: formula (87) in base 5
@@ -13,6 +15,8 @@ is `1/2 - (1/2) [5 ∣ k] - (1/√5) (cos (2πk/5) - cos (4πk/5))`, so the valu
 `-log (1 - x e^(iθ))`) at `θ = 2π/5, 4π/5`, where `cos (2π/5) = (√5 - 1)/4` and
 `cos (4π/5) = -(√5 + 1)/4`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

@@ -1,4 +1,6 @@
-import Pilean.PiFormula.LogExplicit
+module
+
+public import Pilean.PiFormula.LogExplicit
 
 /-!
 # The finite test for a prime (Theorem K, the test)
@@ -36,6 +38,8 @@ The two halves of the proof.
   (`orderOf_two_of_not_dvd`), and for `n = 4d` the two halves have no common prime of order
   `n` (`not_dvd_norm_P_and_Q`).
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

@@ -1,4 +1,6 @@
-import Pilean.RatBase.GoodPrimesR
+module
+
+public import Pilean.RatBase.GoodPrimesR
 
 /-!
 # Rational bases `p/q` with `p ≤ 15`: shared statements
@@ -19,6 +21,8 @@ This file fixes the two statements that remain, each proved in its own file:
 
 `GoodPrimesSmall.lean` assembles them. Nothing is proved here.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

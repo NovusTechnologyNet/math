@@ -1,8 +1,10 @@
-import Pilean.Erdos.Defs
-import Pilean.Erdos.AbstractGroupRing
-import Mathlib.Data.Nat.Factorization.Defs
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.LinearCombination
+module
+
+public import Pilean.Erdos.Defs
+public import Pilean.Erdos.AbstractGroupRing
+public import Mathlib.Data.Nat.Factorization.Defs
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # Theorem C of the Erdős `±1` programme, from Theorems A and B
@@ -14,6 +16,8 @@ even (`thmC_even_of_eq`). All exponents even means that `q` is a square.
 
 The paper proof is section 0 of `research/2026-11-23-erdos-pm1/02_proof_part_II.md`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

@@ -1,4 +1,6 @@
-import Pilean.BaseB.Defs
+module
+
+public import Pilean.BaseB.Defs
 
 /-!
 # The size condition for every base `b ≥ 6`
@@ -20,6 +22,8 @@ Write `s = √b` and `φ = φ(m)`. Mathlib gives `(b - 1)^φ < Φ_m(b)`, and
   `Φ_3(7) = 57`, `Φ_6(7) = 43`. In four of them `q` does not divide `Φ_m(b)`; the other two,
   `(6, 5, 5)` and `(7, 3, 3)`, are checked directly.
 -/
+
+@[expose] public section
 
 open Polynomial
 

@@ -1,4 +1,6 @@
-import Pilean.Polylog.DilogComplex
+module
+
+public import Pilean.Polylog.DilogComplex
 
 /-!
 # Catalan's constant and the dilogarithm at `i` and `(1 + i)/2`
@@ -12,6 +14,8 @@ Mathlib has no Catalan constant. Here `catalanConst = ∑_{k ≥ 0} (-1)^k / (2k
 * `polylog_two_half_add_half_I_im : Im Li_2((1+i)/2) = G - π log 2 / 8`
   (Landen's identity: `z / (z - 1) = -i`).
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

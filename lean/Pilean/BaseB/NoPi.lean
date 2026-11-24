@@ -1,9 +1,11 @@
-import Pilean.BaseB.TheoremG
-import Pilean.BaseB.Kummer
-import Pilean.BaseB.Subseries
-import Pilean.BaseB.Reindex
-import Pilean.BaseB.BaileyForm
-import Pilean.Base3.Unconditional
+module
+
+public import Pilean.BaseB.TheoremG
+public import Pilean.BaseB.Kummer
+public import Pilean.BaseB.Subseries
+public import Pilean.BaseB.Reindex
+public import Pilean.BaseB.BaileyForm
+public import Pilean.Base3.Unconditional
 
 /-!
 # Degree-1 BBP-type formulas for `π` exist only in bases that are powers of 2
@@ -31,6 +33,8 @@ The proof assembles five files:
 
 Baker's theorem is used through the imported proof (`bakerTheorem`); there is no hypothesis.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

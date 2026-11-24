@@ -1,6 +1,8 @@
-import Pilean.Erdos.CriterionGeneral
-import Pilean.Erdos.EvenCase
-import Pilean.Erdos.SizeCase
+module
+
+public import Pilean.Erdos.CriterionGeneral
+public import Pilean.Erdos.EvenCase
+public import Pilean.Erdos.SizeCase
 
 /-!
 # Erdős's conjecture on `∑ f(n)/n`: the cases that are proved, in plain terms
@@ -43,6 +45,8 @@ Status (23 November 2026): complete, no hypothesis left. The files of this exten
 
 Not covered: the odd squares `q` with `∏_{p ∣ q} p/(p-1) > 2` (the first is `11025`).
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

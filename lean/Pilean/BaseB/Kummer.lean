@@ -1,4 +1,6 @@
-import Pilean.BaseB.KummerAux
+module
+
+public import Pilean.BaseB.KummerAux
 
 /-!
 # The Kummer homomorphisms
@@ -22,6 +24,8 @@ Proof. Let `L = ℚ(ζ_N)` with `N = M n`, let `f` be the minimal polynomial of 
 Mathlib's criterion for the irreducibility of `X^n - a` covers odd `n` only; the proof above
 does not use it.
 -/
+
+@[expose] public section
 
 open Complex Polynomial IntermediateField
 

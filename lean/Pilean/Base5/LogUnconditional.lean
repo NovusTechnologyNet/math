@@ -1,5 +1,7 @@
-import Pilean.Base5.LogExplicit
-import Pilean.Base5.Unconditional
+module
+
+public import Pilean.Base5.LogExplicit
+public import Pilean.Base5.Unconditional
 
 /-!
 # Base 5: the criterion for logarithms, with the hypotheses discharged
@@ -13,6 +15,8 @@ and `GoodPrimes5`. Here:
 * the theorems in `PiFormula.Base5.Unconditional` also use the formal proof of Baker's theorem
   in `Baker/` (`PiFormula.bakerTheorem`), and depend only on Lean's three standard axioms.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

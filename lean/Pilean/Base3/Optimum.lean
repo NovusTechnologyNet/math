@@ -1,4 +1,6 @@
-import Pilean.Base3.Dimension
+module
+
+public import Pilean.Base3.Dimension
 
 /-!
 # Base 3: no formula beats the Gregory series
@@ -27,6 +29,8 @@ together. The five forms `b - 3c`, `c`, `b`, `b + c`, `4b + 3c` vanish together 
 `b = c = 0`, and otherwise at most one of them vanishes. So there are at least 6 non-zero
 entries, and equality forces `b = c = 0` or `b = 0, c = -6a`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

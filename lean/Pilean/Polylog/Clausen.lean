@@ -1,5 +1,7 @@
-import Pilean.Polylog.Catalan
-import Pilean.Polylog.PointBase3
+module
+
+public import Pilean.Polylog.Catalan
+public import Pilean.Polylog.PointBase3
 
 /-!
 # The Clausen function `Cl_2`
@@ -18,6 +20,8 @@ function.
 These are the first steps towards the formulas of the Compendium with imaginary parts
 (`literature/bailey-compendium/DEGREE2_PLAN.md`, work package F).
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

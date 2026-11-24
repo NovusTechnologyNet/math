@@ -1,4 +1,6 @@
-import Pilean.PiFormula.LogPrimes
+module
+
+public import Pilean.PiFormula.LogPrimes
 
 /-!
 # Primes below 100 whose logarithm has a binary BBP-type formula, and the classification
@@ -37,6 +39,8 @@ of F are closed under sums and rational multiples (`IsFValue.add`, `IsFValue.con
 the class F if and only if `p` is one of these fifteen. `isFValue_log_23_add_log_89`:
 `log 23 + log 89` is a value, although neither `log 23` nor `log 89` is.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

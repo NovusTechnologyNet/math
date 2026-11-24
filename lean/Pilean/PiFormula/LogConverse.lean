@@ -1,4 +1,6 @@
-import Pilean.PiFormula.LogCriterion
+module
+
+public import Pilean.PiFormula.LogCriterion
 
 /-!
 # Which logarithms are values of the class F: the converse (Theorem K, second half)
@@ -28,6 +30,8 @@ Taking logarithms of absolute values and adding over all such `a`, the number
 sums over full cosets `{u^j x}`, and such a coset is the set of roots of `X^M = x^M`
 (`sum_log_coset_mem`, `sum_log_mod_four_mem`, `sum_log_coprime_mem`).
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

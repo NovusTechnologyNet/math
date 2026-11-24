@@ -1,7 +1,9 @@
-import Pilean.PiFormula
-import Pilean.PiFormula.Orders
-import Pilean.PiFormula.TheoremA
-import TauCeti.NumberTheory.PrimitivePrimeDivisors.Cyclotomic
+module
+
+public import Pilean.PiFormula
+public import Pilean.PiFormula.Orders
+public import Pilean.PiFormula.TheoremA
+public import TauCeti.NumberTheory.PrimitivePrimeDivisors.Cyclotomic
 
 /-!
 # Lemma 2: primitive primes in both Aurifeuillian factors of `4^n + 1`
@@ -26,6 +28,8 @@ The proof (pi_formula_theorem.md, Lemma 2), with `t = 1 + i`:
 4. **Small cases** `M_1 = 5`, `M_3 = 13`, `M_5 = 41` (proved) and the assembly (`lemma2`,
    proved from 1-3).
 -/
+
+@[expose] public section
 
 open Polynomial
 

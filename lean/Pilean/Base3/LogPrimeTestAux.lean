@@ -1,5 +1,7 @@
-import Pilean.Base3.LogExplicit
-import Pilean.Base3.Halves
+module
+
+public import Pilean.Base3.LogExplicit
+public import Pilean.Base3.Halves
 
 /-!
 # Base 3: two primes in one primitive part exclude each other
@@ -33,6 +35,8 @@ The function is a rational combination of valuations at primes, built index by i
   only be 2 or 3. Then the function is zero on `3^D - 1` as well, because
   `(3^D - 1) (3^E - 1) = (3^(3E) - 1) (3^(2E) - 1) L_j M_j` with `E = 2j + 1`.
 -/
+
+@[expose] public section
 
 open Polynomial
 

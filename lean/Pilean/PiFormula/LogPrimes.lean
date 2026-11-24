@@ -1,4 +1,6 @@
-import Pilean.PiFormula.Log23
+module
+
+public import Pilean.PiFormula.Log23
 
 /-!
 # Primes whose logarithm has no binary BBP-type formula
@@ -24,6 +26,8 @@ another good prime. This file makes that general (`goodPrimes_ne`, `no_rel_of_go
 and periodic. `not_isFValue_log_of_mem` (from Baker's theorem): for these ten primes `ℓ`,
 `log ℓ` is not such a value. The classification below 100 is in `LogYes.lean`.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

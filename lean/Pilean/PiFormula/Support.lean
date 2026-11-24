@@ -1,4 +1,6 @@
-import Pilean.PiFormula.Relations
+module
+
+public import Pilean.PiFormula.Relations
 
 /-!
 # Step 2 of Part III: every multiplicative relation lives on `R0`
@@ -28,6 +30,8 @@ The one arithmetic input is `GoodPrimes`: every root of unity outside `R0` has s
 It comes from Lemma 3, Bang's theorem and the Galois table (milestone M4.2 of
 lean/PART3_PLAN.md, not yet in Lean), so `support_subset_R0` is stated as `GoodPrimes → ...`.
 -/
+
+@[expose] public section
 
 open Complex
 

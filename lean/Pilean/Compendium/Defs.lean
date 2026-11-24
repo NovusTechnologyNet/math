@@ -1,9 +1,11 @@
-import Pilean.BaseB.NegativeBase
-import Pilean.BaseB.Combination
-import Pilean.BaseB.LogSelf
-import Pilean.PiFormula.TheoremC3
-import Pilean.PiFormula.SharpD
-import Pilean.Base3.Bailey
+module
+
+public import Pilean.BaseB.NegativeBase
+public import Pilean.BaseB.Combination
+public import Pilean.BaseB.LogSelf
+public import Pilean.PiFormula.TheoremC3
+public import Pilean.PiFormula.SharpD
+public import Pilean.Base3.Bailey
 
 /-!
 # Bailey's Compendium of BBP-type formulas: the uniform statements
@@ -46,6 +48,8 @@ The rest of the file is the toolbox of the proofs:
   `g(k) = ∑_{d ∣ k} c_d` (`listPat`), a combination of the logarithms `log (1 - b^(-d))`
   (`listVal`, `logTerm`, `logTerm_eq`).
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

@@ -1,4 +1,6 @@
-import Pilean.Base3.LogValues
+module
+
+public import Pilean.Base3.LogValues
 
 /-!
 # Base 3: which logarithms are values (the criterion)
@@ -17,6 +19,8 @@ cleared relation is an integer polynomial identity at `ζ = exp(2πi/N)`, `N = 3
 `ω` and `t`. Adding the logarithms of absolute values over these `a` and sorting the terms by
 Möbius inversion leaves the numbers `log |t^M - c|` with `c^3 = 1`.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

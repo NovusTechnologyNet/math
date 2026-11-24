@@ -1,6 +1,8 @@
-import Pilean.PiFormula.TheoremE
-import Pilean.PiFormula.FewestTermsUniqueCert
-import Pilean.PiFormula.Unconditional
+module
+
+public import Pilean.PiFormula.TheoremE
+public import Pilean.PiFormula.FewestTermsUniqueCert
+public import Pilean.PiFormula.Unconditional
 
 /-!
 # Theorem E, the standard measure: the optimum is attained only by Huvent's two formulas
@@ -24,6 +26,8 @@ line of the 8-dimensional space `V`, and the line is the one through Huvent's fi
 pattern (`huvS1_line`, `huvS2_line`). The tree is in `FewestTermsUniqueCert.lean`; here the
 checker is proved sound (`checkU_sound`).
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

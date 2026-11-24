@@ -1,4 +1,6 @@
-import Pilean.Base3.Series
+module
+
+public import Pilean.Base3.Series
 
 /-!
 # Base 3: the generators are values
@@ -14,6 +16,8 @@ The proof. The roots `r` of `X^n = c` have `∏ (t - r) = t^n - c`, so
 `Re(ω^e / t) = Im(ω^e)/√3` are rational: `1, -1/2, -1/2` and `0, 1/2, -1/2`. So the series
 has the form `∑ ρ(k) 3^(-⌊k/2⌋)/k` with `ρ` rational of period `12 n` (`rhoGen`).
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

@@ -1,5 +1,7 @@
-import Pilean.RatBase.ClassificationR
-import Pilean.RatBase.GoodPrimesR
+module
+
+public import Pilean.RatBase.ClassificationR
+public import Pilean.RatBase.GoodPrimesR
 
 /-!
 # No relation in a rational base `p/q` with `p ≥ 16`
@@ -16,6 +18,8 @@ them, `2, 3, 4, 3/2, 4/3`, do have relations: see `ThreeHalves` and `FourThirds`
 
 Baker's theorem is used through the imported proof; there is no hypothesis.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

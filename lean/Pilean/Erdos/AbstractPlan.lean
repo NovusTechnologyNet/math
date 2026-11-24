@@ -1,3 +1,5 @@
+module
+
 /-!
 # Plan and status of the proof of `PiFormula.Erdos.AbstractTheoremA`
 

@@ -1,4 +1,6 @@
-import Pilean.PiFormula.GaloisValue
+module
+
+public import Pilean.PiFormula.GaloisValue
 
 /-!
 # Exact arguments of the 24 numbers `w_j` (milestone M7, part 2)
@@ -21,6 +23,8 @@ Consequence (`log_exact`): for an integer relation `f` on `R0Exps` whose `beta`-
 `gam`-sums vanish, `∑ f_j Log w_j = (∑ f_j alpha_j) · iπ` exactly. So the exact multiple of
 `iπ` of any relation, and of its Galois conjugates, is a finite computation.
 -/
+
+@[expose] public section
 
 open Complex ComplexConjugate
 

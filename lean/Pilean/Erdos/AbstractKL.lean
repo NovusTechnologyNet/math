@@ -1,5 +1,7 @@
-import Pilean.Erdos.AbstractSetting
-import Mathlib.Tactic.FieldSimp
+module
+
+public import Pilean.Erdos.AbstractSetting
+public import Mathlib.Tactic.FieldSimp
 
 /-!
 # The algebraic core of Theorem A, part 4: Lemma KL
@@ -15,6 +17,8 @@ import Mathlib.Tactic.FieldSimp
 * `lemmaKL`: if moreover `(1 - t_{p₀}) y = 0`, then `ε(y) ∈ |S| ℤ_(2)`. (The paper's Lemma KL,
   for `y = N_0 w`.)
 -/
+
+@[expose] public section
 
 set_option linter.unusedSectionVars false
 set_option linter.unusedFintypeInType false

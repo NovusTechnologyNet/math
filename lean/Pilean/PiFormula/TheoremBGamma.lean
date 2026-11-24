@@ -1,4 +1,6 @@
-import Pilean.PiFormula.TheoremB
+module
+
+public import Pilean.PiFormula.TheoremB
 
 /-!
 # Theorem B for the numbers `γ(O)` (Part II of pi_formula_theorem.md)
@@ -31,6 +33,8 @@ That these multisets are exactly the orbits of `Gal(ℚ̄/ℚ(i))` on the roots 
 irreducibility over `ℚ(i)` of `Φ_m(κ X^N)`), and that every orbit is one of them, is proved in
 `TheoremBGalois.lean` (`galois_table`).
 -/
+
+@[expose] public section
 
 open Polynomial Complex ComplexConjugate
 

@@ -2,8 +2,8 @@ import re
 import os
 HERE = os.path.dirname(os.path.abspath(__file__))
 S = os.path.join(HERE, "generated") + os.sep      # written by twgen.py and named.py
-head = open(os.path.join(HERE, "vseries_head.lean"), encoding="utf-8").read()
-tail = open(os.path.join(HERE, "vseries_tail.lean"), encoding="utf-8").read()
+head = open(os.path.join(HERE, "vseries_head.lean.in"), encoding="utf-8").read()
+tail = open(os.path.join(HERE, "vseries_tail.lean.in"), encoding="utf-8").read()
 cases = open(S + "tw_cases.lean", encoding="utf-8").read().splitlines()
 indep = open(S + "indep.lean", encoding="utf-8").read().splitlines()
 table = [(0,0),(0,3),(6,3),(0,0),(0,3),(0,-3),(0,0),(0,3),(0,9),(0,0),(-6,-3),(0,-3),(0,0),(0,3),(-6,3),(0,0),(0,-9),(0,-3),(0,0),(0,3),(0,-3),(0,0),(6,-3),(0,-3)]

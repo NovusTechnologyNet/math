@@ -1,5 +1,7 @@
-import Pilean.Base3.GoodPrimes
-import Pilean.PiFormula.Lemma2
+module
+
+public import Pilean.Base3.GoodPrimes
+public import Pilean.PiFormula.Lemma2
 
 /-!
 # Base 3: each Aurifeuillian factor of `3^(3E) + 1` has a primitive prime
@@ -23,6 +25,8 @@ The proof works in the Eisenstein integers `ℤ[ω]` (`ω² + ω + 1 = 0`), with
 4. A divisor of `Φ_{6E}(3)` that is not `1` and not a prime factor of `6E` has a prime factor
    of order `6E` (`exists_primitive_of_dvd_Phi6`, from the Tau Ceti library).
 -/
+
+@[expose] public section
 
 open Polynomial
 

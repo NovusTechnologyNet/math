@@ -1,4 +1,6 @@
-import Pilean.PiFormula.TheoremC2
+module
+
+public import Pilean.PiFormula.TheoremC2
 
 /-!
 # Theorem D for rational multiples of π (milestone M8)
@@ -21,6 +23,8 @@ particular `k` (`decide +kernel`), and what each condition forces on `q`
 (`linear_combination`). They are also used for Bailey's table in `Bailey.lean` and for the
 sharp form of Theorem D in `SharpD.lean`.
 -/
+
+@[expose] public section
 
 open Complex
 

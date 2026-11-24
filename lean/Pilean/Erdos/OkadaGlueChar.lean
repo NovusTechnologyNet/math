@@ -1,5 +1,7 @@
-import Pilean.Erdos.OkadaDefs
-import Mathlib.NumberTheory.DirichletCharacter.Orthogonality
+module
+
+public import Pilean.Erdos.OkadaDefs
+public import Mathlib.NumberTheory.DirichletCharacter.Orthogonality
 
 /-!
 # Okada's criterion: a function on the units is determined by its twisted sums
@@ -18,6 +20,8 @@ Assume `S'_N(n ↦ u(h n)) → c` for every `h ∈ U`.
    (`OkadaLOne` for `χ⁻¹`). So `∑_b χ(b) u(b) = 0` for every `χ` (for `χ = 1` by step 1).
 3. By the orthogonality of the characters, `u(a) = 0` for every `a ∈ U`.
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

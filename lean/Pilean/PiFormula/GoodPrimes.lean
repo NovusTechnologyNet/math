@@ -1,6 +1,8 @@
-import Pilean.PiFormula.Support
-import Pilean.PiFormula.TheoremBGalois
-import Mathlib.RingTheory.Ideal.GoingUp
+module
+
+public import Pilean.PiFormula.Support
+public import Pilean.PiFormula.TheoremBGalois
+public import Mathlib.RingTheory.Ideal.GoingUp
 
 /-!
 # Part III, Step 2: every root of unity outside `R0` has a good prime (milestone M4.2)
@@ -30,6 +32,8 @@ odd prime `p` not dividing the order of `r`. The construction:
 No Galois automorphism is needed: the root `r` is fixed from the start, and lying over is applied
 to the map `X ↦ r`.
 -/
+
+@[expose] public section
 
 open Polynomial Complex ComplexConjugate
 

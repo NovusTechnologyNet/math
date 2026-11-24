@@ -1,7 +1,9 @@
-import Pilean.Erdos.OkadaFourier
-import Pilean.Erdos.OkadaBaker
-import Pilean.Erdos.OkadaGlueTwist
-import Pilean.Erdos.EvenCase
+module
+
+public import Pilean.Erdos.OkadaFourier
+public import Pilean.Erdos.OkadaBaker
+public import Pilean.Erdos.OkadaGlueTwist
+public import Pilean.Erdos.EvenCase
 
 /-!
 # Okada's criterion for every `q ≥ 1`: the first half
@@ -20,6 +22,8 @@ The proofs are those of `okadaFourierLimit` (`OkadaFourier.lean`), `okadaBakerTw
 these files; only the last lines are repeated. The second half is `CriterionGenSecond.lean`
 and the criterion is `okadaCriterionGeneral` (`CriterionGeneral.lean`).
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

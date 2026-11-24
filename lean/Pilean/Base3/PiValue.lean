@@ -1,4 +1,6 @@
-import Pilean.Base3.Support
+module
+
+public import Pilean.Base3.Support
 
 /-!
 # Base 3: which multiples of `π` are values (from good primes)
@@ -22,6 +24,8 @@ The arguments at the exceptional roots are `π/6, -π/6, 0, 0, -π/6, π/6` for
 `γ = (i/6) (d_1 - d_{-1} - d_ω + d_{-ω²})`, and for a rational pattern this is a rational
 multiple of `√3` (`fourier_pi_combination`).
 -/
+
+@[expose] public section
 
 open Complex
 

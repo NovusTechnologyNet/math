@@ -1,4 +1,6 @@
-import Pilean.BaseB.LogNonValueAux
+module
+
+public import Pilean.BaseB.LogNonValueAux
 
 /-!
 # A general base `b ≥ 5`, `b ≠ 9`: logarithms of numbers built from the primes of the base
@@ -33,6 +35,8 @@ relation `m log y + z₀ iπ + ∑ z_r Log(1 - r/t) = 0` the coefficient `m` is 
 
 So the coefficient `-q'` of `log y` is zero.
 -/
+
+@[expose] public section
 
 open Complex
 

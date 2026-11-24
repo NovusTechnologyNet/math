@@ -1,4 +1,6 @@
-import Pilean.BaseB.TheoremG
+module
+
+public import Pilean.BaseB.TheoremG
 
 /-!
 # Logarithms in a general base: shared definitions
@@ -26,6 +28,8 @@ The plan: from Baker's theorem, if `q π + q' log y` (`q' ≠ 0`) is a value of 
 
 Nothing is proved here.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

@@ -1,5 +1,7 @@
-import Pilean.BaseB.ReductionCyclo
-import Pilean.BaseB.ReductionRoots
+module
+
+public import Pilean.BaseB.ReductionCyclo
+public import Pilean.BaseB.ReductionRoots
 
 /-!
 # A general base `b`: a good prime from the size condition
@@ -27,6 +29,8 @@ The proof uses no field norm and no Galois theory. Let `t = √b`, `n = ord r`, 
    `Φ_m(b)^k = |c₀| |h| ≤ (q (√b + 1)^φ(m))^k`, against the size condition
    (`size_contradiction`).
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

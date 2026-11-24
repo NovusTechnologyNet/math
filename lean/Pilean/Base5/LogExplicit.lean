@@ -1,4 +1,6 @@
-import Pilean.Base5.LogNonValues
+module
+
+public import Pilean.Base5.LogNonValues
 
 /-!
 # Base 5: examples for the criterion on logarithms
@@ -23,6 +25,8 @@ Not values, from Baker's theorem and good primes (`Base5/LogNonValues.lean`): `l
 `log 2` (`not_isF5Value_log_five_of_goodPrimes5`, `not_isF5Value_log_two_of_goodPrimes5`), and
 hence `log 3` (`not_isF5Value_log_three_of_goodPrimes5`).
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

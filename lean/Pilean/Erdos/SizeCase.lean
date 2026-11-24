@@ -1,5 +1,7 @@
-import Pilean.Erdos.Final
-import Pilean.Erdos.EvenCase
+module
+
+public import Pilean.Erdos.Final
+public import Pilean.Erdos.EvenCase
 
 /-!
 # Erdős's conjecture when `∏_{p ∣ q} p/(p-1) ≤ 2` (Okada's size condition)
@@ -27,6 +29,8 @@ If `f(a) = ±1` and `P(q) ≤ 2` this gives `g(a) ≠ 0` (`okadaG_ne_zero_of_siz
 condition (a) of Okada's criterion fails at `a = 1` (`not_condA_of_sizeProd_le`), and the sum
 is not `0` by `okadaOnlyIf` (odd `q`) or by divergence (even `q`, `erdos_even`).
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

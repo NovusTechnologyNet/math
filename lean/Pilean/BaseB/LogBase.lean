@@ -1,7 +1,9 @@
-import Pilean.BaseB.NoPi
-import Pilean.BaseB.SubseriesLog
-import Pilean.BaseB.LogNonValue
-import Pilean.BaseB.LogSelf
+module
+
+public import Pilean.BaseB.NoPi
+public import Pilean.BaseB.SubseriesLog
+public import Pilean.BaseB.LogNonValue
+public import Pilean.BaseB.LogSelf
 
 /-!
 # The logarithm of the base
@@ -26,6 +28,8 @@ The formulas for the powers of 2 and 3 are in `LogSelf`.
 
 Baker's theorem is used through the imported proof; there is no hypothesis.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

@@ -1,5 +1,7 @@
-import Pilean.Erdos.CriterionGeneral
-import Pilean.Erdos.Main
+module
+
+public import Pilean.Erdos.CriterionGeneral
+public import Pilean.Erdos.Main
 
 /-!
 # Odd squares: an odd-valued function with sum `0`, so the 2-adic method is sharp
@@ -46,6 +48,8 @@ equivalence, and it shows that this `f` satisfies conditions (a) and (b)
 
 Status: complete, for every odd square; no hypothesis, the three standard axioms.
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

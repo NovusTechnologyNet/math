@@ -197,7 +197,9 @@ def lean_row(fm):
     return "[" + ", ".join("(%d, %d)" % (l, e) for l, e in fm) + "]"
 
 
-HEADER = """import Pilean.RatBase.SizeSmallAuxCert
+HEADER = """module
+
+public import Pilean.RatBase.SizeSmallAuxCert
 
 /-!
 # The size condition for small rational bases: the table of certificates
@@ -214,6 +216,8 @@ of the %d pairs `2 ≤ q < p ≤ 15`, `p` and `q` coprime, other than `(3, 2)` a
 * `smallCerts_ok`: every certificate passes the check (kernel computation).
 * `exists_smallCert`: every pair in the range has a certificate.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

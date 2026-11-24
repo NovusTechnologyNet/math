@@ -1,4 +1,6 @@
-import Pilean.BaseB.BaileyForm
+module
+
+public import Pilean.BaseB.BaileyForm
 
 /-!
 # BBP-type series in a rational base: the setting
@@ -21,6 +23,8 @@ Tools:
 * `hasSum_baileyBlockRat_of_pattern`: the series of a pattern of period `N = 2B`, cut into
   blocks of length `N`, is `P(1, (p/q)^B, N, A)` with `a_i = ρ(i) (q/p)^⌊i/2⌋`.
 -/
+
+@[expose] public section
 
 open Complex
 

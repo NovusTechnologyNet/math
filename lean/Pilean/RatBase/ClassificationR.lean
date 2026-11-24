@@ -1,5 +1,7 @@
-import Pilean.RatBase.SupportR
-import Pilean.RatBase.ClassificationRAux
+module
+
+public import Pilean.RatBase.SupportR
+public import Pilean.RatBase.ClassificationRAux
 
 /-!
 # A rational base `p/q`: no algebraic multiple of `π` is a value, and no zero relation
@@ -39,6 +41,8 @@ So every `d_r` is zero, and by Fourier inversion the pattern is zero.
 The hypothesis `GoodPrimesR p q` fails for the five bases `2, 3, 4, 3/2, 4/3`, which have
 relations; for `q = 1` the theorem is `BaseB.eq_zero_of_goodPrimesB`.
 -/
+
+@[expose] public section
 
 open Complex
 

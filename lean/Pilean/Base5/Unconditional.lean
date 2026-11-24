@@ -1,7 +1,9 @@
-import Pilean.Base5.Classification
-import Pilean.Base5.GoodPrimes
-import Pilean.Base5.Halves
-import Pilean.PiFormula.Unconditional
+module
+
+public import Pilean.Base5.Classification
+public import Pilean.Base5.GoodPrimes
+public import Pilean.Base5.Halves
+public import Pilean.PiFormula.Unconditional
 
 /-!
 # Base 5: no formula for a multiple of `π`, and no zero relation
@@ -32,6 +34,8 @@ The theorems of this file in the namespace `PiFormula.Base5` take `BakerTheorem`
 hypothesis; those in `PiFormula.Base5.Unconditional` use the formal proof of Baker's theorem
 in `Baker/` and depend only on Lean's three standard axioms.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

@@ -1,5 +1,7 @@
-import Pilean.BaseB.Reduction
-import Pilean.BaseB.Size
+module
+
+public import Pilean.BaseB.Reduction
+public import Pilean.BaseB.Size
 
 /-!
 # Good primes in every base `b ≥ 5`
@@ -15,6 +17,8 @@ neither `b` nor the order of `r` (`goodPrimesB`).
 * For `b = 5` the size condition fails at `m = 6`; there the good primes come from the
   Aurifeuillian factors (`Base5/GoodPrimes`, through `goodPrimesB_five`).
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

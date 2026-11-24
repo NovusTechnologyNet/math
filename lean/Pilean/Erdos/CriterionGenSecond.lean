@@ -1,8 +1,10 @@
-import Pilean.Erdos.OkadaReduction
-import Pilean.Erdos.OkadaLayer
-import Pilean.Erdos.OkadaLOne
-import Pilean.Erdos.OkadaGlueChar
-import Pilean.Erdos.EvenCase
+module
+
+public import Pilean.Erdos.OkadaReduction
+public import Pilean.Erdos.OkadaLayer
+public import Pilean.Erdos.OkadaLOne
+public import Pilean.Erdos.OkadaGlueChar
+public import Pilean.Erdos.EvenCase
 
 /-!
 # Okada's criterion for every `q ≥ 1`: the second half
@@ -22,6 +24,8 @@ The proofs are those of `OkadaGlueWindow.lean`, `OkadaReduction.lean`, `OkadaLay
 `OkadaGlueChar.lean`, with the lemmas of these files and the window sums for every `q`
 (`tendsto_windowSum`, `EvenCase.lean`); only the steps that mention `Odd q` are repeated.
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

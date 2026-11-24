@@ -1,4 +1,6 @@
-import Pilean.PiFormula.LogForms
+module
+
+public import Pilean.PiFormula.LogForms
 
 /-!
 # Theorem C, the rational part: dimension exactly 8 (milestone M7, part 2)
@@ -22,6 +24,8 @@ vector `c ∈ ℂ^13` (its coefficients `d` are `∑ c_k rel_k` on `R0`, by Step
 * So nine patterns have linearly dependent coefficient vectors, hence are linearly dependent
   (`dependent_of_coeffs`).
 -/
+
+@[expose] public section
 
 open Complex
 

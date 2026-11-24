@@ -1,4 +1,6 @@
-import Pilean.Base3.Halves
+module
+
+public import Pilean.Base3.Halves
 
 /-!
 # Base 5: shared definitions
@@ -20,6 +22,8 @@ that they can be developed independently:
 Nothing is proved here beyond the first properties of `t5`. See Part VI of
 `notes/pi_formula_theorem.md` for the mathematics.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

@@ -1,4 +1,6 @@
-import Pilean.PiFormula.GoodPrimes
+module
+
+public import Pilean.PiFormula.GoodPrimes
 
 /-!
 # Part III, Step 3 (upper half): the 13 relations are all of them (milestone M5)
@@ -26,6 +28,8 @@ The proof uses no numerical computation:
   of the algebraic integers containing `t - r` and no other `t - r'` (above 3, 3, 5, 5).
 * The last coefficient, of `w_30 = 1/t`, vanishes because `|1/t| ≠ 1`.
 -/
+
+@[expose] public section
 
 open Complex Polynomial IntermediateField
 

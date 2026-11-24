@@ -1,4 +1,6 @@
-import Pilean.Compendium.GeneralCore
+module
+
+public import Pilean.Compendium.GeneralCore
 
 /-!
 # Bailey's Compendium: the two "curiosities" of section 13, and formula (88)
@@ -28,6 +30,8 @@ import Pilean.Compendium.GeneralCore
   and `θ₂ = arctan (sin (4π/5)/(5 - cos (4π/5)))`, and the two arctangents of the print are
   `θ₂ - θ₁` and `θ₁ + θ₂` (`arctan_add_88`).
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

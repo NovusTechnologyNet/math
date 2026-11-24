@@ -1,5 +1,7 @@
-import Pilean.PiFormula.Fourier
-import Pilean.PiFormula.VSeries
+module
+
+public import Pilean.PiFormula.Fourier
+public import Pilean.PiFormula.VSeries
 
 /-!
 # Theorem C, first part: period 120 and the dimension bounds (milestone M7, part 1)
@@ -26,6 +28,8 @@ among rational vectors gives a rational one (`rat_dependence`).
 Not proved yet: that the dimensions are exactly 13 and exactly 8 (Theorem C in full). See
 lean/PART3_PLAN.md.
 -/
+
+@[expose] public section
 
 open Complex
 
@@ -312,21 +316,21 @@ theorem zero_pi : ((0 : ℚ) : ℝ) * Real.pi = 0 := by
 
 /-- The eight named patterns, as elements of `ratSpace N`. -/
 noncomputable def namedFam {N : ℕ} (hN : 120 ∣ N) : Fin 8 → ratSpace N :=
-  ![⟨namedA1, mem_ratSpace_of (fun k => (named_periodic k).1)
+  ![⟨namedA1, mem_ratSpace_of (q := 1 / 4) (fun k => (named_periodic k).1)
       (by rw [quarter_pi]; exact hasSum_namedA1) hN⟩,
-    ⟨namedA6, mem_ratSpace_of (fun k => (named_periodic k).2.1)
+    ⟨namedA6, mem_ratSpace_of (q := 0) (fun k => (named_periodic k).2.1)
       (by rw [zero_pi]; exact hasSum_namedA6) hN⟩,
-    ⟨namedA10, mem_ratSpace_of (fun k => (named_periodic k).2.2.1)
+    ⟨namedA10, mem_ratSpace_of (q := 1 / 4) (fun k => (named_periodic k).2.2.1)
       (by rw [quarter_pi]; exact hasSum_namedA10) hN⟩,
-    ⟨namedL6, mem_ratSpace_of (fun k => (named_periodic k).2.2.2.1)
+    ⟨namedL6, mem_ratSpace_of (q := 0) (fun k => (named_periodic k).2.2.2.1)
       (by rw [zero_pi]; exact hasSum_namedL6) hN⟩,
-    ⟨namedL8, mem_ratSpace_of (fun k => (named_periodic k).2.2.2.2.1)
+    ⟨namedL8, mem_ratSpace_of (q := 0) (fun k => (named_periodic k).2.2.2.2.1)
       (by rw [zero_pi]; exact hasSum_namedL8) hN⟩,
-    ⟨namedL10, mem_ratSpace_of (fun k => (named_periodic k).2.2.2.2.2.1)
+    ⟨namedL10, mem_ratSpace_of (q := 0) (fun k => (named_periodic k).2.2.2.2.2.1)
       (by rw [zero_pi]; exact hasSum_namedL10) hN⟩,
-    ⟨namedL24, mem_ratSpace_of (fun k => (named_periodic k).2.2.2.2.2.2.1)
+    ⟨namedL24, mem_ratSpace_of (q := 0) (fun k => (named_periodic k).2.2.2.2.2.2.1)
       (by rw [zero_pi]; exact hasSum_namedL24) hN⟩,
-    ⟨namedTW, mem_ratSpace_of (fun k => (named_periodic k).2.2.2.2.2.2.2)
+    ⟨namedTW, mem_ratSpace_of (q := 0) (fun k => (named_periodic k).2.2.2.2.2.2.2)
       (by rw [zero_pi]; exact hasSum_namedTW) hN⟩]
 
 theorem namedFam_linearIndependent {N : ℕ} (hN : 120 ∣ N) :

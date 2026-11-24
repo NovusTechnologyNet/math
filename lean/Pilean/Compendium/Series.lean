@@ -1,5 +1,7 @@
-import Pilean.Compendium.Base2Pi
-import Pilean.Compendium.Logs
+module
+
+public import Pilean.Compendium.Base2Pi
+public import Pilean.Compendium.Logs
 
 /-!
 # Bailey's Compendium: the formulas printed as explicit series only
@@ -28,6 +30,8 @@ to formula (8), a closed form, and formulas (1) and (2) as the series that are p
   series is the series `∑_{m ≥ 1} g(m) 3^(-m) / m` of `log 3` (`g = 3` for odd `m`, `g = 1` for
   even `m`) without its first term, which is 1. So the sum is `4 log 3 - 1`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

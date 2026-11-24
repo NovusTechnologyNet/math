@@ -1,4 +1,6 @@
-import Pilean.Polylog.PointBase3
+module
+
+public import Pilean.Polylog.PointBase3
 
 /-!
 # Bailey's Compendium, degree 2, base 3: formulas (76) and (77)
@@ -24,6 +26,8 @@ cancels.
 Formula (78) (`π √3 log 3`) needs the imaginary parts of `Li_2` at `z₃` and at `i/√3`
 (Clausen values); it is not proved here.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

@@ -1,4 +1,6 @@
-import Pilean.Base5.Series
+module
+
+public import Pilean.Base5.Series
 
 /-!
 # Base 5: the support of a multiplicative relation
@@ -14,6 +16,8 @@ which `t - r` has no odd prime factor: `(t - 1)(t + 1) = 4`.
 A good prime for `r` (`HasGoodPrime5`) is a prime ideal of the algebraic integers that
 contains `t - r` and an odd rational prime `p ≠ 5` not dividing the order of `r`.
 -/
+
+@[expose] public section
 
 open Complex
 

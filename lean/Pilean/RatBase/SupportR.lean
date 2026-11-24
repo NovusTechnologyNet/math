@@ -1,4 +1,6 @@
-import Pilean.RatBase.SeriesR
+module
+
+public import Pilean.RatBase.SeriesR
 
 /-!
 # A rational base `p/q`: the support of a multiplicative relation
@@ -17,6 +19,8 @@ nor the order of `r`. Such a `P`
 * contains no other `u - q r'` of the relation: else `q (r' - r) ∈ P`, and `ℓ ∤ q` gives
   `r' - r ∈ P`, so the order of `r'/r` is a power of `ℓ`, as for integer bases.
 -/
+
+@[expose] public section
 
 open Complex
 

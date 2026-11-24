@@ -1,4 +1,6 @@
-import Pilean.RatBase.SeriesR
+module
+
+public import Pilean.RatBase.SeriesR
 
 /-!
 # A rational base `p/q`: the four logarithms at `1, -1, i, -i`
@@ -29,6 +31,8 @@ among them, for coprime `p > q ≥ 1` other than `(p, q) = (3, 1)`.
 In base 3 the second statement fails (`w` is a sixth root of unity): this is where the formulas
 for `π√3` come from. For `q = 1` this file is `BaseB/ClassificationAux.lean`.
 -/
+
+@[expose] public section
 
 open Complex
 

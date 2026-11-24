@@ -1,4 +1,6 @@
-import Pilean.BaseB.Defs
+module
+
+public import Pilean.BaseB.Defs
 
 /-!
 # A general base `b` and a general step `n`: shared definitions
@@ -27,6 +29,8 @@ From `KummerHom b n` and Baker's theorem: if a series of step `n` is a rational 
 
 Nothing is proved here.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

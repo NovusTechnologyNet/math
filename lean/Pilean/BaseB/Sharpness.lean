@@ -1,4 +1,6 @@
-import Pilean.BaseB.NoPi
+module
+
+public import Pilean.BaseB.NoPi
 
 /-!
 # Sharpness: every power of 2 has a degree-1 BBP-type formula for `π`
@@ -23,6 +25,8 @@ period `8e`: it is `P(1, (2^e)^4, 8e, c)` with `c_i = ρ(i) / 2^⌊i/2⌋`.
 Baker's theorem is used only in `bailey_pi_iff`, through `no_pi_bailey`.
 -/
 
+@[expose] public section
+
 namespace PiFormula
 
 namespace BaseB
@@ -36,7 +40,7 @@ def bbpCoeff : Fin (2 * 4) → ℚ := ![4, 0, 0, -2, -1, -1, 0, 0]
 
 /-- The pattern of the formula of Bailey, Borwein and Plouffe in the class F:
 `(4, 0, 0, -8, -4, -8, 0, 0)`, of period 8. -/
-def rhoBBP : ℕ → ℚ := patF2 (Nat.mul_pos two_pos pos4) bbpCoeff
+def rhoBBP : ℕ → ℚ := patF2 (Nat.mul_pos two_pos (by norm_num : 0 < 4)) bbpCoeff
 
 theorem rhoBBP_periodic (k : ℕ) : rhoBBP (k + 2 * 4) = rhoBBP k :=
   patF2_periodic _ bbpCoeff k

@@ -1,4 +1,6 @@
-import Pilean.PiFormula.TheoremBGamma
+module
+
+public import Pilean.PiFormula.TheoremBGamma
 
 /-!
 # Corollaries B1 and B2 (Part II of pi_formula_theorem.md): series and speed
@@ -31,6 +33,8 @@ series vanish, `tau_selfOrb`.)
 That the speed so defined measures the bits gained per unit of denominator is the note's
 convention, not a theorem here.
 -/
+
+@[expose] public section
 
 open Polynomial Complex ComplexConjugate
 

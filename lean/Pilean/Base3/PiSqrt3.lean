@@ -1,4 +1,6 @@
-import Pilean.Base3.LogExplicit
+module
+
+public import Pilean.Base3.LogExplicit
 
 /-!
 # Base 3: `π√3` is a value
@@ -10,6 +12,8 @@ According to the note (Part V), this is one of exactly two formulas for `π√3`
 F3 with one term per base-3 digit, and no formula has fewer; that statement is computed, not
 yet proved in Lean. Here only: `π√3` is a value (`isF3Value_pi_sqrt3`).
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

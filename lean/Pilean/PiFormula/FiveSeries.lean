@@ -1,4 +1,6 @@
-import Pilean.PiFormula.TheoremC2
+module
+
+public import Pilean.PiFormula.TheoremC2
 
 /-!
 # Five more series: irrational algebraic multiples of π (milestone M7, part 3)
@@ -26,6 +28,8 @@ Each is an arctangent-type series `∑_j e_j arg(1 - ζ^j/t)` with real coeffici
 With the eight named series these are thirteen independent patterns (`TheoremC3.lean`), so
 the space of Theorem C has dimension exactly 13.
 -/
+
+@[expose] public section
 
 open Complex
 

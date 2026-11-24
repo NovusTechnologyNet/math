@@ -1,5 +1,7 @@
-import Pilean.Base5.Classification
-import Pilean.Base3.LogExplicit
+module
+
+public import Pilean.Base5.Classification
+public import Pilean.Base3.LogExplicit
 
 /-!
 # Base 5: the base numbers, and their logarithms as values
@@ -31,6 +33,8 @@ four numbers `v, -v², -v³, v⁴` have
 logarithm is `-∑_j D(j) (√5)^(j mod 2) y^j / j` with `D` rational of period 10 (`aurD`), a
 series of F5 of period `10h`.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

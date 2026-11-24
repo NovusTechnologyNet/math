@@ -1,4 +1,6 @@
-import Pilean.BaseB.LogBase
+module
+
+public import Pilean.BaseB.LogBase
 
 /-!
 # Named cases: base 26 and base 36
@@ -9,6 +11,8 @@ neither is a power of 2 or of 3, so by `no_log_self_bailey` the logarithm of the
 either. (Base 16, base 32 and base 64 are powers of 2 and do have formulas for `π`:
 `bailey_pi_iff`.)
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

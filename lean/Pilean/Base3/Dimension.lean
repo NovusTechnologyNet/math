@@ -1,4 +1,6 @@
-import Pilean.Base3.PiTheorem
+module
+
+public import Pilean.Base3.PiTheorem
 
 /-!
 # Base 3: every formula for a multiple of `π` is known
@@ -34,6 +36,8 @@ so `A = B = C = 0` (`log_indep`): `z_i = z_{-i}` and `z_1 + z_{-1} = z_ω + z_{-
 These three linear conditions pass to the `d_r`, and Fourier inversion turns them into
 `ρ = A G + B H + C F` for three explicit rational patterns.
 -/
+
+@[expose] public section
 
 open Complex
 

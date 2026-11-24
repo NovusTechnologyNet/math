@@ -1,4 +1,6 @@
-import Pilean.PiFormula.TheoremC
+module
+
+public import Pilean.PiFormula.TheoremC
 
 /-!
 # Rational values are Galois invariant (milestone M7, part 2, first half)
@@ -23,6 +25,8 @@ The second half (`ExactArgs.lean`, `TheoremC2.lean`) turns these identities into
 constraints on the coefficient vector and concludes that the patterns with a rational
 multiple of `π` form a space of dimension 8.
 -/
+
+@[expose] public section
 
 open Complex Polynomial IntermediateField
 

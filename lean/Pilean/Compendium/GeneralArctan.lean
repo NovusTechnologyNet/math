@@ -1,4 +1,6 @@
-import Pilean.Compendium.GeneralCore
+module
+
+public import Pilean.Compendium.GeneralCore
 
 /-!
 # Bailey's Compendium, general bases: arctangents of rational functions of `b`
@@ -17,6 +19,8 @@ The paper states no range for `b`. The ranges proved here:
 Each proof takes one of the series of `GeneralCore.lean` at `v = ±1/b`, `±1/(2b)` or
 `±1/(3b)`, multiplies it by a constant, and checks the vector entry by entry.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

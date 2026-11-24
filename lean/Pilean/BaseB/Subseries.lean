@@ -1,4 +1,6 @@
-import Pilean.BaseB.SubseriesAux
+module
+
+public import Pilean.BaseB.SubseriesAux
 
 /-!
 # The sub-series lemma for a general base and a general step
@@ -24,6 +26,8 @@ Put `c = b^(1/n)` and let `P` be a common period of `ρ` with `4 ∣ P` and `n �
 * The mean of `η^k` over the `n₁` roots `η` of `X^(n₁) = 1` is `1` for `n₁ ∣ k` and `0`
   otherwise (`sum_roots_pow`).
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

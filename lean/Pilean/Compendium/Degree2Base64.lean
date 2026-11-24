@@ -1,4 +1,6 @@
-import Pilean.Polylog.Dilog
+module
+
+public import Pilean.Polylog.Dilog
 
 /-!
 # Bailey's Compendium, degree 2, base 64: formulas (30) and (32)
@@ -21,6 +23,8 @@ form `c = c₁ + c₂ [2 ∣ m] + c₃ [3 ∣ m] + c₆ [6 ∣ m]`, and the sub-
 `Li_2(1/2) = π²/12 - (log 2)²/2` (`Polylog.polylogReal_two_half`); only the real dilogarithm
 is used (Landen's identity, duplication, the value at `1/2`).
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

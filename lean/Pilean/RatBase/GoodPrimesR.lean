@@ -1,6 +1,8 @@
-import Pilean.RatBase.ReductionR
-import Pilean.RatBase.SizeR
-import Pilean.BaseB.GoodPrimes
+module
+
+public import Pilean.RatBase.ReductionR
+public import Pilean.RatBase.SizeR
+public import Pilean.BaseB.GoodPrimes
 
 /-!
 # Good primes in every rational base `p/q` with `p ≥ 16`
@@ -10,6 +12,8 @@ good prime in the base `p/q`: a prime ideal of the algebraic integers contains `
 and an odd rational prime that divides neither `p q` nor the order of `r`. From the size
 condition (`SizeR`) and the reduction (`ReductionR`).
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

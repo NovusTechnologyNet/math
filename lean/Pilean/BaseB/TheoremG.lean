@@ -1,5 +1,7 @@
-import Pilean.BaseB.Classification
-import Pilean.BaseB.GoodPrimes
+module
+
+public import Pilean.BaseB.Classification
+public import Pilean.BaseB.GoodPrimes
 
 /-!
 # Theorem G: no algebraic multiple of `π` in any base `b ≥ 5`
@@ -19,6 +21,8 @@ The proof has three parts, in three files:
 The versions in the namespace `Unconditional` use the imported proof of Baker's theorem and
 have no hypothesis.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

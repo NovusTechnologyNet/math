@@ -1,4 +1,6 @@
-import Pilean.Polylog.Catalan
+module
+
+public import Pilean.Polylog.Catalan
 
 /-!
 # Bailey's Compendium, degree 2, base 16: Catalan's constant and formulas (29), (31), (33)
@@ -22,6 +24,8 @@ and `∑_m u(m)/m² = p Re Li_2(z₀) + q Im Li_2(z₀) + r Li_2(1/2)/4` (`hasSu
 `Re Li_2(z₀) = 5π²/96 - (log 2)²/8` (reflection formula), `Im Li_2(z₀) = G - π log 2/8`
 (Landen's identity and `Li_2(-i)`) and `Li_2(1/2) = π²/12 - (log 2)²/2`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

@@ -1,4 +1,6 @@
-import Pilean.PiFormula.LogConverse
+module
+
+public import Pilean.PiFormula.LogConverse
 
 /-!
 # Theorem K in elementary terms
@@ -17,6 +19,8 @@ This file removes the Gaussian integers from the statement.
   is a product of integer powers of base numbers.**
 * `isFValue_log_of_pow`: the "if" half, which needs no Baker.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

@@ -1,4 +1,6 @@
-import Pilean.RatBase.FourThirds
+module
+
+public import Pilean.RatBase.FourThirds
 
 /-!
 # A relation in base 4: a series for `π√3`
@@ -12,6 +14,8 @@ The proof is that of `FourThirds.lean` at the point `w = (1/2) e^(iπ/3) = 1/4 +
 `1 - w = (√3/2) e^(-iπ/6)`, so `∑ Im(w^k) / k = arctan(1/√3) = π/6`, and `w³ = -1/8` gives
 `Im(w^k) = (√3/2) ρ(k) (1/4)^⌊k/2⌋`.
 -/
+
+@[expose] public section
 
 open Complex
 

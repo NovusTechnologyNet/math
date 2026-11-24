@@ -1,4 +1,6 @@
-import Pilean.BaseB.Reindex
+module
+
+public import Pilean.BaseB.Reindex
 
 /-!
 # Bailey's notation in a general base: every `P(1, b^B, N, A)` is a series of step `n`
@@ -23,6 +25,8 @@ Main statements:
   `n` of the pattern `stepPat b B' n A`;
 * `exists_step_of_bailey`: every `P(1, b^B, N, A)` is a series of step `n = N / gcd(B, N)`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

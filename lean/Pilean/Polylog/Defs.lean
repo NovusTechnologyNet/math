@@ -1,4 +1,6 @@
-import Mathlib
+module
+
+public import Mathlib
 
 /-!
 # The polylogarithm as a power series, and Bailey's series of degree `s`
@@ -38,6 +40,8 @@ The regrouping lemmas express `P(s, β, N, A)` through series `∑_m u(m) / m^s`
   `∑_{m ≥ 1} c(m) x^m / m^s = P(s, β, N, (c(1) x, …, c(N) x^N))`;
 * `hasBaileyValueDeg_of_quasiperiodic`: the same for the base `b^B` and a rational vector.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

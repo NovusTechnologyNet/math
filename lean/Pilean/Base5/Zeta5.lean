@@ -1,4 +1,6 @@
-import Pilean.Base5.Defs
+module
+
+public import Pilean.Base5.Defs
 
 /-!
 # Base 5: the ring `ℤ[ζ]` of fifth roots of unity, with its norm to `ℤ`
@@ -20,6 +22,8 @@ Main results, for `u` a primitive fifth root of unity of norm 1 in `Cyc5`:
 4. `lower_bound5`, `half_lower5`: `25 N(Φ_m(z)) ≥ 25^φ(m)` for odd `m`.
 5. `norm_z_th`: `N(ζ t^h - 1) = L5 h` and `N(ζ² t^h - 1) = M5 h` for odd `h`.
 -/
+
+@[expose] public section
 
 open Polynomial
 

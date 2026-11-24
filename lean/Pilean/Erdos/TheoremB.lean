@@ -1,4 +1,6 @@
-import Pilean.Erdos.TheoremBAux
+module
+
+public import Pilean.Erdos.TheoremBAux
 
 /-!
 # Theorem B of the Erdős `±1` programme
@@ -17,6 +19,8 @@ The proof is section 2 of `research/2026-11-23-erdos-pm1/02_proof_part_II.md`. W
 * so `ℓ_p (P k + 1) = -(P² T' + 2 P E) = 2^(s+1) · (-(2^(s-1) m² T' + m E))`, and `P k + 1` is
   an odd natural number, a unit of `ℤ_(2)`.
 -/
+
+@[expose] public section
 
 open Finset
 

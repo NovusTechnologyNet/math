@@ -1,5 +1,7 @@
-import Pilean.Erdos.ArithDefs
-import Pilean.Erdos.ArithRing
+module
+
+public import Pilean.Erdos.ArithDefs
+public import Pilean.Erdos.ArithRing
 
 /-!
 # Theorem A from the abstract theorem, part 7a: the counting behind Lemma 1
@@ -17,6 +19,8 @@ and `p^(k_p - 1 - j_p) (p - 1)/2^(s_p)` for `p ∈ n` (`lem1_card_loc`).
 
 Everything in this file is proved (no `sorry`).
 -/
+
+@[expose] public section
 
 set_option linter.unusedSectionVars false
 

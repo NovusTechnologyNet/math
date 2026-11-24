@@ -1,4 +1,6 @@
-import Pilean.Polylog.DilogComplex
+module
+
+public import Pilean.Polylog.DilogComplex
 
 /-!
 # The dilogarithm at `e^(iπ/6)/√3`
@@ -12,6 +14,8 @@ degree-2 formulas of base 3 (`z₃^12 = 3^(-6)`).
 * `pointThree_pow_six : z₃^6 = -1/27`, `pointThree_pow_twelve : z₃^12 = 1/729`;
 * `polylog_two_pointThree_re : Re Li_2(z₃) = 5π²/72 - (log 3)²/8` (reflection formula).
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

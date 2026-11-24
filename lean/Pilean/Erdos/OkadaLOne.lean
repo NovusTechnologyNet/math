@@ -1,7 +1,9 @@
-import Pilean.Erdos.OkadaDefs
-import Mathlib.Algebra.BigOperators.Module
-import Mathlib.NumberTheory.LSeries.Deriv
-import Mathlib.NumberTheory.LSeries.Nonvanishing
+module
+
+public import Pilean.Erdos.OkadaDefs
+public import Mathlib.Algebra.BigOperators.Module
+public import Mathlib.NumberTheory.LSeries.Deriv
+public import Mathlib.NumberTheory.LSeries.Nonvanishing
 
 /-!
 # `L(1, χ)` is the limit of the partial sums of `∑ χ(n)/n`
@@ -27,6 +29,8 @@ and the conditionally convergent series. The proof here uses no integral:
   `s = 1` (limit `s → 1⁺`).
 * `lone_tendsto`: let `M → ∞`.
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

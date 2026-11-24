@@ -1,4 +1,6 @@
-import Pilean.PiFormula.Relations
+module
+
+public import Pilean.PiFormula.Relations
 
 /-!
 # The space V: eight series with rational multiples of π (Part III, Theorem C)
@@ -24,6 +26,8 @@ involves `√3 = ζ_24^2 - ζ_24^10` and single roots of order 24 and 6, is a Ga
 period 24, checked case by case modulo `Φ_24` (`psTW_eq`). Its value is 0 by the pairing
 `g(i conj r) = -g(r)` and three explicit arguments, `π/6`, `-π/6`, `π/6`.
 -/
+
+@[expose] public section
 
 open Polynomial Complex ComplexConjugate
 

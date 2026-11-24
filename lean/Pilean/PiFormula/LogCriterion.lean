@@ -1,4 +1,6 @@
-import Pilean.PiFormula.Arctan
+module
+
+public import Pilean.PiFormula.Arctan
 
 /-!
 # Which logarithms are values of the class F: the general families, and 38737
@@ -29,6 +31,8 @@ The reason is the one for 23: `Φ_72(2) = 2^24 - 2^12 + 1 = 433 · 38737`, and t
 always occur together. `isFValue_log_433_add_log_38737`: the sum `log 433 + log 38737` is a
 value. Bailey's compendium of 2023 does not list 38737.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

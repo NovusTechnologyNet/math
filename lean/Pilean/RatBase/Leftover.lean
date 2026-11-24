@@ -1,4 +1,6 @@
-import Pilean.RatBase.LeftoverPrime
+module
+
+public import Pilean.RatBase.LeftoverPrime
 
 /-!
 # Rational bases: the twelve triples left over by the size condition
@@ -31,6 +33,8 @@ that divides `p q` to an odd power and does not divide `2m`:
 
 Here `a ≡ 1` modulo `N/π` and `a ≡ 2 (mod 5)` or `a ≡ 3 (mod 7)`, a non-residue modulo `π`.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

@@ -1,6 +1,8 @@
-import Pilean.Erdos.ArithDefs
-import Pilean.Erdos.ArithRing
-import Pilean.Erdos.ArithSeries
+module
+
+public import Pilean.Erdos.ArithDefs
+public import Pilean.Erdos.ArithRing
+public import Pilean.Erdos.ArithSeries
 
 /-!
 # Theorem A from the abstract theorem, part 6: Lemma 2 (the main equation)
@@ -23,6 +25,8 @@ For `r ∈ ℤ/q` with components `r_p ∈ ℤ/p^(k_p)` put
 By `sum_eq_zero_of_harmonic` (applied to every coefficient of `W`), condition (a) gives
 `∑_r f(r) W(r) = 0`: this is `mainEq`.
 -/
+
+@[expose] public section
 
 set_option linter.unusedSectionVars false
 

@@ -1,6 +1,8 @@
-import Pilean.Erdos.ArithDefs
-import Pilean.Erdos.ArithRing
-import Pilean.Erdos.ArithWeight
+module
+
+public import Pilean.Erdos.ArithDefs
+public import Pilean.Erdos.ArithRing
+public import Pilean.Erdos.ArithWeight
 
 /-!
 # Theorem A from the abstract theorem, part 7: step 3 (the sum in the conclusion is `ℓ_p`)
@@ -25,6 +27,8 @@ Steps:
 
 Status: complete. Neither `q` odd nor any property of the maps `χ_p` is used.
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

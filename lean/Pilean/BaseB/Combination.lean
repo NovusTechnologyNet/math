@@ -1,4 +1,6 @@
-import Pilean.BaseB.LogBase
+module
+
+public import Pilean.BaseB.LogBase
 
 /-!
 # Combinations of degree-1 BBP-type series of one base
@@ -32,6 +34,8 @@ Main statements:
 * `no_pi_L_comb`: the same for the series `L(1, b^m, n, j)`, `1 ≤ j ≤ n`;
 * `no_log_bailey_sum`: the corollary of `no_log_bailey` for combinations.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

@@ -1,4 +1,6 @@
-import Pilean.PiFormula.Lemma2
+module
+
+public import Pilean.PiFormula.Lemma2
 
 /-!
 # Theorem B (Part II of pi_formula_theorem.md)
@@ -36,6 +38,8 @@ The relation `γ(O) ≡ arg z_O - |O| π/4`, the pairing and the `γ` form of Th
 `TheoremBGamma.lean`; the identification of the Galois orbits over `ℚ(i)` with the explicit
 orbits used there (the table) is in `TheoremBGalois.lean`.
 -/
+
+@[expose] public section
 
 open Polynomial Complex
 

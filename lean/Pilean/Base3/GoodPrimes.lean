@@ -1,5 +1,7 @@
-import Pilean.Base3.HasPrime
-import TauCeti.NumberTheory.PrimitivePrimeDivisors.Zsigmondy
+module
+
+public import Pilean.Base3.HasPrime
+public import TauCeti.NumberTheory.PrimitivePrimeDivisors.Zsigmondy
 
 /-!
 # Base 3: every root of unity outside the six exceptional ones has a good prime
@@ -34,6 +36,8 @@ In the rows without Aurifeuillian factors the prime comes from Zsigmondy's theor
 `r = ±1, ±i`. In the two Aurifeuillian rows with `E = 1` the number is 1 (for `r = ω`,
 `-ω²`) or 7.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

@@ -1,6 +1,8 @@
-import Pilean.Erdos.OkadaDefs
-import Mathlib.Data.Nat.Factorization.Basic
-import Mathlib.Analysis.SpecialFunctions.Log.Basic
+module
+
+public import Pilean.Erdos.OkadaDefs
+public import Mathlib.Data.Nat.Factorization.Basic
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
 /-!
 # The logarithms of the primes are linearly independent over `ℚ`
@@ -13,6 +15,8 @@ Proof. Clearing denominators gives integers `z_p` with `∑ z_p log p = 0`
 `log A = log B`, so `A = B`, and comparing the exponents of `p` gives `z_p⁺ = z_p⁻`, that is
 `z_p = 0` (`int_log_relation`).
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

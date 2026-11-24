@@ -1,4 +1,6 @@
-import Pilean.PiFormula.LogYes
+module
+
+public import Pilean.PiFormula.LogYes
 
 /-!
 # `arctan (2/7)` has no binary BBP-type formula
@@ -32,6 +34,8 @@ prime to which `Log23.lean` and `LogPrimes.lean` apply. So the three primes `53 
 `89 = 8^2 + 5^2` and `97 = 9^2 + 4^2`, whose logarithms have no formula, give three
 arctangents with none.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

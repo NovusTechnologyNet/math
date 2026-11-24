@@ -1,4 +1,6 @@
-import Pilean.PiFormula.LogConverse
+module
+
+public import Pilean.PiFormula.LogConverse
 
 /-!
 # Base 3: the class F3 and its series as combinations of logarithms
@@ -17,6 +19,8 @@ This file also proves that the values of F3 form a vector space over `ℚ` (`f3V
 the form of Baker's theorem used for logarithms (`baker_no_extra3`), which is `baker_no_extra`
 of `Arctan.lean` with `√-3` in place of `1 + i`.
 -/
+
+@[expose] public section
 
 open Complex
 

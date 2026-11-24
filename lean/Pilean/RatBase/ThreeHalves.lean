@@ -1,4 +1,6 @@
-import Pilean.RatBase.Defs
+module
+
+public import Pilean.RatBase.Defs
 
 /-!
 # A degree-1 BBP-type formula for `π` in base `3/2`
@@ -35,6 +37,8 @@ Each of the two series has weights in `ℚ(√3)`; their mean has rational weigh
 `w₁ + w₂ = 1 + i` and `w₁ w₂ = 2i/3`, so the power sums `w₁^k + w₂^k` lie in `ℚ(i)`, and
 `w₁^6 = w₂^6 = 8i/27` gives `Im(w₁^k + w₂^k) = 2 ρ(k) (2/3)^⌊k/2⌋` (`wTH_pow_add`).
 -/
+
+@[expose] public section
 
 open Complex
 

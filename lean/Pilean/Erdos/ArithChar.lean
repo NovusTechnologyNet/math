@@ -1,6 +1,8 @@
-import Mathlib.Data.ZMod.Basic
-import Mathlib.GroupTheory.SpecificGroups.Cyclic
-import Mathlib.FieldTheory.Finite.Basic
+module
+
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.GroupTheory.SpecificGroups.Cyclic
+public import Mathlib.FieldTheory.Finite.Basic
 
 /-!
 # Theorem A from the abstract theorem, part 2: the homomorphisms `χ_p`
@@ -11,6 +13,8 @@ handled as a function `χ : ℤ/p → ℤ/2^t` with `χ (a b) = χ a + χ b` for
 (`IsLogChar`). Every class of `ℤ/2^t` is the image of exactly `(p - 1)/2^t` non-zero residues
 (`IsLogChar.card_fiber`).
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

@@ -1,10 +1,12 @@
-import Pilean.Erdos.Defs
-import Pilean.Erdos.AbstractGroupRing
-import Mathlib.Data.Nat.Factorization.Basic
-import Mathlib.Algebra.Ring.GeomSum
-import Mathlib.Data.Rat.Lemmas
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.LinearCombination
+module
+
+public import Pilean.Erdos.Defs
+public import Pilean.Erdos.AbstractGroupRing
+public import Mathlib.Data.Nat.Factorization.Basic
+public import Mathlib.Algebra.Ring.GeomSum
+public import Mathlib.Data.Rat.Lemmas
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # Theorem B of the Erdős `±1` programme: the lemmas
@@ -19,6 +21,8 @@ Helper lemmas for `theoremB` (`Pilean/Erdos/TheoremB.lean`) and `theoremC_of`
   `1 ≤ r ≤ q` with `p^k ∤ r` is a multiple of `p - 1` (the count of the paper).
 * `thmB_okadaC_eq`: `c_p = ℓ_p (k + 1/(p-1)) + ∑_{p^k ∤ r} f(r) v_p(r)` when `f(0) = 0`.
 -/
+
+@[expose] public section
 
 open Finset
 

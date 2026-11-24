@@ -1,4 +1,6 @@
-import Pilean.BaseB.LogWeightFacts
+module
+
+public import Pilean.BaseB.LogWeightFacts
 
 /-!
 # The minimal polynomial of `√b - r`: degree, and the non-primitive primes
@@ -17,6 +19,8 @@ Notation of `LogWeightFacts`: `t = √b`, `r` a root of unity of order `n`, `m` 
   prime `q ∣ m` divides `c₀(r)` at most `k` times; and if `d(r) = 2 k φ(m)` then every prime of
   `c₀(r)` divides it at least `k` times (`c₀(r) = Φ_m(b)^k`).
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

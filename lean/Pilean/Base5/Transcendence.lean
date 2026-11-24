@@ -1,5 +1,7 @@
-import Pilean.Base5.Unconditional
-import Pilean.PiFormula.Transcendence
+module
+
+public import Pilean.Base5.Unconditional
+public import Pilean.PiFormula.Transcendence
 
 /-!
 # Base 5: no formula for any number `α + γ π` (from Baker's theorem)
@@ -21,6 +23,8 @@ algebraic, then `ρ = 0`. So the only number `α + γ π` that is a value of F5 
 (`eq_zero_of_isF5Value_add_mul_pi`), and a series of F5 with a non-zero pattern has a
 transcendental sum (`transcendental_of_hasSum`).
 -/
+
+@[expose] public section
 
 open Complex
 

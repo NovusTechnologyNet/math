@@ -1,4 +1,6 @@
-import Pilean.Base5.Unconditional
+module
+
+public import Pilean.Base5.Unconditional
 
 /-!
 # A general base `b`: shared definitions
@@ -23,6 +25,8 @@ of `F_b` whose value is an algebraic multiple of `π` has all coefficients zero.
 
 Nothing is proved here beyond the first properties of `tB`.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

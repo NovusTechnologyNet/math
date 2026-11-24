@@ -1,7 +1,9 @@
-import Pilean.Erdos.Defs
-import Mathlib.Analysis.SpecialFunctions.Complex.CircleAddChar
-import Mathlib.Analysis.SpecialFunctions.Complex.Log
-import Mathlib.NumberTheory.DirichletCharacter.Basic
+module
+
+public import Pilean.Erdos.Defs
+public import Mathlib.Analysis.SpecialFunctions.Complex.CircleAddChar
+public import Mathlib.Analysis.SpecialFunctions.Complex.Log
+public import Mathlib.NumberTheory.DirichletCharacter.Basic
 
 /-!
 # Okada's criterion, the direction "sum `= 0` implies (a) and (b)": statements
@@ -54,6 +56,8 @@ every `c_p` is `0`, which is (b).
 Every proposition is stated for odd `q` and `f(0) = 0` only, because that is all the glue
 needs; none of them needs these two hypotheses to be true (see the plan).
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

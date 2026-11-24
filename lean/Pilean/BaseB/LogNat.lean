@@ -1,6 +1,8 @@
-import Pilean.BaseB.LogWeight
-import Pilean.BaseB.LogSpan
-import Pilean.BaseB.LogBase
+module
+
+public import Pilean.BaseB.LogWeight
+public import Pilean.BaseB.LogSpan
+public import Pilean.BaseB.LogBase
 
 /-!
 # Theorem N: no logarithm of an integer in a base that is not a power of 2 or 3
@@ -28,6 +30,8 @@ any step to the class `F_a` is as for Theorem L (`SubseriesLog`, `Kummer`, `Rein
 
 Baker's theorem is used through the imported proof; there is no hypothesis.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

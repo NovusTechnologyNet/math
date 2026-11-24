@@ -1,7 +1,9 @@
-import Pilean.Erdos.OkadaWindow
-import Pilean.Erdos.OkadaGlueWindow
-import Pilean.Erdos.ArithSeries
-import Mathlib.GroupTheory.SpecificGroups.Cyclic
+module
+
+public import Pilean.Erdos.OkadaWindow
+public import Pilean.Erdos.OkadaGlueWindow
+public import Pilean.Erdos.ArithSeries
+public import Mathlib.GroupTheory.SpecificGroups.Cyclic
 
 /-!
 # Okada's criterion: reduction to the units
@@ -30,6 +32,8 @@ Then `R_∅ = S_N(f)` and `R_P = S'_N(g)` for `P` the set of all primes dividing
    (`red_sum_serH_insert`). For `M = P` it is `ℓ_p` (`red_kappa_primeFactors`).
 3. Telescoping over the primes of `q` (`red_tendsto_sub`).
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

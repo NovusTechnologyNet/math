@@ -1,4 +1,6 @@
-import Pilean.BaseB.GeneralDefs
+module
+
+public import Pilean.BaseB.GeneralDefs
 
 /-!
 # Tools for the sub-series lemma
@@ -17,6 +19,8 @@ Three tools that do not depend on the base, used by `Subseries`:
   logarithms of algebraic numbers and the `d_r` in a field `F` of algebraic numbers that
   contains `i`, then `∑ σ(d_r) L_r = q π` for every embedding `σ` of `F` that fixes `i`.
 -/
+
+@[expose] public section
 
 open Complex
 

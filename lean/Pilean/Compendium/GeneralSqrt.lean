@@ -1,4 +1,6 @@
-import Pilean.Compendium.GeneralCore
+module
+
+public import Pilean.Compendium.GeneralCore
 
 /-!
 # Bailey's Compendium, general bases: the formulas with `√b`
@@ -18,6 +20,8 @@ range.
 * (100) and (110) are the series for `(3 + i√3)/2` at `v` and at `-v`, with
   `v = √b √3 / (3b)` (so `3 b v² = 1`), subtracted.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

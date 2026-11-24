@@ -1,4 +1,6 @@
-import Pilean.BaseB.TheoremG
+module
+
+public import Pilean.BaseB.TheoremG
 
 /-!
 # A general base `b`: relations that involve the logarithm of a rational number (auxiliary)
@@ -27,6 +29,8 @@ rational number all of whose prime factors divide `b`.
   `support_subset_fourth_roots` with the two integers: a good prime `P` lies over a rational
   prime that does not divide `b`, so `u` and `v` are not in `P`.
 -/
+
+@[expose] public section
 
 open Complex
 

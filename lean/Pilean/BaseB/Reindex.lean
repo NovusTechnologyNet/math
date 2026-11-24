@@ -1,4 +1,6 @@
-import Pilean.BaseB.GeneralDefs
+module
+
+public import Pilean.BaseB.GeneralDefs
 
 /-!
 # The sub-series over the multiples of `halfIfEven n` is a series of the class `F_b`
@@ -21,6 +23,8 @@ Main statements:
 
 All of this is a re-indexing of the series. It holds for every `b`; no convergence is used.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

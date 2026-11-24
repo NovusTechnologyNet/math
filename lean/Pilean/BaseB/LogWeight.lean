@@ -1,4 +1,6 @@
-import Pilean.BaseB.LogWeightDefs
+module
+
+public import Pilean.BaseB.LogWeightDefs
 
 /-!
 # A positive weight for every non-square base `b ≥ 5`
@@ -26,6 +28,8 @@ for `|c₀(r)|` and `d(r)`, `m` for the order of `r²`, and call a prime `p ∣ 
   and for `m ≤ 2` unless `e` is a power of 2, where `λ_2 v_2(e) = 1`.
 * `L(ν(r)²) = 2 · d/2 - d · L(b) = 0`, since `L(b) = 1`.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

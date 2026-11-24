@@ -1,4 +1,6 @@
-import Pilean.Base3.Halves
+module
+
+public import Pilean.Base3.Halves
 
 /-!
 # Base 3: `π` is not a value of the class F3
@@ -22,6 +24,8 @@ periodic):
 * `not_isF3Value_pi`: `π` is not a value of F3.
 * `not_isF3Value_rat_mul_pi`: no non-zero rational multiple of `π` is a value of F3.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

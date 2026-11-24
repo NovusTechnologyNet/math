@@ -1,4 +1,6 @@
-import Pilean.PiFormula.LogPrimes
+module
+
+public import Pilean.PiFormula.LogPrimes
 
 /-!
 # The values of the class F are 0 or transcendental (from Baker's theorem)
@@ -26,6 +28,8 @@ bases 2, 3 and 5 (`Base3/Transcendence.lean`, `Base5/Transcendence.lean`).
 
 The third section applies it to `S(ρ) = ∑ d_r Log(1 - r/t)`, `t = 1 + i` (`series_eq_logs`).
 -/
+
+@[expose] public section
 
 open Complex
 

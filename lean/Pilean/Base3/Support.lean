@@ -1,4 +1,6 @@
-import Pilean.Base3.PiSqrt3
+module
+
+public import Pilean.Base3.PiSqrt3
 
 /-!
 # Base 3: the support of a multiplicative relation
@@ -16,6 +18,8 @@ has no prime factor other than 2 and 3: `t - 1 = 2ω`, `t + 1 = -2ω²`, `(t - i
 A good prime for `r` (`HasGoodPrime3`) is a prime ideal of the algebraic integers that
 contains `t - r` and a rational prime `p ≥ 5` not dividing the order of `r`.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

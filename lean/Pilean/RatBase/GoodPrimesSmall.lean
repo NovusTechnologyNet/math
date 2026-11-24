@@ -1,5 +1,7 @@
-import Pilean.RatBase.SmallDefs
-import Pilean.RatBase.ClassificationR
+module
+
+public import Pilean.RatBase.SmallDefs
+public import Pilean.RatBase.ClassificationR
 
 /-!
 # Good primes in every rational base outside `2, 3, 4, 3/2, 4/3`, from two statements
@@ -13,6 +15,8 @@ import Pilean.RatBase.ClassificationR
 The consequences (no relation, `π` is not a value) are stated here from the two statements
 and from Baker's theorem as a hypothesis.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

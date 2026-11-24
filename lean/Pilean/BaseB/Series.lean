@@ -1,4 +1,6 @@
-import Pilean.BaseB.Defs
+module
+
+public import Pilean.BaseB.Defs
 
 /-!
 # A general base `b`: the series of the class `F_b` as combinations of logarithms
@@ -16,6 +18,8 @@ With `t = √b` one has `t² = b`, so `ρ(k) b^(-⌊k/2⌋) = c(k) t^(-k)` for t
 Nothing here depends on `b` being a square or not: when `b = c²` the number `t = c` is
 rational and the statement is the same.
 -/
+
+@[expose] public section
 
 open Complex
 

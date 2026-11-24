@@ -1,7 +1,9 @@
-import Pilean.PiFormula.PrimeMeasure
-import Pilean.PiFormula.FewestTerms
-import Pilean.PiFormula.BaileySums
-import Pilean.PiFormula.SharpD
+module
+
+public import Pilean.PiFormula.PrimeMeasure
+public import Pilean.PiFormula.FewestTerms
+public import Pilean.PiFormula.BaileySums
+public import Pilean.PiFormula.SharpD
 
 /-!
 # Theorem E: the optima in both cost measures
@@ -27,6 +29,8 @@ The table of the note is reproduced by `cost_table`.
 Not proved here: that the two optima are attained *only* by these formulas (two formulas for
 `2/3`, two families for `7/24`), and the list of non-dominated pairs.
 -/
+
+@[expose] public section
 
 open Complex
 

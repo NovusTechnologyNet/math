@@ -1,6 +1,8 @@
-import Pilean.Erdos.OkadaDefs
-import Pilean.PiFormula.Unconditional
-import Pilean.BaseB.SubseriesAux
+module
+
+public import Pilean.Erdos.OkadaDefs
+public import Pilean.PiFormula.Unconditional
+public import Pilean.BaseB.SubseriesAux
 
 /-!
 # Okada's criterion: Baker's theorem and the Galois group of `ℚ(ζ_q)`
@@ -21,6 +23,8 @@ is applied to the coefficients (`BaseB.conj_relationF`). For `σ : ζ ↦ ζ^h`
 
 This is the only place where Baker's theorem is used in the proof of Okada's criterion.
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

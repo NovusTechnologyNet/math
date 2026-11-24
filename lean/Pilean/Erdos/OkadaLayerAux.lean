@@ -1,5 +1,7 @@
-import Pilean.Erdos.OkadaDefs
-import Pilean.Erdos.ArithSeries
+module
+
+public import Pilean.Erdos.OkadaDefs
+public import Pilean.Erdos.ArithSeries
 
 /-!
 # The coefficient of `log p` (`OkadaLayerSum`), part 1: the general lemmas
@@ -23,6 +25,8 @@ part of the proof that does not depend on the weight `λ`; the weight and the th
   `∑_{r : p r = r'} w(r) = p (w(r') - 1)` for `p ∣ r'`, and vanishes off the multiples of `p`,
   then `ℓ_p = ∑_r f(r) w(r)`.
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

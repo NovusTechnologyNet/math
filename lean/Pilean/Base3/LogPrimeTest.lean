@@ -1,4 +1,6 @@
-import Pilean.Base3.LogPrimeTestAux
+module
+
+public import Pilean.Base3.LogPrimeTestAux
 
 /-!
 # Base 3: the finite test for a prime
@@ -41,6 +43,8 @@ The two halves of the proof.
 Examples: `log 31`, `log 41`, `log 43`, `log 61`, `log 73` are values (no Baker); `log 17` and
 `log 23` are not (from Baker's theorem).
 -/
+
+@[expose] public section
 
 open Polynomial
 

@@ -1,8 +1,10 @@
-import Pilean.Erdos.CriterionGenFirst
-import Pilean.Erdos.CriterionGenSecond
-import Pilean.Erdos.OkadaGlue
-import Pilean.Erdos.OkadaLogPrimes
-import Pilean.Erdos.Criterion
+module
+
+public import Pilean.Erdos.CriterionGenFirst
+public import Pilean.Erdos.CriterionGenSecond
+public import Pilean.Erdos.OkadaGlue
+public import Pilean.Erdos.OkadaLogPrimes
+public import Pilean.Erdos.Criterion
 
 /-!
 # Okada's criterion for every modulus `q ≥ 1` and every rational `f`
@@ -26,6 +28,8 @@ This removes the hypotheses `Odd q` and `f 0 = 0` of `okadaOnlyIf` (`Final.lean`
 Example with `f(0) ≠ 0`: `q = 2`, `f(1) = 1`, `f(0) = -1`. Then `g(1) = 1 - ∑_{k ≥ 1} 2^(-k) = 0`
 and `c_2 = f(0) λ(2, 2) = -2`, and indeed `∑ (-1)^(n+1)/n = log 2 = -(1/2) c_2 log 2`.
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

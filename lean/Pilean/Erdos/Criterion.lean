@@ -1,4 +1,6 @@
-import Pilean.Erdos.Final
+module
+
+public import Pilean.Erdos.Final
 
 /-!
 # Okada's criterion in both directions (odd `q`)
@@ -22,6 +24,8 @@ More precisely (`tendsto_partialSum_of_condA`): if (a) holds, the series converg
 Both results are known (Okada). `CriterionGeneral.lean` removes the hypotheses `Odd q` and
 `f 0 = 0` (`okadaCriterionGeneral`: every modulus `q ≥ 1`, every rational `f`).
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

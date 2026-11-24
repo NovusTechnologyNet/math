@@ -1,4 +1,6 @@
-import Pilean.Erdos.OkadaGlue
+module
+
+public import Pilean.Erdos.OkadaGlue
 
 /-!
 # Okada's criterion: the sum stays `0` when `f` is twisted by a unit
@@ -11,6 +13,8 @@ Proof. Let `S_N(f) → 0`. Then `∑_r f(r) = 0`, so `S_N(f) → -Λ(f^)` with
 `h⁻¹`) `Λ(a ↦ f^(h⁻¹ a)) = 0`. The Fourier transform of `f_h : n ↦ f(h n)` is `a ↦ f^(h⁻¹ a)`
 (`fourierCoeff_twistBy`) and `∑_r f_h(r) = ∑_r f(r) = 0`, so `S_N(f_h) → -Λ(f_h^) = 0`.
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

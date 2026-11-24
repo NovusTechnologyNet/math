@@ -1,9 +1,11 @@
-import Pilean.Erdos.Defs
-import Mathlib.NumberTheory.EulerProduct.Basic
-import Mathlib.NumberTheory.SmoothNumbers
-import Mathlib.Algebra.BigOperators.Field
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.LinearCombination
+module
+
+public import Pilean.Erdos.Defs
+public import Mathlib.NumberTheory.EulerProduct.Basic
+public import Mathlib.NumberTheory.SmoothNumbers
+public import Mathlib.Algebra.BigOperators.Field
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # Theorem A from the abstract theorem, part 4: the series of condition (a)
@@ -21,6 +23,8 @@ according to `p ∣ j`). Hence the sum `θ(m)` of `h_m(r) w(r)` over the `r` div
 of `m` does not depend on `m` (`theta_insert`). `θ(∅) = ∑_r f(r) w(r)`, and `θ` of the set of
 all primes dividing `q` is a sum over the units of `g(a) w(a)`, which is `0` by (a).
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

@@ -1,4 +1,6 @@
-import Mathlib
+module
+
+public import Mathlib
 
 /-!
 # The order of 2 modulo a prime, and the norms of the generators
@@ -12,6 +14,8 @@ uses (pi_formula_theorem.md, Fact 3), and the norms of the generators:
 * If 2 has order `4n` modulo `p`, then `p ∣ 4^n + 1`, `p ≡ 1 (mod 4)`, and `p ∣ 4^m + 1`
   forces `n ∣ m` with `m / n` odd.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

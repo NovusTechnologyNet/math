@@ -1,4 +1,6 @@
-import Pilean.Erdos.Defs
+module
+
+public import Pilean.Erdos.Defs
 
 /-!
 # The algebraic core of Theorem A: the statement
@@ -34,6 +36,8 @@ can be proved separately. The setting:
 
 Nothing is proved in this file.
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

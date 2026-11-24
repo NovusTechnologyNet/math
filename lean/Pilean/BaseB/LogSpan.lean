@@ -1,5 +1,7 @@
-import Pilean.BaseB.LogSpanAux
-import Pilean.BaseB.LogNonValue
+module
+
+public import Pilean.BaseB.LogSpanAux
+public import Pilean.BaseB.LogNonValue
 
 /-!
 # A general base `b`: the values that are logarithms lie in the span of the base numbers
@@ -28,6 +30,8 @@ The proof. Let `t = √b`.
 4. (`inBaseSpan_of_zpow`) So `y^(2mD) = ∏ ν(r)²^(-m_r z_r)` with `2mD ≠ 0`; if `m < 0`, take the
    inverses.
 -/
+
+@[expose] public section
 
 open Complex Module
 

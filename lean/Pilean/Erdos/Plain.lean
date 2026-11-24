@@ -1,4 +1,6 @@
-import Pilean.Erdos.Main
+module
+
+public import Pilean.Erdos.Main
 
 /-!
 # The statement in plain terms
@@ -9,6 +11,8 @@ import Pilean.Erdos.Main
 `∑_{1 ≤ n < N} f(n)/n` do not tend to `0`. In this file it still takes Okada's criterion as a
 hypothesis (`OkadaOnlyIf`); `Final.lean` removes it.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

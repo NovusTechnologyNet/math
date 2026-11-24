@@ -1,4 +1,6 @@
-import Pilean.Base5.LogValues
+module
+
+public import Pilean.Base5.LogValues
 
 /-!
 # Base 5: which logarithms are values (the criterion)
@@ -31,6 +33,8 @@ the four-term products `∏_{ρ=1..4} (1 - (±(ρ/5))^M v^ρ / T)`. For even `M`
 `(1 - 1/T)^4` or `(1 - T^(-5))/(1 - 1/T)`; for odd `M` they are `(1 - 1/T²)²` or one of the two
 Aurifeuillian numbers `L_M/5^(2M)`, `M_M/5^(2M)` (`prod_even_mem`, `prod_odd_mem`).
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

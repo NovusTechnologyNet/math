@@ -1,5 +1,7 @@
-import Pilean.RatBase.ReductionRCyclo
-import Pilean.RatBase.ReductionRRoots
+module
+
+public import Pilean.RatBase.ReductionRCyclo
+public import Pilean.RatBase.ReductionRRoots
 
 /-!
 # Rational bases: a good prime from the size condition
@@ -31,6 +33,8 @@ of `x` over `ℤ` and `c₀ = μ(0)`.
    `Φ_m(p, q)^(2k) = |C| |C'| ≤ (ℓ (√p + √q)^φ(m))^(2k)`, against the size condition
    (`size_contradictionR`).
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

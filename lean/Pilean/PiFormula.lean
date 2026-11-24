@@ -18,7 +18,11 @@ Stated but NOT yet proved in Lean
 The missing work is the number theory: unique factorization arguments in ℤ[i],
 Bang's theorem, and Lemma 2. See pi_formula_theorem.md for the written proof.
 -/
-import Mathlib
+module
+
+public import Mathlib
+
+@[expose] public section
 
 open Real
 

@@ -1,9 +1,11 @@
-import Pilean.Erdos.AbstractA
-import Pilean.Erdos.ArithA
-import Pilean.Erdos.ArithEll
-import Pilean.Erdos.ArithLemma1
-import Pilean.Erdos.TheoremB
-import Pilean.Erdos.TheoremC
+module
+
+public import Pilean.Erdos.AbstractA
+public import Pilean.Erdos.ArithA
+public import Pilean.Erdos.ArithEll
+public import Pilean.Erdos.ArithLemma1
+public import Pilean.Erdos.TheoremB
+public import Pilean.Erdos.TheoremC
 
 /-!
 # Erdős's conjecture on `∑ f(n)/n`: the algebraic part, complete
@@ -33,6 +35,8 @@ partial sums of `∑ f(n)/n` do not tend to `0`). The criterion itself is proved
 
 Paper proof and referee report: `research/2026-11-23-erdos-pm1/`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

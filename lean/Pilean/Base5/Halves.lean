@@ -1,4 +1,6 @@
-import Pilean.Base5.Zeta5
+module
+
+public import Pilean.Base5.Zeta5
 
 /-!
 # Base 5: each Aurifeuillian factor of `Φ_5(5^h)` has a primitive prime
@@ -26,6 +28,8 @@ contains `t = √5`. The norm `N` to `ℤ` is taken in two steps, through `ℤ[�
 
 For `h = 1` the two factors are the primes 11 and 71.
 -/
+
+@[expose] public section
 
 open Polynomial
 

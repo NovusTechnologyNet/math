@@ -112,3 +112,8 @@ rev = "main"
 
 The library is one package with three parts: `Pilean` (this project), and the vendored
 `TauCeti` and `Baker`. Names and file layout may still change.
+
+Every `.lean` file uses Lean's module system, as Mathlib does: it starts with `module`, and
+its declarations are public and exposed, so a file that imports the library can use and
+unfold everything as before. Both kinds of project can import it: one that uses modules
+(`public import Pilean`) and one that does not (`import Pilean`).

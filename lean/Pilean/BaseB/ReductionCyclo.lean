@@ -1,4 +1,6 @@
-import Pilean.BaseB.Symmetrize
+module
+
+public import Pilean.BaseB.Symmetrize
 
 /-!
 # A general base `b`: the value `Φ_n(√b) Φ_n(-√b)`
@@ -14,6 +16,8 @@ where `k = 2` if `4 ∣ n` and `k = 1` otherwise (only `k ≥ 1` is recorded). T
 * `n = 2m`, `m` odd: `Φ_{2m}(X) = Φ_m(-X)`, and the same identity;
 * `n = 2m`, `m` even: `Φ_{2m}(X) = Φ_m(X²)`.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

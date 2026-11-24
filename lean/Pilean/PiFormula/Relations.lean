@@ -1,4 +1,6 @@
-import Pilean.PiFormula.NewFormula
+module
+
+public import Pilean.PiFormula.NewFormula
 
 /-!
 # The 13 multiplicative relations (Part III, Step 3, of pi_formula_theorem.md)
@@ -17,6 +19,8 @@ degree 8). The quotients were computed by a script (sympy) and are checked here 
 
 That there are no further relations (rank 11) is proved in `Rank.lean`.
 -/
+
+@[expose] public section
 
 open Complex
 

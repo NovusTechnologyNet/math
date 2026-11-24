@@ -1,48 +1,50 @@
-import Pilean.PiFormula
-import Pilean.PiFormula.All
-import Pilean.PiFormula.Unconditional
-import Pilean.PiFormula.UnconditionalPair
-import Pilean.PiFormula.Transcendence
-import Pilean.Base3.Unconditional
-import Pilean.Base3.Bailey
-import Pilean.Base3.LogPrimeTestUnconditional
-import Pilean.Base3.Transcendence
-import Pilean.Base5.Unconditional
-import Pilean.Base5.LogUnconditional
-import Pilean.Base5.Transcendence
-import Pilean.BaseB.NoPi
-import Pilean.BaseB.NegativeBase
-import Pilean.BaseB.LogBase
-import Pilean.BaseB.TermsPerBit
-import Pilean.BaseB.Combination
-import Pilean.BaseB.Examples
-import Pilean.PiFormula.FewestTermsUnique
-import Pilean.BaseB.LogSpan
-import Pilean.RatBase.Identities
-import Pilean.BaseB.LogNat
-import Pilean.RatBase.TheoremGR
-import Pilean.Compendium.Series
-import Pilean.Compendium.Arctan
-import Pilean.Compendium.Base5
-import Pilean.Compendium.Base2Sqrt
-import Pilean.Compendium.Base3
-import Pilean.RatBase.GoodPrimesSmall
-import Pilean.RatBase.Leftover
-import Pilean.RatBase.TheoremR
-import Pilean.Erdos.AbstractDefs
-import Pilean.Compendium.GeneralLog
-import Pilean.Compendium.GeneralArctan
-import Pilean.Compendium.GeneralSqrt
-import Pilean.Compendium.Curiosities
-import Pilean.Erdos.AbstractA
-import Pilean.Erdos.TheoremC
-import Pilean.Erdos.ArithA
-import Pilean.Erdos.Main
-import Pilean.Erdos.OkadaStatus
-import Pilean.Erdos.Final
-import Pilean.Erdos.Summary
-import Pilean.Erdos.Squares
-import Pilean.Compendium.Degree2Base64
-import Pilean.Compendium.Degree2Base16
-import Pilean.Compendium.Degree2Base3
-import Pilean.Polylog.Clausen
+module
+
+public import Pilean.PiFormula
+public import Pilean.PiFormula.All
+public import Pilean.PiFormula.Unconditional
+public import Pilean.PiFormula.UnconditionalPair
+public import Pilean.PiFormula.Transcendence
+public import Pilean.Base3.Unconditional
+public import Pilean.Base3.Bailey
+public import Pilean.Base3.LogPrimeTestUnconditional
+public import Pilean.Base3.Transcendence
+public import Pilean.Base5.Unconditional
+public import Pilean.Base5.LogUnconditional
+public import Pilean.Base5.Transcendence
+public import Pilean.BaseB.NoPi
+public import Pilean.BaseB.NegativeBase
+public import Pilean.BaseB.LogBase
+public import Pilean.BaseB.TermsPerBit
+public import Pilean.BaseB.Combination
+public import Pilean.BaseB.Examples
+public import Pilean.PiFormula.FewestTermsUnique
+public import Pilean.BaseB.LogSpan
+public import Pilean.RatBase.Identities
+public import Pilean.BaseB.LogNat
+public import Pilean.RatBase.TheoremGR
+public import Pilean.Compendium.Series
+public import Pilean.Compendium.Arctan
+public import Pilean.Compendium.Base5
+public import Pilean.Compendium.Base2Sqrt
+public import Pilean.Compendium.Base3
+public import Pilean.RatBase.GoodPrimesSmall
+public import Pilean.RatBase.Leftover
+public import Pilean.RatBase.TheoremR
+public import Pilean.Erdos.AbstractDefs
+public import Pilean.Compendium.GeneralLog
+public import Pilean.Compendium.GeneralArctan
+public import Pilean.Compendium.GeneralSqrt
+public import Pilean.Compendium.Curiosities
+public import Pilean.Erdos.AbstractA
+public import Pilean.Erdos.TheoremC
+public import Pilean.Erdos.ArithA
+public import Pilean.Erdos.Main
+public import Pilean.Erdos.OkadaStatus
+public import Pilean.Erdos.Final
+public import Pilean.Erdos.Summary
+public import Pilean.Erdos.Squares
+public import Pilean.Compendium.Degree2Base64
+public import Pilean.Compendium.Degree2Base16
+public import Pilean.Compendium.Degree2Base3
+public import Pilean.Polylog.Clausen

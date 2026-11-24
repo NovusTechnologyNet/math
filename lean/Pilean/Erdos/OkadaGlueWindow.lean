@@ -1,5 +1,7 @@
-import Pilean.Erdos.OkadaDefs
-import Mathlib.Topology.Order.MonotoneConvergence
+module
+
+public import Pilean.Erdos.OkadaDefs
+public import Mathlib.Topology.Order.MonotoneConvergence
 
 /-!
 # Okada's criterion: two consequences of the window sums
@@ -12,6 +14,8 @@ From `OkadaWindow` (`∑_{N ≤ n < cN, n ≡ r mod q} 1/n → (log c)/q`), with
 * `okadaHarmonicDiverges_of_window`: the sum of `1/n` over the `n` prime to `q` diverges.
   Its partial sums `T_N` increase, and `T_{2N} - T_N ≥ W_N(1) → (log 2)/q > 0`.
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

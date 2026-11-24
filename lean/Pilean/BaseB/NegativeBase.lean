@@ -1,4 +1,6 @@
-import Pilean.BaseB.Sharpness
+module
+
+public import Pilean.BaseB.Sharpness
 
 /-!
 # Negative bases: a degree-1 BBP-type formula for `π` exists only if `|β|` is a power of 2
@@ -19,6 +21,8 @@ The condition is exact (`bailey_int_pi_iff`): if `|β| = 2^e` with `e ≥ 1`, a 
 in base `β` with an even exponent `B` is a formula in base `|β|`, and
 `exists_bailey_pi_of_two_pow` gives one.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

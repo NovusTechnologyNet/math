@@ -1,4 +1,6 @@
-import Pilean.RatBase.SymmetrizeR
+module
+
+public import Pilean.RatBase.SymmetrizeR
 
 /-!
 # Rational bases: the cofactor of the minimal polynomial of `√(pq) - q r`
@@ -21,6 +23,8 @@ minimal polynomial over `ℤ` of `x = u - q r`.
   `C = μ(0)² / q^(deg μ)` and `C' = H(0)² / q^(deg H)`; `H` has degree at most `φ(n)` and each
   of its roots `z` has `|z|² ≤ (√(pq) + q)² = q (√p + √q)²`.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

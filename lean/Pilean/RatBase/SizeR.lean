@@ -1,4 +1,6 @@
-import Pilean.RatBase.ClassDefs
+module
+
+public import Pilean.RatBase.ClassDefs
 
 /-!
 # The size condition for every rational base `p/q` with `p ≥ 16`
@@ -24,6 +26,8 @@ that `ℓ ≤ (3/2)^φ`. This holds for every prime `ℓ ∣ m` (by `φ ≥ 2`, 
 when `3 ∣ m` and `m ≠ 3, 6`), except for `ℓ = 3` and `m = 3, 6`, where the values
 `Φ_3(p, q) = p² + p q + q²` and `Φ_6(p, q) = p² - p q + q²` exceed `6 (p + q) ≥ 3 (a + b)²`.
 -/
+
+@[expose] public section
 
 open Polynomial
 

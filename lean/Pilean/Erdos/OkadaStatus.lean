@@ -1,8 +1,10 @@
-import Pilean.Erdos.OkadaGlueAll
-import Pilean.Erdos.OkadaWindow
-import Pilean.Erdos.OkadaLogPrimes
-import Pilean.Erdos.OkadaFourier
-import Pilean.Erdos.OkadaBaker
+module
+
+public import Pilean.Erdos.OkadaGlueAll
+public import Pilean.Erdos.OkadaWindow
+public import Pilean.Erdos.OkadaLogPrimes
+public import Pilean.Erdos.OkadaFourier
+public import Pilean.Erdos.OkadaBaker
 
 /-!
 # Okada's criterion, the direction "sum `= 0` implies (a) and (b)": what is proved so far
@@ -24,6 +26,8 @@ Baker's theorem). Hence:
 When these are proved, replace this file by `Okada.lean` with
 `theorem okadaOnlyIf : OkadaOnlyIf`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

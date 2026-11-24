@@ -1,8 +1,10 @@
-import Pilean.Erdos.Plain
-import Pilean.Erdos.OkadaStatus
-import Pilean.Erdos.OkadaReduction
-import Pilean.Erdos.OkadaLayer
-import Pilean.Erdos.OkadaLOne
+module
+
+public import Pilean.Erdos.Plain
+public import Pilean.Erdos.OkadaStatus
+public import Pilean.Erdos.OkadaReduction
+public import Pilean.Erdos.OkadaLayer
+public import Pilean.Erdos.OkadaLOne
 
 /-!
 # Erdős's conjecture on `∑ f(n)/n` for odd `q` that is not a perfect square
@@ -33,6 +35,8 @@ is `exists_oddValued_sumIsZero` in `Squares.lean`, which also has the equivalenc
 `exists_oddValued_sumIsZero_iff`: for odd `q > 1`, an odd-valued `f` with `f(0) = 0` and
 sum `0` exists if and only if `q` is a perfect square.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

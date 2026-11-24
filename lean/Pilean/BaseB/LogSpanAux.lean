@@ -1,4 +1,6 @@
-import Pilean.BaseB.LogDefs
+module
+
+public import Pilean.BaseB.LogDefs
 
 /-!
 # The norm of `1 - r/√b` and the numbers `ν(r)²` (auxiliary)
@@ -17,6 +19,8 @@ assumed: if `L` is not finite over `ℚ` the norm is `1` and the degrees are `0`
 * `norm_one_sub_div_sq_eq_nuSq`: the same when `L` has an embedding `φ` in `ℂ` with
   `φ(t) = √b` and `φ(s) = r`: `Norm_{L/ℚ}(1 - s/t)² = ν(r)²^m` for some natural number `m`.
 -/
+
+@[expose] public section
 
 open Polynomial Module IntermediateField
 

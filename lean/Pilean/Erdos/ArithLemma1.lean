@@ -1,4 +1,6 @@
-import Pilean.Erdos.ArithLemma1Aux
+module
+
+public import Pilean.Erdos.ArithLemma1Aux
 
 /-!
 # Theorem A from the abstract theorem, part 7: Lemma 1
@@ -17,6 +19,8 @@ unless `σ ∈ S_n` (`lem1_coeff_gElt_eq_zero`). For `σ ∈ S_n`, `#T ≡ ν` m
 
 Complete: no `sorry`, no hypothesis left.
 -/
+
+@[expose] public section
 
 set_option linter.unusedSectionVars false
 

@@ -1,4 +1,6 @@
-import Mathlib
+module
+
+public import Mathlib
 
 /-!
 # From arctangent relations to Gaussian integers
@@ -10,6 +12,8 @@ has an argument that is a rational multiple of `π`, so a power of it is real.
 
 Main result: `PiFormula.star_pow_W_eq`.
 -/
+
+@[expose] public section
 
 open Complex Real
 

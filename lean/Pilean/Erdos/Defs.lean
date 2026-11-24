@@ -1,9 +1,11 @@
-import Mathlib.Data.ZMod.Basic
-import Mathlib.NumberTheory.Padics.PadicVal.Basic
-import Mathlib.Topology.Algebra.InfiniteSum.Real
-import Mathlib.Analysis.SpecificLimits.Basic
-import Mathlib.Algebra.MonoidAlgebra.Basic
-import Mathlib.Data.Nat.PrimeFin
+module
+
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.NumberTheory.Padics.PadicVal.Basic
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
+public import Mathlib.Analysis.SpecificLimits.Basic
+public import Mathlib.Algebra.MonoidAlgebra.Basic
+public import Mathlib.Data.Nat.PrimeFin
 
 /-!
 # Erdős's conjecture on `∑ f(n)/n` for periodic `f` with values `±1`: statements
@@ -35,6 +37,8 @@ Nothing is proved in this file except the deduction `erdos_of` and its corollari
 The paper proof is in `research/2026-11-23-erdos-pm1/` (`00_summary.md`, the referee's
 `01_referee_report.md` and `02_proof_part_II.md`).
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

@@ -1,5 +1,7 @@
-import Pilean.Base3.Optimum
-import Pilean.PiFormula.Unconditional
+module
+
+public import Pilean.Base3.Optimum
+public import Pilean.PiFormula.Unconditional
 
 /-!
 # Base 3: the theorems without a hypothesis
@@ -11,6 +13,8 @@ hypothesis is discharged by the formal proof of Baker's theorem in `Baker/`
 (`PiFormula.bakerTheorem`, see `PiFormula/Unconditional.lean`). The theorems below depend
 only on Lean's three standard axioms.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

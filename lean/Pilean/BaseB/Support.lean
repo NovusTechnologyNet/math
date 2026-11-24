@@ -1,4 +1,6 @@
-import Pilean.BaseB.Series
+module
+
+public import Pilean.BaseB.Series
 
 /-!
 # A general base `b`: the support of a multiplicative relation
@@ -14,6 +16,8 @@ odd rational prime `p` that divides neither `b` nor the order of `r`. The four r
 `r⁴ = 1` are those for which no good prime is claimed: `(t - 1)(t + 1) = b - 1` and
 `(t - i)(t + i) = b + 1` can be powers of 2.
 -/
+
+@[expose] public section
 
 open Complex
 

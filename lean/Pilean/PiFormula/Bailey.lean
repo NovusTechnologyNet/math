@@ -1,4 +1,6 @@
-import Pilean.PiFormula.TheoremD
+module
+
+public import Pilean.PiFormula.TheoremD
 
 /-!
 # Bailey's table: the zero relations at each period (milestone M8)
@@ -23,6 +25,8 @@ with `n = B` is `zeroSpaceEven (2n)` (take `ρ(2k) = 2^(i+1) a_i`). `bailey_F2` 
 `bailey_F1` give the 27 counts for these spaces. The re-indexing between Bailey's sums and
 the patterns is elementary and is not formalized here.
 -/
+
+@[expose] public section
 
 open Complex
 

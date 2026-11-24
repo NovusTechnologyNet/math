@@ -1,5 +1,7 @@
-import Pilean.Base3.LogConverse
-import Pilean.PiFormula.LogExplicit
+module
+
+public import Pilean.Base3.LogConverse
+public import Pilean.PiFormula.LogExplicit
 
 /-!
 # Base 3: the criterion for logarithms in elementary terms
@@ -17,6 +19,8 @@ import Pilean.PiFormula.LogExplicit
 * `isF3Value_log_of_pow`: the "if" half, which needs no Baker.
 * Examples (no Baker): `log 2, 5, 7, 11, 13, 19, 37` are values of the class F3.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

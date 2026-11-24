@@ -1,10 +1,12 @@
-import Pilean.RatBase.GoodPrimesSmall
-import Pilean.RatBase.SizeSmall
-import Pilean.RatBase.Leftover
-import Pilean.RatBase.Four
-import Pilean.RatBase.ThreeHalves
-import Pilean.Base3.Dimension
-import Pilean.PiFormula.Unconditional
+module
+
+public import Pilean.RatBase.GoodPrimesSmall
+public import Pilean.RatBase.SizeSmall
+public import Pilean.RatBase.Leftover
+public import Pilean.RatBase.Four
+public import Pilean.RatBase.ThreeHalves
+public import Pilean.Base3.Dimension
+public import Pilean.PiFormula.Unconditional
 
 /-!
 # Theorem R: the rational bases with a relation are exactly `2, 3, 4, 3/2, 4/3`
@@ -43,6 +45,8 @@ Not proved here: which of the five bases have a formula for a rational multiple 
 2 and 3/2 do, base 3 does not by `Base3`; bases 4 and 4/3 are not classified in Lean), and
 Bailey's form with an arbitrary exponent and length for rational bases.
 -/
+
+@[expose] public section
 
 open Complex
 

@@ -1,4 +1,6 @@
-import Pilean.PiFormula.TheoremBGamma
+module
+
+public import Pilean.PiFormula.TheoremBGamma
 
 /-!
 # The Galois table of Part II
@@ -25,6 +27,8 @@ The proof:
   (`exists_explicit_orbit`); the key step is that for `s` of order `4m`, exactly one of `i s`,
   `-i s` has order `m` (`prim_I_mul_or`).
 -/
+
+@[expose] public section
 
 open Polynomial IntermediateField Complex ComplexConjugate
 

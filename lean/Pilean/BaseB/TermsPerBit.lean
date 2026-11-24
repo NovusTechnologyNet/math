@@ -1,6 +1,8 @@
-import Pilean.BaseB.Sharpness
-import Pilean.PiFormula.TheoremE
-import Pilean.PiFormula.Unconditional
+module
+
+public import Pilean.BaseB.Sharpness
+public import Pilean.PiFormula.TheoremE
+public import Pilean.PiFormula.Unconditional
 
 /-!
 # No degree-1 BBP-type formula for `π` uses fewer than `2/3` terms per bit
@@ -33,6 +35,8 @@ The proof. In base 2 with the exponent `B₀ = e B`:
 
 Baker's theorem is used through the imported proof (`bakerTheorem`); there is no hypothesis.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

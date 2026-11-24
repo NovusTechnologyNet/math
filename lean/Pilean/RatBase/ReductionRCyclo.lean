@@ -1,4 +1,6 @@
-import Pilean.RatBase.SymmetrizeR
+module
+
+public import Pilean.RatBase.SymmetrizeR
 
 /-!
 # Rational bases: the value `Ψ(u) Ψ(-u) = q^φ(n) Φ_m(p, q)^k`
@@ -14,6 +16,8 @@ Let `r` be a root of unity with `r⁴ ≠ 1`, of order `n`, and let `m ≥ 3` be
   where `Φ_m(p, q)` is the homogeneous cyclotomic value `cycValR p q m`. Indeed
   `Ψ(±u) = q^φ(n) Φ_n(±u/q)`, `(u/q)² = p/q` and `Φ_m(p/q) q^φ(m) = Φ_m(p, q)`.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

@@ -1,7 +1,9 @@
-import Pilean.PiFormula
-import Pilean.PiFormula.Gaussian
-import Pilean.PiFormula.Orders
-import Pilean.PiFormula.Bang
+module
+
+public import Pilean.PiFormula
+public import Pilean.PiFormula.Gaussian
+public import Pilean.PiFormula.Orders
+public import Pilean.PiFormula.Bang
 
 /-!
 # Theorem A: assembly
@@ -19,6 +21,8 @@ Status (21 November 2026): complete, no `sorry`.
 
 Lemma 2 itself (the Aurifeuillian primitive-divisor lemma) is the one remaining input.
 -/
+
+@[expose] public section
 
 open Real
 

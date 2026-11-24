@@ -1,5 +1,7 @@
-import Pilean.PiFormula.SharpD
-import Pilean.PiFormula.TheoremC3
+module
+
+public import Pilean.PiFormula.SharpD
+public import Pilean.PiFormula.TheoremC3
 
 /-!
 # Theorem D for algebraic multiples of π
@@ -19,6 +21,8 @@ All three are from Baker's theorem. The certificate is `coords13_D` (generated, 
 `TheoremC3.lean`): twelve positions with `gcd(k, 120) < 4` force the five new coordinates to
 vanish and leave the one direction `zD`.
 -/
+
+@[expose] public section
 
 open Complex
 

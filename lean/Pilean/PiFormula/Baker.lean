@@ -1,4 +1,6 @@
-import Pilean.PiFormula.Rank
+module
+
+public import Pilean.PiFormula.Rank
 
 /-!
 # Part III, Step 1: from Baker's theorem to the 13 relations (milestone M6)
@@ -28,6 +30,8 @@ The converse needs no Baker (`step1_converse`): every combination of the 13 rela
 algebraic coefficients gives an algebraic multiple of `π`. For this each relation is put in
 logarithmic form, `∑ e_j Log w_j ∈ ℚ · iπ` (`log_form`).
 -/
+
+@[expose] public section
 
 open Complex
 

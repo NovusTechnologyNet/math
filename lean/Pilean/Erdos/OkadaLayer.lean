@@ -1,4 +1,6 @@
-import Pilean.Erdos.OkadaLayerAux
+module
+
+public import Pilean.Erdos.OkadaLayerAux
 
 /-!
 # The coefficient of `log p`: `ℓ_p = c_p` (`OkadaLayerSum`)
@@ -21,6 +23,8 @@ of `d` in `ℤ/q` (`lay_ind`). The weight is
 
 `lay_main` (`OkadaLayerAux.lean`) then gives `ℓ_p = ∑_r f(r) w(r)`.
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

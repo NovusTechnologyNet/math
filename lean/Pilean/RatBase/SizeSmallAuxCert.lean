@@ -1,4 +1,6 @@
-import Pilean.RatBase.SizeSmallAux
+module
+
+public import Pilean.RatBase.SizeSmallAux
 
 /-!
 # The size condition for small rational bases: a checkable certificate
@@ -20,6 +22,8 @@ correct and either `φ(m) > F` or the size condition is checked on the integers:
 `s = b (p + q) + 2 a`, `h = φ(m)/2` and `N = Φ_m(p, q)`, `s^h < N b^h`, and for each prime `ℓ` of
 the factored form, `ℓ ∤ N` or `ℓ s^h < N b^h`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

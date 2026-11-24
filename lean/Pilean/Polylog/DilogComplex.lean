@@ -1,4 +1,6 @@
-import Pilean.Polylog.Dilog
+module
+
+public import Pilean.Polylog.Dilog
 
 /-!
 # The complex dilogarithm: reflection formula and Landen's identity
@@ -17,6 +19,8 @@ import Pilean.Polylog.Dilog
   `im_polylog_two_of_re_eq_half : Im Li_2(z) = -Im Li_2(z / (z - 1)) + log ‖z‖ · arg z`;
 * `arg_eq_arctan_of_re_pos`: `arg z = arctan (Im z / Re z)` for `Re z > 0`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

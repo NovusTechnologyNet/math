@@ -1,4 +1,6 @@
-import Pilean.Erdos.AbstractKL
+module
+
+public import Pilean.Erdos.AbstractKL
 
 /-!
 # The algebraic core of Theorem A: the proof
@@ -27,6 +29,8 @@ not used (the augmentation is applied to `N_0 Z + a_0 B = 0` directly), and Lemm
 from the dual form of Lemma D without lattice duality. The hypotheses `u p p = 0`,
 `¬ 2^(s p + 1) ∣ π p - 1` and `SuppIn n e` of `AbstractTheoremA` are not needed.
 -/
+
+@[expose] public section
 
 set_option linter.unusedSectionVars false
 set_option linter.unusedFintypeInType false

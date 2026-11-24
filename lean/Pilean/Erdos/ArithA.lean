@@ -1,5 +1,7 @@
-import Pilean.Erdos.ArithDefs
-import Pilean.Erdos.ArithWeight
+module
+
+public import Pilean.Erdos.ArithDefs
+public import Pilean.Erdos.ArithWeight
 
 /-!
 # Theorem A from the abstract theorem
@@ -55,6 +57,8 @@ and `ArithEll.lean` (`Arith.ellProp`), following the plans kept below. Lemma 2
    `p₀^k ∣ r` (`ZMod.prodEquivPi_apply`/`map_natCast`, `ZMod.natCast_eq_zero_iff`, `kExp_eq`).
 3. Then `theoremA_of_abstract := theoremA_of_lemma1_ell lemma1 ell`, and the axiom check.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

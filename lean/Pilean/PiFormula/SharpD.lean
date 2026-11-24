@@ -1,4 +1,6 @@
-import Pilean.PiFormula.Bailey
+module
+
+public import Pilean.PiFormula.Bailey
 
 /-!
 # The sharp form of Theorem D, and its sharpness (milestone M8, addition)
@@ -19,6 +21,8 @@ at `gcd(k, 120) < 4` has value 0. Two sharper statements:
 The certificate `coords_Dall` (generated, in `TheoremD.lean`) uses the seven positions
 `k = 1, 2, 3, 7, 9, 11, 14` only.
 -/
+
+@[expose] public section
 
 open Complex
 

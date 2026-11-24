@@ -1,5 +1,7 @@
-import Pilean.RatBase.ClassDefs
-import Pilean.BaseB.SubseriesAux
+module
+
+public import Pilean.RatBase.ClassDefs
+public import Pilean.BaseB.SubseriesAux
 
 /-!
 # A rational base `p/q`: the series of the class as combinations of logarithms
@@ -18,6 +20,8 @@ by `BaseB.hasSum_periodic_logs`
 
 For `q = 1` these are the objects of `BaseB/Series.lean`: `x = 1/√p`.
 -/
+
+@[expose] public section
 
 open Complex
 

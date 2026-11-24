@@ -1,4 +1,6 @@
-import Pilean.Polylog.Deriv
+module
+
+public import Pilean.Polylog.Deriv
 
 /-!
 # The real dilogarithm: Landen's identity, the reflection formula, special values
@@ -21,6 +23,8 @@ import Pilean.Polylog.Deriv
   `dilog_ladder_three : Li_2(1/9) = 6 Li_2(1/3) - π²/3 + (log 3)²`,
   `polylogReal_two_neg_third_eq : Li_2(-1/3) = 2 Li_2(1/3) - π²/6 + (log 3)²/2`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

@@ -1,7 +1,9 @@
-import Pilean.Erdos.OkadaDefs
-import Mathlib.Data.Int.CardIntervalMod
-import Mathlib.Analysis.SpecificLimits.Normed
-import Mathlib.Analysis.SpecialFunctions.Log.Basic
+module
+
+public import Pilean.Erdos.OkadaDefs
+public import Mathlib.Data.Int.CardIntervalMod
+public import Mathlib.Analysis.SpecificLimits.Normed
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
 /-!
 # The window sums of `1/n` in a residue class
@@ -16,6 +18,8 @@ test the series `∑ z(n)/n` converges (`exists_limit_classSum`), and its sum ov
 tends to `0`. What is left is `(1/q) ∑_{N ≤ n < cN} 1/n`, and
 `log c ≤ ∑_{N ≤ n < cN} 1/n ≤ log c + 1/(N-1)` (`log_le_sum_Ico`, `sum_Ico_le_log`).
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

@@ -1,5 +1,7 @@
-import Pilean.RatBase.Defs
-import Pilean.BaseB.TheoremG
+module
+
+public import Pilean.RatBase.Defs
+public import Pilean.BaseB.TheoremG
 
 /-!
 # Rational bases: shared definitions for the classification
@@ -32,6 +34,8 @@ Baker's theorem, no relation (file `ClassificationR`). For `q = 1` these are the
 
 Nothing is proved here.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

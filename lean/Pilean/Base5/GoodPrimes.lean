@@ -1,4 +1,6 @@
-import Pilean.Base5.Defs
+module
+
+public import Pilean.Base5.Defs
 
 /-!
 # Base 5: every root of unity other than `1` and `-1` has a good prime
@@ -34,6 +36,8 @@ order of `r²` (so `n = m` or `n = 2m`).
    `Q(-t^h) - Q(c) = M_h`, so `P` contains `M_h - L_h = 2·5^((h+1)/2) (5^h + 1)`, against
    `ord_p(5) = 5h`. If `Q(-c) = 0`, take `p ∣ M_h` in the same way.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

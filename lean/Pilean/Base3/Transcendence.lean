@@ -1,5 +1,7 @@
-import Pilean.Base3.Dimension
-import Pilean.PiFormula.Transcendence
+module
+
+public import Pilean.Base3.Dimension
+public import Pilean.PiFormula.Transcendence
 
 /-!
 # Base 3: the values of the class F3 are 0 or transcendental (from Baker's theorem)
@@ -21,6 +23,8 @@ for a number `α + γ π` with `α`, `γ` algebraic (`exists_coords3_of_hasSum_a
 `a rhoGregory + b Z₁ + c Z₂`. So `α + γ π` is a value of F3 if and only if `α = 0` and `γ` is a
 rational multiple of `√3` (`isF3Value_add_mul_pi_iff`).
 -/
+
+@[expose] public section
 
 open Complex
 

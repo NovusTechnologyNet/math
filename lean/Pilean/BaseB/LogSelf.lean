@@ -1,4 +1,6 @@
-import Pilean.BaseB.BaileyForm
+module
+
+public import Pilean.BaseB.BaileyForm
 
 /-!
 # The logarithm of the base, in a base that is a power of 2 or of 3
@@ -25,6 +27,8 @@ cut into blocks of any length `N` that is a period of `g`
   and `c_i = e / 3^i` for even `i`;
 * `exists_bailey_log_two_pow`, `exists_bailey_log_three_pow`: the two existence statements.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

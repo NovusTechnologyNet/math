@@ -1,4 +1,6 @@
-import Pilean.PiFormula.BaileySums
+module
+
+public import Pilean.PiFormula.BaileySums
 
 /-!
 # `log 23` has no binary BBP-type formula
@@ -31,6 +33,8 @@ The proof has the shape of Steps 1 and 2 of Theorem C, with one more logarithm.
 Not proved here: the same for the other binary families (weights `2^(-⌊k/n⌋)`, `n > 2`),
 which the note reduces to F (Part IV, not formalized).
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

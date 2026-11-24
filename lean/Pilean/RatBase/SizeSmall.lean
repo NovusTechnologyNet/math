@@ -1,4 +1,6 @@
-import Pilean.RatBase.SizeSmallTable
+module
+
+public import Pilean.RatBase.SizeSmallTable
 
 /-!
 # The size condition for the rational bases `p/q` with `2 ≤ q < p ≤ 15`
@@ -27,6 +29,8 @@ The proof, for one pair `(p, q)` (55 pairs):
 
 The table is written by `python/ratbase_size_tables.py`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

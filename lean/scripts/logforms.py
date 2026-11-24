@@ -57,7 +57,9 @@ def q(x):
 
 out = io.StringIO()
 w = out.write
-w("""import Pilean.PiFormula.ExactArgs
+w("""module
+
+public import Pilean.PiFormula.ExactArgs
 
 /-!
 # Exact logarithmic forms of the conjugated relations (milestone M7, part 2)
@@ -70,6 +72,8 @@ relations `rel_l`, the vector `j ↦ rel_l (b j mod 120)` is again a relation (`
 with an explicit rational `ν` (`lf_b_l`), by `log_exact` and three kernel computations. Summed
 against a coefficient vector `c` this gives `conjlog_b`.
 -/
+
+@[expose] public section
 
 open Complex
 

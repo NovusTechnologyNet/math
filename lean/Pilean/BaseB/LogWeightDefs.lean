@@ -1,4 +1,6 @@
-import Pilean.BaseB.LogWeightDegree
+module
+
+public import Pilean.BaseB.LogWeightDegree
 
 /-!
 # The weight `λ` on the primes: definition and first properties
@@ -20,6 +22,8 @@ For a base `b`, the weight `lam b : ℕ → ℚ` on the primes (research note
 By F3 (`data_eq_of_common_prime`) the weight of a prime `p ∣ c₀(r)` with `p ∤ 2m` is computed
 from the data of `r` itself (`lam_eq_of_dvd`).
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

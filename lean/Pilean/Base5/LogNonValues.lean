@@ -1,4 +1,6 @@
-import Pilean.Base5.LogConverse
+module
+
+public import Pilean.Base5.LogConverse
 
 /-!
 # Base 5: `log 5` and `log 2` are not values (from Baker's theorem and good primes)
@@ -22,6 +24,8 @@ numbers is `4/5` and their quotient is the square of the golden ratio, whose non
 are irrational; so `a = b` and `(4/5)^(2a) = y^(2m)` (`rel5_reduce`), which is impossible
 for `y = 5` and for `y = 2` unless `m = 0`, since `4^x = 5^y` only for `x = y = 0`.
 -/
+
+@[expose] public section
 
 open Complex
 

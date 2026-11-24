@@ -1,6 +1,8 @@
-import Pilean.Erdos.OkadaWindow
-import Pilean.Erdos.OkadaGlueWindow
-import Pilean.Erdos.Plain
+module
+
+public import Pilean.Erdos.OkadaWindow
+public import Pilean.Erdos.OkadaGlueWindow
+public import Pilean.Erdos.Plain
 
 /-!
 # Erdős's conjecture for even `q`: the series diverges
@@ -26,6 +28,8 @@ again here without it):
 The file also contains the passage from a periodic `f : ℕ → ℤ` to a function on `ℤ/q`
 (`zmodLift`), used again in `Summary.lean`.
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

@@ -1,5 +1,7 @@
-import Pilean.Compendium.GeneralDefs
-import Pilean.Compendium.Arctan
+module
+
+public import Pilean.Compendium.GeneralDefs
+public import Pilean.Compendium.Arctan
 
 /-!
 # Bailey's Compendium, general bases: the seven series behind the formulas
@@ -21,6 +23,8 @@ length `N`:
 The coefficient vectors are `a_i = v^i t_i` with the table `t` of the imaginary or real parts
 of `c, c², …, c^N`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

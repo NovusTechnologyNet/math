@@ -1,8 +1,10 @@
-import Pilean.Erdos.AbstractDefs
-import Mathlib.Algebra.MonoidAlgebra.Basic
-import Mathlib.Algebra.BigOperators.Group.Finset.Powerset
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.LinearCombination
+module
+
+public import Pilean.Erdos.AbstractDefs
+public import Mathlib.Algebra.MonoidAlgebra.Basic
+public import Mathlib.Algebra.BigOperators.Group.Finset.Powerset
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # Theorem A from the abstract theorem, part 5: identities in the group ring `ℚ[S]`
@@ -15,6 +17,8 @@ import Mathlib.Tactic.LinearCombination
 `AbstractGroupRing.lean`; they are repeated here so that the two parts of the proof of Theorem A
 do not depend on each other.)
 -/
+
+@[expose] public section
 
 set_option linter.unusedSectionVars false
 set_option linter.unusedFintypeInType false

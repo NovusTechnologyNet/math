@@ -1,6 +1,8 @@
-import Pilean.Compendium.Base2Pi
-import Pilean.Compendium.Base2Zero
-import Pilean.Base3.PiValue
+module
+
+public import Pilean.Compendium.Base2Pi
+public import Pilean.Compendium.Base2Zero
+public import Pilean.Base3.PiValue
 
 /-!
 # Bailey's Compendium: arctangents and square roots in degree 1
@@ -32,6 +34,8 @@ of a rational number, stated as printed.
 The equalities between vectors are checked by `decide +kernel`. Here `φ` is
 `Real.goldenRatio`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

@@ -1,6 +1,8 @@
-import Pilean.BaseB.Support
-import Pilean.BaseB.ClassificationAux
-import Pilean.PiFormula.Transcendence
+module
+
+public import Pilean.BaseB.Support
+public import Pilean.BaseB.ClassificationAux
+public import Pilean.PiFormula.Transcendence
 
 /-!
 # A general base `b ≥ 5`: no algebraic multiple of `π` is a value, and no zero relation
@@ -39,6 +41,8 @@ So every `d_r` is zero, and by Fourier inversion the pattern is zero.
 The last section is the analogue of `Base5/Transcendence.lean`: from Baker's theorem alone,
 for every `b ≥ 2`, a value of `F_b` that is `α + γ π` with `α`, `γ` algebraic has `α = 0`.
 -/
+
+@[expose] public section
 
 open Complex
 

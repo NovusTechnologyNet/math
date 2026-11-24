@@ -1,4 +1,6 @@
-import Pilean.Base3.PiValue
+module
+
+public import Pilean.Base3.PiValue
 
 /-!
 # Base 3: building a good prime for a root of unity
@@ -19,6 +21,8 @@ and the algebraic integer `x`.
   `t^E - r^E = ∏_j (t - r^(1 + g j))`, so the prime contains some `t - r^a`; the order of 3
   forces `a` to be prime to `M`; and `r^a` is conjugate to `r` over `ℚ(ω)`.
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

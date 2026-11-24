@@ -1,4 +1,6 @@
-import Pilean.Polylog.Defs
+module
+
+public import Pilean.Polylog.Defs
 
 /-!
 # The polylogarithm: derivative on the open unit disc, continuity on the closed disc
@@ -14,6 +16,8 @@ import Pilean.Polylog.Defs
   `hasDerivAt_dilogReal`, `hasDerivAt_polylogReal_succ_zero` (the derivative at `0` is `1`),
   `continuousOn_polylogReal` (on `[-1, 1]`).
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

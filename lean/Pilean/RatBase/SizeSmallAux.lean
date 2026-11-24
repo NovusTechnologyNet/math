@@ -1,4 +1,6 @@
-import Pilean.RatBase.SmallDefs
+module
+
+public import Pilean.RatBase.SmallDefs
 
 /-!
 # The size condition for small rational bases: the analytic part
@@ -21,6 +23,8 @@ Three results, used by `SizeSmallAuxCert.lean` and `SizeSmall.lean`.
   `n > F`, and so, by Lemma (M) and `ℓ ≤ φ(m) + 1` for a prime `ℓ ∣ m`, the size condition holds
   at every `m ≥ 3` with `φ(m) > F`. The hypothesis `ℓ ∣ Φ_m(p, q)` is not used here.
 -/
+
+@[expose] public section
 
 open Polynomial
 

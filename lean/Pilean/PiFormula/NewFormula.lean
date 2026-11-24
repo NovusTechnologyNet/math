@@ -1,4 +1,6 @@
-import Pilean.PiFormula.TheoremBSpeed
+module
+
+public import Pilean.PiFormula.TheoremBSpeed
 
 /-!
 # The new formula (Part III of pi_formula_theorem.md): its series
@@ -27,6 +29,8 @@ with `ARG(O) = γ(O)`, `LOG(O) = ∑_{r ∈ O} log |1 - r/t|`, `O_1, O_2, O_6, O
   `k`-th term is an integer `N(k)`, computed in `ℤ[i]` (`NZ`), of period 120, and the 120
   values `N(k) = numerators[k]` are checked by `decide` (`NZ_eq_rhoNum`).
 -/
+
+@[expose] public section
 
 open Polynomial Complex ComplexConjugate
 

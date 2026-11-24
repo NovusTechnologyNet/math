@@ -1,7 +1,9 @@
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.Ideal.Lattice
-import Mathlib.Algebra.BigOperators.Ring.Finset
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.Ideal.Lattice
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.Tactic.Ring
 
 /-!
 # The algebraic core of Theorem A, part 1: Lemma D in dual form, in an abstract ring
@@ -28,6 +30,8 @@ of passing to the rings `L/(1 - t_r)` and `L/(N_r)` (the paper's settings (S1) a
 ring stays fixed and the ideal `Q E F` grows: (S1) is `(insert r E, F)`, (S2) is
 `(E, insert r F)`. The dual form makes the lattice duality (L1), (L2) of the paper unnecessary.
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

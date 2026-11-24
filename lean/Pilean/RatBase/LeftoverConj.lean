@@ -1,4 +1,6 @@
-import Pilean.RatBase.SmallDefs
+module
+
+public import Pilean.RatBase.SmallDefs
 
 /-!
 # Conjugate pairs in a cyclotomic ring, and square roots as Gauss sums
@@ -19,6 +21,8 @@ Tools for the file `Leftover`. Let `ζ` be a primitive `N`-th root of unity and 
   `sqrtConj_neg_seven`, `sqrtConj_neg_eleven`); `√5` changes sign when `a ≡ 2 (mod 5)`
   (`sqrtConj_five_flip`) and `√-7` when `a ≡ 3 (mod 7)` (`sqrtConj_neg_seven_flip`).
 -/
+
+@[expose] public section
 
 open Complex Polynomial
 

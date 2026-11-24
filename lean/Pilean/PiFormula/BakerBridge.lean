@@ -1,4 +1,6 @@
-import Pilean.PiFormula.Baker
+module
+
+public import Pilean.PiFormula.Baker
 
 /-!
 # From a standard statement of Baker's theorem to `BakerTheorem`
@@ -13,6 +15,8 @@ So a formal proof of Baker's theorem in that form turns every theorem here that 
 `(hB : BakerTheorem)` into an unconditional one, with no other change. No such proof is used
 or imported here: the statement is a hypothesis of `bakerTheorem_of_linearIndependent`.
 -/
+
+@[expose] public section
 
 open Complex
 

@@ -1,4 +1,6 @@
-import Pilean.Compendium.Defs
+module
+
+public import Pilean.Compendium.Defs
 
 /-!
 # Bailey's Compendium, general bases: the statements with a real parameter
@@ -29,6 +31,8 @@ The toolbox:
   and a real `v`, the series `∑ v^n Im(c^n) / n` and `∑ v^n Re(c^n) / n` are
   `P(1, β, N, ·)` with `β = 1 / (ρ v^N)`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

@@ -1,7 +1,9 @@
-import Pilean.Erdos.OkadaGlue
-import Pilean.Erdos.OkadaGlueTwist
-import Pilean.Erdos.OkadaGlueChar
-import Pilean.Erdos.OkadaGlueWindow
+module
+
+public import Pilean.Erdos.OkadaGlue
+public import Pilean.Erdos.OkadaGlueTwist
+public import Pilean.Erdos.OkadaGlueChar
+public import Pilean.Erdos.OkadaGlueWindow
 
 /-!
 # Okada's criterion, the direction "sum `= 0` implies (a) and (b)", from seven statements
@@ -20,6 +22,8 @@ follows from the seven propositions
 all stated in `OkadaDefs.lean`. The deductions are in `OkadaGlue.lean`,
 `OkadaGlueTwist.lean`, `OkadaGlueChar.lean` and `OkadaGlueWindow.lean`.
 -/
+
+@[expose] public section
 
 namespace PiFormula
 

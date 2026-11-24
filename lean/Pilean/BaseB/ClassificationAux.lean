@@ -1,4 +1,6 @@
-import Pilean.BaseB.Defs
+module
+
+public import Pilean.BaseB.Defs
 
 /-!
 # A general base `b`: the four logarithms at `1, -1, i, -i`
@@ -25,6 +27,8 @@ primes do not reach. This file proves that there is no multiplicative relation a
 In base 3 the second statement fails (`2(b - 1)/(b + 1) = 1`, and `w` is a sixth root of
 unity): this is where the formulas for `π√3` come from.
 -/
+
+@[expose] public section
 
 open Complex
 
