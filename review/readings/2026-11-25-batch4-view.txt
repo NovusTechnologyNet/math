@@ -1,0 +1,302 @@
+STATEMENTS
+==========
+
+theorem PiFormula.Erdos.erdos_pm_one_of_cases :
+  ∀ {q : ℕ},
+    2 ≤ q →
+      Even q ∨ ¬IsSquare q ∨ ∏ p ∈ q.primeFactors, (↑p : ℚ) / ((↑p : ℚ) - 1) ≤ 2 →
+        ∀ (f : ℕ → ℤ),
+          (∀ (n : ℕ), f (n + q) = f n) →
+            (∀ (n : ℕ), q ∣ n → f n = 0) →
+              (∀ (n : ℕ), ¬q ∣ n → f n = 1 ∨ f n = -1) →
+                ¬Filter.Tendsto (fun (N : ℕ) ↦ ∑ n ∈ Finset.range N, (↑(f n) : ℝ) / (↑n : ℝ))
+                    Filter.atTop (nhds 0)
+
+theorem PiFormula.Erdos.erdos_even_nat :
+  ∀ {q : ℕ},
+    q ≠ 0 →
+      Even q →
+        ∀ (f : ℕ → ℤ),
+          (∀ (n : ℕ), f (n + q) = f n) →
+            (∀ (n : ℕ), q ∣ n → f n = 0) →
+              (∀ (n : ℕ), ¬q ∣ n → f n = 1 ∨ f n = -1) →
+                ¬∃ (l : ℝ),
+                    Filter.Tendsto (fun (N : ℕ) ↦ ∑ n ∈ Finset.range N, (↑(f n) : ℝ) / (↑n : ℝ))
+                      Filter.atTop (nhds l)
+
+theorem PiFormula.Erdos.erdos_size_nat :
+  ∀ {q : ℕ},
+    2 ≤ q →
+      PiFormula.Erdos.sizeProd q ≤ 2 →
+        ∀ (f : ℕ → ℤ),
+          (∀ (n : ℕ), f (n + q) = f n) →
+            (∀ (n : ℕ), q ∣ n → f n = 0) →
+              (∀ (n : ℕ), ¬q ∣ n → f n = 1 ∨ f n = -1) →
+                ¬Filter.Tendsto (fun (N : ℕ) ↦ ∑ n ∈ Finset.range N, (↑(f n) : ℝ) / (↑n : ℝ))
+                    Filter.atTop (nhds 0)
+
+theorem PiFormula.Erdos.isSquare_of_condA_condB :
+  ∀ {q : ℕ},
+    Odd q →
+      ∀ (f : ZMod q → ℚ),
+        f 0 = 0 →
+          (∀ (r : ZMod q), r ≠ 0 → PiFormula.Erdos.IsOddRat (f r)) →
+            PiFormula.Erdos.CondA q f → PiFormula.Erdos.CondB q f → IsSquare q
+
+theorem PiFormula.Erdos.not_cases_11025 :
+  ¬(Even 11025 ∨ ¬IsSquare 11025 ∨ ∏ p ∈ Nat.primeFactors 11025, (↑p : ℚ) / ((↑p : ℚ) - 1) ≤ 2)
+
+theorem PiFormula.RatBase.TheoremR.eq_zero_of_hasSum_mul_pi :
+  ∀ {p q : ℕ},
+    0 < q →
+      q < p →
+        p.Coprime q →
+          ¬PiFormula.RatBase.IsExceptional p q →
+            ∀ {N : ℕ},
+              0 < N →
+                ∀ {ρ : ℕ → ℚ},
+                  (∀ (k : ℕ), ρ (k + N) = ρ k) →
+                    ∀ {γ : ℝ},
+                      IsAlgebraic ℚ γ →
+                        HasSum (PiFormula.RatBase.seriesTermRat p q ρ) (γ * Real.pi) → ρ = 0
+
+theorem PiFormula.RatBase.pi_base_three_halves :
+  HasSum
+    (PiFormula.RatBase.baileyBlockRat 3 2 12 24
+      ![1 / 2, 1 / 3, 0, 0, 2 / 9, 8 / 27, 4 / 27, 0, 0, 16 / 243, 16 / 243, 0, -32 / 729,
+        -64 / 2187, 0, 0, -128 / 6561, -512 / 19683, -256 / 19683, 0, 0, -1024 / 177147,
+        -1024 / 177147, 0])
+    (Real.pi / 4)
+
+theorem PiFormula.RatBase.sqrt_three_pi_base_four_thirds :
+  HasSum
+    (PiFormula.RatBase.baileyBlockRat 4 3 6 12
+      ![1 / 4, 3 / 8, 3 / 8, 9 / 32, 9 / 64, 0, -27 / 256, -81 / 512, -81 / 512, -243 / 2048,
+        -243 / 4096, 0])
+    (√3 * Real.pi / 9)
+
+theorem PiFormula.RatBase.hasSum_rhoFour :
+  HasSum (PiFormula.RatBase.seriesTermRat 4 1 PiFormula.RatBase.rhoFour) (√3 * Real.pi / 9)
+
+theorem PiFormula.Compendium.formula_1 :
+  PiFormula.Compendium.BaileyFormula Real.pi 1 16 1 8 ![4, 0, 0, -2, -1, -1, 0, 0]
+
+theorem PiFormula.Compendium.formula_102_real :
+  ∀ {b : ℝ},
+    1 < |b| →
+      PiFormula.Compendium.BaileyFormulaReal (Real.log ((b - 1) / b)) (-(1 / b ^ 2)) (b ^ 2) 2
+        ![b, 1]
+
+theorem PiFormula.Compendium.formula_93 :
+  ∀ {b : ℕ},
+    2 ≤ b →
+      PiFormula.Compendium.BaileyFormulaInt
+        ((↑b : ℝ) ^ 2 * √3 * Real.arctan (√3 / (2 * (↑b : ℝ) - 1))) (3 / 2) (-(↑b : ℤ) ^ 3) 1 3
+        ![(↑b : ℚ), 1, 0]
+
+theorem PiFormula.Compendium.formula_88 :
+  PiFormula.Compendium.BaileyFormula
+    (1 / √Real.goldenRatio *
+        Real.arctan (5 ^ (1 / 4) / √Real.goldenRatio * ((233 - 329 * √5) / 5938)) +
+      √Real.goldenRatio * Real.arctan (5 ^ (1 / 4) / √Real.goldenRatio * ((939 + 281 * √5) / 5938)))
+    (1 / (2 * 5 ^ (13 / 4))) 5 5 5 ![125, -25, 5, -1, 0]
+
+theorem PiFormula.Compendium.formula_132 :
+  PiFormula.Compendium.BaileyFormulaReal (3 * Real.pi * √Real.goldenRatio / 5 ^ (5 / 4)) (1 / 2 ^ 9)
+    ((2 / Real.goldenRatio) ^ 10) 10
+    ![256 * Real.goldenRatio, 128 * Real.goldenRatio ^ 3, 64 * Real.goldenRatio ^ 4,
+      32 * Real.goldenRatio ^ 4, 0, -8 * Real.goldenRatio ^ 6, -4 * Real.goldenRatio ^ 8,
+      -2 * Real.goldenRatio ^ 9, -Real.goldenRatio ^ 9, 0]
+
+theorem PiFormula.Compendium.formula_69 :
+  PiFormula.Compendium.BaileyFormula (Real.pi * √3) (1 / 9) 3 6 12
+    ![81, -54, 0, -9, 0, -12, -3, -2, 0, -1, 0, 0]
+
+theorem PiFormula.Compendium.formula_p10_a :
+  HasSum (fun (k : ℕ) ↦ (-1) ^ k / (2 * (↑k : ℝ) + 1) ^ 2) PiFormula.Polylog.catalanConst
+
+theorem PiFormula.Compendium.formula_76 :
+  PiFormula.Polylog.BaileyFormulaDeg (Real.pi ^ 2) (2 / 27) 2 3 6 12
+    ![243, -405, 0, -81, -27, -72, -9, -9, 0, -5, 1, 0]
+
+PROJECT DEFINITIONS USED BY THE STATEMENTS (26), in order of first use
+====================================================================
+
+-- from module Pilean.Erdos.SizeCase
+def PiFormula.Erdos.sizeProd :
+  ℕ → ℚ
+  :=
+  fun (q : ℕ) ↦ ∏ p ∈ q.primeFactors, (↑p : ℚ) / ((↑p : ℚ) - 1)
+
+-- from module Pilean.Erdos.Defs
+def PiFormula.Erdos.IsOddRat :
+  ℚ → Prop
+  :=
+  fun (x : ℚ) ↦ Odd x.num ∧ Odd x.den
+
+-- from module Pilean.Erdos.Defs
+def PiFormula.Erdos.CondA :
+  (q : ℕ) → (ZMod q → ℚ) → Prop
+  :=
+  fun (q : ℕ) (f : ZMod q → ℚ) ↦ ∀ (a : ZMod q), IsUnit a → PiFormula.Erdos.okadaG q f a = 0
+
+-- from module Pilean.Erdos.Defs
+def PiFormula.Erdos.okadaG :
+  (q : ℕ) → (ZMod q → ℚ) → ZMod q → ℝ
+  :=
+  fun (q : ℕ) (f : ZMod q → ℚ) (a : ZMod q) ↦
+    ∑' (m : ℕ), if PiFormula.Erdos.InM q m then (↑(f (a * (↑m : ZMod q))) : ℝ) / (↑m : ℝ) else 0
+
+-- from module Pilean.Erdos.Defs
+def PiFormula.Erdos.InM :
+  ℕ → ℕ → Prop
+  :=
+  fun (q m : ℕ) ↦ m ≠ 0 ∧ m.primeFactors ⊆ q.primeFactors
+
+-- from module Pilean.Erdos.Defs
+def PiFormula.Erdos.instDecidableInM :
+  (q m : ℕ) → Decidable (PiFormula.Erdos.InM q m)
+  :=
+  fun (q m : ℕ) ↦
+    { decide := decide (m ≠ 0) && decide (m.primeFactors ⊆ q.primeFactors), reflects_decide := ⋯ }
+
+-- from module Pilean.Erdos.Defs
+def PiFormula.Erdos.CondB :
+  (q : ℕ) → (ZMod q → ℚ) → Prop
+  :=
+  fun (q : ℕ) (f : ZMod q → ℚ) ↦ ∀ (p : ℕ), Nat.Prime p → p ∣ q → PiFormula.Erdos.okadaC q f p = 0
+
+-- from module Pilean.Erdos.Defs
+def PiFormula.Erdos.okadaC :
+  (q : ℕ) → (ZMod q → ℚ) → ℕ → ℚ
+  :=
+  fun (q : ℕ) (f : ZMod q → ℚ) (p : ℕ) ↦
+    ∑ r ∈ Finset.Icc 1 q, f (↑r : ZMod q) * PiFormula.Erdos.lam q r p
+
+-- from module Pilean.Erdos.Defs
+def PiFormula.Erdos.lam :
+  ℕ → ℕ → ℕ → ℚ
+  :=
+  fun (q r p : ℕ) ↦
+    if padicValNat p r < padicValNat p q then (↑(padicValNat p r) : ℚ)
+    else (↑(padicValNat p q) : ℚ) + 1 / ((↑p : ℚ) - 1)
+
+-- from module Pilean.RatBase.SmallDefs
+def PiFormula.RatBase.IsExceptional :
+  ℕ → ℕ → Prop
+  :=
+  fun (p q : ℕ) ↦ p = 2 ∧ q = 1 ∨ p = 3 ∧ q = 1 ∨ p = 4 ∧ q = 1 ∨ p = 3 ∧ q = 2 ∨ p = 4 ∧ q = 3
+
+-- from module Pilean.RatBase.Defs
+def PiFormula.RatBase.seriesTermRat :
+  ℕ → ℕ → (ℕ → ℚ) → ℕ → ℝ
+  :=
+  fun (p q : ℕ) (ρ : ℕ → ℚ) (k : ℕ) ↦ (↑(ρ k) : ℝ) * ((↑q : ℝ) / (↑p : ℝ)) ^ (k / 2) / (↑k : ℝ)
+
+-- from module Pilean.RatBase.Defs
+def PiFormula.RatBase.baileyBlockRat :
+  ℕ → ℕ → ℕ → (N : ℕ) → (Fin N → ℚ) → ℕ → ℝ
+  :=
+  fun (p q B N : ℕ) (a : Fin N → ℚ) (j : ℕ) ↦
+    ∑ i : Fin N, (↑(a i) : ℝ) * ((↑q : ℝ) / (↑p : ℝ)) ^ (B * j) / (↑(N * j + (↑i : ℕ) + 1) : ℝ)
+
+-- from module Pilean.RatBase.Four
+def PiFormula.RatBase.rhoFour :
+  ℕ → ℚ
+  :=
+  fun (k : ℕ) ↦
+    match k % 6 with
+    | 1 => 1 / 2
+    | 2 => 1
+    | 4 => -1
+    | 5 => -(1 / 2)
+    | x => 0
+
+-- from module Pilean.Compendium.Defs
+def PiFormula.Compendium.BaileyFormula :
+  ℝ → ℝ → ℕ → ℕ → (N : ℕ) → (Fin N → ℚ) → Prop
+  :=
+  fun (x c : ℝ) (b B N : ℕ) (a : Fin N → ℚ) ↦
+    ∃ (S : ℝ), PiFormula.Compendium.HasBaileyValue b B N a S ∧ x = c * S
+
+-- from module Pilean.Compendium.Defs
+def PiFormula.Compendium.HasBaileyValue :
+  ℕ → ℕ → (N : ℕ) → (Fin N → ℚ) → ℝ → Prop
+  :=
+  fun (b B N : ℕ) (a : Fin N → ℚ) (x : ℝ) ↦ HasSum (PiFormula.BaseB.baileyBlock b B N a) x
+
+-- from module Pilean.BaseB.BaileyForm
+def PiFormula.BaseB.baileyBlock :
+  ℕ → ℕ → (N : ℕ) → (Fin N → ℚ) → ℕ → ℝ
+  :=
+  fun (b B N : ℕ) (a : Fin N → ℚ) (j : ℕ) ↦
+    ∑ i : Fin N, (↑(a i) : ℝ) / (↑b : ℝ) ^ (B * j) / (↑(N * j + (↑i : ℕ) + 1) : ℝ)
+
+-- from module Pilean.Compendium.GeneralDefs
+def PiFormula.Compendium.BaileyFormulaReal :
+  ℝ → ℝ → ℝ → (N : ℕ) → (Fin N → ℝ) → Prop
+  :=
+  fun (x c β : ℝ) (N : ℕ) (a : Fin N → ℝ) ↦
+    ∃ (S : ℝ), PiFormula.Compendium.HasBaileyValueReal β N a S ∧ x = c * S
+
+-- from module Pilean.Compendium.GeneralDefs
+def PiFormula.Compendium.HasBaileyValueReal :
+  ℝ → (N : ℕ) → (Fin N → ℝ) → ℝ → Prop
+  :=
+  fun (β : ℝ) (N : ℕ) (a : Fin N → ℝ) (x : ℝ) ↦
+    HasSum (PiFormula.Compendium.baileyBlockReal β N a) x
+
+-- from module Pilean.Compendium.GeneralDefs
+def PiFormula.Compendium.baileyBlockReal :
+  ℝ → (N : ℕ) → (Fin N → ℝ) → ℕ → ℝ
+  :=
+  fun (β : ℝ) (N : ℕ) (a : Fin N → ℝ) (j : ℕ) ↦
+    ∑ i : Fin N, a i / β ^ j / (↑(N * j + (↑i : ℕ) + 1) : ℝ)
+
+-- from module Pilean.Compendium.Defs
+def PiFormula.Compendium.BaileyFormulaInt :
+  ℝ → ℝ → ℤ → ℕ → (N : ℕ) → (Fin N → ℚ) → Prop
+  :=
+  fun (x c : ℝ) (β : ℤ) (B N : ℕ) (a : Fin N → ℚ) ↦
+    ∃ (S : ℝ), PiFormula.Compendium.HasBaileyValueInt β B N a S ∧ x = c * S
+
+-- from module Pilean.Compendium.Defs
+def PiFormula.Compendium.HasBaileyValueInt :
+  ℤ → ℕ → (N : ℕ) → (Fin N → ℚ) → ℝ → Prop
+  :=
+  fun (β : ℤ) (B N : ℕ) (a : Fin N → ℚ) (x : ℝ) ↦ HasSum (PiFormula.BaseB.baileyBlockInt β B N a) x
+
+-- from module Pilean.BaseB.NegativeBase
+def PiFormula.BaseB.baileyBlockInt :
+  ℤ → ℕ → (N : ℕ) → (Fin N → ℚ) → ℕ → ℝ
+  :=
+  fun (β : ℤ) (B N : ℕ) (a : Fin N → ℚ) (j : ℕ) ↦
+    ∑ i : Fin N, (↑(a i) : ℝ) / (↑β : ℝ) ^ (B * j) / (↑(N * j + (↑i : ℕ) + 1) : ℝ)
+
+-- from module Pilean.Polylog.Catalan
+def PiFormula.Polylog.catalanConst :
+  ℝ
+  :=
+  ∑' (k : ℕ), (-1) ^ k / (2 * (↑k : ℝ) + 1) ^ 2
+
+-- from module Pilean.Polylog.Defs
+def PiFormula.Polylog.BaileyFormulaDeg :
+  ℝ → ℝ → ℕ → ℕ → ℕ → (N : ℕ) → (Fin N → ℚ) → Prop
+  :=
+  fun (x c : ℝ) (s b B N : ℕ) (a : Fin N → ℚ) ↦
+    ∃ (S : ℝ), PiFormula.Polylog.HasBaileyValueDeg s b B N a S ∧ x = c * S
+
+-- from module Pilean.Polylog.Defs
+def PiFormula.Polylog.HasBaileyValueDeg :
+  ℕ → ℕ → ℕ → (N : ℕ) → (Fin N → ℚ) → ℝ → Prop
+  :=
+  fun (s b B N : ℕ) (a : Fin N → ℚ) (x : ℝ) ↦ HasSum (PiFormula.Polylog.baileyBlockDeg s b B N a) x
+
+-- from module Pilean.Polylog.Defs
+def PiFormula.Polylog.baileyBlockDeg :
+  ℕ → ℕ → ℕ → (N : ℕ) → (Fin N → ℚ) → ℕ → ℝ
+  :=
+  fun (s b B N : ℕ) (a : Fin N → ℚ) (j : ℕ) ↦
+    ∑ i : Fin N, (↑(a i) : ℝ) / (↑b : ℝ) ^ (B * j) / (↑(N * j + (↑i : ℕ) + 1) : ℝ) ^ s
+
+Everything else named above is defined in Mathlib or in Lean itself.

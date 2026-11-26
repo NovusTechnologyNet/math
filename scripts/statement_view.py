@@ -7,7 +7,10 @@ For each named theorem the output has its statement as Lean prints it, and after
 statements every definition of this project (Pilean, TauCeti, Baker) that the statements use,
 directly or through other definitions, again as Lean prints them. Comments, docstrings and
 proofs are not shown: the text is made from the compiled library, not from the source files.
-Definitions of Mathlib and of Lean itself are not expanded.
+Definitions of Mathlib and of Lean itself are not expanded. Every numeral and every coercion
+is printed with its type, so that `5 ^ (1 / 4 : ℝ)` (a real power) cannot be taken for
+`5 ^ (1 / 4 : ℕ)` (the power 0): a reader of an earlier version, without these types, could not
+tell the two apart.
 
 This is the text given to the independent reader of a statement (see PRACTICES.md). Run it from
 the top folder of the repository after `lake build`. `-i` adds a module to import when a
@@ -124,6 +127,7 @@ set_option pp.proofs false
 set_option pp.unicode.fun true
 set_option pp.funBinderTypes true
 set_option pp.coercions.types true
+set_option pp.numericTypes true
 '''
 
 

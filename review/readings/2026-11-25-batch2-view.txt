@@ -1,0 +1,596 @@
+STATEMENTS
+==========
+
+theorem PiFormula.theoremB :
+  PiFormula.TheoremB
+
+theorem PiFormula.Unconditional.value_formula :
+  ∀ {N : ℕ},
+    0 < N →
+      120 ∣ N →
+        ∀ {ρ : ℕ → ℚ},
+          ρ ∈ PiFormula.ratSpace N →
+            HasSum (PiFormula.seriesTerm ρ)
+              ((↑(7 / 12 * ρ 1 + 1 / 8 * ρ 2 + 1 / 6 * ρ 3 - 7 / 12 * ρ 7 + 1 / 6 * ρ 9 -
+                      1 / 8 * ρ 14) :
+                  ℝ) *
+                (Real.pi / 4))
+
+theorem PiFormula.Unconditional.theoremD_sharp :
+  ∀ {N : ℕ},
+    0 < N →
+      120 ∣ N →
+        ∀ {ρ : ℕ → ℚ},
+          ρ ∈ PiFormula.ratSpace N →
+            (∀ (k : ℕ), k.gcd 120 < 4 → ρ k = 0) → ∃ (c : ℚ), ρ = c • PiFormula.zD
+
+theorem PiFormula.Unconditional.bailey_table :
+  ∀
+    r ∈
+      [(4, 8, 1), (6, 6, 1), (8, 16, 1), (12, 12, 1), (12, 24, 5), (16, 32, 1), (18, 18, 1),
+        (20, 40, 3), (24, 24, 1), (24, 48, 5), (28, 56, 1), (30, 30, 1), (30, 60, 1), (32, 64, 1),
+        (36, 36, 1), (36, 72, 5), (40, 80, 3), (42, 42, 1), (42, 84, 1), (44, 88, 1), (48, 48, 1),
+        (48, 96, 5), (52, 104, 1), (54, 54, 1), (56, 112, 1), (60, 60, 1), (60, 120, 7)],
+    Module.finrank ℚ ↥(PiFormula.baileyZero r.1 r.2.1) = r.2.2
+
+theorem PiFormula.Unconditional.theoremE :
+  ∀ {N : ℕ},
+    0 < N →
+      120 ∣ N →
+        ∀ {ρ : ℕ → ℚ},
+          (∀ (k : ℕ), ρ (k + N) = ρ k) →
+            ∀ {r : ℚ},
+              r ≠ 0 →
+                HasSum (PiFormula.seriesTerm ρ) ((↑r : ℝ) * Real.pi) →
+                  40 ≤ PiFormula.termCount ρ ∧ 7 / 24 ≤ PiFormula.primeCost ρ
+
+theorem PiFormula.Unconditional.termCount_eq_forty_iff :
+  ∀ {N : ℕ},
+    0 < N →
+      120 ∣ N →
+        ∀ {ρ : ℕ → ℚ},
+          (∀ (k : ℕ), ρ (k + N) = ρ k) →
+            ∀ {r : ℚ},
+              r ≠ 0 →
+                HasSum (PiFormula.seriesTerm ρ) ((↑r : ℝ) * Real.pi) →
+                  (PiFormula.termCount ρ = 40 ↔
+                    ∃ (a : ℚ),
+                      a ≠ 0 ∧ (ρ = a • PiFormula.rhoHuvent1 ∨ ρ = a • PiFormula.rhoHuvent2))
+
+theorem PiFormula.Unconditional.no_log23 :
+  ∀ {N : ℕ},
+    0 < N →
+      8 ∣ N →
+        ∀ {ρ : ℕ → ℚ},
+          (∀ (k : ℕ), ρ (k + N) = ρ k) →
+            ∀ {q : ℝ}, IsAlgebraic ℚ q → HasSum (PiFormula.seriesTerm ρ) (q * Real.log 23) → q = 0
+
+theorem PiFormula.Unconditional.log_primes_below_100 :
+  ∀ {p : ℕ},
+    Nat.Prime p → p < 100 → (PiFormula.IsFValue (Real.log (↑p : ℝ)) ↔ p ∈ PiFormula.logPrimes)
+
+theorem PiFormula.Unconditional.isFValue_log_rat_iff_pow :
+  ∀ {y : ℚ},
+    0 < y →
+      (PiFormula.IsFValue (Real.log (↑y : ℝ)) ↔
+        ∃ (k : ℕ),
+          0 < k ∧
+            ∃ (n : ℕ) (g : Fin n → ℤ) (e : Fin n → ℤ),
+              (∀ (i : Fin n), g i ∈ PiFormula.baseNumbers) ∧
+                y ^ k = ∏ i : Fin n, (↑(g i) : ℚ) ^ e i)
+
+theorem PiFormula.Unconditional.isFValue_log_prime_classification :
+  ∀ {ℓ : ℕ},
+    Nat.Prime ℓ →
+      (PiFormula.IsFValue (Real.log (↑ℓ : ℝ)) ↔
+        ℓ ∣ 2 * (2 ^ 60 - 1) ∨
+          ∀ (q : ℕ),
+            Nat.Prime q →
+              (↑q : ℤ) ∣ PiFormula.primPart ℓ →
+                q ≠ ℓ → q ∣ orderOf 2 ∧ PiFormula.IsFValue (Real.log (↑q : ℝ)))
+
+theorem PiFormula.Unconditional.not_isFValue_arctan_two_sevenths :
+  ¬PiFormula.IsFValue (Real.arctan (2 / 7))
+
+theorem PiFormula.Unconditional.pairCost_ge :
+  ∀ {N : ℕ},
+    0 < N →
+      120 ∣ N →
+        ∀ {ρ₁ ρ₂ : ℕ → ℚ},
+          (∀ (k : ℕ), ρ₁ (k + N) = ρ₁ k) →
+            (∀ (k : ℕ), ρ₂ (k + N) = ρ₂ k) →
+              ∀ {r : ℚ},
+                r ≠ 0 →
+                  HasSum (PiFormula.seriesTerm ρ₁) ((↑r : ℝ) * Real.pi) →
+                    HasSum (PiFormula.seriesTerm ρ₂) ((↑r : ℝ) * Real.pi) →
+                      ρ₁ ≠ ρ₂ → 60 ≤ PiFormula.pairCost ρ₁ ρ₂
+
+theorem PiFormula.Unconditional.checkedPair :
+  (∀ {N : ℕ},
+      0 < N →
+        120 ∣ N →
+          ∀ {ρ₁ ρ₂ : ℕ → ℚ},
+            (∀ (k : ℕ), ρ₁ (k + N) = ρ₁ k) →
+              (∀ (k : ℕ), ρ₂ (k + N) = ρ₂ k) →
+                ∀ {r : ℚ},
+                  r ≠ 0 →
+                    HasSum (PiFormula.seriesTerm ρ₁) ((↑r : ℝ) * Real.pi) →
+                      HasSum (PiFormula.seriesTerm ρ₂) ((↑r : ℝ) * Real.pi) →
+                        ρ₁ ≠ ρ₂ → 60 ≤ PiFormula.pairCost ρ₁ ρ₂) ∧
+    HasSum (PiFormula.seriesTerm PiFormula.rhoTak1) Real.pi ∧
+      HasSum (PiFormula.seriesTerm PiFormula.rhoTak2) Real.pi ∧
+        PiFormula.pairCost PiFormula.rhoTak1 PiFormula.rhoTak2 = 60
+
+theorem PiFormula.Unconditional.not_isFValue_log_38737 :
+  ¬PiFormula.IsFValue (Real.log 38737)
+
+PROJECT DEFINITIONS USED BY THE STATEMENTS (53), in order of first use
+====================================================================
+
+-- from module Pilean.PiFormula.TheoremB
+def PiFormula.TheoremB :
+  Prop
+  :=
+  ∀ (c : PiFormula.Atom →₀ ℚ) (q : ℚ),
+    PiFormula.valueB c = (↑q : ℝ) * Real.pi →
+      (∀ a ∉ PiFormula.exceptional, (c : PiFormula.Atom → ℚ) a = 0) ∧
+        (c : PiFormula.Atom → ℚ) (PiFormula.Atom.Q 0) +
+              (c : PiFormula.Atom → ℚ) (PiFormula.Atom.Q 2) =
+            0 ∧
+          q =
+            ((c : PiFormula.Atom → ℚ) (PiFormula.Atom.P 0) +
+                (c : PiFormula.Atom → ℚ) (PiFormula.Atom.Q 1)) /
+              2
+
+-- from module Pilean.PiFormula.TheoremB
+inductive PiFormula.Atom :
+  Type
+  | PiFormula.Atom.P :
+  ℕ → PiFormula.Atom
+  | PiFormula.Atom.Q :
+  ℕ → PiFormula.Atom
+  | PiFormula.Atom.R :
+  ℕ → ℕ → PiFormula.Atom
+
+-- from module Pilean.PiFormula.TheoremB
+def PiFormula.valueB :
+  (PiFormula.Atom →₀ ℚ) → ℝ
+  :=
+  fun (c : PiFormula.Atom →₀ ℚ) ↦
+    c.sum fun (a : PiFormula.Atom) (x : ℚ) ↦
+      (↑x : ℝ) * ((GaussianInt.toComplex : GaussianInt → ℂ) (PiFormula.atom a)).arg
+
+-- from module Pilean.PiFormula.TheoremB
+def PiFormula.atom :
+  PiFormula.Atom → GaussianInt
+  :=
+  fun (a : PiFormula.Atom) ↦
+    Polynomial.eval (PiFormula.base a) (Polynomial.cyclotomic (PiFormula.mOf a) GaussianInt)
+
+-- from module Pilean.PiFormula.TheoremB
+def PiFormula.base :
+  PiFormula.Atom → GaussianInt
+  :=
+  fun (x : PiFormula.Atom) ↦
+    match x with
+    | PiFormula.Atom.P k => PiFormula.tG
+    | PiFormula.Atom.Q k => -PiFormula.tG
+    | PiFormula.Atom.R k e => PiFormula.xR e
+
+-- from module Pilean.PiFormula.TheoremB
+def PiFormula.Atom.casesOn :
+  {motive : PiFormula.Atom → Sort u} →
+    (t : PiFormula.Atom) →
+      ((k : ℕ) → motive (PiFormula.Atom.P k)) →
+        ((k : ℕ) → motive (PiFormula.Atom.Q k)) →
+          ((k e : ℕ) → motive (PiFormula.Atom.R k e)) → motive t
+  -- defined by recursion; its defining equations:
+
+-- from module Pilean.PiFormula.Lemma2
+def PiFormula.tG :
+  GaussianInt
+  :=
+  { re := 1, im := 1 }
+
+-- from module Pilean.PiFormula.TheoremB
+def PiFormula.xR :
+  ℕ → GaussianInt
+  :=
+  fun (e : ℕ) ↦ { re := 0, im := 2 ^ 2 ^ (e + 1) }
+
+-- from module Pilean.PiFormula.TheoremB
+def PiFormula.mOf :
+  PiFormula.Atom → ℕ
+  :=
+  fun (x : PiFormula.Atom) ↦
+    match x with
+    | PiFormula.Atom.P k => 2 * k + 1
+    | PiFormula.Atom.Q k => 2 * k + 1
+    | PiFormula.Atom.R k e => 2 * k + 1
+
+-- from module Pilean.PiFormula.TheoremB
+def PiFormula.exceptional :
+  Finset PiFormula.Atom
+  :=
+  {PiFormula.Atom.P 0, PiFormula.Atom.Q 0, PiFormula.Atom.Q 1, PiFormula.Atom.Q 2}
+
+-- from module Pilean.PiFormula.TheoremB
+def PiFormula.instDecidableEqAtom :
+  DecidableEq PiFormula.Atom
+  :=
+  PiFormula.instDecidableEqAtom.decEq
+
+-- from module Pilean.PiFormula.TheoremB
+def PiFormula.instDecidableEqAtom.decEq :
+  (x x_1 : PiFormula.Atom) → Decidable (x = x_1)
+  :=
+  fun (x x_1 : PiFormula.Atom) ↦
+    match x, x_1 with
+    | PiFormula.Atom.P a, PiFormula.Atom.P b => if h : a = b then h ▸ isTrue ⋯ else isFalse ⋯
+    | PiFormula.Atom.P k, PiFormula.Atom.Q k_1 => isFalse ⋯
+    | PiFormula.Atom.P k, PiFormula.Atom.R k_1 e => isFalse ⋯
+    | PiFormula.Atom.Q k, PiFormula.Atom.P k_1 => isFalse ⋯
+    | PiFormula.Atom.Q a, PiFormula.Atom.Q b => if h : a = b then h ▸ isTrue ⋯ else isFalse ⋯
+    | PiFormula.Atom.Q k, PiFormula.Atom.R k_1 e => isFalse ⋯
+    | PiFormula.Atom.R k e, PiFormula.Atom.P k_1 => isFalse ⋯
+    | PiFormula.Atom.R k e, PiFormula.Atom.Q k_1 => isFalse ⋯
+    | PiFormula.Atom.R a a_1, PiFormula.Atom.R b b_1 =>
+      if h : a = b then h ▸ if h : a_1 = b_1 then h ▸ isTrue ⋯ else isFalse ⋯ else isFalse ⋯
+
+-- from module Pilean.PiFormula.TheoremC
+def PiFormula.ratSpace :
+  ℕ → Submodule ℚ (ℕ → ℚ)
+  :=
+  fun (N : ℕ) ↦
+    {
+      carrier :=
+        {ρ : ℕ → ℚ |
+          (∀ (k : ℕ), ρ (k + N) = ρ k) ∧
+            ∃ (q : ℚ), HasSum (PiFormula.seriesTerm ρ) ((↑q : ℝ) * Real.pi)},
+      add_mem' := ⋯, zero_mem' := ⋯, smul_mem' := ⋯ }
+
+-- from module Pilean.PiFormula.VSeries
+def PiFormula.seriesTerm :
+  (ℕ → ℚ) → ℕ → ℝ
+  :=
+  fun (ρ : ℕ → ℚ) (k : ℕ) ↦ (↑(ρ k) : ℝ) / 2 ^ (k / 2) / (↑k : ℝ)
+
+-- from module Pilean.PiFormula.SharpD
+def PiFormula.zD :
+  ℕ → ℚ
+  :=
+  fun (k : ℕ) ↦ -2 * PiFormula.namedL8 k + 2 * PiFormula.namedL10 k + PiFormula.namedL24 k
+
+-- from module Pilean.PiFormula.VSeries
+def PiFormula.namedL8 :
+  ℕ → ℚ
+  :=
+  fun (k : ℕ) ↦ PiFormula.rhoL PiFormula.P8aZ k - 2 * PiFormula.rhoL PiFormula.P1Z k
+
+-- from module Pilean.PiFormula.VSeries
+def PiFormula.rhoL :
+  (ℕ → GaussianInt) → ℕ → ℚ
+  :=
+  fun (P : ℕ → GaussianInt) (k : ℕ) ↦ -(↑(P k * PiFormula.UZ k).re : ℚ) / 2
+
+-- from module Pilean.PiFormula.NewFormula
+def PiFormula.UZ :
+  ℕ → GaussianInt
+  :=
+  fun (k : ℕ) ↦ (-PiFormula.gI) ^ (k / 2) * if 2 ∣ k then 2 else { re := 1, im := -1 }
+
+-- from module Pilean.PiFormula.TheoremB
+def PiFormula.gI :
+  GaussianInt
+  :=
+  { re := 0, im := 1 }
+
+-- from module Pilean.PiFormula.NewFormula
+def PiFormula.P8aZ :
+  ℕ → GaussianInt
+  :=
+  fun (k : ℕ) ↦ if 2 ∣ k then 2 * PiFormula.gI ^ (k / 2) else 0
+
+-- from module Pilean.PiFormula.VSeries
+def PiFormula.P1Z :
+  ℕ → GaussianInt
+  :=
+  fun (x : ℕ) ↦ 1
+
+-- from module Pilean.PiFormula.VSeries
+def PiFormula.namedL10 :
+  ℕ → ℚ
+  :=
+  fun (k : ℕ) ↦
+    PiFormula.rhoL PiFormula.P10Z k - PiFormula.rhoL PiFormula.P2Z k -
+      3 * PiFormula.rhoL PiFormula.P1Z k
+
+-- from module Pilean.PiFormula.NewFormula
+def PiFormula.P10Z :
+  ℕ → GaussianInt
+  :=
+  fun (k : ℕ) ↦ (((if 10 ∣ k then 10 else 0) - if 5 ∣ k then 5 else 0) - if 2 ∣ k then 2 else 0) + 1
+
+-- from module Pilean.PiFormula.NewFormula
+def PiFormula.P2Z :
+  ℕ → GaussianInt
+  :=
+  fun (k : ℕ) ↦ (if 2 ∣ k then 2 else 0) - 1
+
+-- from module Pilean.PiFormula.VSeries
+def PiFormula.namedL24 :
+  ℕ → ℚ
+  :=
+  fun (k : ℕ) ↦
+    PiFormula.rhoL PiFormula.P24Z k - PiFormula.rhoL PiFormula.P8bZ k -
+      2 * PiFormula.rhoL PiFormula.P1Z k
+
+-- from module Pilean.PiFormula.NewFormula
+def PiFormula.P24Z :
+  ℕ → GaussianInt
+  :=
+  fun (k : ℕ) ↦ (if 6 ∣ k then 6 * PiFormula.gI ^ (k / 6) else 0) - PiFormula.P8bZ k
+
+-- from module Pilean.PiFormula.NewFormula
+def PiFormula.P8bZ :
+  ℕ → GaussianInt
+  :=
+  fun (k : ℕ) ↦ if 2 ∣ k then 2 * (-PiFormula.gI) ^ (k / 2) else 0
+
+-- from module Pilean.PiFormula.BaileySums
+def PiFormula.baileyZero :
+  ℕ → (n : ℕ) → Submodule ℚ (Fin n → ℚ)
+  :=
+  fun (B n : ℕ) ↦
+    { carrier := {a : Fin n → ℚ | HasSum (PiFormula.baileyBlock B n a) 0}, add_mem' := ⋯,
+      zero_mem' := ⋯, smul_mem' := ⋯ }
+
+-- from module Pilean.PiFormula.BaileySums
+def PiFormula.baileyBlock :
+  ℕ → (n : ℕ) → (Fin n → ℚ) → ℕ → ℝ
+  :=
+  fun (B n : ℕ) (a : Fin n → ℚ) (j : ℕ) ↦
+    ∑ i : Fin n, (↑(a i) : ℝ) / 2 ^ (B * j) / (↑(n * j + (↑i : ℕ) + 1) : ℝ)
+
+-- from module Pilean.PiFormula.FewestTerms
+def PiFormula.termCount :
+  (ℕ → ℚ) → ℕ
+  :=
+  fun (ρ : ℕ → ℚ) ↦ List.countP (fun (k : ℕ) ↦ decide (ρ k ≠ 0)) (List.range 120)
+
+-- from module Pilean.PiFormula.PrimeMeasure
+def PiFormula.primeCost :
+  (ℕ → ℚ) → ℚ
+  :=
+  fun (ρ : ℕ → ℚ) ↦
+    (List.map (fun (c : ℕ) ↦ 1 / (↑(PiFormula.firstNZ ρ c) : ℚ)) PiFormula.unitsList).sum / 32
+
+-- from module Pilean.PiFormula.PrimeMeasure
+def PiFormula.firstNZ :
+  (ℕ → ℚ) → ℕ → ℕ
+  :=
+  fun (ρ : ℕ → ℚ) (c : ℕ) ↦ PiFormula.firstNZAux ρ c 120 1
+
+-- from module Pilean.PiFormula.PrimeMeasure
+def PiFormula.firstNZAux :
+  (ℕ → ℚ) → ℕ → ℕ → ℕ → ℕ
+  -- defined by recursion; its defining equations:
+  equation:
+  ∀ (ρ : ℕ → ℚ) (c x : ℕ), PiFormula.firstNZAux ρ c 0 x = 0
+  equation:
+  ∀ (ρ : ℕ → ℚ) (c x fuel : ℕ),
+    PiFormula.firstNZAux ρ c fuel.succ x =
+      if ρ (x * c) ≠ 0 then x else PiFormula.firstNZAux ρ c fuel (x + 1)
+
+-- from module Pilean.PiFormula.Classes
+def PiFormula.unitsList :
+  List ℕ
+  :=
+  List.filter (fun (c : ℕ) ↦ c.gcd 120 == 1) (List.range 120)
+
+-- from module Pilean.PiFormula.TheoremE
+def PiFormula.rhoHuvent1 :
+  ℕ → ℚ
+  :=
+  (PiFormula.patF2 PiFormula.rhoHuvent1._proof_2 : (Fin (2 * 12) → ℚ) → ℕ → ℚ) PiFormula.huvent1
+
+-- from module Pilean.PiFormula.BaileySums
+def PiFormula.patF2 :
+  {n : ℕ} → 0 < n → (Fin n → ℚ) →ₗ[ℚ] ℕ → ℚ
+  :=
+  fun {n : ℕ} (hn : 0 < n) ↦
+    {
+      toFun := fun (a : Fin n → ℚ) (k : ℕ) ↦
+        a (PiFormula.bIdx hn k) * 2 ^ (((↑(PiFormula.bIdx hn k) : ℕ) + 1) / 2),
+      map_add' := ⋯, map_smul' := ⋯ }
+
+-- from module Pilean.PiFormula.BaileySums
+def PiFormula.bIdx :
+  {n : ℕ} → 0 < n → ℕ → Fin n
+  :=
+  fun {n : ℕ} (hn : 0 < n) (k : ℕ) ↦ ⟨(k + (n - 1)) % n, ⋯⟩
+
+-- from module Pilean.PiFormula.TheoremE
+def PiFormula.huvent1 :
+  Fin (2 * 12) → ℚ
+  :=
+  ![0, 0, 768, 512, 0, 128, 0, 0, 0, 0, 0, -16, 0, -16, -12, 0, 0, 0, 0, 2, 0, -1, 0, 0]
+
+-- from module Pilean.PiFormula.TheoremE
+def PiFormula.rhoHuvent2 :
+  ℕ → ℚ
+  :=
+  (PiFormula.patF2 PiFormula.rhoHuvent1._proof_2 : (Fin (2 * 12) → ℚ) → ℕ → ℚ) PiFormula.huvent2
+
+-- from module Pilean.PiFormula.TheoremE
+def PiFormula.huvent2 :
+  Fin (2 * 12) → ℚ
+  :=
+  ![0, 2048, 0, -1024, 0, 0, 0, 0, 192, 128, 0, 32, 0, 0, 0, 0, 0, -4, 0, -4, -3, 0, 0, 0]
+
+-- from module Pilean.PiFormula.LogPrimes
+def PiFormula.IsFValue :
+  ℝ → Prop
+  :=
+  fun (x : ℝ) ↦
+    ∃ (N : ℕ) (ρ : ℕ → ℚ), 0 < N ∧ (∀ (k : ℕ), ρ (k + N) = ρ k) ∧ HasSum (PiFormula.seriesTerm ρ) x
+
+-- from module Pilean.PiFormula.LogYes
+def PiFormula.logPrimes :
+  Finset ℕ
+  :=
+  {2, 3, 5, 7, 11, 13, 17, 19, 29, 31, 37, 41, 43, 61, 73}
+
+-- from module Pilean.PiFormula.LogExplicit
+def PiFormula.baseNumbers :
+  Set ℤ
+  :=
+  {g : ℤ |
+    g = 2 ∨
+      (∃ (m : ℕ), 0 < m ∧ g = 2 ^ m - 1) ∨
+        (∃ (k : ℕ), g = 2 ^ (2 * k + 1) - 2 ^ (k + 1) + 1) ∨
+          ∃ (k : ℕ), g = 2 ^ (2 * k + 1) + 2 ^ (k + 1) + 1}
+
+-- from module Pilean.PiFormula.LogPrimeTest
+def PiFormula.primPart :
+  ℕ → ℤ
+  :=
+  fun (ℓ : ℕ) ↦
+    if orderOf 2 % 8 = 4 then
+      if (↑ℓ : ℤ) ∣ PiFormula.Aplus (orderOf 2 / 4) then PiFormula.Aplus (orderOf 2 / 4)
+      else PiFormula.Aminus (orderOf 2 / 4)
+    else Polynomial.eval 2 (Polynomial.cyclotomic (orderOf 2) ℤ)
+
+-- from module Pilean.PiFormula.Lemma2
+def PiFormula.Aplus :
+  ℕ → ℤ
+  :=
+  fun (n : ℕ) ↦ Zsqrtd.norm (Polynomial.eval PiFormula.tG (Polynomial.cyclotomic n GaussianInt))
+
+-- from module Pilean.PiFormula.Lemma2
+def PiFormula.Aminus :
+  ℕ → ℤ
+  :=
+  fun (n : ℕ) ↦ Zsqrtd.norm (Polynomial.eval (-PiFormula.tG) (Polynomial.cyclotomic n GaussianInt))
+
+-- from module Pilean.PiFormula.CheckedPairDefs
+def PiFormula.pairCost :
+  (ℕ → ℚ) → (ℕ → ℚ) → ℕ
+  :=
+  fun (ρ₁ ρ₂ : ℕ → ℚ) ↦
+    List.countP (fun (k : ℕ) ↦ decide (ρ₁ k ≠ 0 ∨ ρ₂ k ≠ 0)) (List.range 120) +
+      List.countP (fun (k : ℕ) ↦ decide (ρ₁ k ≠ 0 ∧ ρ₁ k = ρ₂ k)) (List.range 120)
+
+-- from module Pilean.PiFormula.CheckedPair
+def PiFormula.rhoTak1 :
+  ℕ → ℚ
+  :=
+  (PiFormula.patF2 PiFormula.rhoTak1._proof_2 : (Fin (2 * 60) → ℚ) → ℕ → ℚ) PiFormula.takahashi1
+
+-- from module Pilean.PiFormula.CheckedPair
+def PiFormula.takahashi1 :
+  Fin (2 * 60) → ℚ
+  :=
+  fun (i : Fin (2 * 60)) ↦ (↑(PiFormula.tak1Num.getD (↑i : ℕ) 0) : ℚ) / 2 ^ 57
+
+-- from module Pilean.PiFormula.CheckedPair
+def PiFormula.tak1Num :
+  List ℤ
+  :=
+  have y :=
+    have y :=
+      have y :=
+        have y :=
+          have y := [0, -4, 0, 0];
+          0 :: 16 :: 10 :: 0 :: y;
+        256 :: 0 :: 0 :: 0 :: 16 :: 0 :: 0 :: y;
+      have y :=
+        have y := -1024 :: 0 :: 0 :: 320 :: y;
+        4096 :: 0 :: 0 :: 0 :: y;
+      0 :: 0 :: 0 :: -16384 :: -10240 :: 0 :: 0 :: y;
+    have y :=
+      have y :=
+        have y := 0 :: 0 :: 0 :: -16384 :: y;
+        0 :: 0 :: -327680 :: -262144 :: y;
+      0 :: 0 :: -4194304 :: 0 :: 0 :: 0 :: 1048576 :: y;
+    have y :=
+      have y := 0 :: 0 :: 16777216 :: 10485760 :: y;
+      0 :: 0 :: 16777216 :: 0 :: y;
+    0 :: -1073741824 :: 0 :: 0 :: 335544320 :: 268435456 :: 0 :: y;
+  have y :=
+    have y :=
+      have y :=
+        have y := 0 :: 4294967296 :: 0 :: 0 :: y;
+        0 :: -17179869184 :: -10737418240 :: 0 :: y;
+      -274877906944 :: 0 :: 0 :: 0 :: -17179869184 :: 0 :: 0 :: y;
+    have y :=
+      have y := 1099511627776 :: 0 :: 0 :: -343597383680 :: y;
+      -4398046511104 :: 0 :: 0 :: 0 :: y;
+    0 :: 0 :: 0 :: 17592186044416 :: 10995116277760 :: 0 :: 0 :: y;
+  have y :=
+    have y :=
+      have y := 0 :: 0 :: 0 :: 17592186044416 :: y;
+      0 :: 0 :: 351843720888320 :: 281474976710656 :: y;
+    0 :: 0 :: 4503599627370496 :: 0 :: 0 :: 0 :: -1125899906842624 :: y;
+  have y :=
+    have y := 0 :: 0 :: -18014398509481984 :: -11258999068426240 :: y;
+    0 :: 0 :: -18014398509481984 :: 0 :: y;
+  0 :: 1152921504606846976 :: 0 :: 0 :: -360287970189639680 :: -288230376151711744 :: 0 :: y
+
+-- from module Pilean.PiFormula.CheckedPair
+def PiFormula.rhoTak2 :
+  ℕ → ℚ
+  :=
+  (PiFormula.patF2 PiFormula.rhoTak1._proof_2 : (Fin (2 * 60) → ℚ) → ℕ → ℚ) PiFormula.takahashi2
+
+-- from module Pilean.PiFormula.CheckedPair
+def PiFormula.takahashi2 :
+  Fin (2 * 60) → ℚ
+  :=
+  fun (i : Fin (2 * 60)) ↦ (↑(PiFormula.tak2Num.getD (↑i : ℕ) 0) : ℚ) / 2 ^ 57
+
+-- from module Pilean.PiFormula.CheckedPair
+def PiFormula.tak2Num :
+  List ℤ
+  :=
+  have y :=
+    have y :=
+      have y :=
+        have y :=
+          have y := [-3, -2, 0, 0];
+          0 :: -4 :: 0 :: 0 :: y;
+        128 :: 0 :: 0 :: 0 :: -32 :: -24 :: 0 :: y;
+      have y :=
+        have y := 256 :: 0 :: 0 :: 192 :: y;
+        2048 :: 1536 :: 0 :: 0 :: y;
+      0 :: 0 :: -12288 :: -8192 :: 0 :: 0 :: 0 :: y;
+    have y :=
+      have y :=
+        have y := -98304 :: 0 :: 0 :: -16384 :: y;
+        0 :: 0 :: 0 :: -131072 :: y;
+      0 :: 0 :: 1048576 :: 0 :: 0 :: 786432 :: 524288 :: y;
+    have y :=
+      have y := 0 :: 0 :: 8388608 :: 6291456 :: y;
+      0 :: -50331648 :: -33554432 :: 0 :: y;
+    0 :: -536870912 :: -402653184 :: 0 :: 0 :: -67108864 :: 0 :: y;
+  have y :=
+    have y :=
+      have y :=
+        have y := 3221225472 :: 2147483648 :: 0 :: 0 :: y;
+        0 :: 4294967296 :: 0 :: 0 :: y;
+      -137438953472 :: 0 :: 0 :: 0 :: 34359738368 :: 25769803776 :: 0 :: y;
+    have y :=
+      have y := -274877906944 :: 0 :: 0 :: -206158430208 :: y;
+      -2199023255552 :: -1649267441664 :: 0 :: 0 :: y;
+    0 :: 0 :: 13194139533312 :: 8796093022208 :: 0 :: 0 :: 0 :: y;
+  have y :=
+    have y :=
+      have y := 105553116266496 :: 0 :: 0 :: 17592186044416 :: y;
+      0 :: 0 :: 0 :: 140737488355328 :: y;
+    0 :: 0 :: -1125899906842624 :: 0 :: 0 :: -844424930131968 :: -562949953421312 :: y;
+  have y :=
+    have y := 0 :: 0 :: -9007199254740992 :: -6755399441055744 :: y;
+    0 :: 54043195528445952 :: 36028797018963968 :: 0 :: y;
+  0 :: 576460752303423488 :: 432345564227567616 :: 0 :: 0 :: 72057594037927936 :: 0 :: y
+
+Everything else named above is defined in Mathlib or in Lean itself.

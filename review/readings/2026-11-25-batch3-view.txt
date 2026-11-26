@@ -1,0 +1,272 @@
+STATEMENTS
+==========
+
+theorem PiFormula.Base3.Unconditional.isF3Value_log_rat_iff_pow :
+  ∀ {y : ℚ},
+    0 < y →
+      (PiFormula.Base3.IsF3Value (Real.log (↑y : ℝ)) ↔
+        ∃ (k : ℕ),
+          0 < k ∧
+            ∃ (n : ℕ) (g : Fin n → ℤ) (e : Fin n → ℤ),
+              (∀ (i : Fin n), g i ∈ PiFormula.Base3.baseNumbers3) ∧
+                y ^ k = ∏ i : Fin n, (↑(g i) : ℚ) ^ e i)
+
+theorem PiFormula.Base3.Unconditional.not_isF3Value_pi :
+  ¬PiFormula.Base3.IsF3Value Real.pi
+
+theorem PiFormula.Base3.Unconditional.isF3Value_mul_pi_iff :
+  ∀ {γ : ℝ},
+    IsAlgebraic ℚ γ → (PiFormula.Base3.IsF3Value (γ * Real.pi) ↔ ∃ (q : ℚ), γ = (↑q : ℝ) * √3)
+
+theorem PiFormula.Base3.Unconditional.theoremC3 :
+  ∀ {N : ℕ},
+    0 < N →
+      12 ∣ N →
+        (∀ ρ ∈ PiFormula.Base3.algSpace3 N, ∀ (k : ℕ), ρ (k + 12) = ρ k) ∧
+          Module.finrank ℚ ↥(PiFormula.Base3.algSpace3 N) = 3 ∧
+            Module.finrank ℚ ↥(PiFormula.Base3.zeroSpace3 N) = 2
+
+theorem PiFormula.Base3.Unconditional.theoremE3 :
+  ∀ {N : ℕ},
+    0 < N →
+      ∀ {ρ : ℕ → ℚ},
+        (∀ (k : ℕ), ρ (k + N) = ρ k) →
+          ∀ {γ : ℝ},
+            IsAlgebraic ℚ γ →
+              γ ≠ 0 →
+                HasSum (PiFormula.Base3.seriesTerm3 ρ) (γ * Real.pi) →
+                  6 ≤ PiFormula.Base3.termCount3 ρ ∧
+                    (PiFormula.Base3.termCount3 ρ = 6 ↔
+                      ∃ (a : ℚ),
+                        ρ = a • PiFormula.Base3.rhoGregory ∨ ρ = a • PiFormula.Base3.rhoSecond)
+
+theorem PiFormula.Base5.Unconditional.eq_zero_of_hasSum_mul_pi :
+  ∀ {N : ℕ},
+    0 < N →
+      ∀ {ρ : ℕ → ℚ},
+        (∀ (k : ℕ), ρ (k + N) = ρ k) →
+          ∀ {γ : ℝ}, IsAlgebraic ℚ γ → HasSum (PiFormula.Base5.seriesTerm5 ρ) (γ * Real.pi) → ρ = 0
+
+theorem PiFormula.Base5.Unconditional.isF5Value_log_rat_iff_pow :
+  ∀ {y : ℚ},
+    0 < y →
+      (PiFormula.Base5.IsF5Value (Real.log (↑y : ℝ)) ↔
+        ∃ (k : ℕ),
+          0 < k ∧
+            ∃ (n : ℕ) (g : Fin n → ℚ) (e : Fin n → ℤ),
+              (∀ (i : Fin n), g i ∈ PiFormula.Base5.baseNumbers5) ∧ y ^ k = ∏ i : Fin n, g i ^ e i)
+
+theorem PiFormula.BaseB.Unconditional.eq_zero_of_hasSum_mul_pi :
+  ∀ {b : ℕ},
+    5 ≤ b →
+      ∀ {N : ℕ},
+        0 < N →
+          ∀ {ρ : ℕ → ℚ},
+            (∀ (k : ℕ), ρ (k + N) = ρ k) →
+              ∀ {γ : ℝ},
+                IsAlgebraic ℚ γ → HasSum (PiFormula.BaseB.seriesTermB b ρ) (γ * Real.pi) → ρ = 0
+
+theorem PiFormula.BaseB.Unconditional.transcendental_of_isFBValue :
+  ∀ {b : ℕ}, 2 ≤ b → ∀ {x : ℝ}, PiFormula.BaseB.IsFBValue b x → x ≠ 0 → Transcendental ℚ x
+
+theorem PiFormula.BaseB.bailey_pi_iff :
+  ∀ {b : ℕ},
+    2 ≤ b →
+      ((∃ (B : ℕ) (N : ℕ) (c : Fin N → ℚ) (q : ℚ),
+          0 < B ∧
+            0 < N ∧ q ≠ 0 ∧ HasSum (PiFormula.BaseB.baileyBlock b B N c) ((↑q : ℝ) * Real.pi)) ↔
+        ∃ (e : ℕ), b = 2 ^ e)
+
+theorem PiFormula.BaseB.bailey_int_pi_iff :
+  ∀ {β : ℤ},
+    2 ≤ β.natAbs →
+      ((∃ (B : ℕ) (N : ℕ) (c : Fin N → ℚ) (q : ℚ),
+          0 < B ∧
+            0 < N ∧ q ≠ 0 ∧ HasSum (PiFormula.BaseB.baileyBlockInt β B N c) ((↑q : ℝ) * Real.pi)) ↔
+        ∃ (e : ℕ), β.natAbs = 2 ^ e)
+
+theorem PiFormula.BaseB.no_pi_bailey_ten :
+  ∀ {B N : ℕ},
+    0 < B →
+      0 < N →
+        ∀ (c : Fin N → ℚ) {q : ℚ},
+          HasSum (PiFormula.BaseB.baileyBlock 10 B N c) ((↑q : ℝ) * Real.pi) → q = 0
+
+theorem PiFormula.BaseB.bailey_log_self_iff :
+  ∀ {b : ℕ},
+    2 ≤ b →
+      ((∃ (B : ℕ) (N : ℕ) (c : Fin N → ℚ),
+          0 < B ∧ 0 < N ∧ HasSum (PiFormula.BaseB.baileyBlock b B N c) (Real.log (↑b : ℝ))) ↔
+        (∃ (e : ℕ), b = 2 ^ e) ∨ ∃ (e : ℕ), b = 3 ^ e)
+
+theorem PiFormula.BaseB.no_log_nat_bailey :
+  ∀ {b B N : ℕ},
+    2 ≤ b →
+      (∀ (k : ℕ), b ≠ 2 ^ k) →
+        (∀ (k : ℕ), b ≠ 3 ^ k) →
+          0 < B →
+            0 < N →
+              ∀ (c : Fin N → ℚ) {q q' : ℚ},
+                q' ≠ 0 →
+                  ∀ {n : ℕ},
+                    2 ≤ n →
+                      ¬HasSum (PiFormula.BaseB.baileyBlock b B N c)
+                          ((↑q : ℝ) * Real.pi + (↑q' : ℝ) * Real.log (↑n : ℝ))
+
+theorem PiFormula.BaseB.terms_per_bit :
+  ∀ {b B N : ℕ},
+    2 ≤ b →
+      0 < B →
+        0 < N →
+          ∀ (c : Fin N → ℚ) {q : ℚ},
+            q ≠ 0 →
+              HasSum (PiFormula.BaseB.baileyBlock b B N c) ((↑q : ℝ) * Real.pi) →
+                ∃ (e : ℕ), b = 2 ^ e ∧ 2 * (e * B) ≤ 3 * {i : Fin N | c i ≠ 0}.card
+
+theorem PiFormula.BaseB.terms_per_bit_attained :
+  ∃ (c : Fin 24 → ℚ) (q : ℚ),
+    q ≠ 0 ∧
+      HasSum (PiFormula.BaseB.baileyBlock 2 12 24 c) ((↑q : ℝ) * Real.pi) ∧
+        {i : Fin 24 | c i ≠ 0}.card = 8
+
+PROJECT DEFINITIONS USED BY THE STATEMENTS (17), in order of first use
+====================================================================
+
+-- from module Pilean.Base3.Series
+def PiFormula.Base3.IsF3Value :
+  ℝ → Prop
+  :=
+  fun (x : ℝ) ↦
+    ∃ (N : ℕ) (ρ : ℕ → ℚ),
+      0 < N ∧ (∀ (k : ℕ), ρ (k + N) = ρ k) ∧ HasSum (PiFormula.Base3.seriesTerm3 ρ) x
+
+-- from module Pilean.Base3.Series
+def PiFormula.Base3.seriesTerm3 :
+  (ℕ → ℚ) → ℕ → ℝ
+  :=
+  fun (ρ : ℕ → ℚ) (k : ℕ) ↦ (↑(ρ k) : ℝ) / 3 ^ (k / 2) / (↑k : ℝ)
+
+-- from module Pilean.Base3.LogExplicit
+def PiFormula.Base3.baseNumbers3 :
+  Set ℤ
+  :=
+  {g : ℤ |
+    g = 3 ∨
+      (∃ (m : ℕ), 0 < m ∧ g = 3 ^ m - 1) ∨
+        (∃ (k : ℕ), g = 3 ^ (2 * k + 1) - 3 ^ (k + 1) + 1) ∨
+          ∃ (k : ℕ), g = 3 ^ (2 * k + 1) + 3 ^ (k + 1) + 1}
+
+-- from module Pilean.Base3.Dimension
+def PiFormula.Base3.algSpace3 :
+  ℕ → Submodule ℚ (ℕ → ℚ)
+  :=
+  fun (N : ℕ) ↦
+    {
+      carrier :=
+        {ρ : ℕ → ℚ |
+          (∀ (k : ℕ), ρ (k + N) = ρ k) ∧
+            ∃ (γ : ℝ), IsAlgebraic ℚ γ ∧ HasSum (PiFormula.Base3.seriesTerm3 ρ) (γ * Real.pi)},
+      add_mem' := ⋯, zero_mem' := ⋯, smul_mem' := ⋯ }
+
+-- from module Pilean.Base3.Dimension
+def PiFormula.Base3.zeroSpace3 :
+  ℕ → Submodule ℚ (ℕ → ℚ)
+  :=
+  fun (N : ℕ) ↦
+    {
+      carrier :=
+        {ρ : ℕ → ℚ | (∀ (k : ℕ), ρ (k + N) = ρ k) ∧ HasSum (PiFormula.Base3.seriesTerm3 ρ) 0},
+      add_mem' := ⋯, zero_mem' := ⋯, smul_mem' := ⋯ }
+
+-- from module Pilean.Base3.Optimum
+def PiFormula.Base3.termCount3 :
+  (ℕ → ℚ) → ℕ
+  :=
+  fun (ρ : ℕ → ℚ) ↦ {k ∈ Finset.range 12 | ρ k ≠ 0}.card
+
+-- from module Pilean.Base3.PiSqrt3
+def PiFormula.Base3.rhoGregory :
+  ℕ → ℚ
+  :=
+  fun (k : ℕ) ↦ if k % 2 = 1 then 6 * (-1) ^ (k / 2) else 0
+
+-- from module Pilean.Base3.Optimum
+def PiFormula.Base3.rhoSecond :
+  ℕ → ℚ
+  :=
+  fun (k : ℕ) ↦
+    match k % 12 with
+    | 2 => 18
+    | 3 => 18
+    | 4 => 18
+    | 8 => -18
+    | 9 => -18
+    | 10 => -18
+    | x => 0
+
+-- from module Pilean.Base5.Defs
+def PiFormula.Base5.seriesTerm5 :
+  (ℕ → ℚ) → ℕ → ℝ
+  :=
+  fun (ρ : ℕ → ℚ) (k : ℕ) ↦ (↑(ρ k) : ℝ) / 5 ^ (k / 2) / (↑k : ℝ)
+
+-- from module Pilean.Base5.Defs
+def PiFormula.Base5.IsF5Value :
+  ℝ → Prop
+  :=
+  fun (x : ℝ) ↦
+    ∃ (N : ℕ) (ρ : ℕ → ℚ),
+      0 < N ∧ (∀ (k : ℕ), ρ (k + N) = ρ k) ∧ HasSum (PiFormula.Base5.seriesTerm5 ρ) x
+
+-- from module Pilean.Base5.LogValues
+def PiFormula.Base5.baseNumbers5 :
+  Set ℚ
+  :=
+  {g : ℚ |
+    (∃ (m : ℕ), 0 < m ∧ g = (5 ^ m - 1) / 5 ^ m) ∨
+      ∃ (h : ℕ),
+        Odd h ∧
+          (g = (↑(PiFormula.Base5.L5 h) : ℚ) / 5 ^ (2 * h) ∨
+            g = (↑(PiFormula.Base5.M5 h) : ℚ) / 5 ^ (2 * h))}
+
+-- from module Pilean.Base5.Defs
+def PiFormula.Base5.L5 :
+  ℕ → ℤ
+  :=
+  fun (h : ℕ) ↦ 5 ^ (2 * h) + 3 * 5 ^ h + 1 - 5 ^ ((h + 1) / 2) * (5 ^ h + 1)
+
+-- from module Pilean.Base5.Defs
+def PiFormula.Base5.M5 :
+  ℕ → ℤ
+  :=
+  fun (h : ℕ) ↦ 5 ^ (2 * h) + 3 * 5 ^ h + 1 + 5 ^ ((h + 1) / 2) * (5 ^ h + 1)
+
+-- from module Pilean.BaseB.Defs
+def PiFormula.BaseB.seriesTermB :
+  ℕ → (ℕ → ℚ) → ℕ → ℝ
+  :=
+  fun (b : ℕ) (ρ : ℕ → ℚ) (k : ℕ) ↦ (↑(ρ k) : ℝ) / (↑b : ℝ) ^ (k / 2) / (↑k : ℝ)
+
+-- from module Pilean.BaseB.Defs
+def PiFormula.BaseB.IsFBValue :
+  ℕ → ℝ → Prop
+  :=
+  fun (b : ℕ) (x : ℝ) ↦
+    ∃ (N : ℕ) (ρ : ℕ → ℚ),
+      0 < N ∧ (∀ (k : ℕ), ρ (k + N) = ρ k) ∧ HasSum (PiFormula.BaseB.seriesTermB b ρ) x
+
+-- from module Pilean.BaseB.BaileyForm
+def PiFormula.BaseB.baileyBlock :
+  ℕ → ℕ → (N : ℕ) → (Fin N → ℚ) → ℕ → ℝ
+  :=
+  fun (b B N : ℕ) (a : Fin N → ℚ) (j : ℕ) ↦
+    ∑ i : Fin N, (↑(a i) : ℝ) / (↑b : ℝ) ^ (B * j) / (↑(N * j + (↑i : ℕ) + 1) : ℝ)
+
+-- from module Pilean.BaseB.NegativeBase
+def PiFormula.BaseB.baileyBlockInt :
+  ℤ → ℕ → (N : ℕ) → (Fin N → ℚ) → ℕ → ℝ
+  :=
+  fun (β : ℤ) (B N : ℕ) (a : Fin N → ℚ) (j : ℕ) ↦
+    ∑ i : Fin N, (↑(a i) : ℝ) / (↑β : ℝ) ^ (B * j) / (↑(N * j + (↑i : ℕ) + 1) : ℝ)
+
+Everything else named above is defined in Mathlib or in Lean itself.

@@ -1,0 +1,123 @@
+STATEMENTS
+==========
+
+theorem PiFormula.Unconditional.isFValue_log_prime_classification :
+  ∀ {ℓ : ℕ},
+    Nat.Prime ℓ →
+      (PiFormula.IsFValue (Real.log (↑ℓ : ℝ)) ↔
+        ℓ ∣ (2 : ℕ) * ((2 : ℕ) ^ (60 : ℕ) - (1 : ℕ)) ∨
+          ∀ (q : ℕ),
+            Nat.Prime q →
+              (↑q : ℤ) ∣ PiFormula.primPart ℓ →
+                q ≠ ℓ → q ∣ orderOf (2 : ZMod ℓ) ∧ PiFormula.IsFValue (Real.log (↑q : ℝ)))
+
+theorem PiFormula.Compendium.formula_88 :
+  PiFormula.Compendium.BaileyFormula
+    ((1 : ℝ) / √Real.goldenRatio *
+        Real.arctan
+          ((5 : ℝ) ^ (1 / 4 : ℝ) / √Real.goldenRatio *
+            (((233 : ℝ) - (329 : ℝ) * √(5 : ℝ)) / (5938 : ℝ))) +
+      √Real.goldenRatio *
+        Real.arctan
+          ((5 : ℝ) ^ (1 / 4 : ℝ) / √Real.goldenRatio *
+            (((939 : ℝ) + (281 : ℝ) * √(5 : ℝ)) / (5938 : ℝ))))
+    ((1 : ℝ) / ((2 : ℝ) * (5 : ℝ) ^ (13 / 4 : ℝ))) (5 : ℕ) (5 : ℕ) (5 : ℕ)
+    ![(125 : ℚ), (-25 : ℚ), (5 : ℚ), (-1 : ℚ), (0 : ℚ)]
+
+theorem PiFormula.Compendium.formula_132 :
+  PiFormula.Compendium.BaileyFormulaReal
+    ((3 : ℝ) * Real.pi * √Real.goldenRatio / (5 : ℝ) ^ (5 / 4 : ℝ)) ((1 : ℝ) / (2 : ℝ) ^ (9 : ℕ))
+    (((2 : ℝ) / Real.goldenRatio) ^ (10 : ℕ)) (10 : ℕ)
+    ![(256 : ℝ) * Real.goldenRatio, (128 : ℝ) * Real.goldenRatio ^ (3 : ℕ),
+      (64 : ℝ) * Real.goldenRatio ^ (4 : ℕ), (32 : ℝ) * Real.goldenRatio ^ (4 : ℕ), (0 : ℝ),
+      (-8 : ℝ) * Real.goldenRatio ^ (6 : ℕ), (-4 : ℝ) * Real.goldenRatio ^ (8 : ℕ),
+      (-2 : ℝ) * Real.goldenRatio ^ (9 : ℕ), -Real.goldenRatio ^ (9 : ℕ), (0 : ℝ)]
+
+PROJECT DEFINITIONS USED BY THE STATEMENTS (12), in order of first use
+====================================================================
+
+-- from module Pilean.PiFormula.LogPrimes
+def PiFormula.IsFValue :
+  ℝ → Prop
+  :=
+  fun (x : ℝ) ↦
+    ∃ (N : ℕ) (ρ : ℕ → ℚ),
+      (0 : ℕ) < N ∧ (∀ (k : ℕ), ρ (k + N) = ρ k) ∧ HasSum (PiFormula.seriesTerm ρ) x
+
+-- from module Pilean.PiFormula.VSeries
+def PiFormula.seriesTerm :
+  (ℕ → ℚ) → ℕ → ℝ
+  :=
+  fun (ρ : ℕ → ℚ) (k : ℕ) ↦ (↑(ρ k) : ℝ) / (2 : ℝ) ^ (k / (2 : ℕ)) / (↑k : ℝ)
+
+-- from module Pilean.PiFormula.LogPrimeTest
+def PiFormula.primPart :
+  ℕ → ℤ
+  :=
+  fun (ℓ : ℕ) ↦
+    if orderOf (2 : ZMod ℓ) % (8 : ℕ) = (4 : ℕ) then
+      if (↑ℓ : ℤ) ∣ PiFormula.Aplus (orderOf (2 : ZMod ℓ) / (4 : ℕ)) then
+        PiFormula.Aplus (orderOf (2 : ZMod ℓ) / (4 : ℕ))
+      else PiFormula.Aminus (orderOf (2 : ZMod ℓ) / (4 : ℕ))
+    else Polynomial.eval (2 : ℤ) (Polynomial.cyclotomic (orderOf (2 : ZMod ℓ)) ℤ)
+
+-- from module Pilean.PiFormula.Lemma2
+def PiFormula.Aplus :
+  ℕ → ℤ
+  :=
+  fun (n : ℕ) ↦ Zsqrtd.norm (Polynomial.eval PiFormula.tG (Polynomial.cyclotomic n GaussianInt))
+
+-- from module Pilean.PiFormula.Lemma2
+def PiFormula.tG :
+  GaussianInt
+  :=
+  { re := (1 : ℤ), im := (1 : ℤ) }
+
+-- from module Pilean.PiFormula.Lemma2
+def PiFormula.Aminus :
+  ℕ → ℤ
+  :=
+  fun (n : ℕ) ↦ Zsqrtd.norm (Polynomial.eval (-PiFormula.tG) (Polynomial.cyclotomic n GaussianInt))
+
+-- from module Pilean.Compendium.Defs
+def PiFormula.Compendium.BaileyFormula :
+  ℝ → ℝ → ℕ → ℕ → (N : ℕ) → (Fin N → ℚ) → Prop
+  :=
+  fun (x c : ℝ) (b B N : ℕ) (a : Fin N → ℚ) ↦
+    ∃ (S : ℝ), PiFormula.Compendium.HasBaileyValue b B N a S ∧ x = c * S
+
+-- from module Pilean.Compendium.Defs
+def PiFormula.Compendium.HasBaileyValue :
+  ℕ → ℕ → (N : ℕ) → (Fin N → ℚ) → ℝ → Prop
+  :=
+  fun (b B N : ℕ) (a : Fin N → ℚ) (x : ℝ) ↦ HasSum (PiFormula.BaseB.baileyBlock b B N a) x
+
+-- from module Pilean.BaseB.BaileyForm
+def PiFormula.BaseB.baileyBlock :
+  ℕ → ℕ → (N : ℕ) → (Fin N → ℚ) → ℕ → ℝ
+  :=
+  fun (b B N : ℕ) (a : Fin N → ℚ) (j : ℕ) ↦
+    ∑ i : Fin N, (↑(a i) : ℝ) / (↑b : ℝ) ^ (B * j) / (↑(N * j + (↑i : ℕ) + (1 : ℕ)) : ℝ)
+
+-- from module Pilean.Compendium.GeneralDefs
+def PiFormula.Compendium.BaileyFormulaReal :
+  ℝ → ℝ → ℝ → (N : ℕ) → (Fin N → ℝ) → Prop
+  :=
+  fun (x c β : ℝ) (N : ℕ) (a : Fin N → ℝ) ↦
+    ∃ (S : ℝ), PiFormula.Compendium.HasBaileyValueReal β N a S ∧ x = c * S
+
+-- from module Pilean.Compendium.GeneralDefs
+def PiFormula.Compendium.HasBaileyValueReal :
+  ℝ → (N : ℕ) → (Fin N → ℝ) → ℝ → Prop
+  :=
+  fun (β : ℝ) (N : ℕ) (a : Fin N → ℝ) (x : ℝ) ↦
+    HasSum (PiFormula.Compendium.baileyBlockReal β N a) x
+
+-- from module Pilean.Compendium.GeneralDefs
+def PiFormula.Compendium.baileyBlockReal :
+  ℝ → (N : ℕ) → (Fin N → ℝ) → ℕ → ℝ
+  :=
+  fun (β : ℝ) (N : ℕ) (a : Fin N → ℝ) (j : ℕ) ↦
+    ∑ i : Fin N, a i / β ^ j / (↑(N * j + (↑i : ℕ) + (1 : ℕ)) : ℝ)
+
+Everything else named above is defined in Mathlib or in Lean itself.
