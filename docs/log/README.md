@@ -63,3 +63,22 @@ What the next person working in this area should know before starting. One line 
 ## Follow-ups
 Open questions and deferred work.
 ```
+
+## In this repository
+
+- **Evidence for Lean work.** [measured] is a command run at a commit: `lake build`,
+  `#print axioms`, `python scripts/check_format.py`, `lake comparator`, or a program in
+  `python/`. A Lean theorem that settles a point is cited by name and file, with the commit at
+  which the library builds. [code] is a reading of a named file at a commit. Everything else is
+  [inferred], including what an agent reported and nobody reran.
+- **Evidence about the literature** keeps its own labels, in `research/`: what was read, what was
+  seen only in a search result, what was inferred. The log points there instead of repeating it.
+- **Who did the work is said**, an AI agent included. This repository discloses how its work is
+  made (`README.md`), and its log does the same.
+- **It is a public repository.** No secrets, no personal details, no machine names, addresses or
+  local paths.
+- **Entries written after the fact** carry a `Written:` line under `Date:`. The log started on
+  27 November 2026; older dead ends are in `review/refuted_and_abandoned.md`, and only those that
+  someone is likely to try again were given an entry here.
+- **Where the rest lives.** What a result says and whether it is new: `review/`. How we check:
+  `PRACTICES.md`. The mathematics: `notes/`.

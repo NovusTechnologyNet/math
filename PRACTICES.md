@@ -57,11 +57,25 @@ In this order, before any claim that a result is new.
 *stated as known, proof not found in print*; *not found in print (searched DATE)*; *prior work
 found (DATE)*; *not searched*. "New" and "first" are not used without the qualifiers.
 
-## 4. Refuted and abandoned
+## 4. What was tried and what failed: the work log
 
-A claim that turned out false, a guess that failed and an approach that cannot work are kept,
-with the date and the reason, in `review/refuted_and_abandoned.md`. Where possible the reason
-is a Lean theorem. A counterexample has the same standing as a proof.
+The code shows what landed. `docs/log/` holds what it cannot show: what was tried, what failed,
+how we know, and what would make a dead end worth trying again. One file per piece of work; the
+format and the rules are in `docs/log/README.md`. In short:
+
+- search the log for the area before starting work in it, and do not retry an approach an entry
+  says failed unless its "Reopen if" condition now holds;
+- record each attempt when its result is known, the failed ones above all;
+- every result names its evidence: [measured] with the command and the commit, [code] for a
+  reading of a named file at a commit, [inferred] for reasoning; a check that could not tell is
+  VOID, not a pass;
+- entries are never rewritten: a correction is a new entry that supersedes the old one;
+- the entry lands in the same commit as the work, and abandoned work still lands its entry;
+- a brief for a helper agent lists the entries for its area and repeats these rules.
+
+Where possible the reason for a failure is a Lean theorem: a counterexample has the same standing
+as a proof. Dead ends recorded before the log began on 27 November 2026 are in
+`review/refuted_and_abandoned.md`.
 
 ## 5. Notes and papers
 

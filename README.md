@@ -15,6 +15,7 @@ hexadecimal digit of pi without computing the digits before it.
 | `research/` | Literature research: what is known, what is open, where results could go. |
 | `review/` | The checks around the proofs: independent readings of the statements, the novelty ledger (what is known, what was searched, who was asked), and the record of refuted claims and abandoned approaches. The rules are in `PRACTICES.md`. |
 | `scripts/` | Tools: the form check for Lean files, the statement view given to an independent reader, the sandboxed verification. |
+| `docs/log/` | The work log: one file per piece of work, with what was tried, what failed, the evidence, and when a dead end is worth trying again. Read it before working in an area. |
 | `papers/` | Downloaded papers. Kept on disk only, not in git. |
 
 ## Results

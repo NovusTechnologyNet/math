@@ -5,6 +5,16 @@ reason. The rule is in `PRACTICES.md`, section 4: these are kept, and where poss
 is a Lean theorem. First written on 25 November 2026 from what the repository already recorded;
 earlier dead ends that were never written down are not here.
 
+**Closed on 27 November 2026.** New dead ends go to the work log, `docs/log/`, one file per
+piece of work, with the evidence and a "Reopen if" condition for each failed attempt. This table
+stays as it is. Four of its rows have a fuller entry there:
+
+- the certificate of Theorem J: `docs/log/2026-11-23-verification-comparator-sandbox.md`;
+- the parity argument and odd squares: `docs/log/2026-11-23-erdos-odd-squares.md`;
+- perfect-power bases (two rows): `docs/log/2026-11-22-baseb-perfect-power-bases.md`;
+- generated files that do not reproduce: `docs/log/2026-11-24-lean-warning-cleanup.md` and
+  `docs/log/2026-11-24-lean-module-port.md`.
+
 | Date | What was claimed or tried | What happened | Evidence |
 |---|---|---|---|
 | 21 Nov 2026 | Our guess: the irrational multiples of pi in the 13-dimensional space of Theorem C come with sqrt 2, sqrt 3, sqrt 6 and two numbers of Q(zeta_20). | **Wrong** for sqrt 6: the third square root is sqrt 5. | `lean/PART3_PLAN.md` (M7, part 3); the five series are in `lean/Pilean/PiFormula/FiveSeries.lean` |
