@@ -74,7 +74,9 @@ Open questions and deferred work.
 - **Evidence about the literature** keeps its own labels, in `research/`: what was read, what was
   seen only in a search result, what was inferred. The log points there instead of repeating it.
 - **Who did the work is said**, an AI agent included. This repository discloses how its work is
-  made (`README.md`), and its log does the same.
+  made (`README.md`), and its log does the same. The owner confirmed this on 27 November 2026,
+  when the question was put: keep the naming. The entry that raised it is
+  `2026-11-27-docs-work-log.md`, attempt 2.
 - **It is a public repository.** No secrets, no personal details, no machine names, addresses or
   local paths.
 - **Entries written after the fact** carry a `Written:` line under `Date:`. The log started on
